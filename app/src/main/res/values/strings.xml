@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Flow Tranding System</string>
+    <string name="login">Login</string>
+    <string name="forgotPassword">Forgot Password?</string>
+
+    <!-- Personal Information-->
+    <string name="nome">Nome</string>
+    <string name="rg">RG</string>
+    <string name="cpf">CPF</string>
+    <string name="user">User</string>
+    <string name="password">Password</string>
+
+    <!-- Titles and subtitles-->
+    <string name="manager_register">Cadastro de Gerentes</string>
+    <string name="employees_register">Cadastro de Funcionários</string>
+    <string name="register">Cadastrar</string>
+    <string name="fts">Flow Tranding System</string>
+    <string name="kind_of_system">Sistema de Gerenciamento Comercial</string>
+    <string name="arent_you_a_client">Aren\'t you a client?Know our plans</string>
+    <string name="know_our_plans">Know our plans</string>
+
+</resources>
