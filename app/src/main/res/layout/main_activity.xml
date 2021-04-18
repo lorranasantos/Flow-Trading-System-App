@@ -29,26 +29,25 @@
         android:orientation="vertical"
 
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_padding="15dp">
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/welcome_screen_button_login"
-            style="@style/buttonTextAppearence"
+            android:textAppearance="@style/buttonTextAppearence"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="35dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="35dp"
             android:background="@drawable/welcome_screen_login_button"
-            android:text="@string/login" />
+            android:text="@string/login"/>
 
         <Button
             android:id="@+id/welcome_screen_button_register"
-            style="@style/buttonTextAppearence"
+            android:textAppearance="@style/buttonTextAppearence"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="85dp"
+            android:layout_marginStart="85dp"
             android:layout_marginTop="15dp"
             android:background="@drawable/welcome_creen_register_button"
             android:gravity="center_horizontal"

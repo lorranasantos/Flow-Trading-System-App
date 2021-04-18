@@ -27,6 +27,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             startActivity(intentIMC)
         } else {
         Toast.makeText(this, "Nothing here", Toast.LENGTH_SHORT).show()
-    }
+        }
     }
 }

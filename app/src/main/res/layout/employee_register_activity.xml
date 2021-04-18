@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="@string/employees_register"
             android:gravity="center_horizontal"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center"
             style="@style/register_title_appearence"/>
     </LinearLayout>
 

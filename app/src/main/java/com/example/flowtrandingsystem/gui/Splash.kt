@@ -17,7 +17,7 @@ class Splash: AppCompatActivity() {
             startActivity(abrirActivityMain)
             finish()
 
-        }, 3000 )
+        }, 90000 )
     }
 
 }

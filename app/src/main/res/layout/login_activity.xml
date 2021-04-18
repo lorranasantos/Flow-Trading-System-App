@@ -8,11 +8,19 @@
     <LinearLayout
         android:id="@+id/login_activity_banner"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="90dp"
         android:background="@drawable/rounded_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/employees_register"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            style="@style/register_title_appearence"/>
 
     </LinearLayout>
     <EditText
