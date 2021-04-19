@@ -2,14 +2,19 @@ package com.example.flowtrandingsystem.gui
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flowtrandingsystem.R
+import kotlinx.android.synthetic.main.drawer_navigation_manager_register.*
 import kotlinx.android.synthetic.main.main_menu_activity.*
 
 class MainMenuActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+
+        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_menu_activity)
+
+        supportActionBar?.hide()
 
         btn_register_employer_screen.setOnClickListener {
 

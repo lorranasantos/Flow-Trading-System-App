@@ -5,29 +5,38 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.Toast
 import com.example.flowtrandingsystem.R
 import kotlinx.android.synthetic.main.employer_register_activity.*
 import kotlinx.android.synthetic.main.main_activity.*
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
+        supportActionBar?.hide();
 
-        btn_login_screen.setOnClickListener {
+        login_activity_button.setOnClickListener{
 
-            goToLogin()
+            goToMainMenu()
         }
+        login_activity_client.setOnClickListener{
 
+            goToMainMenu()
+        }
     }
 
-    private fun goToLogin(){
+    private fun goToMainMenu(){
 
-        val loginScreen = Intent(this, LoginActivity::class.java)
-        startActivity(loginScreen)
+        val menuScreen = Intent(this, MainMenuActivity::class.java)
+        startActivity(menuScreen)
     }
-
 }
+
+
+

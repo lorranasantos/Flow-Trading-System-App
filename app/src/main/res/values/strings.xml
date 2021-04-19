@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">Flow Tranding System</string>
     <string name="login">Login</string>
-    <string name="forgotPassword">Forgot Password?</string>
+    <string name="forgotPassword">Esqueceu sua senha?</string>
 
     <!-- Personal Information-->
     <string name="nome">Nome</string>
     <string name="rg">RG</string>
     <string name="cpf">CPF</string>
-    <string name="user">User</string>
-    <string name="password">Password</string>
+    <string name="user">Usúario</string>
+    <string name="password">Senha</string>
 
     <!-- Titles and subtitles-->
     <string name="manager_register">Cadastro de Gerentes</string>
@@ -17,9 +17,7 @@
     <string name="register_employer">Cadastrar Funcionário</string>
     <string name="fts">Flow Tranding System</string>
     <string name="kind_of_system">Sistema de Gerenciamento Comercial</string>
-    <string name="arent_you_a_client">Aren\'t you a client? Know our plans</string>
-    <string name="know_our_plans">Know our plans</string>
-    <string name="our_company">Sobre Nós</string>
+    <string name="arent_you_a_client">Não é cliente? Conheça nossos planos!</string>
     <string name="register">Cadastrar</string>
 
 </resources>

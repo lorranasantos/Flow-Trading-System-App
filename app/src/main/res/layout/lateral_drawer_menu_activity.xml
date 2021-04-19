@@ -9,8 +9,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_photo_perfil"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="32dp"
         app:layout_constraintBottom_toTopOf="@id/text_view_perfil_name"
         app:layout_constraintStart_toStartOf="parent">
