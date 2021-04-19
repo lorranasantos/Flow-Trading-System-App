@@ -1,59 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:background="@drawable/circle_dark"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="50dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@drawable/fts"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_gravity="center"
-            android:layout_margin="50dp"/>
+            android:layout_margin="50dp"
+            android:src="@drawable/fts" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="190dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
         android:background="@drawable/welcome_screen_rounded"
-        android:orientation="vertical"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/welcome_screen_button_login"
-            android:textAppearance="@style/buttonTextAppearence"
+            android:id="@+id/btn_login_screen"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="35dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/welcome_screen_login_button"
-            android:text="@string/login"/>
+            android:text="@string/login"
+            android:textAppearance="@style/buttonTextAppearence"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/welcome_screen_button_register"
-            android:textAppearance="@style/buttonTextAppearence"
+            android:id="@+id/btn_register_employer_screen"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="85dp"
-            android:layout_marginTop="15dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
             android:background="@drawable/welcome_creen_register_button"
-            android:gravity="center_horizontal"
-            android:text="@string/register"
-            android:textColor="@android:color/black" />
+            android:text="@string/register_employer"
+            android:textAppearance="@style/buttonTextAppearence"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_login_screen" />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/btn_register_manager_screen"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/welcome_creen_register_button"
+            android:text="@string/register_manager"
+            android:textAppearance="@style/buttonTextAppearence"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_register_employer_screen" />
+
+        <Button
+            android:id="@+id/btn_plans_screen"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/welcome_creen_register_button"
+            android:text="@string/get_a_plan"
+            android:textAppearance="@style/buttonTextAppearence"
+            android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_register_manager_screen" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

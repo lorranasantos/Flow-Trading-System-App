@@ -8,21 +8,42 @@
     <LinearLayout
         android:id="@+id/login_activity_banner"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
+        android:layout_height="270dp"
         android:background="@drawable/rounded_bottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/employees_register"
+            android:text="@string/login"
             android:gravity="center_horizontal"
             android:layout_marginTop="30dp"
-            style="@style/register_title_appearence"/>
+            android:textAppearance="@style/register_title_appearence"/>
 
-    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:background="@drawable/circle_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="100dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/fts" />
+
+        </LinearLayout>
+
+        </LinearLayout>
+
     <EditText
         android:id="@+id/login_activity_user"
         android:layout_width="match_parent"
@@ -34,6 +55,7 @@
         android:layout_marginBottom="25dp"
         android:layout_marginTop="50dp"
         android:hint="@string/user"
+        android:textSize="18sp"
         android:textAppearance="@style/hintInputAppearence"
         android:inputType="number"/>
 
@@ -47,6 +69,7 @@
         android:layout_marginRight="35dp"
         android:layout_marginBottom="30dp"
         android:hint="@string/password"
+        android:textSize="18sp"
         android:textAppearance="@style/hintInputAppearence"
         android:inputType="textPassword"/>
 
@@ -77,16 +100,14 @@
         android:background="@drawable/rounded_top"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/login_activity_client"
-            style="@style/footerAppearence"
+            android:textAppearance="@style/footerAppearence"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="7dp"
             android:text="@string/arent_you_a_client"
             android:gravity="center_horizontal"/>
 

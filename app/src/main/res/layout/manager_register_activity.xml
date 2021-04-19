@@ -18,7 +18,7 @@
             android:text="@string/manager_register"
             android:gravity="center_horizontal"
             android:layout_gravity="center_vertical"
-            style="@style/register_title_appearence"/>
+            android:textAppearance="@style/register_title_appearence"/>
     </LinearLayout>
 
     <EditText
@@ -73,7 +73,18 @@
         app:layout_constraintTop_toBottomOf="@+id/manager_register_rg"
         app:layout_constraintStart_toStartOf="parent"/>
 
-
+    <Button
+        android:id="@+id/employees_register_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:background="@drawable/rounded_purple_button"
+        android:text="@string/register"
+        android:textAppearance="@style/buttonTextAppearence"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/manager_register_password"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -85,11 +96,10 @@
 
         <TextView
             android:id="@+id/manager_register_footer"
-            style="@style/footerAppearence"
+            android:textAppearance="@style/footerAppearence"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="7dp"
             android:text="@string/app_name"
             android:gravity="center_horizontal"/>
     </LinearLayout>

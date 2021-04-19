@@ -27,7 +27,7 @@
     <!--splash -->
     <style name="splash_startupName_appearence" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textSize">25sp</item>
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textStyle">bold</item>
         <item name="textAllCaps">true</item>
         <item name="theme">@style/TextAppearance.AppCompat.Medium</item>
@@ -35,7 +35,7 @@
 
     <style name="splash_startupKind_appearence" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textStyle">bold</item>
         <item name="theme">@style/TextAppearance.AppCompat.Medium</item>
     </style>
