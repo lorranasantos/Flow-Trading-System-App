@@ -82,7 +82,8 @@
        app:layout_constraintTop_toBottomOf="@+id/login_activity_password"
        app:layout_constraintStart_toStartOf="parent"
        android:background="@drawable/rounded_purple_button"
-       android:text="@string/login"/>
+       android:text="@string/login"
+       android:textAppearance="@style/buttonTextAppearence"/>
 
     <TextView
         android:id="@+id/login_activity_forgotpassword"

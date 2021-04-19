@@ -7,14 +7,24 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flowtrandingsystem.R
+import kotlinx.android.synthetic.main.login_activity.*
 import kotlinx.android.synthetic.main.main_activity.*
 
 class LoginActivity: AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_activity)
 
+        login_activity_button.setOnClickListener{
+
+            goToMainMenu()
+        }
+    }
+
+    private fun goToMainMenu(){
+
+        val menuScreen = Intent(this, MainMenuActivity::class.java)
+        startActivity(menuScreen)
     }
 }
 

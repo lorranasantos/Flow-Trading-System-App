@@ -16,14 +16,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        btn_register_employer_screen.setOnClickListener {
 
-            goToRegisterEmployer()
-        }
-        btn_register_manager_screen.setOnClickListener {
-
-            goToRegisterManager()
-        }
         btn_login_screen.setOnClickListener {
 
             goToLogin()
@@ -35,19 +28,6 @@ class MainActivity : AppCompatActivity() {
 
         val loginScreen = Intent(this, LoginActivity::class.java)
         startActivity(loginScreen)
-    }
-
-    private fun goToRegisterEmployer(){
-
-        val registerScreen = Intent(this, RegisterEmployerActivity::class.java)
-        startActivity(registerScreen)
-    }
-
-
-    private fun goToRegisterManager(){
-
-        val registerScreen = Intent(this, RegisterManagerActivity::class.java)
-        startActivity(registerScreen)
     }
 
 }

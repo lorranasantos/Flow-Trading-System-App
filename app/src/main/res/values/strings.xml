@@ -17,9 +17,9 @@
     <string name="register_employer">Cadastrar Funcionário</string>
     <string name="fts">Flow Tranding System</string>
     <string name="kind_of_system">Sistema de Gerenciamento Comercial</string>
-    <string name="arent_you_a_client">Aren\'t you a client?Know our plans</string>
+    <string name="arent_you_a_client">Aren\'t you a client? Know our plans</string>
     <string name="know_our_plans">Know our plans</string>
-    <string name="get_a_plan">Adiquirir Plano</string>
+    <string name="our_company">Sobre Nós</string>
     <string name="register">Cadastrar</string>
 
 </resources>

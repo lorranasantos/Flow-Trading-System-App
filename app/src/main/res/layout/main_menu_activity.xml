@@ -33,38 +33,38 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+
         <Button
-            android:id="@+id/btn_login_screen"
+            android:id="@+id/btn_register_employer_screen"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="24dp"
-            android:background="@drawable/welcome_screen_login_button"
-            android:text="@string/login"
+            android:background="@drawable/welcome_creen_register_button"
+            android:text="@string/register_employer"
             android:textAppearance="@style/buttonTextAppearence"
+            android:textColor="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout" />
 
         <Button
-            android:id="@+id/btn_our_company_screen"
+            android:id="@+id/btn_register_manager_screen"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="4dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/welcome_creen_register_button"
-            android:text="@string/our_company"
+            android:text="@string/register_manager"
             android:textAppearance="@style/buttonTextAppearence"
             android:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_login_screen" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_register_employer_screen" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
