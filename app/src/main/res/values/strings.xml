@@ -20,4 +20,8 @@
     <string name="arent_you_a_client">Não é cliente? Conheça nossos planos!</string>
     <string name="register">Cadastrar</string>
 
+
+    <string name="open">Abrir</string>
+    <string name="close">Fechar</string>
+
 </resources>
