@@ -27,8 +27,7 @@ class MainMenuActivity : AppCompatActivity() {
 
         main_navigation_view.setNavigationItemSelectedListener {
             when(it.itemId) {
-                R.id.nav_profile1 -> Toast.makeText(applicationContext,
-                    "item clicado 1", Toast.LENGTH_SHORT).show()
+                R.id.nav_profile1 -> goToRegisterEmployer()
                 R.id.nav_profile2 -> Toast.makeText(applicationContext,
                     "item clicado 2", Toast.LENGTH_SHORT).show()
                 R.id.nav_profile3 -> Toast.makeText(applicationContext,
