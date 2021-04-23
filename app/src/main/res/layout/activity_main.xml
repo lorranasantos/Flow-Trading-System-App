@@ -57,7 +57,7 @@
         android:hint="@string/user"
         android:textSize="18sp"
         android:textAppearance="@style/hintInputAppearence"
-        android:inputType="number"/>
+        android:inputType=""/>
 
     <EditText
         android:id="@+id/login_activity_password"

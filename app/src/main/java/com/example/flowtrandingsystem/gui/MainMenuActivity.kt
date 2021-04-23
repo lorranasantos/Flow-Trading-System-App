@@ -33,8 +33,7 @@ class MainMenuActivity : AppCompatActivity() {
                     "item clicado 2", Toast.LENGTH_SHORT).show()
                 R.id.nav_profile3 -> Toast.makeText(applicationContext,
                     "item clicado 3", Toast.LENGTH_SHORT).show()
-                R.id.nav_profile4 -> Toast.makeText(applicationContext,
-                    "item clicado 4", Toast.LENGTH_SHORT).show()
+                R.id.nav_profile4 -> goToRegisterEmployer()
             }
             true
         }
