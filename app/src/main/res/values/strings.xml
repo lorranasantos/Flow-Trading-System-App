@@ -11,33 +11,17 @@
     <string name="password">Senha</string>
 
     <!-- Titles and subtitles-->
-
+    <string name="manager_register">Cadastro de Gerentes</string>
+    <string name="employees_register">Cadastro de Funcionários</string>
+    <string name="register_manager">Cadastrar Gerente</string>
+    <string name="register_employer">Cadastrar Funcionário</string>
     <string name="fts">Flow Tranding System</string>
     <string name="kind_of_system">Sistema de Gerenciamento Comercial</string>
     <string name="arent_you_a_client">Não é cliente? Conheça nossos planos!</string>
     <string name="register">Cadastrar</string>
 
-    <!--Inventory section-->
-    <string name="add_product">Cadastro de Produtos</string>
-    <string name="sell">Venda</string>
-    <string name="inventory">Estoque</string>
-    <string name="type">tipo</string>
-    <string name="price_un">Preço unitário</string>
-    <string name="price_all">Preço Atacado</string>
-    <string name="amount_in_inventory">Quantidade em estoque</string>
-    <string name="expiration_date">Expiração</string>
-    <string name="acquisition_date">Data de Aquisição</string>
-
 
     <string name="open">Abrir</string>
     <string name="close">Fechar</string>
-    <string name="save">Salvar</string>
-    <string name="find">Buscar</string>
-
-    <string-array name="products_type">
-        <item>Elétrodomesticos</item>
-        <item>Papelaria</item>
-        <item>Decoração</item>
-    </string-array>
 
 </resources>
