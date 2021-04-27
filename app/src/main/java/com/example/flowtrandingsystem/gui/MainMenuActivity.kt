@@ -8,11 +8,10 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flowtrandingsystem.R
-import kotlinx.android.synthetic.main.drawer_navigation_manager_register.*
-import kotlinx.android.synthetic.main.main_menu_activity.*
 
 class MainMenuActivity : AppCompatActivity() {
 
+    /**
     lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,5 +66,5 @@ class MainMenuActivity : AppCompatActivity() {
 
         val registerScreen = Intent(this, RegisterManagerActivity::class.java)
         startActivity(registerScreen)
-    }
+    }**/
 }
