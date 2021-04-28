@@ -16,10 +16,7 @@ class InventoryActivity: AppCompatActivity() {
 
         rvInventoryItems = findViewById(R.id.recycler_view_inventory_list)
 
-        rvInventoryItems.layoutManager =
-            LinearLayoutManager(
-                this,
-                LinearLayoutManager.HORIZONTAL, false)
+        rvInventoryItems.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
     }
 }

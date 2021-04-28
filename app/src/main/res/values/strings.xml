@@ -21,7 +21,7 @@
     <string name="add_product">Cadastro de Produtos</string>
     <string name="sell">Venda</string>
     <string name="inventory">Estoque</string>
-    <string name="type">tipo</string>
+    <string name="type">Tipo</string>
     <string name="price_un">Preço unitário</string>
     <string name="price_all">Preço Atacado</string>
     <string name="amount_in_inventory">Quantidade em estoque</string>

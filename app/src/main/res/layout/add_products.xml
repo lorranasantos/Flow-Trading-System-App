@@ -126,7 +126,7 @@
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"
         android:inputType="datetime"
-        android:hint="@string/acquisition_date"
+        android:hint="@string/expiration_date"
 
         app:layout_constraintTop_toBottomOf="@+id/add_products_acquisition_date"
         app:layout_constraintStart_toStartOf="parent"

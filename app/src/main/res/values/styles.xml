@@ -66,4 +66,22 @@
         <item name="color">@color/logoDark</item>
     </style>
 
+    <!--Datasheet Activity-->
+    <style name="title_product_name" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="color">@color/logoDark</item>
+    </style>
+
+    <style name="product_infotmation_titles" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="color">@color/logoDark</item>
+    </style>
+
+    <style name="product_infotmation" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">18sp</item>
+        <item name="color">@color/logoDark</item>
+    </style>
+
 </resources>
