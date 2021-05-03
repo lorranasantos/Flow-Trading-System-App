@@ -10,14 +10,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
-        <!--SPLASH-->
+        <!--SPLASH
         <activity android:name=".gui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity> -->
+        <activity
+            android:name=".gui.MainActivity"
+            android:label="YourAppName"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+        <activity android:name=".gui.gui.MenuActivity" />
+        <activity android:name=".gui.gui.InventoryActivity"/>
+        <activity android:name=".gui.gui.AddNewProductActivity"/>
     </application>
 
 </manifest>

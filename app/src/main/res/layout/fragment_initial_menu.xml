@@ -22,7 +22,7 @@
         android:padding="8dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_venda"
+            android:id="@+id/card_sell"
             android:layout_width="0dp"
             android:layout_height="130dp"
             android:layout_weight="1"

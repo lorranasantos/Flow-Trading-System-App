@@ -10,13 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.flowtrandingsystem.R
 
 class MainMenuActivity : AppCompatActivity() {
-
-    /**
+/*
     lateinit var toggle: ActionBarDrawerToggle
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_menu_activity)
+        setContentView(R.layout.fragment_initial_menu)
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
@@ -32,19 +31,10 @@ class MainMenuActivity : AppCompatActivity() {
                     "item clicado 2", Toast.LENGTH_SHORT).show()
                 R.id.nav_profile3 -> Toast.makeText(applicationContext,
                     "item clicado 3", Toast.LENGTH_SHORT).show()
-                R.id.nav_profile4 -> goToRegisterEmployer()
             }
             true
         }
 
-        btn_register_employer_screen.setOnClickListener {
-
-            goToRegisterEmployer()
-        }
-        btn_register_manager_screen.setOnClickListener {
-
-            goToRegisterManager()
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -54,17 +44,6 @@ class MainMenuActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
+    */
 
-    private fun goToRegisterEmployer() {
-
-        val registerScreen = Intent(this, RegisterEmployerActivity::class.java)
-        startActivity(registerScreen)
-    }
-
-
-    private fun goToRegisterManager() {
-
-        val registerScreen = Intent(this, RegisterManagerActivity::class.java)
-        startActivity(registerScreen)
-    }**/
 }

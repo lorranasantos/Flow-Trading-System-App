@@ -5,44 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/login_activity_banner"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
-        android:background="@drawable/rounded_bottom"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="30dp"
         app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/login"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:textAppearance="@style/register_title_appearence"/>
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center_horizontal"
-            android:background="@drawable/circle_dark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/fts" />
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <EditText
         android:id="@+id/login_activity_user"
@@ -98,10 +71,10 @@
     <Button
         android:id="@+id/login_activity_client"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
         android:background="@drawable/welcome_plans_ripple"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/arent_you_a_client"
         android:orientation="horizontal"/>
 
