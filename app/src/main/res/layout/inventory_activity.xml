@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/inventory_list_title"
+        android:layout_width="match_parent"
+        android:padding="25dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_bottom"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/inventory"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_vertical"
+            android:textAppearance="@style/register_title_appearence"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:background="@drawable/rounded_input"
+            android:paddingEnd="15dp"
+            android:orientation="horizontal"
+            android:paddingStart="15dp">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="@string/find"/>
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_baseline_search_24"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_item_categorie"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inventory_list_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:textSize="18sp"
+        android:textColor="@color/logoDark"
+        android:layout_marginTop="20dp"
+        android:text="@string/paleparia"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_inventory_list"
+        android:layout_width="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_height="210dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/holder_inventory_items"
+        app:layout_constraintTop_toBottomOf="@+id/txt_item_categorie"/>
+
+    <TextView
+        android:id="@+id/txt_item_categorie2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recycler_view_inventory_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:textSize="18sp"
+        android:textColor="@color/logoDark"
+        android:layout_marginTop="20dp"
+        android:text="@string/vestuario"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_inventory_lists"
+        android:layout_width="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_height="210dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/holder_inventory_items"
+        app:layout_constraintTop_toBottomOf="@+id/txt_item_categorie2"/>
+
+
+    <ImageButton
+        android:id="@+id/button_add_product"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_baseline_add_24"
+        android:background="@drawable/circle_add_product_inventory"
+        android:layout_margin="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

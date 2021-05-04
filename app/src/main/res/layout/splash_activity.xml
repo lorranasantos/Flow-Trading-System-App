@@ -22,11 +22,12 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/fts"
+            android:background="@drawable/fts"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/fts"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

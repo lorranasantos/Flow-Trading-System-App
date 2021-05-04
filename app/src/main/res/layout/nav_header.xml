@@ -3,10 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="150dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/cardview_dark_background"
+    android:background="@color/colorPrimaryDark"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:padding="16dp"
-    android:layout_marginTop="80dp">
+    android:padding="16dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_photo_perfil"
@@ -41,25 +40,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <Button
-        android:id="@+id/button_editar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Editar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:minHeight="0dp"
-        android:minWidth="2dp"
-        android:layout_marginTop="10dp"
-        android:padding="0dp"/>
 
-    <FrameLayout
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:background="@android:color/white"
-        app:layout_constraintStart_toStartOf="@id/button_editar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/button_editar"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

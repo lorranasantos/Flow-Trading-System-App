@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -33,6 +33,7 @@
         <item name="theme">@style/TextAppearance.AppCompat.Medium</item>
     </style>
 
+
     <style name="splash_startupKind_appearence" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/colorPrimary</item>
@@ -60,10 +61,35 @@
         <item name="color">@android:color/white</item>
     </style>
 
+    <!-- HEAD -->
     <style name="initialMenu_appearence" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/logoDark</item>
+    </style>
+    <style name="holder_menu_title" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="color">@color/logoDark</item>
+    </style>
+
+    <!--Datasheet Activity-->
+    <style name="title_product_name" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="color">@color/logoDark</item>
+    </style>
+
+    <style name="product_infotmation_titles" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="color">@color/logoDark</item>
+    </style>
+
+    <style name="product_infotmation" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textSize">18sp</item>
+        <item name="color">@color/logoDark</item>
+>>>>>>> 8be70137eeefccd540850e71eb307424b7f32abc
     </style>
 
 </resources>

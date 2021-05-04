@@ -5,4 +5,8 @@
     <color name="colorAccent">#C0CFFF</color>
     <color name="logoDark">#3A4F6C</color>
     <color name="lightPurple">#33C0CFFF</color>
+    <color name="light_purple">#30C0CFFF</color>
+    <color name="primaryTransparent">#81C0CFFF</color>
+    <color name="primaryDarkTransparent">#475870CB</color>
+>>>>>>> 8be70137eeefccd540850e71eb307424b7f32abc
 </resources>
