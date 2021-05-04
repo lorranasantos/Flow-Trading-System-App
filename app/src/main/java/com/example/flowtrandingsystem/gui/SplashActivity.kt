@@ -9,7 +9,7 @@ import com.example.flowtrandingsystem.R
 class SplashActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.splash_activity);
+        setContentView(R.layout.splash_activity)
 
         supportActionBar?.hide()
 
