@@ -20,45 +20,45 @@
             android:title="Config" />
     </group>
 
-<!--    <group android:checkableBehavior="single">-->
+    <group android:checkableBehavior="single">
 
-<!--        <item android:title="Profile">-->
+        <item android:title="Profile">
 
-<!--            <menu>-->
+            <menu>
 
-<!--                <item-->
-<!--                    android:id="@+id/nav_4"-->
-<!--                    android:icon="@drawable/ic_profile_24"-->
-<!--                    android:title="Login" />-->
-<!--                <item-->
-<!--                    android:id="@+id/nav_5"-->
-<!--                    android:icon="@drawable/ic_profile_24"-->
-<!--                    android:title="Profile" />-->
-<!--                <item-->
-<!--                    android:id="@+id/nav_6"-->
-<!--                    android:icon="@drawable/ic_profile_24"-->
-<!--                    android:title="Logout" />-->
+                <item
+                    android:id="@+id/nav_4"
+                    android:icon="@drawable/ic_profile_24"
+                    android:title="Login" />
+                <item
+                    android:id="@+id/nav_5"
+                    android:icon="@drawable/ic_profile_24"
+                    android:title="Profile" />
+                <item
+                    android:id="@+id/nav_6"
+                    android:icon="@drawable/ic_profile_24"
+                    android:title="Logout" />
 
-<!--            </menu>-->
-<!--        </item>-->
+            </menu>
+        </item>
 
-<!--    </group>-->
+    </group>
 
-<!--    <item android:title="Communicate">-->
+    <item android:title="Communicate">
 
-<!--        <menu>-->
+        <menu>
 
-<!--            <item-->
-<!--                android:id="@+id/nav_7"-->
-<!--                android:icon="@drawable/ic_profile_24"-->
-<!--                android:title="Share" />-->
-<!--            <item-->
-<!--                android:id="@+id/nav_8"-->
-<!--                android:icon="@drawable/ic_profile_24"-->
-<!--                android:title="Rate" />-->
+            <item
+                android:id="@+id/nav_7"
+                android:icon="@drawable/ic_profile_24"
+                android:title="Share" />
+            <item0
+                android:id="@+id/nav_8"
+                android:icon="@drawable/ic_profile_24"
+                android:title="Rate" />
 
 
-<!--        </menu>-->
-<!--    </item>-->
+        </menu>
+    </item>
 
 </menu>

@@ -21,6 +21,13 @@ class MenuActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var toggle: ActionBarDrawerToggle
 
+    private fun goToinventory(){
+
+        val inventoryScreen = Intent(this, InventoryActivity::class.java)
+        startActivity(inventoryScreen)
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_initial_menu)
@@ -40,7 +47,7 @@ class MenuActivity : AppCompatActivity(), View.OnClickListener {
 
         main_navigation_view.setNavigationItemSelectedListener {
             when(it.itemId) {
-//                R.id.nav_profile1 -> goToinventory()
+                R.id.nav_profile1 -> goToinventory()
 
             }
             true
@@ -48,11 +55,6 @@ class MenuActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
-//    private fun goToinventory(){
-//
-//        val inventoryScreen = Intent(this, MenuActivity::class.java)
-//        startActivity(menuScreen)
-//    }
 
     override fun onClick(v: View) {
         if (v.id == R.id.card_sell) {
