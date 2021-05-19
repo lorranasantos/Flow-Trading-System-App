@@ -39,6 +39,8 @@
         </activity>
         <activity android:name=".gui.gui.InventoryActivity"/>
         <activity android:name=".gui.gui.AddNewProductActivity"/>
+        <activity android:name=".gui.gui.CompanyInfoActivity"/>
+        <activity android:name=".gui.gui.UserInfoActivity"/>
     </application>
 
 </manifest>

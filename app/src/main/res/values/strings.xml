@@ -1,14 +1,24 @@
 <resources>
-    <string name="app_name">Flow Tranding System</string>
+    <string name="app_name">Flow Trading System</string>
     <string name="login">Login</string>
     <string name="forgotPassword">Esqueceu sua senha?</string>
 
     <!-- Personal Information-->
     <string name="nome">Nome</string>
     <string name="rg">RG</string>
+    <string name="rgUser">RG:</string>
     <string name="cpf">CPF</string>
+    <string name="cpfUser">CPF:</string>
     <string name="user">Usuário</string>
+    <string name="role">Cargo:</string>
+    <string name="branch">Filial Atual:</string>
+    <string name="permission">Permissão:</string>
     <string name="password">Senha</string>
+    <string name="profile">Perfil</string>
+    <string name="company">Sobre a Empresa</string>
+    <string name="home">Menu</string>
+    <string name="logout">Deslogar</string>
+    <string name="config">Configurações</string>
 
     <!-- Titles and subtitles-->
 

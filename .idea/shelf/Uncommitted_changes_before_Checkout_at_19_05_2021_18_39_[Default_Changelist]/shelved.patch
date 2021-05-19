@@ -1,0 +1,480 @@
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>apply plugin: 'com.android.application'\r\napply plugin: 'kotlin-android'\r\napply plugin: 'kotlin-android-extensions'\r\n\r\nandroid {\r\n    compileSdkVersion 30\r\n    buildToolsVersion \"30.0.3\"\r\n\r\n    defaultConfig {\r\n        applicationId \"com.example.flowtrandingsystem\"\r\n        minSdkVersion 21\r\n        targetSdkVersion 30\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation fileTree(dir: \"libs\", include: [\"*.jar\"])\r\n    implementation \"org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version\"\r\n    implementation 'androidx.core:core-ktx:1.1.0'\r\n    implementation 'androidx.appcompat:appcompat:1.1.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'\r\n    implementation 'com.google.android.material:material:1.2.0-alpha04'\r\n    implementation 'com.google.android.material:material:1.0.0-beta01'\r\n\r\n    //ACESSO DE API\r\n    implementation 'com.google.code.gson:gson:2.8.2'\r\n    implementation 'com.squareup.okhttp3:okhttp:3.10.0'\r\n    implementation 'org.jetbrains.anko:anko-sqlite:0.10.4'\r\n\r\n    testImplementation 'junit:junit:4.12'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.1'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 95fd1f55ff8bee28f6671c0714137c95ca90cd46)
++++ app/build.gradle	(date 1621458332703)
+@@ -22,6 +22,10 @@
+             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+         }
+     }
++
++    compileOptions {
++        targetCompatibility JavaVersion.VERSION_1_8
++    }
+ }
+ 
+ dependencies {
+Index: app/src/main/res/menu/nav_drawer_menu.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<menu xmlns:android=\"http://schemas.android.com/apk/res/android\">\r\n\r\n    <group android:checkableBehavior=\"single\">\r\n        <item\r\n            android:id=\"@+id/nav_profile1\"\r\n            android:icon=\"@drawable/home_24\"\r\n            android:title=\"Home\" />\r\n        <item\r\n            android:id=\"@+id/nav_profile2\"\r\n            android:icon=\"@drawable/ic_profile_24\"\r\n            android:title=\"Nav \" />\r\n        <item\r\n            android:id=\"@+id/nav_profile3\"\r\n            android:icon=\"@drawable/ic_profile_24\"\r\n            android:title=\"Menu\" />\r\n        <item\r\n            android:id=\"@+id/nav_profile4\"\r\n            android:icon=\"@drawable/ic_profile_24\"\r\n            android:title=\"Config\" />\r\n    </group>\r\n\r\n    <group android:checkableBehavior=\"single\">\r\n\r\n        <item android:title=\"Profile\">\r\n\r\n            <menu>\r\n\r\n                <item\r\n                    android:id=\"@+id/nav_4\"\r\n                    android:icon=\"@drawable/ic_profile_24\"\r\n                    android:title=\"Login\" />\r\n                <item\r\n                    android:id=\"@+id/nav_5\"\r\n                    android:icon=\"@drawable/ic_profile_24\"\r\n                    android:title=\"Profile\" />\r\n                <item\r\n                    android:id=\"@+id/nav_6\"\r\n                    android:icon=\"@drawable/ic_profile_24\"\r\n                    android:title=\"Logout\" />\r\n\r\n            </menu>\r\n        </item>\r\n\r\n    </group>\r\n\r\n    <item android:title=\"Communicate\">\r\n\r\n        <menu>\r\n\r\n            <item\r\n                android:id=\"@+id/nav_7\"\r\n                android:icon=\"@drawable/ic_profile_24\"\r\n                android:title=\"Share\" />\r\n            <item0\r\n                android:id=\"@+id/nav_8\"\r\n                android:icon=\"@drawable/ic_profile_24\"\r\n                android:title=\"Rate\" />\r\n\r\n\r\n        </menu>\r\n    </item>\r\n\r\n</menu>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/menu/nav_drawer_menu.xml	(revision 95fd1f55ff8bee28f6671c0714137c95ca90cd46)
++++ app/src/main/res/menu/nav_drawer_menu.xml	(date 1621459726329)
+@@ -3,62 +3,21 @@
+ 
+     <group android:checkableBehavior="single">
+         <item
+-            android:id="@+id/nav_profile1"
++            android:id="@+id/nav_option_home"
+             android:icon="@drawable/home_24"
+-            android:title="Home" />
++            android:title="@string/home" />
+         <item
+-            android:id="@+id/nav_profile2"
+-            android:icon="@drawable/ic_profile_24"
+-            android:title="Nav " />
+-        <item
+-            android:id="@+id/nav_profile3"
+-            android:icon="@drawable/ic_profile_24"
+-            android:title="Menu" />
+-        <item
+-            android:id="@+id/nav_profile4"
+-            android:icon="@drawable/ic_profile_24"
+-            android:title="Config" />
+-    </group>
+-
+-    <group android:checkableBehavior="single">
+-
+-        <item android:title="Profile">
+-
+-            <menu>
+-
+-                <item
+-                    android:id="@+id/nav_4"
+-                    android:icon="@drawable/ic_profile_24"
+-                    android:title="Login" />
+-                <item
+-                    android:id="@+id/nav_5"
+-                    android:icon="@drawable/ic_profile_24"
+-                    android:title="Profile" />
+-                <item
+-                    android:id="@+id/nav_6"
+-                    android:icon="@drawable/ic_profile_24"
+-                    android:title="Logout" />
+-
+-            </menu>
+-        </item>
+-
++            android:id="@+id/nav_option_profile"
++            android:icon="@drawable/ic_profile_24"
++            android:title="@string/profile" />
++        <item
++            android:id="@+id/nav_option_company"
++            android:icon="@drawable/ic_baseline_business_24"
++            android:title="@string/company" />
++        <item
++            android:id="@+id/nav_option_logout"
++            android:icon="@drawable/ic_baseline_arrow_forward_24"
++            android:title="@string/logout" />
+     </group>
+ 
+-    <item android:title="Communicate">
+-
+-        <menu>
+-
+-            <item
+-                android:id="@+id/nav_7"
+-                android:icon="@drawable/ic_profile_24"
+-                android:title="Share" />
+-            <item0
+-                android:id="@+id/nav_8"
+-                android:icon="@drawable/ic_profile_24"
+-                android:title="Rate" />
+-
+-
+-        </menu>
+-    </item>
+-
+ </menu>
+\ No newline at end of file
+Index: app/src/main/res/layout/main_activity.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n    <androidx.constraintlayout.widget.ConstraintLayout\r\n        android:id=\"@+id/login_activity_banner\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:background=\"@drawable/rounded_bottom\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        android:layout_marginBottom=\"100dp\"\r\n        android:orientation=\"vertical\"\r\n        android:gravity=\"center_horizontal\"\r\n        android:paddingBottom=\"20dp\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/text_login_title\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:text=\"@string/login\"\r\n            android:gravity=\"center_horizontal\"\r\n            android:layout_marginTop=\"30dp\"\r\n            android:layout_marginBottom=\"20dp\"\r\n            android:textAppearance=\"@style/register_title_appearence\"\r\n            app:layout_constraintTop_toTopOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"/>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"200dp\"\r\n            android:layout_height=\"200dp\"\r\n            android:background=\"@drawable/circle_dark_purple\"\r\n            android:orientation=\"horizontal\"\r\n            android:layout_marginTop=\"20dp\"\r\n            android:layout_marginLeft=\"15dp\"\r\n            android:layout_marginBottom=\"50dp\"\r\n            android:gravity=\"center\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@id/text_login_title\"/>\r\n\r\n        <LinearLayout\r\n            android:id=\"@+id/topp\"\r\n            android:orientation=\"vertical\"\r\n            android:layout_width=\"200dp\"\r\n            android:layout_height=\"200dp\"\r\n            android:layout_marginLeft=\"20dp\"\r\n            android:layout_marginRight=\"40dp\"\r\n            android:layout_marginBottom=\"20dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:background=\"@drawable/circle_purple\"\r\n            android:gravity=\"center_horizontal\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\"\r\n            app:layout_constraintTop_toBottomOf=\"@id/text_login_title\"/>\r\n\r\n        <LinearLayout\r\n            android:id=\"@+id/linearLayout\"\r\n            android:layout_width=\"120dp\"\r\n            android:layout_height=\"120dp\"\r\n            android:layout_marginTop=\"45dp\"\r\n            android:layout_marginLeft=\"15dp\"\r\n            android:orientation=\"horizontal\"\r\n            android:background=\"@drawable/circle_dark\"\r\n            android:paddingLeft=\"30dp\"\r\n            android:layout_marginRight=\"1dp\"\r\n            android:padding=\"20dp\"\r\n            app:layout_constraintTop_toTopOf=\"@+id/topp\"\r\n            app:layout_constraintStart_toStartOf=\"parent\"\r\n            app:layout_constraintEnd_toEndOf=\"parent\">\r\n\r\n            <ImageView\r\n                android:layout_width=\"80dp\"\r\n                android:layout_height=\"80dp\"\r\n                android:layout_gravity=\"center_horizontal\"\r\n                android:background=\"@drawable/fts\" />\r\n        </LinearLayout>\r\n\r\n    </androidx.constraintlayout.widget.ConstraintLayout>\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/login_activity_banner\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/footer_fts\">\r\n\r\n        <androidx.constraintlayout.widget.ConstraintLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\">\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"vertical\"\r\n                app:layout_constraintTop_toBottomOf=\"parent\"\r\n                app:layout_constraintBottom_toTopOf=\"parent\"\r\n                app:layout_constraintStart_toStartOf=\"parent\">\r\n\r\n                <com.google.android.material.textfield.TextInputLayout\r\n                    android:id=\"@+id/login_activity_user\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    app:layout_constraintTop_toTopOf=\"parent\"\r\n                    app:layout_constraintBottom_toTopOf=\"@+id/login_activity_password\">\r\n\r\n                    <com.google.android.material.textfield.TextInputEditText\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:drawableStart=\"@drawable/ic_profile_24\"\r\n                        android:drawablePadding=\"10dp\"\r\n                        android:layout_marginLeft=\"35dp\"\r\n                        android:layout_marginRight=\"35dp\"\r\n                        android:layout_marginBottom=\"15dp\"\r\n                        android:layout_marginTop=\"100dp\"\r\n                        android:hint=\"@string/user\"\r\n                        android:textSize=\"18sp\"\r\n                        android:textAppearance=\"@style/hintInputAppearence\"\r\n                        android:inputType=\"number\"/>\r\n\r\n                </com.google.android.material.textfield.TextInputLayout>\r\n\r\n\r\n                <com.google.android.material.textfield.TextInputLayout\r\n                    android:id=\"@+id/login_activity_password\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    app:layout_constraintTop_toBottomOf=\"@+id/login_activity_user\"\r\n                    app:layout_constraintBottom_toTopOf=\"@+id/login_activity_button\"\r\n                    app:passwordToggleEnabled=\"true\">\r\n\r\n                    <com.google.android.material.textfield.TextInputEditText\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:drawableStart=\"@drawable/ic_key_24\"\r\n                        android:drawablePadding=\"10dp\"\r\n                        android:layout_marginLeft=\"35dp\"\r\n                        android:layout_marginRight=\"35dp\"\r\n                        android:layout_marginBottom=\"15dp\"\r\n                        android:hint=\"@string/password\"\r\n                        android:textSize=\"18sp\"\r\n                        android:textAppearance=\"@style/hintInputAppearence\"\r\n                        android:inputType=\"textPassword\"/>\r\n\r\n\r\n                </com.google.android.material.textfield.TextInputLayout>\r\n\r\n                <Button\r\n                    android:id=\"@+id/login_activity_button\"\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginLeft=\"35dp\"\r\n                    android:layout_marginRight=\"35dp\"\r\n                    app:layout_constraintTop_toBottomOf=\"@+id/login_activity_password\"\r\n                    app:layout_constraintStart_toStartOf=\"parent\"\r\n                    android:background=\"@drawable/rounded_purple_button\"\r\n                    android:text=\"@string/login\"\r\n                    android:textAppearance=\"@style/buttonTextAppearence\"/>\r\n\r\n                <TextView\r\n                    android:id=\"@+id/login_activity_forgotpassword\"\r\n                    android:layout_width=\"wrap_content\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:text=\"@string/forgotPassword\"\r\n                    android:layout_marginLeft=\"20dp\"\r\n                    app:layout_constraintTop_toBottomOf=\"@+id/login_activity_button\"\r\n                    app:layout_constraintStart_toStartOf=\"@+id/login_activity_button\"\r\n                    android:layout_marginTop=\"10dp\"/>\r\n\r\n            </LinearLayout>\r\n\r\n        </androidx.constraintlayout.widget.ConstraintLayout>\r\n\r\n    </ScrollView>\r\n    <TextView\r\n        android:id=\"@+id/footer_fts\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:padding=\"10dp\"\r\n        android:layout_marginTop=\"20dp\"\r\n        android:background=\"@drawable/welcome_plans_ripple\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        android:text=\"@string/arent_you_a_client\"\r\n        android:orientation=\"horizontal\"\r\n        android:textAlignment=\"center\"\r\n        style=\"@style/footerAppearence\"/>\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/main_activity.xml	(revision 95fd1f55ff8bee28f6671c0714137c95ca90cd46)
++++ app/src/main/res/layout/main_activity.xml	(date 1621459420936)
+@@ -16,20 +16,8 @@
+         android:layout_marginBottom="100dp"
+         android:orientation="vertical"
+         android:gravity="center_horizontal"
+-        android:paddingBottom="20dp">
+-
+-        <TextView
+-            android:id="@+id/text_login_title"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:text="@string/login"
+-            android:gravity="center_horizontal"
+-            android:layout_marginTop="30dp"
+-            android:layout_marginBottom="20dp"
+-            android:textAppearance="@style/register_title_appearence"
+-            app:layout_constraintTop_toTopOf="parent"
+-            app:layout_constraintEnd_toEndOf="parent"
+-            app:layout_constraintStart_toStartOf="parent"/>
++        android:paddingBottom="20dp"
++        android:paddingTop="30dp">
+ 
+         <LinearLayout
+             android:layout_width="200dp"
+@@ -42,7 +30,7 @@
+             android:gravity="center"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+-            app:layout_constraintTop_toBottomOf="@id/text_login_title"/>
++            app:layout_constraintTop_toTopOf="parent"/>
+ 
+         <LinearLayout
+             android:id="@+id/topp"
+@@ -57,7 +45,7 @@
+             android:gravity="center_horizontal"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+-            app:layout_constraintTop_toBottomOf="@id/text_login_title"/>
++            app:layout_constraintTop_toTopOf="parent"/>
+ 
+         <LinearLayout
+             android:id="@+id/linearLayout"
+@@ -82,22 +70,12 @@
+         </LinearLayout>
+ 
+     </androidx.constraintlayout.widget.ConstraintLayout>
+-    <ScrollView
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        app:layout_constraintTop_toBottomOf="@+id/login_activity_banner"
+-        app:layout_constraintBottom_toTopOf="@+id/footer_fts">
+-
+-        <androidx.constraintlayout.widget.ConstraintLayout
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content">
+ 
+             <LinearLayout
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:orientation="vertical"
+-                app:layout_constraintTop_toBottomOf="parent"
+-                app:layout_constraintBottom_toTopOf="parent"
++                app:layout_constraintTop_toBottomOf="@+id/login_activity_banner"
+                 app:layout_constraintStart_toStartOf="parent">
+ 
+                 <com.google.android.material.textfield.TextInputLayout
+@@ -105,6 +83,7 @@
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     app:layout_constraintTop_toTopOf="parent"
++                    android:layout_marginTop="40dp"
+                     app:layout_constraintBottom_toTopOf="@+id/login_activity_password">
+ 
+                     <com.google.android.material.textfield.TextInputEditText
+@@ -172,9 +151,6 @@
+ 
+             </LinearLayout>
+ 
+-        </androidx.constraintlayout.widget.ConstraintLayout>
+-
+-    </ScrollView>
+     <TextView
+         android:id="@+id/footer_fts"
+         android:layout_width="match_parent"
+Index: app/src/main/java/com/example/flowtrandingsystem/gui/gui/MenuActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.flowtrandingsystem.gui.gui\r\n\r\nimport android.content.Intent\r\nimport android.graphics.Color\r\nimport android.graphics.drawable.ColorDrawable\r\nimport android.os.Bundle\r\nimport android.view.MenuItem\r\nimport android.view.View\r\nimport android.widget.Toast\r\nimport androidx.appcompat.app.ActionBar\r\nimport androidx.appcompat.app.ActionBarDrawerToggle\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.cardview.widget.CardView\r\nimport com.example.flowtrandingsystem.R\r\nimport kotlinx.android.synthetic.main.fragment_initial_menu.*\r\n\r\n\r\nclass MenuActivity : AppCompatActivity(), View.OnClickListener {\r\n    private lateinit var inventoryCard: CardView\r\n    private lateinit var sellCard: CardView\r\n\r\n    lateinit var toggle: ActionBarDrawerToggle\r\n\r\n    private fun goToinventory(){\r\n\r\n        val inventoryScreen = Intent(this, InventoryActivity::class.java)\r\n        startActivity(inventoryScreen)\r\n    }\r\n\r\n\r\n    override fun onCreate(savedInstanceState: Bundle?){\r\n        super.onCreate(savedInstanceState)\r\n        setContentView(R.layout.fragment_initial_menu)\r\n\r\n        inventoryCard = findViewById(R.id.card_inventory)\r\n        inventoryCard.setOnClickListener(this)\r\n\r\n        sellCard = findViewById(R.id.card_sell)\r\n        sellCard.setOnClickListener(this)\r\n\r\n        toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)\r\n        drawerLayout.addDrawerListener(toggle)\r\n        toggle.syncState()\r\n\r\n        supportActionBar?.setDisplayHomeAsUpEnabled(true)\r\n\r\n\r\n        main_navigation_view.setNavigationItemSelectedListener {\r\n            when(it.itemId) {\r\n                R.id.nav_profile1 -> goToinventory()\r\n\r\n            }\r\n            true\r\n        }\r\n\r\n    }\r\n\r\n\r\n    override fun onClick(v: View) {\r\n        if (v.id == R.id.card_sell) {\r\n            val intentSell = Intent(this, SellActivity::class.java)\r\n            startActivity(intentSell)\r\n        } else\r\n        if (v.id == R.id.card_inventory) {\r\n            val intentInventory = Intent(this, InventoryActivity::class.java)\r\n            startActivity(intentInventory)\r\n        } else {\r\n            Toast.makeText(this, \"Nada foi clicado\", Toast.LENGTH_SHORT).show()\r\n        }\r\n    }\r\n\r\n    override fun onOptionsItemSelected(item: MenuItem): Boolean {\r\n        if(toggle.onOptionsItemSelected(item)) {\r\n            return true\r\n        }\r\n\r\n        return super.onOptionsItemSelected(item)\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/flowtrandingsystem/gui/gui/MenuActivity.kt	(revision 95fd1f55ff8bee28f6671c0714137c95ca90cd46)
++++ app/src/main/java/com/example/flowtrandingsystem/gui/gui/MenuActivity.kt	(date 1621460321487)
+@@ -1,13 +1,10 @@
+ package com.example.flowtrandingsystem.gui.gui
+ 
+ import android.content.Intent
+-import android.graphics.Color
+-import android.graphics.drawable.ColorDrawable
+ import android.os.Bundle
+ import android.view.MenuItem
+ import android.view.View
+ import android.widget.Toast
+-import androidx.appcompat.app.ActionBar
+ import androidx.appcompat.app.ActionBarDrawerToggle
+ import androidx.appcompat.app.AppCompatActivity
+ import androidx.cardview.widget.CardView
+@@ -47,8 +44,10 @@
+ 
+         main_navigation_view.setNavigationItemSelectedListener {
+             when(it.itemId) {
+-                R.id.nav_profile1 -> goToinventory()
+-
++                R.id.nav_option_home -> goToinventory()
++                R.id.nav_option_profile -> goToinventory()
++                R.id.nav_option_company -> goToinventory()
++                R.id.nav_option_logout -> goToinventory()
+             }
+             true
+         }
+@@ -76,4 +75,4 @@
+ 
+         return super.onOptionsItemSelected(item)
+     }
+-}
+\ No newline at end of file
++}
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">Flow Tranding System</string>\r\n    <string name=\"login\">Login</string>\r\n    <string name=\"forgotPassword\">Esqueceu sua senha?</string>\r\n\r\n    <!-- Personal Information-->\r\n    <string name=\"nome\">Nome</string>\r\n    <string name=\"rg\">RG</string>\r\n    <string name=\"cpf\">CPF</string>\r\n    <string name=\"user\">Usuário</string>\r\n    <string name=\"password\">Senha</string>\r\n\r\n    <!-- Titles and subtitles-->\r\n\r\n    <string name=\"fts\">Flow Tranding System</string>\r\n    <string name=\"kind_of_system\">Sistema de Gerenciamento Comercial</string>\r\n    <string name=\"arent_you_a_client\">Não é cliente? Conheça nossos planos!</string>\r\n    <string name=\"register\">Cadastrar</string>\r\n    <string name=\"menu\">Menu</string>\r\n\r\n    <!--Inventory section-->\r\n    <string name=\"add_product\">Cadastro de Produtos</string>\r\n    <string name=\"sell\">Venda</string>\r\n    <string name=\"inventory\">Estoque</string>\r\n    <string name=\"type\">Tipo</string>\r\n    <string name=\"price_un\">Preço unitário</string>\r\n    <string name=\"price_all\">Preço Atacado</string>\r\n    <string name=\"amount_in_inventory\">Quantidade em estoque</string>\r\n    <string name=\"qtd\">Quantidade</string>\r\n    <string name=\"expiration_date\">Expiração</string>\r\n    <string name=\"companie\">Empresa</string>\r\n    <string name=\"unit_of_measurement\">Unidade de medida</string>\r\n    <string name=\"paleparia\"><b>Papelaria</b></string>\r\n    <string name=\"vestuario\"><b>Vestuario</b></string>\r\n\r\n\r\n    <string name=\"open\">Abrir</string>\r\n    <string name=\"close\">Fechar</string>\r\n    <string name=\"save\">Salvar</string>\r\n    <string name=\"find\">Buscar</string>\r\n\r\n    <string-array name=\"products_type\">\r\n        <item>Elétrodomesticos</item>\r\n        <item>Papelaria</item>\r\n        <item>Decoração</item>\r\n    </string-array>\r\n\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/values/strings.xml	(revision 95fd1f55ff8bee28f6671c0714137c95ca90cd46)
++++ app/src/main/res/values/strings.xml	(date 1621458332719)
+@@ -1,5 +1,5 @@
+ <resources>
+-    <string name="app_name">Flow Tranding System</string>
++    <string name="app_name">Flow Trading System</string>
+     <string name="login">Login</string>
+     <string name="forgotPassword">Esqueceu sua senha?</string>
+ 
+@@ -9,6 +9,11 @@
+     <string name="cpf">CPF</string>
+     <string name="user">Usuário</string>
+     <string name="password">Senha</string>
++    <string name="profile">Perfil</string>
++    <string name="company">Sobre a Empresa</string>
++    <string name="home">Menu</string>
++    <string name="logout">Deslogar</string>
++    <string name="config">Configurações</string>
+ 
+     <!-- Titles and subtitles-->
+ 
+Index: app/src/main/res/layout/company_info_activity.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/company_info_activity.xml	(date 1621458332724)
++++ app/src/main/res/layout/company_info_activity.xml	(date 1621458332724)
+@@ -0,0 +1,165 @@
++<?xml version="1.0" encoding="utf-8"?>
++<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    xmlns:tools="http://schemas.android.com/tools"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent"
++    xmlns:app="http://schemas.android.com/apk/res-auto">
++
++    <androidx.constraintlayout.widget.ConstraintLayout
++        android:layout_width="match_parent"
++        android:layout_height="match_parent"
++        android:layout_below="@+id/datasheet_list_title"
++        android:layout_alignParentStart="true"
++        android:layout_alignParentEnd="true">
++
++        <TextView
++            android:id="@+id/product_name_datasheet"
++            android:layout_width="wrap_content"
++            android:layout_height="40dp"
++            android:text="@string/app_name"
++            app:layout_constraintTop_toTopOf="parent"
++            app:layout_constraintEnd_toEndOf="parent"
++            app:layout_constraintStart_toStartOf="parent"
++            android:layout_marginTop="150dp"
++            style="@style/title_product_name"/>
++
++        <TextView
++            android:id="@+id/product_type_datasheet"
++            android:layout_width="wrap_content"
++            android:layout_height="40dp"
++            android:layout_marginTop="50dp"
++            android:text="Nome fantasia: "
++            app:layout_constraintTop_toBottomOf="@+id/product_name_datasheet"
++            app:layout_constraintStart_toStartOf="parent"
++            android:layout_marginStart="15dp"
++            android:layout_marginEnd="15dp"
++            style="@style/product_infotmation_titles"/>
++
++        <TextView
++            android:id="@+id/un_price_datasheet"
++            android:layout_width="wrap_content"
++            android:layout_height="40dp"
++            android:text="Razão Social:"
++            app:layout_constraintTop_toBottomOf="@+id/product_type_datasheet"
++            app:layout_constraintStart_toStartOf="parent"
++            android:layout_marginStart="15dp"
++            android:layout_marginEnd="15dp"
++            style="@style/product_infotmation_titles"/>
++
++
++        <TextView
++            android:id="@+id/title_price_all_datasheet"
++            android:layout_width="wrap_content"
++            android:layout_height="40dp"
++            android:text="Email Comercial:"
++            app:layout_constraintTop_toBottomOf="@+id/un_price_datasheet"
++            app:layout_constraintStart_toStartOf="parent"
++            android:layout_marginStart="15dp"
++            android:layout_marginEnd="15dp"
++            style="@style/product_infotmation_titles"/>
++
++        <TextView
++            android:id="@+id/title_amount_in_inventory_datasheet"
++            android:layout_width="wrap_content"
++            android:layout_height="40dp"
++            android:text="Plano Adiquirido:"
++            app:layout_constraintTop_toBottomOf="@+id/title_price_all_datasheet"
++            app:layout_constraintStart_toStartOf="parent"
++            android:layout_marginStart="15dp"
++            android:layout_marginEnd="15dp"
++            style="@style/product_infotmation_titles"/>
++
++        <TextView
++            android:id="@+id/acquisition_date_datasheet"
++            android:layout_width="wrap_content"
++            android:layout_height="40dp"
++            android:text="Natureza de Negocios:"
++            app:layout_constraintTop_toBottomOf="@+id/title_amount_in_inventory_datasheet"
++            app:layout_constraintStart_toStartOf="parent"
++            android:layout_marginStart="15dp"
++            android:layout_marginEnd="15dp"
++            style="@style/product_infotmation_titles"/>
++
++        <TextView
++            android:id="@+id/title_expiration_date_datasheet"
++            android:layout_width="wrap_content"
++            android:layout_height="40dp"
++            android:text="Filial Atual:"
++            app:layout_constraintTop_toBottomOf="@+id/acquisition_date_datasheet"
++            app:layout_constraintStart_toStartOf="parent"
++            android:layout_marginStart="15dp"
++            android:layout_marginEnd="15dp"
++            style="@style/product_infotmation_titles"/>
++
++        <TextView
++            android:id="@+id/type_of_product_datasheet"
++            android:layout_width="wrap_content"
++            android:layout_height="40dp"
++            android:layout_marginTop="45dp"
++            android:layout_marginEnd="25dp"
++            app:layout_constraintTop_toBottomOf="@id/product_name_datasheet"
++            app:layout_constraintEnd_toEndOf="parent"
++            android:text="teste"
++            style="@style/product_infotmation_titles"/>
++
++        <TextView
++            android:id="@+id/value_un_price_datasheet"
++            android:layout_width="wrap_content"
++            android:layout_height="40dp"
++            android:text="teste"
++            app:layout_constraintTop_toBottomOf="@+id/type_of_product_datasheet"
++            app:layout_constraintEnd_toEndOf="parent"
++            android:layout_marginStart="15dp"
++            android:layout_marginEnd="25dp"
++            style="@style/product_infotmation_titles"/>
++
++        <TextView
++            android:id="@+id/price_all_datasheet"
++            android:layout_width="wrap_content"
++            android:layout_height="40dp"
++            android:text="teste"
++            app:layout_constraintTop_toBottomOf="@+id/value_un_price_datasheet"
++            app:layout_constraintEnd_toEndOf="parent"
++            android:layout_marginStart="15dp"
++            android:layout_marginEnd="25dp"
++            style="@style/product_infotmation_titles"/>
++
++        <TextView
++            android:id="@+id/amount_in_inventory_datasheet"
++            android:layout_width="wrap_content"
++            android:layout_height="40dp"
++            android:text="teste"
++            app:layout_constraintTop_toBottomOf="@+id/price_all_datasheet"
++            app:layout_constraintEnd_toEndOf="parent"
++            android:layout_marginStart="15dp"
++            android:layout_marginEnd="25dp"
++            style="@style/product_infotmation_titles"/>
++
++        <TextView
++            android:id="@+id/price_datasheet"
++            android:layout_width="wrap_content"
++            android:layout_height="40dp"
++            android:text="teste"
++            app:layout_constraintTop_toBottomOf="@+id/amount_in_inventory_datasheet"
++            app:layout_constraintEnd_toEndOf="parent"
++            android:layout_marginStart="15dp"
++            android:layout_marginEnd="25dp"
++            style="@style/product_infotmation_titles"/>
++
++        <TextView
++            android:id="@+id/expiration_date_datasheet"
++            android:layout_width="wrap_content"
++            android:layout_height="40dp"
++            android:text="teste"
++            app:layout_constraintTop_toBottomOf="@+id/price_datasheet"
++            app:layout_constraintEnd_toEndOf="parent"
++            android:layout_marginStart="15dp"
++            android:layout_marginEnd="25dp"
++            style="@style/product_infotmation_titles"/>
++
++    </androidx.constraintlayout.widget.ConstraintLayout>
++
++
++
++
++</RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml	(date 1621459714203)
++++ app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml	(date 1621459714203)
+@@ -0,0 +1,11 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="24dp"
++    android:height="24dp"
++    android:viewportWidth="24"
++    android:viewportHeight="24"
++    android:tint="?attr/colorControlNormal"
++    android:autoMirrored="true">
++  <path
++      android:fillColor="@android:color/white"
++      android:pathData="M12,4l-1.41,1.41L16.17,11H4v2h12.17l-5.58,5.59L12,20l8,-8z"/>
++</vector>
+Index: app/src/main/res/drawable/ic_baseline_business_24.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/drawable/ic_baseline_business_24.xml	(date 1621459501381)
++++ app/src/main/res/drawable/ic_baseline_business_24.xml	(date 1621459501381)
+@@ -0,0 +1,10 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="24dp"
++    android:height="24dp"
++    android:viewportWidth="24"
++    android:viewportHeight="24"
++    android:tint="?attr/colorControlNormal">
++  <path
++      android:fillColor="@android:color/white"
++      android:pathData="M12,7L12,3L2,3v18h20L22,7L12,7zM6,19L4,19v-2h2v2zM6,15L4,15v-2h2v2zM6,11L4,11L4,9h2v2zM6,7L4,7L4,5h2v2zM10,19L8,19v-2h2v2zM10,15L8,15v-2h2v2zM10,11L8,11L8,9h2v2zM10,7L8,7L8,5h2v2zM20,19h-8v-2h2v-2h-2v-2h2v-2h-2L12,9h8v10zM18,11h-2v2h2v-2zM18,15h-2v2h2v-2z"/>
++</vector>

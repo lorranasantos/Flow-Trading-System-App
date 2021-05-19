@@ -1,17 +1,15 @@
 package com.example.flowtrandingsystem.gui.gui
 
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.example.flowtrandingsystem.R
+import com.example.flowtrandingsystem.gui.MainActivity
 import kotlinx.android.synthetic.main.fragment_initial_menu.*
 
 
@@ -21,10 +19,22 @@ class MenuActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var toggle: ActionBarDrawerToggle
 
-    private fun goToinventory(){
+    private fun goToInfoCompany(){
 
-        val inventoryScreen = Intent(this, InventoryActivity::class.java)
-        startActivity(inventoryScreen)
+        val companyScreen = Intent(this, CompanyInfoActivity::class.java)
+        startActivity(companyScreen)
+    }
+
+    private fun goToInfoUser(){
+
+        val userScreen = Intent(this, UserInfoActivity::class.java)
+    startActivity(userScreen)
+}
+
+    private fun goToLogin(){
+
+        val loginScreen = Intent(this, MainActivity::class.java)
+        startActivity(loginScreen)
     }
 
 
@@ -47,14 +57,14 @@ class MenuActivity : AppCompatActivity(), View.OnClickListener {
 
         main_navigation_view.setNavigationItemSelectedListener {
             when(it.itemId) {
-                R.id.nav_profile1 -> goToinventory()
-
+                R.id.nav_option_home -> Toast.makeText(this, "Tela Atual", Toast.LENGTH_SHORT).show()
+                R.id.nav_option_profile -> goToInfoUser()
+                R.id.nav_option_company -> goToInfoCompany()
+                R.id.nav_option_logout -> goToLogin()
             }
             true
         }
-
     }
-
 
     override fun onClick(v: View) {
         if (v.id == R.id.card_sell) {
