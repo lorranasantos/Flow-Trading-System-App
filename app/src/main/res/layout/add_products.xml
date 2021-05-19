@@ -57,32 +57,19 @@
                     app:layout_constraintTop_toBottomOf="@+id/manager_register_title" />
 
 
-                <TextView
-                    android:id="@+id/add_products_type_title"
-                    style="@style/hintInputAppearence"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="25dp"
-                    android:text="@string/type"
-
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/add_products_name" />
-
-                <Spinner
+                <EditText
                     android:id="@+id/add_products_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="35dp"
                     android:layout_marginRight="40dp"
-                    android:entries="@array/products_type"
-                    android:hint="@string/type"
-                    android:inputType="number"
+                    android:hint="Tipo"
+                    android:inputType="textCapWords"
 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/add_products_type_title" />
+                    app:layout_constraintTop_toBottomOf="@+id/manager_register_title" />
 
                 <EditText
                     android:id="@+id/add_products_un_price"
@@ -98,19 +85,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/add_products_type" />
 
-                <EditText
-                    android:id="@+id/add_products_box_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginRight="40dp"
-                    android:hint="@string/price_all"
-                    android:inputType="number"
-
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/add_products_un_price" />
 
                 <EditText
                     android:id="@+id/add_products_quantity"
@@ -119,7 +93,7 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="25dp"
                     android:layout_marginRight="40dp"
-                    android:hint="@string/amount_in_inventory"
+                    android:hint="@string/qtd"
                     android:inputType="number"
 
                     app:layout_constraintEnd_toEndOf="parent"
@@ -127,13 +101,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/add_products_box_price" />
 
                 <EditText
-                    android:id="@+id/add_products_acquisition_date"
+                    android:id="@+id/add_products_measurement"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="25dp"
                     android:layout_marginRight="40dp"
-                    android:hint="@string/acquisition_date"
+                    android:hint="@string/unit_of_measurement"
                     android:inputType="date"
 
                     app:layout_constraintEnd_toEndOf="parent"
@@ -141,13 +115,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/add_products_quantity" />
 
                 <EditText
-                    android:id="@+id/add_products_expiration_date"
+                    android:id="@+id/add_products_companie"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="25dp"
                     android:layout_marginRight="40dp"
-                    android:hint="@string/expiration_date"
+                    android:hint="@string/companie"
                     android:inputType="datetime"
 
                     app:layout_constraintEnd_toEndOf="parent"
@@ -155,7 +129,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/add_products_acquisition_date" />
 
                 <Button
-                    android:id="@+id/employees_register_button"
+                    android:id="@+id/products_register_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="40dp"
@@ -166,7 +140,7 @@
                     android:textAppearance="@style/buttonTextAppearence"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/add_products_expiration_date" />
+                    app:layout_constraintTop_toBottomOf="@id/add_products_companie" />
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

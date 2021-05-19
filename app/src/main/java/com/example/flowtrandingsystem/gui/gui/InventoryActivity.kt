@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
-import com.example.flowtrandingsystem.gui.model.ItensCadastrados
+import com.example.flowtrandingsystem.gui.http.HttpHelper
+import com.example.flowtrandingsystem.gui.model.Produto
+import org.jetbrains.anko.doAsync
 
 class InventoryActivity() : AppCompatActivity(), View.OnClickListener {
 
@@ -20,6 +22,11 @@ class InventoryActivity() : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.inventory_activity)
+
+        doAsync {
+            val http = HttpHelper()
+            http.get()
+        }
 
         buttonAddProduct = findViewById(R.id.button_add_product)
         buttonAddProduct.setOnClickListener(this)
@@ -37,14 +44,9 @@ class InventoryActivity() : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    private  fun setListaItens() : List<ItensCadastrados> {
+    private  fun setListaItens() : List<Produto> {
         val lista = listOf(
-            ItensCadastrados("Caneta Preta", "5", "R$1.500,00"),
-            ItensCadastrados("Caneta Azul", "8", "R$1.000,00"),
-            ItensCadastrados("Caneta Azul", "8", "R$1.000,00"),
-            ItensCadastrados("Caneta Azul", "8", "R$1.000,00"),
-            ItensCadastrados("Azul Caneta", "15", "R$500,00"))
-
+            Produto("adsadada",0,0.0,0,0,0))
         return lista
 
     }

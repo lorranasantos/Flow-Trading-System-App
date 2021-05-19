@@ -78,8 +78,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/fts"
-                android:contentDescription="@string/acquisition_date"/>
+                android:background="@drawable/fts" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -176,7 +175,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-    <Button
+    <TextView
         android:id="@+id/footer_fts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -187,7 +186,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/arent_you_a_client"
         android:orientation="horizontal"
+        android:textAlignment="center"
         style="@style/footerAppearence"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

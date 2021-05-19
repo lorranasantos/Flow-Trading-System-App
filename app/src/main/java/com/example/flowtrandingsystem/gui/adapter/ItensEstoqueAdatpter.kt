@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.model.ItensCadastrados
+import com.example.flowtrandingsystem.gui.model.Produto
 
 class ItensEstoqueAdatpter (
 
-    val listItens: List<ItensCadastrados>,
+    val listItens: List<Produto>,
     val context: Context) : RecyclerView.Adapter<ItensEstoqueAdatpter.Holder>() {
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater
@@ -33,9 +33,9 @@ class ItensEstoqueAdatpter (
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val itensRecentes = listItens[position]
 
-        holder.tvNomeItem.text = itensRecentes.nomeItem
-        holder.tvQuantidade.text = itensRecentes.quantidade
-        holder.tvValor.text = itensRecentes.descValor
+        holder.tvNomeItem.text = itensRecentes.product_name
+        holder.tvQuantidade.text = itensRecentes.total_quantity.toString()
+        holder.tvValor.text = itensRecentes.cost_per_item.toString()
     }
 
     //inner class
