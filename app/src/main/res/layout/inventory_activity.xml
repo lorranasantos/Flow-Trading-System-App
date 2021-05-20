@@ -69,29 +69,6 @@
         tools:listitem="@layout/holder_inventory_items"
         app:layout_constraintTop_toBottomOf="@+id/txt_item_categorie"/>
 
-    <TextView
-        android:id="@+id/txt_item_categorie2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_view_inventory_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:textSize="18sp"
-        android:textColor="@color/logoDark"
-        android:layout_marginTop="20dp"
-        android:text="@string/vestuario"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_inventory_lists"
-        android:layout_width="0dp"
-        android:layout_marginTop="16dp"
-        android:layout_height="210dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/holder_inventory_items"
-        app:layout_constraintTop_toBottomOf="@+id/txt_item_categorie2"/>
-
-
     <ImageButton
         android:id="@+id/button_add_product"
         android:layout_width="48dp"

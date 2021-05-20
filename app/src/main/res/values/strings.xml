@@ -36,8 +36,10 @@
     <string name="price_un">Preço unitário</string>
     <string name="price_all">Preço Atacado</string>
     <string name="amount_in_inventory">Quantidade em estoque</string>
+    <string name="qtd">Quantidade</string>
     <string name="expiration_date">Expiração</string>
-    <string name="acquisition_date">Data de Aquisição</string>
+    <string name="companie">Empresa</string>
+    <string name="unit_of_measurement">Unidade de medida</string>
     <string name="paleparia"><b>Papelaria</b></string>
     <string name="vestuario"><b>Vestuario</b></string>
 
