@@ -27,7 +27,7 @@ class AddNewProductActivity: AppCompatActivity() {
 
         buttonGravar.setOnClickListener {
             // Criar um objeto produto
-            val produto = Produto("", 0, 0.0, 0, 0, 0)
+            val produto = Produto()
             produto.product_name = editTextNome.text.toString()
             produto.total_quantity = editTextQtd.text.toString().toInt()
             produto.cost_per_item = editTextCusto.text.toString().toDouble()

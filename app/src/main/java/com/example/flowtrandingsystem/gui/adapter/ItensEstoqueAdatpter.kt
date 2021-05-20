@@ -13,10 +13,14 @@ import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.model.ItensCadastrados
 import com.example.flowtrandingsystem.gui.model.Produto
 
-class ItensEstoqueAdatpter (
+class ItensEstoqueAdatpter ( val context: Context) : RecyclerView.Adapter<ItensEstoqueAdatpter.Holder>() {
 
-    val listItens: List<Produto>,
-    val context: Context) : RecyclerView.Adapter<ItensEstoqueAdatpter.Holder>() {
+    var listItens =  emptyList<Produto>()
+
+    fun updateListaProdutos(lista: List<Produto>){
+        listItens = lista
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater

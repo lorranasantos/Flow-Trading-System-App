@@ -1,13 +1,6 @@
 package com.example.flowtrandingsystem.gui.model
 
-class Produto(
-    s: String,
-    i: Int,
-    d: Double,
-    i1: Int,
-    i2: Int,
-    i3: Int
-) {
+class Produto() {
     var product_name = ""
     var total_quantity = 0
     var cost_per_item = 0.0
