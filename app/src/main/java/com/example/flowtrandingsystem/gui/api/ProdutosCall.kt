@@ -7,7 +7,8 @@ import retrofit2.http.GET
 
 interface ProdutosCall {
 
-    @GET("produtos")
+    @GET("product")
+
     fun getProduto(): Call<List<Produto>>
 
 }
