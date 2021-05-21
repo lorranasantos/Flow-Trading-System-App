@@ -80,39 +80,39 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/login_activity_user"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@+id/login_activity_password">
 
                     <com.santalu.maskara.widget.MaskEditText
+                        android:id="@+id/editTextUser"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableStart="@drawable/ic_profile_24"
-                        android:drawablePadding="10dp"
                         android:layout_marginLeft="35dp"
+                        android:layout_marginTop="100dp"
                         android:layout_marginRight="35dp"
                         android:layout_marginBottom="15dp"
-                        android:layout_marginTop="100dp"
+                        android:drawableStart="@drawable/ic_profile_24"
+                        android:drawablePadding="10dp"
                         android:hint="@string/user"
-                        android:textSize="18sp"
-                        android:textAppearance="@style/hintInputAppearence"
                         android:inputType="number"
-                        app:mask="###.###.###-##"/>
+                        android:textAppearance="@style/hintInputAppearence"
+                        android:textSize="18sp"
+                        app:mask="###.###.###-##" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/login_activity_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/login_activity_user"
+                    app:layout_constraintTop_toBottomOf="@+id/editTextUser"
                     app:layout_constraintBottom_toTopOf="@+id/login_activity_button"
                     app:passwordToggleEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editTextPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_key_24"

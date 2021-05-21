@@ -30,6 +30,7 @@
 
     <!--Inventory section-->
     <string name="add_product">Cadastro de Produtos</string>
+    <string name="pdv">PDV</string>
     <string name="sell">Venda</string>
     <string name="inventory">Estoque</string>
     <string name="type">Tipo</string>

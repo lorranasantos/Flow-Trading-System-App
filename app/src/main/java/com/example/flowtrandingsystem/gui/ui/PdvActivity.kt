@@ -7,6 +7,6 @@ import com.example.flowtrandingsystem.R
 class PdvActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pdv)
+        setContentView(R.layout.pdv_activity)
     }
 }

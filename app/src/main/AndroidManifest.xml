@@ -13,7 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".gui.ui.PdvActivity"></activity>
         <activity android:name=".gui.ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,31 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".gui.ui.MainActivity"
-            android:label="YourAppName"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".gui.ui.MenuActivity"
-            android:label="FTS"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".gui.ui.InventoryActivity" />
-        <activity android:name=".gui.ui.AddNewProductActivity" />
-        <activity android:name=".gui.ui.CompanyInfoActivity" />
-        <activity android:name=".gui.ui.UserInfoActivity" />
-        <activity android:name=".gui.ui.DatasheetActivity" />
+        <activity android:name=".gui.ui.PdvActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".gui.ui.MainActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".gui.ui.MenuActivity" android:label="FTS" android:theme="@style/AppTheme"/>
+        <activity android:name=".gui.ui.InventoryActivity"/>
+        <activity android:name=".gui.ui.AddNewProductActivity"/>
+        <activity android:name=".gui.ui.CompanyInfoActivity"/>
+        <activity android:name=".gui.ui.UserInfoActivity"/>
+        <activity android:name=".gui.ui.DatasheetActivity"/>
     </application>
 
 </manifest>
