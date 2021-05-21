@@ -86,7 +86,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toTopOf="@+id/login_activity_password">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.santalu.maskara.widget.MaskEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:drawableStart="@drawable/ic_profile_24"
@@ -98,7 +98,8 @@
                         android:hint="@string/user"
                         android:textSize="18sp"
                         android:textAppearance="@style/hintInputAppearence"
-                        android:inputType="number"/>
+                        android:inputType="number"
+                        app:mask="###.###.###-##"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
