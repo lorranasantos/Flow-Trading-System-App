@@ -1,4 +1,4 @@
-package com.example.flowtrandingsystem.gui.gui
+package com.example.flowtrandingsystem.gui.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.example.flowtrandingsystem.R
-import com.example.flowtrandingsystem.gui.MainActivity
 import kotlinx.android.synthetic.main.fragment_initial_menu.*
 
 
@@ -68,7 +67,7 @@ class MenuActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View) {
         if (v.id == R.id.card_sell) {
-            val intentSell = Intent(this, SellActivity::class.java)
+            val intentSell = Intent(this, PdvActivity::class.java)
             startActivity(intentSell)
         } else
         if (v.id == R.id.card_inventory) {

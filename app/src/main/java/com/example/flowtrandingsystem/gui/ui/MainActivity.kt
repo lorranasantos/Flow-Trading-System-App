@@ -1,14 +1,11 @@
-package com.example.flowtrandingsystem.gui
+package com.example.flowtrandingsystem.gui.ui
 
 import android.content.Intent
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
-import android.view.View
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.flowtrandingsystem.R
-import com.example.flowtrandingsystem.gui.gui.MenuActivity
 import kotlinx.android.synthetic.main.main_activity.*
 
 

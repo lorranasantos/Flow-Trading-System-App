@@ -1,4 +1,4 @@
-package com.example.flowtrandingsystem.gui.gui
+package com.example.flowtrandingsystem.gui.ui
 
 import android.os.Bundle
 import android.widget.Button

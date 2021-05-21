@@ -1,4 +1,4 @@
-package com.example.flowtrandingsystem.gui.gui
+package com.example.flowtrandingsystem.gui.ui
 
 import android.content.Intent
 import android.os.Bundle
@@ -19,7 +19,6 @@ import com.example.flowtrandingsystem.gui.api.ProdutosCall
 import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Response
-import javax.security.auth.callback.Callback
 
 class InventoryActivity() : AppCompatActivity(), View.OnClickListener {
 

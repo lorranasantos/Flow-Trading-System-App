@@ -36,7 +36,7 @@
     <string name="price_un">Preço unitário</string>
     <string name="price_all">Preço Atacado</string>
     <string name="amount_in_inventory">Quantidade em estoque</string>
-    <string name="qtd">Quantidade</string>
+    <string name="quantidade">Quantidade</string>
     <string name="expiration_date">Expiração</string>
     <string name="companie">Empresa</string>
     <string name="unit_of_measurement">Unidade de medida</string>
@@ -54,5 +54,19 @@
         <item>Papelaria</item>
         <item>Decoração</item>
     </string-array>
+
+    <!--PDV Section-->
+    <string name="product_code">Código do Produto</string>
+    <string name="un_value">Valor Unitário</string>
+    <string name="total_price">Total do Item</string>
+    <string name="product_list">Lista de Produtos</string>
+    <string name="item_number">N° Item</string>
+    <string name="code">Código</string>
+    <string name="description">Descrição</string>
+    <string name="qtd">Qtd</string>
+    <string name="un_price_abrv">Vlr. unit.</string>
+    <string name="total">Total</string>
+    <string name="subtotal">SubTotal</string>
+    <string name="discount">Desconto</string>
 
 </resources>

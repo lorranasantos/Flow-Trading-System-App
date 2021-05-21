@@ -43,7 +43,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@color/logoDark"/>
+            android:src="@color/colorPrimaryDark"/>
 
         <TextView
             android:id="@+id/product_name_datasheet"
