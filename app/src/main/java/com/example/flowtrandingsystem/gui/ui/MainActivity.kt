@@ -26,9 +26,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
 
         supportActionBar?.hide();
 
-        login_activity_button.setOnClickListener{
-
-        }
+        login_activity_button.setOnClickListener(this)
 
     }
 
@@ -40,10 +38,10 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
             val usuario = httpHelper.login(editTextUser.text.toString(), editTextPassword.text.toString())
 
             uiThread {
-                if (usuario.cnpj_ou_cpf.isNotEmpty()) {
+                if (usuario.user_cpf.isNotEmpty()) {
                     goToMainMenu()
                 }else{
-                    toast("Cu")
+                    toast("Falha")
 
                 }
             }

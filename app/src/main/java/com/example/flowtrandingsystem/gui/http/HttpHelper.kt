@@ -1,32 +1,34 @@
 package com.example.flowtrandingsystem.gui.http
 
+import com.example.flowtrandingsystem.gui.api.Constants
 import com.example.flowtrandingsystem.gui.model.Usuario
 import com.google.gson.Gson
 import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 
 class HttpHelper {
 
-    fun login (cnpj_ou_cpf: String, user_password: String ) : Usuario {
+    fun login (user_cpf: String, password: String ) : Usuario {
 
         // Definir URL do servidor
         val URL = "http://10.0.2.2:3333/session"
 
-        // Criar um produto que vai disparar a requisição
+        // Criar um usuario que vai disparar a requisição
         val produto = OkHttpClient()
 
         // Construir a requisição http para o servidor
-    var request = Request
-        .Builder()
-        .url(URL)
-        .addHeader("Authorization", Credentials.basic(cnpj_ou_cpf, user_password))
-        .get()
-        .build()
+        var request = Request
+            .Builder()
+            .url(URL)
+            .addHeader("Authorization", Credentials.basic(user_cpf, password))
+            .get()
+            .build()
 
         // Enviar a requisição para o servidor
         val response = produto.newCall(request).execute()
 
         // Extrair o body da requisição
-        val responseBody = response.body()
+        val responseBody = response.body
 
         var usuario = Usuario()
 
@@ -47,7 +49,7 @@ class HttpHelper {
         val URL = "http://10.0.2.2:3333/product"
 
         // Definir o cabeçalho
-        val headerhttp = MediaType.parse("application/json; charset=utf-8")
+        val headerhttp = "application/json; charset=utf-8".toMediaTypeOrNull()
 
         // Criar um produto que vai disparar a requisição
         val produto = OkHttpClient()
@@ -61,7 +63,7 @@ class HttpHelper {
         // Utilizar o client para fazer a requisição e receber a resposta
         val response = produto.newCall(request).execute()
 
-        return response.body().toString()
+        return response.body.toString()
     }
 
     fun get () {
@@ -82,7 +84,7 @@ class HttpHelper {
         val response = produto.newCall(request).execute()
 
         // Extrair o body da requisição
-        val responseBody = response.body()
+        val responseBody = response.body
 
         // Exibir o body da requisição
         if (responseBody != null){

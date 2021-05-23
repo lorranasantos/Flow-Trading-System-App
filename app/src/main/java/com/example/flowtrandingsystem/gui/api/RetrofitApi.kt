@@ -7,11 +7,10 @@ class RetrofitApi {
     companion object {
         fun getRetrofit() : Retrofit {
             var retrofit = Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3333/")
+                .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             return retrofit
         }
     }
-
 }

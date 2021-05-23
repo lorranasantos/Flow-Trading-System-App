@@ -1,10 +1,10 @@
 package com.example.flowtrandingsystem.gui.model
 
-class Usuario() {
-    var cnpj_ou_cpf: String = ""
-    var user_password: String = ""
+import com.google.gson.annotations.SerializedName
 
-    override fun toString(): String {
-        return "Usuario(cnpj_ou_cpf='$cnpj_ou_cpf', user_password=$user_password)"
-    }
-}
+data class Usuario(
+        var user_cpf: String = "",
+        var password: String = ""
+)
+
+
