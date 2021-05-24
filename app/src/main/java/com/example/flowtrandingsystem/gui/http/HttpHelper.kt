@@ -1,31 +1,31 @@
 package com.example.flowtrandingsystem.gui.http
 
-import com.example.flowtrandingsystem.gui.api.Constants
 import com.example.flowtrandingsystem.gui.model.Usuario
 import com.google.gson.Gson
-import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
 
 class HttpHelper {
 
-    fun login (user_cpf: String, password: String ) : Usuario {
+    fun login (cnpj_ou_cpf: String, password: String ) : Usuario {
 
         // Definir URL do servidor
         val URL = "http://10.0.2.2:3333/session"
 
         // Criar um usuario que vai disparar a requisição
-        val produto = OkHttpClient()
+        val cliente = OkHttpClient()
 
         // Construir a requisição http para o servidor
         var request = Request
             .Builder()
             .url(URL)
-            .addHeader("Authorization", Credentials.basic(user_cpf, password))
             .get()
             .build()
 
         // Enviar a requisição para o servidor
-        val response = produto.newCall(request).execute()
+        val response = cliente.newCall(request).execute()
 
         // Extrair o body da requisição
         val responseBody = response.body
@@ -38,10 +38,25 @@ class HttpHelper {
             var gson = Gson()
 
             usuario = gson.fromJson(json, Usuario::class.java)
+
         }
 
         return usuario
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     fun post (json: String) : String{
 
@@ -93,3 +108,4 @@ class HttpHelper {
         }
     }
 }
+
