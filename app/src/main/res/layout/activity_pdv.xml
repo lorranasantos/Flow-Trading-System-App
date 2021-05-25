@@ -130,14 +130,15 @@
                     <RelativeLayout
                         android:id="@+id/item_number_pdv"
                         android:layout_width="60dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
                         android:orientation="vertical"
+                        android:paddingTop="5dp"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent">
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
                             android:text="@string/item_number"
                             android:textAlignment="center"
                             style="@style/buy_description"/>
@@ -145,14 +146,15 @@
                     <RelativeLayout
                         android:id="@+id/item_code_pdv"
                         android:layout_width="70dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
+                        android:paddingTop="5dp"
                         android:orientation="vertical"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/item_number_pdv">
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
                             android:text="@string/code"
                             android:textAlignment="center"
                             style="@style/buy_description"/>
@@ -160,14 +162,15 @@
                     <RelativeLayout
                         android:id="@+id/item_description_pdv"
                         android:layout_width="70dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
+                        android:paddingTop="5dp"
                         android:orientation="vertical"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/item_code_pdv">
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
                             android:text="@string/description"
                             android:textAlignment="center"
                             style="@style/buy_description"/>
@@ -175,14 +178,15 @@
                     <RelativeLayout
                         android:id="@+id/item_qtde_pdv"
                         android:layout_width="40dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
+                        android:paddingTop="5dp"
                         android:orientation="vertical"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/item_description_pdv">
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
                             android:text="@string/qtd"
                             android:textAlignment="center"
                             style="@style/buy_description"/>
@@ -190,14 +194,15 @@
                     <RelativeLayout
                         android:id="@+id/item_un_price_pdv"
                         android:layout_width="60dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
+                        android:paddingTop="5dp"
                         android:orientation="vertical"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/item_qtde_pdv">
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
                             android:text="@string/un_price_abrv"
                             android:textAlignment="center"
                             style="@style/buy_description" />
@@ -205,19 +210,19 @@
                     <RelativeLayout
                         android:id="@+id/item_total_price_pdv"
                         android:layout_width="60dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="30dp"
+                        android:paddingTop="5dp"
                         android:orientation="vertical"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/item_un_price_pdv">
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
                             android:text="@string/total"
                             android:textAlignment="center"
                             style="@style/buy_description"/>
                     </RelativeLayout>
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </HorizontalScrollView>

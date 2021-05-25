@@ -9,6 +9,10 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.flowtrandingsystem.R
+import com.example.flowtrandingsystem.gui.http.HttpHelper
+import com.example.flowtrandingsystem.gui.model.RegisterClientPdv
+import com.google.gson.Gson
+import org.jetbrains.anko.doAsync
 
 class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -26,25 +30,35 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         buttonAdicionarCliente.setOnClickListener(this)
         }
 
-    override fun onClick(v: View?) {
-        if (v != null) {
-            if (v.id == R.id.pdv_client_register) {
-                openClientRegister()
-            }
-            else if (v != null) {
-                if(v.id == R.id.button_cancel_client_register){
-                    dialog.dismiss()
-                } else if (v != null) {
-                    if(v.id == R.id.button_save_client_register) {
-                        Toast.makeText(this, "Salvo", Toast.LENGTH_SHORT).show()
-                    }else{
-                        Toast.makeText(this, "Nada foi clicado", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
+    override fun onClick(v: View) {
+        if (v.id == R.id.pdv_client_register) {
+            openClientRegister()
+        }else if(v.id == R.id.button_cancel_client_register) {
+            dialog.dismiss()
+        }else if(v.id == R.id.button_save_client_register) {
+            salvarCliente()
+        }else{
+            Toast.makeText(this, "Nada foi clicado", Toast.LENGTH_SHORT).show()
+        }
+
+    }
+
+    private fun salvarCliente() {
+        var registerClient = RegisterClientPdv(0, editCpf.toString())
+
+        val register = RegisterClientPdv()
+        register.cpf = editCpf.text.toString()
+
+        val gson = Gson()
+        val registerClientJson = gson.toJson(register)
+
+        doAsync {
+            val http = HttpHelper()
+            http.post(registerClientJson)
         }
 
 
+        dialog.dismiss()
     }
 
     private fun openClientRegister() {
@@ -54,16 +68,14 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
         editCpf = view.findViewById(R.id.edit_client_register_cpf)
 
-        buttonSave = findViewById(R.id.button_save_client_register)
+        buttonSave = view.findViewById(R.id.button_save_client_register!!)
         buttonSave.setOnClickListener(this)
 
-        buttonCancel = findViewById(R.id.button_cancel_client_register)
+        buttonCancel = view.findViewById(R.id.button_cancel_client_register)
         buttonCancel.setOnClickListener(this)
 
         dialog = alertDialog.create()
         dialog.setCancelable(false)
         dialog.show()
     }
-
-
 }

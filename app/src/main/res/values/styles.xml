@@ -89,7 +89,6 @@
     <style name="product_infotmation" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textSize">18sp</item>
         <item name="color">@color/colorPrimaryDark</item>
->>>>>>> 8be70137eeefccd540850e71eb307424b7f32abc
     </style>
 
     <style name="titles_pdv" parent="TextAppearance.AppCompat.Large">
