@@ -10,5 +10,4 @@ data class Usuario(
         @SerializedName("password")
         var password: String = ""
 
-
 )

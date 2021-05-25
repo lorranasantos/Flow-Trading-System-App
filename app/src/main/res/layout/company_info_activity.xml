@@ -15,148 +15,145 @@
         android:layout_alignParentEnd="true">
 
         <TextView
-            android:id="@+id/product_name_datasheet"
+            android:id="@+id/company_name"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="@string/app_name"
+            android:text="Casa Bahia"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="110dp"
+            android:textColor="@color/colorPrimaryDark"
             style="@style/title_product_name"/>
 
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/company_name"/>
+
         <TextView
-            android:id="@+id/product_type_datasheet"
+            android:id="@+id/social_reason"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="50dp"
-            android:text="Nome fantasia: "
-            app:layout_constraintTop_toBottomOf="@+id/product_name_datasheet"
+            android:text="@string/companyName"
+            app:layout_constraintTop_toBottomOf="@+id/company_name"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
         <TextView
-            android:id="@+id/un_price_datasheet"
+            android:id="@+id/comercial_email"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="Razão Social:"
-            app:layout_constraintTop_toBottomOf="@+id/product_type_datasheet"
+            android:text="@string/companyEmail"
+            app:layout_constraintTop_toBottomOf="@+id/social_reason"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
-
         <TextView
-            android:id="@+id/title_price_all_datasheet"
+            android:id="@+id/plan_company"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="Email Comercial:"
-            app:layout_constraintTop_toBottomOf="@+id/un_price_datasheet"
+            android:text="@string/companyPlan"
+            app:layout_constraintTop_toBottomOf="@+id/comercial_email"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
         <TextView
-            android:id="@+id/title_amount_in_inventory_datasheet"
+            android:id="@+id/busines_company"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="Plano Adiquirido:"
-            app:layout_constraintTop_toBottomOf="@+id/title_price_all_datasheet"
+            android:text="@string/companyBusines"
+            app:layout_constraintTop_toBottomOf="@+id/plan_company"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
         <TextView
-            android:id="@+id/acquisition_date_datasheet"
+            android:id="@+id/company_branch"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="Natureza de Negocios:"
-            app:layout_constraintTop_toBottomOf="@+id/title_amount_in_inventory_datasheet"
+            android:text="@string/comanyBranch"
+            app:layout_constraintTop_toBottomOf="@+id/busines_company"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
         <TextView
-            android:id="@+id/title_expiration_date_datasheet"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="Filial Atual:"
-            app:layout_constraintTop_toBottomOf="@+id/acquisition_date_datasheet"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            style="@style/product_infotmation_titles"/>
-
-        <TextView
-            android:id="@+id/type_of_product_datasheet"
+            android:id="@+id/name_of_company"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="45dp"
             android:layout_marginEnd="25dp"
-            app:layout_constraintTop_toBottomOf="@id/product_name_datasheet"
+            app:layout_constraintTop_toBottomOf="@id/company_name"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="teste"
+            android:textColor="@color/secondary"
+
             style="@style/product_infotmation_titles"/>
 
         <TextView
-            android:id="@+id/value_un_price_datasheet"
+            android:id="@+id/email_of_company"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/type_of_product_datasheet"
+            app:layout_constraintTop_toBottomOf="@+id/name_of_company"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="25dp"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
         <TextView
-            android:id="@+id/price_all_datasheet"
+            android:id="@+id/plan_of_company"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/value_un_price_datasheet"
+            app:layout_constraintTop_toBottomOf="@+id/email_of_company"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="25dp"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
         <TextView
-            android:id="@+id/amount_in_inventory_datasheet"
+            android:id="@+id/busines_of_company"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/price_all_datasheet"
+            app:layout_constraintTop_toBottomOf="@+id/plan_of_company"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="25dp"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
         <TextView
-            android:id="@+id/price_datasheet"
+            android:id="@+id/branch_of_company"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/amount_in_inventory_datasheet"
+            app:layout_constraintTop_toBottomOf="@+id/busines_of_company"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="25dp"
-            style="@style/product_infotmation_titles"/>
-
-        <TextView
-            android:id="@+id/expiration_date_datasheet"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/price_datasheet"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="25dp"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

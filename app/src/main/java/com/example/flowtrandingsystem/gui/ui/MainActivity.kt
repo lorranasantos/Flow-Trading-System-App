@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -27,12 +28,8 @@ import kotlin.math.log
 
 class MainActivity: AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var sessionManager: SessionManager
-    private lateinit var apiClient: ApiClient
-
-    private lateinit var campoCpf: String
-    private lateinit var campoSenha: String
-
+    private lateinit var editTextCpf: EditText
+    private lateinit var editTextSenha: EditText
 
     private fun goToMainMenu(){
         val menuScreen = Intent(this, MenuActivity::class.java)
@@ -43,72 +40,29 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
 
-        supportActionBar?.hide();
+        supportActionBar?.hide()
+
+        editTextCpf = findViewById(R.id.editTextUser)
+        editTextSenha = findViewById(R.id.editTextPassword)
 
         login_activity_button.setOnClickListener(this)
-
-
-
 
     }
 
    override fun onClick(v: View?) {
 
-       campoCpf = findViewById<TextInputEditText>(R.id.editTextUser).toString()
-       campoSenha = findViewById<TextInputEditText>(R.id.editTextPassword).toString()
-
-       apiClient = ApiClient()
-       sessionManager = SessionManager(this)
-
        executarLogin()
-
-//       apiClient.getApiService().login(LoginRequest(cnpj_ou_cpf = campoCpf, password = campoSenha))
-//           .enqueue(object : Callback<LoginResponse> {
-//               override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-//                   // Error logging in
-//               }
-//
-//               override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-//                   val loginResponse = response.body()
-//
-//                   if (loginResponse?.user != null) {
-//
-//                       goToMainMenu()
-//
-//                   } else {
-//                       toast("Falha")
-//                   }
-//               }
-//           })
-
-
-
-//
-//        val httpHelper = HttpHelper()
-//
-//        doAsync {
-//            val usuario = httpHelper.login(editTextUser.text.toString(), editTextPassword.text.toString())
-//
-//            uiThread {
-//                if (usuario.cnpj_ou_cpf.isNotEmpty()) {
-//                    goToMainMenu()
-//                }else{
-//                    toast("Falha")
-//
-//                }
-//            }
-//
-//        }
-//
     }
 
     fun executarLogin() {
 
-        var token = Token("")
+        var token: Token = Token("")
 
         val usuario = Usuario(
-            cnpj_ou_cpf = "502.671.948-11", password = "12345678"
+            cnpj_ou_cpf = editTextCpf.text.toString(), password = editTextSenha.text.toString()
         )
+
+        Log.e("Usuario", usuario.toString())
 
         val retrofit = RetrofitApi.getRetrofit()
         val loginCall = retrofit.create(LoginCall::class.java)
@@ -124,9 +78,9 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
             override fun onResponse(call: Call<Token>, response: Response<Token>) {
                 token = response.body()!!
                 Log.e("RESPONSE", token.toString())
-            }
 
+                goToMainMenu()
+            }
         })
     }
-
 }

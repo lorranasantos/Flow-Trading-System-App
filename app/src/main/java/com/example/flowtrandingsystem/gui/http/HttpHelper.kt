@@ -9,56 +9,35 @@ import okhttp3.RequestBody
 
 class HttpHelper {
 
-    fun login (cnpj_ou_cpf: String, password: String ) : Usuario {
-
+    fun getUserInfo () {
         // Definir URL do servidor
-        val URL = "http://10.0.2.2:3333/session"
+        val URL = "http://10.0.2.2:3333/user/"
 
         // Criar um usuario que vai disparar a requisição
-        val cliente = OkHttpClient()
+        val usuario = OkHttpClient()
 
-        // Construir a requisição http para o servidor
-        var request = Request
+        // Criar uma requisição GET
+        val request = Request
             .Builder()
             .url(URL)
             .get()
             .build()
 
         // Enviar a requisição para o servidor
-        val response = cliente.newCall(request).execute()
+        val response = usuario.newCall(request).execute()
 
         // Extrair o body da requisição
         val responseBody = response.body
 
-        var usuario = Usuario()
-
-        // Criar um objeto usuario
-        if(responseBody!!.contentLength().toInt() != 0) {
-            var json = responseBody.string()
-            var gson = Gson()
-
-            usuario = gson.fromJson(json, Usuario::class.java)
+        // Exibir o body da requisição
+        if (responseBody != null) {
+            val json = responseBody.string()
+            println("RESPOSTA ==========" + json)
 
         }
-
-        return usuario
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    fun post (json: String) : String{
+    fun post(json: String): String {
 
         // Definir URL do servidor
         val URL = "http://10.0.2.2:3333/product"
@@ -81,7 +60,7 @@ class HttpHelper {
         return response.body.toString()
     }
 
-    fun get () {
+    fun get() {
         // Definir URL do servidor
         val URL = "http://10.0.2.2:3333/product"
 
@@ -102,7 +81,7 @@ class HttpHelper {
         val responseBody = response.body
 
         // Exibir o body da requisição
-        if (responseBody != null){
+        if (responseBody != null) {
             val json = responseBody.string()
             println("RESPOSTA ==========" + json)
         }
