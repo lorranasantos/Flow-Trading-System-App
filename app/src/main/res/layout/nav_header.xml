@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="150dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/primaryDark"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:padding="16dp">
 
@@ -28,20 +28,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Chris Rock"
-        app:layout_constraintBottom_toTopOf="@id/text_view_perfil_email"
+        app:layout_constraintTop_toBottomOf="@+id/card_photo_perfil"
         app:layout_constraintStart_toStartOf="parent"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
-
-    <TextView
-        android:id="@+id/text_view_perfil_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="chris@sucodefruta.com"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

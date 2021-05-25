@@ -28,7 +28,7 @@
         <activity android:name=".gui.ui.AddNewProductActivity"/>
         <activity android:name=".gui.ui.CompanyInfoActivity"/>
         <activity android:name=".gui.ui.UserInfoActivity"/>
-        <activity android:name=".gui.ui.DatasheetActivity"/>
+        <activity android:name=".gui.ui.DatasheetActivity" android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

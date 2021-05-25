@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -12,9 +13,9 @@ import com.example.flowtrandingsystem.R
 import kotlinx.android.synthetic.main.fragment_initial_menu.*
 
 
-class MenuActivity : AppCompatActivity(), View.OnClickListener {
-    private lateinit var inventoryCard: CardView
-    private lateinit var sellCard: CardView
+class MenuActivity : AppCompatActivity() {
+    private lateinit var inventoryOption: TextView
+    private lateinit var pdvOption: TextView
 
     lateinit var toggle: ActionBarDrawerToggle
 
@@ -41,11 +42,17 @@ class MenuActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_initial_menu)
 
-        inventoryCard = findViewById(R.id.card_inventory)
-        inventoryCard.setOnClickListener(this)
+        inventoryOption = findViewById(R.id.option_inventory)
+        pdvOption = findViewById(R.id.option_sell)
 
-        sellCard = findViewById(R.id.card_sell)
-        sellCard.setOnClickListener(this)
+        inventoryOption.setOnClickListener {
+            val intentInventory = Intent(this, InventoryActivity::class.java)
+            startActivity(intentInventory)
+        }
+        pdvOption.setOnClickListener{
+            val intentSell = Intent(this, PdvActivity::class.java)
+            startActivity(intentSell)
+        }
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
@@ -62,19 +69,6 @@ class MenuActivity : AppCompatActivity(), View.OnClickListener {
                 R.id.nav_option_logout -> goToLogin()
             }
             true
-        }
-    }
-
-    override fun onClick(v: View) {
-        if (v.id == R.id.card_sell) {
-            val intentSell = Intent(this, PdvActivity::class.java)
-            startActivity(intentSell)
-        } else
-        if (v.id == R.id.card_inventory) {
-            val intentInventory = Intent(this, InventoryActivity::class.java)
-            startActivity(intentInventory)
-        } else {
-            Toast.makeText(this, "Nada foi clicado", Toast.LENGTH_SHORT).show()
         }
     }
 
