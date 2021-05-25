@@ -20,8 +20,14 @@
     <string name="logout">Deslogar</string>
     <string name="config">Configurações</string>
 
-    <!-- Titles and subtitles-->
+    <!-- Company Information-->
+    <string name="companyName">Nome da Empresa:</string>
+    <string name="companyEmail">Email Comercial:</string>
+    <string name="companyPlan">Plano Adiquirido:</string>
+    <string name="companyBusines">Natureza de Negocios:</string>
+    <string name="comanyBranch">Filial Atual:</string>
 
+    <!-- Titles and subtitles-->
     <string name="fts">Flow Tranding System</string>
     <string name="kind_of_system">Sistema de Gerenciamento Comercial</string>
     <string name="arent_you_a_client">Não é cliente? Conheça nossos planos!</string>
@@ -30,6 +36,7 @@
 
     <!--Inventory section-->
     <string name="add_product">Cadastro de Produtos</string>
+    <string name="pdv">PDV</string>
     <string name="sell">Venda</string>
     <string name="inventory">Estoque</string>
     <string name="type">Tipo</string>

@@ -15,7 +15,7 @@
         android:layout_alignParentEnd="true">
 
         <TextView
-            android:id="@+id/product_name_datasheet"
+            android:id="@+id/user_name"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="Guilherme Ferreira da Silva"
@@ -23,126 +23,137 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="110dp"
+            android:textColor="@color/colorPrimaryDark"
             style="@style/title_product_name"/>
 
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="2dp"
-            android:background="@android:color/black"
+            android:background="@color/colorPrimaryDark"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/product_name_datasheet"/>
+            app:layout_constraintTop_toBottomOf="@id/user_name"/>
 
         <TextView
-            android:id="@+id/product_type_datasheet"
+            android:id="@+id/user_rg"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="50dp"
             android:text="@string/rgUser"
-            app:layout_constraintTop_toBottomOf="@+id/product_name_datasheet"
+            app:layout_constraintTop_toBottomOf="@+id/user_name"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
         <TextView
-            android:id="@+id/un_price_datasheet"
+            android:id="@+id/user_cpf"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="@string/cpfUser"
-            app:layout_constraintTop_toBottomOf="@+id/product_type_datasheet"
+            app:layout_constraintTop_toBottomOf="@+id/user_rg"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
 
         <TextView
-            android:id="@+id/title_price_all_datasheet"
+            android:id="@+id/user_role"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="@string/role"
-            app:layout_constraintTop_toBottomOf="@+id/un_price_datasheet"
+            app:layout_constraintTop_toBottomOf="@+id/user_cpf"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
         <TextView
-            android:id="@+id/title_amount_in_inventory_datasheet"
+            android:id="@+id/user_branch"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="@string/branch"
-            app:layout_constraintTop_toBottomOf="@+id/title_price_all_datasheet"
+            app:layout_constraintTop_toBottomOf="@+id/user_role"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
         <TextView
-            android:id="@+id/acquisition_date_datasheet"
+            android:id="@+id/user_permission"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="@string/permission"
-            app:layout_constraintTop_toBottomOf="@+id/title_amount_in_inventory_datasheet"
+            app:layout_constraintTop_toBottomOf="@+id/user_branch"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
         <TextView
-            android:id="@+id/type_of_product_datasheet"
+            android:id="@+id/rg_from_user"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="45dp"
             android:layout_marginEnd="25dp"
-            app:layout_constraintTop_toBottomOf="@id/product_name_datasheet"
+            app:layout_constraintTop_toBottomOf="@id/user_name"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="teste"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
         <TextView
-            android:id="@+id/value_un_price_datasheet"
+            android:id="@+id/cpf_from_user"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/type_of_product_datasheet"
+            app:layout_constraintTop_toBottomOf="@+id/rg_from_user"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="25dp"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
         <TextView
-            android:id="@+id/price_all_datasheet"
+            android:id="@+id/role_from_user"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/value_un_price_datasheet"
+            app:layout_constraintTop_toBottomOf="@+id/cpf_from_user"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="25dp"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
         <TextView
-            android:id="@+id/amount_in_inventory_datasheet"
+            android:id="@+id/branch_from_user"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/price_all_datasheet"
+            app:layout_constraintTop_toBottomOf="@+id/role_from_user"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="25dp"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
         <TextView
-            android:id="@+id/price_datasheet"
+            android:id="@+id/permission_from_user"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/amount_in_inventory_datasheet"
+            app:layout_constraintTop_toBottomOf="@+id/branch_from_user"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="25dp"
+            android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
