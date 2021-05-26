@@ -76,10 +76,17 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
             }
 
             override fun onResponse(call: Call<Token>, response: Response<Token>) {
-                token = response.body()!!
-                Log.e("RESPONSE", token.toString())
 
-                goToMainMenu()
+                if (response.body() != null) {
+                    if (response.body()!!.token !== null) {
+                        token = response.body()!!
+                        Log.e("RESPONSE", token.toString())
+                        goToMainMenu()
+                    }
+
+                }else {
+                    Toast.makeText(this@MainActivity, "cpf ou senha esta errado", Toast.LENGTH_LONG).show()
+                }
             }
         })
     }
