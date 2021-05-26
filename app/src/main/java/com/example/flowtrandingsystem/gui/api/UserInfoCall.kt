@@ -10,7 +10,7 @@ import retrofit2.http.GET
 
 interface UserInfoCall {
 
-    @GET("2")
+    @GET("{id}")
     fun getInfoFromUser(): Call<UsuarioInfo>
 
 }

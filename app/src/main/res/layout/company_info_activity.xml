@@ -11,7 +11,6 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/datasheet_list_title"
         android:layout_alignParentStart="true"
-        android:padding="20dp"
         android:layout_alignParentEnd="true">
 
         <TextView
@@ -27,14 +26,15 @@
             style="@style/title_product_name"/>
 
         <FrameLayout
-            android:layout_width="0dp"
+            android:layout_width="350dp"
             android:layout_height="2dp"
             android:background="@color/primaryDark"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/company_name"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/company_name" />
 
         <TextView
+            app:layout_goneMarginStart="20dp"
             android:id="@+id/social_reason"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
@@ -42,58 +42,49 @@
             android:text="@string/companyName"
             app:layout_constraintTop_toBottomOf="@+id/company_name"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginStart="25dp"
             android:textColor="@color/secondary"
             style="@style/product_infotmation_titles"/>
 
         <TextView
             android:id="@+id/comercial_email"
+            style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="@string/companyEmail"
-            app:layout_constraintTop_toBottomOf="@+id/social_reason"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
+            app:layout_constraintStart_toStartOf="@+id/social_reason"
+            app:layout_constraintTop_toBottomOf="@+id/social_reason" />
 
         <TextView
             android:id="@+id/plan_company"
+            style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="@string/companyPlan"
-            app:layout_constraintTop_toBottomOf="@+id/comercial_email"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
+            app:layout_constraintStart_toStartOf="@+id/social_reason"
+            app:layout_constraintTop_toBottomOf="@+id/comercial_email" />
 
         <TextView
             android:id="@+id/busines_company"
+            style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="@string/companyBusines"
-            app:layout_constraintTop_toBottomOf="@+id/plan_company"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
+            app:layout_constraintStart_toStartOf="@+id/social_reason"
+            app:layout_constraintTop_toBottomOf="@+id/plan_company" />
 
         <TextView
             android:id="@+id/company_branch"
+            style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="@string/comanyBranch"
-            app:layout_constraintTop_toBottomOf="@+id/busines_company"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
+            app:layout_constraintStart_toStartOf="@+id/social_reason"
+            app:layout_constraintTop_toBottomOf="@+id/busines_company" />
 
         <TextView
             android:id="@+id/name_of_company"
