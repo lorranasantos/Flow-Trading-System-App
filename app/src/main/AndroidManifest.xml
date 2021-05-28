@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.flowtrandingsystem">
 
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -46,6 +48,7 @@
         <activity android:name=".gui.ui.CompanyInfoActivity" />
         <activity android:name=".gui.ui.UserInfoActivity" />
         <activity android:name=".gui.ui.DatasheetActivity" />
+        <activity android:name=".gui.ui.ScannerActivity" />
     </application>
 
 </manifest>
