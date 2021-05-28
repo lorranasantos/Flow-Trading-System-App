@@ -15,6 +15,7 @@ import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.http.HttpHelper
+import com.example.flowtrandingsystem.gui.model.Produto
 import com.example.flowtrandingsystem.gui.model.RegisterClientPdv
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_pdv.*
@@ -23,18 +24,11 @@ import kotlinx.android.synthetic.main.code_scanner_activity.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 
-class PdvActivity : AppCompatActivity(), View.OnClickListener {
+class PdvActivity : AppCompatActivity() {
 
     private lateinit var buttonAdicionarCliente: Button
-    private lateinit var editCpf: EditText
-    private lateinit var buttonSave: Button
-    private lateinit var buttonCancel: Button
-    private lateinit var dialog: AlertDialog
 
     private lateinit var buttonAddDiscount: Button
-    private lateinit var editDiscount: EditText
-    private lateinit var buttonSaveDiscount: Button
-    private lateinit var buttonCancelDiscount: Button
 
     private lateinit var imgCameraCode: ImageView
 
@@ -44,9 +38,8 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_pdv)
 
         buttonAdicionarCliente = findViewById(R.id.pdv_client_register)
-        buttonAdicionarCliente.setOnClickListener(this)
-
         buttonAddDiscount = findViewById(R.id.pdv_add_discount)
+<<<<<<< HEAD
         buttonAddDiscount.setOnClickListener(this)
 
         imgCameraCode = findViewById(R.id.img_camera_code)
@@ -92,39 +85,8 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         dialog.setCancelable(false)
         dialog.show()
 
+=======
+>>>>>>> 31e69a1bf62f96f25a058f5cbdcdcecdd5ca9d93
     }
 
-
-    private fun openClientRegister() {
-        val alertDialog = AlertDialog.Builder(this)
-        val view = layoutInflater.inflate(R.layout.client_register_pdv, null)
-        alertDialog.setView(view)
-
-        editCpf = view.findViewById(R.id.edit_client_register_cpf)
-
-        buttonSave = view.findViewById(R.id.button_save_client_register)
-        buttonSave.setOnClickListener(this)
-
-        buttonCancel = view.findViewById(R.id.button_cancel_client_register)
-        buttonCancel.setOnClickListener(this)
-
-        dialog = alertDialog.create()
-        dialog.setCancelable(false)
-        dialog.show()
-
-        edit_client_register_cpf.setOnClickListener{
-            val register = RegisterClientPdv()
-            register.cpf = editCpf.text.toString()
-
-            val gson = Gson()
-            val registerClientJson = gson.toJson(register)
-
-            doAsync {
-                val http = HttpHelper()
-                http.post(registerClientJson)
-            }
-
-            dialog.dismiss()
-        }
-    }
 }

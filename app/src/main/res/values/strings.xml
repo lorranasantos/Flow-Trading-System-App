@@ -70,5 +70,6 @@
     <string name="subtotal">SubTotal</string>
     <string name="discount">Desconto</string>
     <string name="client_register">Cadastrar Cliente</string>
+    <string name="product">Produto</string>
 
 </resources>
