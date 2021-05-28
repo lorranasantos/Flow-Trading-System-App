@@ -34,6 +34,18 @@
             app:layout_constraintStart_toEndOf="@id/pdv_activity_product_code"
             app:layout_constraintTop_toTopOf="@+id/pdv_activity_product_code" />
 
+        <TextView
+            android:id="@+id/tv_resultado_pos_scan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:text="Resultado pós scan"
+            android:textColor="@android:color/black"
+            app:layout_constraintEnd_toEndOf="@+id/pdv_activity_product_code"
+            app:layout_constraintStart_toStartOf="@+id/pdv_activity_product_code"
+            app:layout_constraintTop_toBottomOf="@+id/pdv_activity_product_code" />
+
         <LinearLayout
             android:id="@+id/prices_pdv_screen"
             android:layout_width="match_parent"
@@ -43,7 +55,7 @@
             android:layout_marginTop="25dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pdv_activity_product_code">
+            app:layout_constraintTop_toBottomOf="@+id/tv_resultado_pos_scan">
 
 
             <LinearLayout

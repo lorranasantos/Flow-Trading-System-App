@@ -19,6 +19,7 @@ import com.example.flowtrandingsystem.gui.model.RegisterClientPdv
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_pdv.*
 import kotlinx.android.synthetic.main.client_register_pdv.*
+import kotlinx.android.synthetic.main.code_scanner_activity.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 
@@ -52,7 +53,6 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         imgCameraCode.setOnClickListener(this)
 
     }
-
 
     override fun onClick(v: View) {
         if (v.id == R.id.pdv_client_register){

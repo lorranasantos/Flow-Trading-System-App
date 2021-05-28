@@ -21,7 +21,7 @@ class ScannerActivity : AppCompatActivity() {
     private lateinit var scanner_view: CodeScannerView
     private lateinit var tvTextView: TextView
     private lateinit var tvResultado: TextView
-    private lateinit var pdvActivityProductCode: EditText
+    private lateinit var pdvActivityProductCode: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,8 @@ class ScannerActivity : AppCompatActivity() {
         tvResultado = findViewById(R.id.tv_resultado)
 
         // Variavel do EditText do codigo do PDV
-        pdvActivityProductCode = findViewById(R.id.pdv_activity_product_code)
+        pdvActivityProductCode = findViewById(R.id.tv_resultado_pos_scan)
+
 
         setupPermission()
         codeScanner()
@@ -47,7 +48,7 @@ class ScannerActivity : AppCompatActivity() {
             formats = CodeScanner.ALL_FORMATS
 
             autoFocusMode = AutoFocusMode.SAFE
-            scanMode = ScanMode.CONTINUOUS
+            scanMode = ScanMode.SINGLE
             isAutoFocusEnabled = true
             isFlashEnabled = false
 
