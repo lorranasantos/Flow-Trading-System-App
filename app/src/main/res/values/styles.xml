@@ -67,11 +67,14 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/primaryDark</item>
     </style>
+<<<<<<< HEAD
     <style name="holder_menu_title" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textSize">14sp</item>
         <item name="android:textStyle">bold</item>
         <item name="color">@color/primaryDark</item>
     </style>
+=======
+>>>>>>> 1f77bd17dbb26b5ecf98ad661f44f1ef9f038a06
 
     <!--Datasheet Activity-->
     <style name="title_product_name" parent="TextAppearance.AppCompat.Large">
@@ -88,8 +91,12 @@
 
     <style name="product_infotmation" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textSize">18sp</item>
+<<<<<<< HEAD
         <item name="color">@color/primaryDark</item>
 >>>>>>> 8be70137eeefccd540850e71eb307424b7f32abc
+=======
+        <item name="color">@color/colorPrimaryDark</item>
+>>>>>>> 1f77bd17dbb26b5ecf98ad661f44f1ef9f038a06
     </style>
 
     <style name="titles_pdv" parent="TextAppearance.AppCompat.Large">
@@ -108,7 +115,8 @@
     </style>
     <style name="buy_description" parent="TextAppearance.AppCompat.Medium">
         <item name="android:textSize">13sp</item>
-        <item name="color">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

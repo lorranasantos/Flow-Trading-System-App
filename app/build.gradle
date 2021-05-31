@@ -43,6 +43,7 @@ dependencies {
     // Acesso de API
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.squareup.okhttp3:okhttp:4.2.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     implementation 'org.jetbrains.anko:anko-sqlite:0.10.4'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
@@ -50,5 +51,13 @@ dependencies {
 
     // Mascara
     implementation 'com.github.santalu:maskara:1.0.0'
+
+    // CodeScanner
+    implementation 'com.budiyev.android:code-scanner:2.1.0'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
 
 }

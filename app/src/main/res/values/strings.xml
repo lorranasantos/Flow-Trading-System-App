@@ -49,6 +49,7 @@
     <string name="unit_of_measurement">Unidade de medida</string>
     <string name="paleparia"><b>Papelaria</b></string>
     <string name="vestuario"><b>Vestuario</b></string>
+    <string name="code_scaner_hint"><b>Codigo do Poduto:</b></string>
 
 
     <string name="open">Abrir</string>
@@ -75,5 +76,7 @@
     <string name="total">Total</string>
     <string name="subtotal">SubTotal</string>
     <string name="discount">Desconto</string>
+    <string name="client_register">Cadastrar Cliente</string>
+    <string name="product">Produto</string>
 
 </resources>
