@@ -3,6 +3,7 @@ package com.example.flowtrandingsystem.gui.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
@@ -16,11 +17,7 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var buttonAdicionarCliente: Button
 
-    //private lateinit var buttonSave: Button
-   // private lateinit var buttonCancel: Button
-
     private lateinit var buttonAddDiscount: Button
-    private lateinit var editDiscount: EditText
 
     private lateinit var dialog: AlertDialog
 
@@ -73,6 +70,21 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         val view = layoutInflater.inflate(R.layout.add_discount_pdv, null)
         alertDialog.setView(view)
 
+        val editAddDiscount = view.findViewById<EditText>(R.id.edit_add_discount_pdv)
+        val buttonSave = view.findViewById<Button>(R.id.button_save_discount)
+        val buttonCancel = view.findViewById<Button>(R.id.button_cancel_discount)
+
+        buttonSave.setOnClickListener(this)
+
+        dialog = alertDialog.create()
+        dialog.setCancelable(false)
+        dialog.show()
+
+        buttonCancel.setOnClickListener{
+            dialog.dismiss()
+        }
+
+
     }
 
     private fun openClientRegister() {
@@ -80,7 +92,7 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         val view = layoutInflater.inflate(R.layout.client_register_pdv, null)
         alertDialog.setView(view)
 
-        val editRegisterCpf = findViewById<EditText>(R.id.edit_client_register_cpf)
+        val editRegisterCpf = view.findViewById<EditText>(R.id.edit_client_register_cpf)
         val buttonSave = view.findViewById<Button>(R.id.button_save_client_register)
         val buttonCancel = view.findViewById<Button>(R.id.button_cancel_client_register)
 
@@ -95,7 +107,10 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
             doAsync {
                 val http = HttpHelper()
                 http.postCostumer(clientJson)
+
             }
+            dialog.dismiss()
+            Toast.makeText(this, "Cliente Cadastrado", Toast.LENGTH_SHORT).show()
         }
 
         dialog = alertDialog.create()

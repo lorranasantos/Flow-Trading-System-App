@@ -27,7 +27,7 @@ class HttpHelper {
         // Utilizar o client para fazer a requisição e receber a resposta
         val response = produto.newCall(request).execute()
 
-        return response.body().toString()
+        return response.body()!!.string()
     }
 
     fun get () {
