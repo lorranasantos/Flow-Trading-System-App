@@ -88,7 +88,6 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
         buttonSave.setOnClickListener{
             val newClient = RegisterClientPdv()
-
             newClient.cpf = editCpf.text.toString()
 
             val gson = Gson()
