@@ -34,18 +34,6 @@
             app:layout_constraintStart_toEndOf="@id/pdv_activity_product_code"
             app:layout_constraintTop_toTopOf="@+id/pdv_activity_product_code" />
 
-        <TextView
-            android:id="@+id/tv_resultado_pos_scan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="5dp"
-            android:text="Resultado pós scan"
-            android:textColor="@android:color/black"
-            app:layout_constraintEnd_toEndOf="@+id/pdv_activity_product_code"
-            app:layout_constraintStart_toStartOf="@+id/pdv_activity_product_code"
-            app:layout_constraintTop_toBottomOf="@+id/pdv_activity_product_code" />
-
         <LinearLayout
             android:id="@+id/prices_pdv_screen"
             android:layout_width="match_parent"
@@ -55,7 +43,7 @@
             android:layout_marginTop="25dp"
             android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_resultado_pos_scan">
+            app:layout_constraintTop_toBottomOf="@+id/pdv_activity_product_code">
 
 
             <LinearLayout
@@ -149,97 +137,45 @@
                 app:layout_constraintTop_toBottomOf="@+id/product_list_pdv">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:id="@+id/pdv_product_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/pdv_item_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="5dp"
-                        android:paddingTop="5dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/cabecalho_itens"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp">
 
                         <TextView
                             android:id="@+id/pdv_item_number_title"
                             style="@style/buy_description"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:text="@string/item_number"
                             android:textAlignment="center" />
 
                         <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="1"
-                            android:textAlignment="center" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/pdv_code"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="5dp"
-                        android:paddingTop="5dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <TextView
+                            android:id="@+id/code_product"
                             style="@style/buy_description"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="@string/code"
+                            app:layout_constraintStart_toEndOf="@+id/pdv_item_number_title"
+                            android:layout_marginStart="18dp"
                             android:textAlignment="center" />
-
-                        <TextView
-                            android:id="@+id/pdv_product_code"
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:gravity="center"
-                            android:text="871125"
-                            android:textAlignment="center" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/pdv_product"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="5dp"
-                        android:paddingTop="5dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <TextView
-                            style="@style/buy_description"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="@string/product"
-                            android:textAlignment="center" />
-
-                        <TextView
-                            android:id="@+id/pdv_product_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:gravity="center"
-                            android:text="Lapiseira aaaaa "
-                            android:textAlignment="center" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/pdv_qtd"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="5dp"
-                        android:paddingTop="5dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
                             android:id="@+id/tv_pdv_qtd"
@@ -247,26 +183,19 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="@string/qtd"
+                            app:layout_constraintStart_toEndOf="@+id/code_product"
+                            android:layout_marginStart="18dp"
                             android:textAlignment="center" />
 
                         <TextView
-                            android:id="@+id/tv_quantidade"
+                            android:id="@+id/name_product"
+                            style="@style/buy_description"
                             android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:gravity="center"
-                            android:text="5"
+                            android:layout_height="match_parent"
+                            android:text="@string/product"
+                            app:layout_constraintStart_toEndOf="@+id/tv_pdv_qtd"
+                            android:layout_marginStart="18dp"
                             android:textAlignment="center" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/pdv_vlr_unit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="5dp"
-                        android:paddingTop="5dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
                             android:id="@+id/tv_vlr_un"
@@ -274,26 +203,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="@string/un_price_abrv"
+                            android:layout_marginStart="18dp"
+                            app:layout_constraintStart_toEndOf="@+id/name_product"
                             android:textAlignment="center" />
-
-                        <TextView
-                            android:id="@+id/pdv_valor_unitario"
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:gravity="center"
-                            android:text="10,00"
-                            android:textAlignment="center" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/item_number_pdv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="5dp"
-                        android:paddingTop="5dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
                             android:id="@+id/tv_total_title"
@@ -301,22 +213,25 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:text="@string/total"
+                            app:layout_constraintStart_toEndOf="@+id/tv_vlr_un"
+                            android:layout_marginStart="18dp"
                             android:textAlignment="center" />
 
-                        <TextView
-                            android:id="@+id/pdv_total_item"
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:gravity="center"
-                            android:text="50,00"
-                            android:textAlignment="center" />
-                    </LinearLayout>
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/cabecalho_itens"
+                            tools:ignore="NotSibling"
+                            tools:listitem="@layout/holder_list_items_sale" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </LinearLayout>
 
             </HorizontalScrollView>
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

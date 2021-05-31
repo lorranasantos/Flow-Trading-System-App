@@ -56,7 +56,7 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         imgCameraCode = findViewById(R.id.img_camera_code)
         imgCameraCode.setOnClickListener(this)
 
-        scanResultado = findViewById(R.id.tv_resultado_pos_scan)
+        scanResultado = findViewById(R.id.pdv_activity_product_code)
 
 
         barCode = intent.getStringExtra("barCode").toString()
