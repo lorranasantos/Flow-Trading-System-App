@@ -24,11 +24,18 @@ import kotlinx.android.synthetic.main.code_scanner_activity.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 
-class PdvActivity : AppCompatActivity() {
+class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var buttonAdicionarCliente: Button
+    private lateinit var editCpf: EditText
+
+    private lateinit var buttonSave: Button
+    private lateinit var buttonCancel: Button
 
     private lateinit var buttonAddDiscount: Button
+    private lateinit var editDiscount: EditText
+
+    private lateinit var dialog: AlertDialog
 
     private lateinit var imgCameraCode: ImageView
 
@@ -38,8 +45,9 @@ class PdvActivity : AppCompatActivity() {
         setContentView(R.layout.activity_pdv)
 
         buttonAdicionarCliente = findViewById(R.id.pdv_client_register)
+        buttonAdicionarCliente.setOnClickListener(this)
+
         buttonAddDiscount = findViewById(R.id.pdv_add_discount)
-<<<<<<< HEAD
         buttonAddDiscount.setOnClickListener(this)
 
         imgCameraCode = findViewById(R.id.img_camera_code)
@@ -59,34 +67,50 @@ class PdvActivity : AppCompatActivity() {
         }
     }
 
-    private fun toCodeBar() {
-        val codeScannerScreen = Intent(this, ScannerActivity::class.java)
-        startActivity(codeScannerScreen)
-    }
-
-    /*private fun saveDiscount() {
-        dialog.dismiss()
-    }*/
-
     private fun openAddDiscount() {
         val alertDialog = AlertDialog.Builder(this)
         val view = layoutInflater.inflate(R.layout.add_discount_pdv, null)
         alertDialog.setView(view)
 
         editDiscount = view.findViewById(R.id.edit_add_discount_pdv)
+        buttonSave = view.findViewById(R.id.button_save_discount)
+        buttonCancel = view.findViewById(R.id.button_cancel_discount)
+    }
 
-        buttonSaveDiscount = view.findViewById(R.id.button_save_discount)
-        buttonSaveDiscount.setOnClickListener(this)
+    private fun openClientRegister() {
+        val alertDialog = AlertDialog.Builder(this)
+        val view = layoutInflater.inflate(R.layout.client_register_pdv, null)
+        alertDialog.setView(view)
 
-        buttonCancelDiscount = view.findViewById(R.id.button_cancel_discount)
-        buttonCancelDiscount.setOnClickListener(this)
+        editCpf = view.findViewById(R.id.edit_client_register_cpf)
+        buttonSave = view.findViewById(R.id.button_save_client_register)
+        buttonCancel = view.findViewById(R.id.button_cancel_client_register)
+
+        buttonSave.setOnClickListener{
+            val newClient = RegisterClientPdv()
+
+            newClient.cpf = editCpf.text.toString()
+
+            val gson = Gson()
+            val clientJson = gson.toJson(newClient)
+
+            doAsync {
+                val http = HttpHelper()
+                http.post(clientJson)
+            }
+        }
+
+        buttonCancel.setOnClickListener(this)
 
         dialog = alertDialog.create()
         dialog.setCancelable(false)
         dialog.show()
 
-=======
->>>>>>> 31e69a1bf62f96f25a058f5cbdcdcecdd5ca9d93
+
     }
 
+    private fun toCodeBar() {
+        val codeScannerScreen = Intent(this, ScannerActivity::class.java)
+        startActivity(codeScannerScreen)
+    }
 }
