@@ -20,9 +20,7 @@ import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Response
 
-class InventoryActivity() : AppCompatActivity(), View.OnClickListener {
-
-    private lateinit var buttonAddProduct: ImageButton
+class InventoryActivity() : AppCompatActivity() {
 
     lateinit var rvItens: RecyclerView
     lateinit var adapterItensEstoque: ItensEstoqueAdatpter
@@ -36,8 +34,6 @@ class InventoryActivity() : AppCompatActivity(), View.OnClickListener {
             http.get()
         }
 
-        buttonAddProduct = findViewById(R.id.button_add_product)
-        buttonAddProduct.setOnClickListener(this)
 
         supportActionBar!!.hide()
 
@@ -79,9 +75,4 @@ class InventoryActivity() : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    override fun onClick(v:View) {
-        (v.id == R.id.button_add_product)
-        val intentAddProduct = Intent(this, AddNewProductActivity::class.java)
-        startActivity(intentAddProduct)
-    }
 }
