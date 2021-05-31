@@ -7,33 +7,17 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import com.budiyev.android.codescanner.AutoFocusMode
-import com.budiyev.android.codescanner.CodeScanner
-import com.budiyev.android.codescanner.CodeScannerView
-import com.budiyev.android.codescanner.DecodeCallback
-import com.budiyev.android.codescanner.ErrorCallback
-import com.budiyev.android.codescanner.ScanMode
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.http.HttpHelper
-import com.example.flowtrandingsystem.gui.model.Produto
 import com.example.flowtrandingsystem.gui.model.RegisterClientPdv
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.activity_pdv.*
-import kotlinx.android.synthetic.main.client_register_pdv.*
-import kotlinx.android.synthetic.main.code_scanner_activity.*
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.toast
 
 class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var buttonAdicionarCliente: Button
-    private lateinit var editCpf: EditText
-
-    private lateinit var buttonSave: Button
-    private lateinit var buttonCancel: Button
 
     private lateinit var buttonAddDiscount: Button
-    private lateinit var editDiscount: EditText
 
     private lateinit var dialog: AlertDialog
 
@@ -86,9 +70,21 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         val view = layoutInflater.inflate(R.layout.add_discount_pdv, null)
         alertDialog.setView(view)
 
-        editDiscount = view.findViewById(R.id.edit_add_discount_pdv)
-        buttonSave = view.findViewById(R.id.button_save_discount)
-        buttonCancel = view.findViewById(R.id.button_cancel_discount)
+        val editAddDiscount = view.findViewById<EditText>(R.id.edit_add_discount_pdv)
+        val buttonSave = view.findViewById<Button>(R.id.button_save_discount)
+        val buttonCancel = view.findViewById<Button>(R.id.button_cancel_discount)
+
+        buttonSave.setOnClickListener(this)
+
+        dialog = alertDialog.create()
+        dialog.setCancelable(false)
+        dialog.show()
+
+        buttonCancel.setOnClickListener{
+            dialog.dismiss()
+        }
+
+
     }
 
     private fun openClientRegister() {
@@ -96,29 +92,34 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         val view = layoutInflater.inflate(R.layout.client_register_pdv, null)
         alertDialog.setView(view)
 
-        editCpf = view.findViewById(R.id.edit_client_register_cpf)
-        buttonSave = view.findViewById(R.id.button_save_client_register)
-        buttonCancel = view.findViewById(R.id.button_cancel_client_register)
+        val editRegisterCpf = view.findViewById<EditText>(R.id.edit_client_register_cpf)
+        val buttonSave = view.findViewById<Button>(R.id.button_save_client_register)
+        val buttonCancel = view.findViewById<Button>(R.id.button_cancel_client_register)
 
         buttonSave.setOnClickListener{
+
             val newClient = RegisterClientPdv()
-            newClient.cpf = editCpf.text.toString()
+            newClient.cpf = editRegisterCpf.text.toString()
 
             val gson = Gson()
             val clientJson = gson.toJson(newClient)
 
             doAsync {
                 val http = HttpHelper()
-                http.post(clientJson)
-            }
-        }
+                http.postCostumer(clientJson)
 
-        buttonCancel.setOnClickListener(this)
+            }
+            dialog.dismiss()
+            Toast.makeText(this, "Cliente Cadastrado", Toast.LENGTH_SHORT).show()
+        }
 
         dialog = alertDialog.create()
         dialog.setCancelable(false)
         dialog.show()
 
+        buttonCancel.setOnClickListener{
+            dialog.dismiss()
+        }
 
     }
 

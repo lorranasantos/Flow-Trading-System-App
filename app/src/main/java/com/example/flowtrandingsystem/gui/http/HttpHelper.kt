@@ -7,10 +7,10 @@ import okhttp3.RequestBody
 
 class HttpHelper {
 
-    fun post (json: String) : String{
+    fun postCostumer  (json: String) : String{
 
         // Definir URL do servidor
-        val URL = "http://10.0.2.2:3333/product"
+        val URL = "http://10.0.2.2:3333/costumer"
 
         // Definir o cabeçalho
         val headerhttp = MediaType.parse("application/json; charset=utf-8")
@@ -27,7 +27,7 @@ class HttpHelper {
         // Utilizar o client para fazer a requisição e receber a resposta
         val response = produto.newCall(request).execute()
 
-        return response.body().toString()
+        return response.body()!!.string()
     }
 
     fun get () {
