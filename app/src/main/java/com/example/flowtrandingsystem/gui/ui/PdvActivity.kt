@@ -38,7 +38,10 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var dialog: AlertDialog
 
     private lateinit var imgCameraCode: ImageView
+    private lateinit var barCode: String
 
+
+    private lateinit var scanResultado: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +56,17 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         imgCameraCode = findViewById(R.id.img_camera_code)
         imgCameraCode.setOnClickListener(this)
 
+        scanResultado = findViewById(R.id.tv_resultado_pos_scan)
+
+
+        barCode = intent.getStringExtra("barCode").toString()
+
+        if (barCode !== "null") {
+
+//            Toast.makeText(this, "Codigo: ${barCode}", Toast.LENGTH_SHORT).show()
+            scanResultado.setText(barCode)
+
+        }
     }
 
     override fun onClick(v: View) {

@@ -1,5 +1,6 @@
 package com.example.flowtrandingsystem.gui.ui
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.text.Editable
@@ -31,10 +32,6 @@ class ScannerActivity : AppCompatActivity() {
         tvTextView = findViewById(R.id.tv_textView)
         tvResultado = findViewById(R.id.tv_resultado)
 
-        // Variavel do EditText do codigo do PDV
-        pdvActivityProductCode = findViewById(R.id.tv_resultado_pos_scan)
-
-
         setupPermission()
         codeScanner()
 
@@ -55,8 +52,11 @@ class ScannerActivity : AppCompatActivity() {
             decodeCallback = DecodeCallback {
                 runOnUiThread {
 
-                    // Colocar a variavel "pdvActivityProductCode" aqui no lugar do "tvResultado" caso queira tentar
                     tvResultado.text = it.text
+
+                    val codeIntent = Intent(this@ScannerActivity, PdvActivity::class.java)
+                    codeIntent.putExtra("barCode", it.text)
+                    startActivity(codeIntent)
 
                 }
             }

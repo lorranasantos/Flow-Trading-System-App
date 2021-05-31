@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,7 +16,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".gui.ui.PdvActivity"></activity>
         <activity android:name=".gui.ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -49,6 +49,7 @@
         <activity android:name=".gui.ui.UserInfoActivity" />
         <activity android:name=".gui.ui.DatasheetActivity" />
         <activity android:name=".gui.ui.ScannerActivity" />
+        <activity android:name=".gui.ui.PdvActivity" />
     </application>
 
 </manifest>
