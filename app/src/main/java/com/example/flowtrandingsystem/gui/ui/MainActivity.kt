@@ -85,7 +85,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
                     }
 
                 }else {
-                    Toast.makeText(this@MainActivity, "cpf ou senha esta errado", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this@MainActivity, "CPF ou senha invalidos", Toast.LENGTH_LONG).show()
                 }
             }
         })
