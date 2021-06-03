@@ -1,10 +1,7 @@
 package com.example.flowtrandingsystem.gui.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.ImageButton
 import android.widget.Toast
 import com.example.flowtrandingsystem.gui.adapter.ItensEstoqueAdatpter
 import androidx.appcompat.app.AppCompatActivity
@@ -16,13 +13,10 @@ import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.model.Produto
 import org.jetbrains.anko.doAsync
 import com.example.flowtrandingsystem.gui.api.ProdutosCall
-import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Response
 
-class InventoryActivity() : AppCompatActivity(), View.OnClickListener {
-
-    private lateinit var buttonAddProduct: ImageButton
+class InventoryActivity() : AppCompatActivity() {
 
     lateinit var rvItens: RecyclerView
     lateinit var adapterItensEstoque: ItensEstoqueAdatpter
@@ -33,11 +27,8 @@ class InventoryActivity() : AppCompatActivity(), View.OnClickListener {
 
         doAsync {
             val http = HttpHelper()
-            http.get()
+            http.getProduct()
         }
-
-        buttonAddProduct = findViewById(R.id.button_add_product)
-        buttonAddProduct.setOnClickListener(this)
 
         supportActionBar!!.hide()
 
@@ -79,9 +70,4 @@ class InventoryActivity() : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    override fun onClick(v:View) {
-        (v.id == R.id.button_add_product)
-        val intentAddProduct = Intent(this, AddNewProductActivity::class.java)
-        startActivity(intentAddProduct)
-    }
 }
