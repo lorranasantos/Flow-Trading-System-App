@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.adapter.BarCodeAdapter
-import com.example.flowtrandingsystem.gui.adapter.ItemsSaleAdapter
 import com.example.flowtrandingsystem.gui.api.ProductBarCode
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.SaleProductCall
@@ -36,7 +35,7 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var rvProductSale: RecyclerView
     private lateinit var buttonAddCode: Button
-    private lateinit var adapterItemsSale: ItemsSaleAdapter
+    //private lateinit var adapterItemsSale: ItemsSaleAdapter
 
     lateinit var BarCodeAdapter: BarCodeAdapter
 
@@ -75,13 +74,13 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
         }
 
-        rvProductSale = findViewById(R.id.recycler_view_product_sale)
-
-        rvProductSale.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
-        adapterItemsSale= ItemsSaleAdapter(this)
-        rvProductSale.adapter = adapterItemsSale
+//        rvProductSale = findViewById(R.id.recycler_view_product_sale)
+//
+//        rvProductSale.layoutManager =
+//            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+//
+//        adapterItemsSale= ItemsSaleAdapter(this)
+//        rvProductSale.adapter = adapterItemsSale
 
     }
 
@@ -142,7 +141,7 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
             override fun onResponse(call: Call<Produto>, response: Response<Produto>) {
                 itemProduct = response.body()!!
-                adapterItemsSale.updateListSale(itemProduct)
+                BarCodeAdapter.updateListaProdutos(itemProduct)
 
             }
         })
