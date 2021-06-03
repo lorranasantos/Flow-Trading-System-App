@@ -1,10 +1,7 @@
 package com.example.flowtrandingsystem.gui.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.ImageButton
 import android.widget.Toast
 import com.example.flowtrandingsystem.gui.adapter.ItensEstoqueAdatpter
 import androidx.appcompat.app.AppCompatActivity
@@ -16,7 +13,6 @@ import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.model.Produto
 import org.jetbrains.anko.doAsync
 import com.example.flowtrandingsystem.gui.api.ProdutosCall
-import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Response
 
@@ -31,7 +27,7 @@ class InventoryActivity() : AppCompatActivity() {
 
         doAsync {
             val http = HttpHelper()
-            http.get()
+            http.getInventoryProduct()
         }
 
 

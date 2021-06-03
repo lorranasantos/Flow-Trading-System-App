@@ -7,29 +7,43 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
+import com.example.flowtrandingsystem.gui.adapter.ItemsSaleAdapter
+import com.example.flowtrandingsystem.gui.api.RetrofitApi
+import com.example.flowtrandingsystem.gui.api.SaleProductCall
 import com.example.flowtrandingsystem.gui.http.HttpHelper
 import com.example.flowtrandingsystem.gui.model.RegisterClientPdv
+import com.example.flowtrandingsystem.gui.model.Sale
 import com.google.gson.Gson
 import org.jetbrains.anko.doAsync
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.create
 
 class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var buttonAdicionarCliente: Button
-
     private lateinit var buttonAddDiscount: Button
-
     private lateinit var dialog: AlertDialog
 
     private lateinit var imgCameraCode: ImageView
     private lateinit var barCode: String
 
+    private lateinit var rvProductSale: RecyclerView
+    private lateinit var adapterItemsSale: ItemsSaleAdapter
 
     private lateinit var scanResultado: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pdv)
+
+        doAsync {
+            val http = HttpHelper()
+            http.getProductSale()
+        }
 
         buttonAdicionarCliente = findViewById(R.id.pdv_client_register)
         buttonAdicionarCliente.setOnClickListener(this)
@@ -51,6 +65,39 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
             scanResultado.setText(barCode)
 
         }
+
+        rvProductSale = findViewById(R.id.recycler_view_product_sale)
+
+        rvProductSale.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        adapterItemsSale= ItemsSaleAdapter(this)
+        rvProductSale.adapter = adapterItemsSale
+
+        loadProductsSale()
+    }
+
+    private fun loadProductsSale(){
+
+        var listaDeCompras: List<Sale>
+
+        val retrofit = RetrofitApi.getRetrofit()
+        val saleProductCall = retrofit.create(SaleProductCall::class.java)
+
+        val call = saleProductCall.getSaleProduct()
+
+        call.enqueue(object : retrofit2.Callback<List<Sale>>{
+
+            override fun onFailure(call: Call<List<Sale>>, t: Throwable) {
+                Toast.makeText(this@PdvActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
+                Log.e("Erro_CONEXÃO", t.message.toString())
+            }
+
+            override fun onResponse(call: Call<List<Sale>>, response: Response<List<Sale>>) {
+                listaDeCompras = response.body()!!
+                adapterItemsSale.updateListSale(listaDeCompras)
+            }
+        })
     }
 
     override fun onClick(v: View) {
