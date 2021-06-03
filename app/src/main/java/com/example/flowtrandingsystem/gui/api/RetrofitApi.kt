@@ -1,5 +1,6 @@
 package com.example.flowtrandingsystem.gui.api
 
+import com.example.flowtrandingsystem.gui.api.UrlApi.Companion.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -7,11 +8,10 @@ class RetrofitApi {
     companion object {
         fun getRetrofit() : Retrofit {
             var retrofit = Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:3333/")
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
             return retrofit
         }
     }
-
 }

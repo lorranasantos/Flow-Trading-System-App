@@ -10,15 +10,20 @@ import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
+import com.example.flowtrandingsystem.gui.adapter.BarCodeAdapter
 import com.example.flowtrandingsystem.gui.adapter.ItemsSaleAdapter
+import com.example.flowtrandingsystem.gui.api.ProductBarCode
+import com.example.flowtrandingsystem.gui.api.ProdutosCall
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.SaleProductCall
 import com.example.flowtrandingsystem.gui.http.HttpHelper
+import com.example.flowtrandingsystem.gui.model.Produto
 import com.example.flowtrandingsystem.gui.model.RegisterClientPdv
 import com.example.flowtrandingsystem.gui.model.Sale
 import com.google.gson.Gson
 import org.jetbrains.anko.doAsync
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.create
 
@@ -32,7 +37,10 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var barCode: String
 
     private lateinit var rvProductSale: RecyclerView
+    private lateinit var buttonAddCode: Button
     private lateinit var adapterItemsSale: ItemsSaleAdapter
+
+    lateinit var BarCodeAdapter: BarCodeAdapter
 
     private lateinit var scanResultado: TextView
 
@@ -50,6 +58,9 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
         buttonAddDiscount = findViewById(R.id.pdv_add_discount)
         buttonAddDiscount.setOnClickListener(this)
+
+        buttonAddCode = findViewById(R.id.add_code)
+        buttonAddCode.setOnClickListener(this)
 
         imgCameraCode = findViewById(R.id.img_camera_code)
         imgCameraCode.setOnClickListener(this)
@@ -74,7 +85,6 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         adapterItemsSale= ItemsSaleAdapter(this)
         rvProductSale.adapter = adapterItemsSale
 
-        loadProductsSale()
     }
 
     private fun loadProductsSale(){
@@ -107,10 +117,65 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
             openAddDiscount()
         }else if(v.id == R.id.img_camera_code) {
             toCodeBar()
+        }else if(v.id == R.id.add_code) {
+            addCode()
         }else{
             Toast.makeText(this, "Nada foi clicado", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun addCode() {
+
+        val editCode = findViewById<EditText>(R.id.pdv_activity_product_code)
+
+        var itemProduct: Produto
+
+        val retrofit = RetrofitApi.getRetrofit()
+        val productBarCode = retrofit.create(ProductBarCode::class.java)
+
+        val call = productBarCode.getBarProduct(editCode.text.toString())
+
+        call.enqueue(object : Callback<Produto> {
+
+            override fun onFailure(call: Call<Produto>, t: Throwable) {
+                Toast.makeText(this@PdvActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
+                Log.e("ERRO_CONEXÃO", t.message.toString())
+            }
+
+            override fun onResponse(call: Call<Produto>, response: Response<Produto>) {
+                itemProduct = response.body()!!
+                adapterItemsSale.updateListSale(itemProduct)
+
+            }
+        })
+    }
+
+//    private  fun loadListaItens() {
+//
+//        var listaItens: List<Produto>
+//
+//        val retrofit = RetrofitApi.getRetrofit()
+//        val produtosCall = retrofit.create(ProdutosCall::class.java)
+//
+//        val call = produtosCall.getProduto()
+//
+//        call.enqueue(object : retrofit2.Callback<List<Produto>>{
+//
+//            override fun onFailure(call: Call<List<Produto>>, t: Throwable) {
+//                Toast.makeText(this@InventoryActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
+//                Log.e("Erro_CONEXÃO", t.message.toString())
+//            }
+//
+//            override fun onResponse(call: Call<List<Produto>>, response: Response<List<Produto>>) {
+//                listaItens = response.body()!!
+//                adapterItensEstoque.updateListaProdutos(listaItens)
+//            }
+//
+//        })
+//
+//    }
+
+
 
     private fun openAddDiscount() {
         val alertDialog = AlertDialog.Builder(this)

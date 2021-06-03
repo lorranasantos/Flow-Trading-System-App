@@ -27,9 +27,8 @@ class InventoryActivity() : AppCompatActivity() {
 
         doAsync {
             val http = HttpHelper()
-            http.getInventoryProduct()
+            http.getProduct()
         }
-
 
         supportActionBar!!.hide()
 

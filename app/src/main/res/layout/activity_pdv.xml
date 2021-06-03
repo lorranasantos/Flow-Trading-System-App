@@ -12,16 +12,12 @@
 
         <EditText
             android:id="@+id/pdv_activity_product_code"
-            android:layout_width="280dp"
+            android:layout_width="250dp"
             android:layout_height="0dp"
-
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="30dp"
             android:hint="@string/product_code"
-
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:inputType="text"
+            app:layout_constraintStart_toStartOf="@+id/prices_pdv_screen"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -31,7 +27,18 @@
             android:background="@drawable/ic_baseline_qr_code_2_24"
             app:layout_constraintBottom_toBottomOf="@+id/pdv_activity_product_code"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.12"
             app:layout_constraintStart_toEndOf="@id/pdv_activity_product_code"
+            app:layout_constraintTop_toTopOf="@+id/pdv_activity_product_code"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/add_code"
+            android:layout_width="45dp"
+            android:layout_height="0dp"
+            android:text="+"
+            app:layout_constraintBottom_toBottomOf="@+id/pdv_activity_product_code"
+            app:layout_constraintStart_toEndOf="@id/img_camera_code"
             app:layout_constraintTop_toTopOf="@+id/pdv_activity_product_code" />
 
         <LinearLayout
@@ -48,7 +55,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginEnd="5dp"
                 android:orientation="vertical">
@@ -60,24 +67,26 @@
                     android:layout_height="30dp"
                     android:text="@string/un_value" />
 
-                <TextView
+                <EditText
                     style="@style/pdv_prices"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="R$ 0,00" />
+                    android:hint="R$ 0,00"
+                    android:inputType="number"/>
 
                 <TextView
-                    android:id="@+id/pdv_total_item_price"
+                    android:id="@+id/pdv_qtd"
                     style="@style/titles_pdv"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:text="@string/total_price" />
+                    android:text="Quantidade" />
 
-                <TextView
+                <EditText
                     style="@style/pdv_prices"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="R$ 0,00" />
+                    android:hint="0"
+                    android:inputType="number"/>
 
 
             </LinearLayout>

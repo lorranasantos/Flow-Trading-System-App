@@ -1,5 +1,6 @@
 package com.example.flowtrandingsystem.gui.http
 
+import com.example.flowtrandingsystem.gui.api.UrlApi
 import com.example.flowtrandingsystem.gui.api.UrlApi.Companion.BASE_URL
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
@@ -31,9 +32,9 @@ class HttpHelper {
         return response.body()!!.string()
     }
 
-    fun getInventoryProduct () {
+    fun getProduct () {
         // Definir URL do servidor
-        val URL = "http://10.0.2.2:3333/product"
+        val URL = "${BASE_URL}product/"
 
         // Criar um produto que vai disparar a requisição
         val produto = OkHttpClient()
@@ -53,6 +54,7 @@ class HttpHelper {
             println("RESPOSTA ==========" + json)
         }
     }
+
 
     fun getProductSale () {
         // Definir URL do servidor
@@ -77,4 +79,26 @@ class HttpHelper {
         }
     }
 
+    fun getUser () {
+        // Definir URL do servidor
+        val URL = "${BASE_URL}user/"
+
+        // Criar um produto que vai disparar a requisição
+        val produto = OkHttpClient()
+
+        // Criar uma requisição GET
+        val request = Request.Builder().url(URL).get().build()
+
+        // Enviar a requisição para o servidor
+        val response = produto.newCall(request).execute()
+
+        // Extrair o body da requisição
+        val responseBody = response.body()
+
+        // Exibir o body da requisição
+        if (responseBody != null){
+            val json = responseBody.string()
+            println("RESPOSTA ==========" + json)
+        }
+    }
 }
