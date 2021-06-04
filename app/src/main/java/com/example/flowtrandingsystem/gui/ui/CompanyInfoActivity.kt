@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flowtrandingsystem.R
-import kotlinx.android.synthetic.main.company_info_activity.*
+import kotlinx.android.synthetic.main.company_info.*
 
 class CompanyInfoActivity() : AppCompatActivity() {
 
@@ -33,7 +33,7 @@ class CompanyInfoActivity() : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.company_info_activity)
+        setContentView(R.layout.company_info)
 
         toggle = ActionBarDrawerToggle(this, drawerLayoutCompanyInfo, R.string.open, R.string.close)
         drawerLayoutCompanyInfo.addDrawerListener(toggle)

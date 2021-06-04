@@ -7,10 +7,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
-import com.example.flowtrandingsystem.gui.adapter.ItensEstoqueAdatpter
-import kotlinx.android.synthetic.main.user_info_activity.*
+import kotlinx.android.synthetic.main.user_info.*
 
 class UserInfoActivity() : AppCompatActivity() {
 
@@ -39,7 +37,7 @@ class UserInfoActivity() : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.user_info_activity)
+        setContentView(R.layout.user_info)
 
         toggle = ActionBarDrawerToggle(this, drawerLayoutUserInfo, R.string.open, R.string.close)
         drawerLayoutUserInfo.addDrawerListener(toggle)

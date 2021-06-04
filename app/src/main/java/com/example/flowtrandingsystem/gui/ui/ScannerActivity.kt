@@ -3,9 +3,7 @@ package com.example.flowtrandingsystem.gui.ui
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.example.flowtrandingsystem.R
@@ -26,7 +24,7 @@ class ScannerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.code_scanner_activity)
+        setContentView(R.layout.code_scanner)
 
         scanner_view = findViewById(R.id.scanner_view)
         tvTextView = findViewById(R.id.tv_textView)

@@ -1,15 +1,5 @@
 package com.example.flowtrandingsystem.gui.adapter
 
-import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView
-import com.example.flowtrandingsystem.R
-import com.example.flowtrandingsystem.gui.model.Produto
-import com.example.flowtrandingsystem.gui.model.Sale
-
 //class ItemsSaleAdapter (val context: Context): RecyclerView.Adapter<ItemsSaleAdapter.Holder>() {
 //
 //    var listItemsSale = emptyList<Sale>()

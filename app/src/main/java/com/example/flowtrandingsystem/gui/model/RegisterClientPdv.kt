@@ -1,6 +1,5 @@
 package com.example.flowtrandingsystem.gui.model
 
-class RegisterClientPdv(
+data class RegisterClientPdv(
     var cpf: String = ""
-) {
-}
+)

@@ -7,17 +7,14 @@ import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.adapter.BarCodeAdapter
-import com.example.flowtrandingsystem.gui.api.ProductBarCode
+import com.example.flowtrandingsystem.gui.api.ProductCalls
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
-import com.example.flowtrandingsystem.gui.api.SaleProductCall
 import com.example.flowtrandingsystem.gui.http.HttpHelper
-import com.example.flowtrandingsystem.gui.model.Produto
+import com.example.flowtrandingsystem.gui.model.Product
 import com.example.flowtrandingsystem.gui.model.RegisterClientPdv
-import com.example.flowtrandingsystem.gui.model.Sale
 import com.google.gson.Gson
 import org.jetbrains.anko.doAsync
 import retrofit2.Call
@@ -43,11 +40,11 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.pdv_activity)
+        setContentView(R.layout.pdv)
 
         doAsync {
             val http = HttpHelper()
-            http.getProductSale()
+            http.getProduct()
         }
 
         buttonAdicionarCliente = findViewById(R.id.pdv_client_register)
@@ -125,21 +122,21 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
         val editCode = findViewById<EditText>(R.id.pdv_activity_product_code)
 
-        var itemProduct: Produto
+        var itemProduct: Product
 
         val retrofit = RetrofitApi.getRetrofit()
-        val productBarCode = retrofit.create(ProductBarCode::class.java)
+        val productBarCode = retrofit.create(ProductCalls::class.java)
 
         val call = productBarCode.getBarProduct(editCode.text.toString())
 
-        call.enqueue(object : Callback<Produto> {
+        call.enqueue(object : Callback<Product> {
 
-            override fun onFailure(call: Call<Produto>, t: Throwable) {
+            override fun onFailure(call: Call<Product>, t: Throwable) {
                 Toast.makeText(this@PdvActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                 Log.e("ERRO_CONEXÃO", t.message.toString())
             }
 
-            override fun onResponse(call: Call<Produto>, response: Response<Produto>) {
+            override fun onResponse(call: Call<Product>, response: Response<Product>) {
                 itemProduct = response.body()!!
                 BarCodeAdapter.updateListaProdutos(itemProduct)
 
