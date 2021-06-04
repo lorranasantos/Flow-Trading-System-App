@@ -49,8 +49,6 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
 
     fun executarLogin() {
 
-
-
         val usuario = User(
             cnpj_ou_cpf = editTextCpf.text.toString(), password = editTextSenha.text.toString()
         )

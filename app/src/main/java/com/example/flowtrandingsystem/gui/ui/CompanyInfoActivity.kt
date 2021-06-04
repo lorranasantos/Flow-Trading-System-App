@@ -3,15 +3,23 @@ package com.example.flowtrandingsystem.gui.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flowtrandingsystem.R
+import com.example.flowtrandingsystem.gui.model.Branch
+import com.example.flowtrandingsystem.gui.model.UserToken
 import kotlinx.android.synthetic.main.company_info.*
 
 class CompanyInfoActivity() : AppCompatActivity() {
 
     lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var branchName: TextView
+
+
+
+
 
     private fun goToMenu(){
 
@@ -41,6 +49,11 @@ class CompanyInfoActivity() : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        branchName = findViewById(R.id.branch_of_company)
+
+
+
+        //var user: UserToken = UserToken(Branch())
 
         company_navigation_view.setNavigationItemSelectedListener {
             when(it.itemId) {

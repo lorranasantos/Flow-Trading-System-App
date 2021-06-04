@@ -1,7 +1,6 @@
 package com.example.flowtrandingsystem.gui.model
 
-class Permission (
+data class Permission(
 
-    var permission_name: String = ""
-
+    var permissions: Int = 0
 )
