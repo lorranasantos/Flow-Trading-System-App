@@ -9,12 +9,9 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flowtrandingsystem.R
-import com.example.flowtrandingsystem.gui.api.ProductCalls
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.UserCalls
-import com.example.flowtrandingsystem.gui.model.Product
 import com.example.flowtrandingsystem.gui.model.User
-import com.example.flowtrandingsystem.gui.model.UserToken
 import kotlinx.android.synthetic.main.user_info.*
 import retrofit2.Call
 import retrofit2.Response
@@ -77,12 +74,12 @@ class UserInfoActivity() : AppCompatActivity() {
 
     private  fun loadInfo() {
 
-        var userInfo: User
+        var userInfo: User = User()
 
         val retrofit = RetrofitApi.getRetrofit()
         val userCall = retrofit.create(UserCalls::class.java)
 
-        val call = userCall.getInfoFromUser()
+        val call = userCall.getInfoFromUser(User)
 
         call.enqueue(object : retrofit2.Callback<User>{
 
