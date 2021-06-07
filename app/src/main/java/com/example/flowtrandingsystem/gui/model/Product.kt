@@ -1,6 +1,7 @@
 package com.example.flowtrandingsystem.gui.model
 
 data class Product(
+
     var id: Long = 0,
     var product_name: String = "",
     var total_quantity: Long = 0,

@@ -11,6 +11,7 @@ import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.api.*
 import com.example.flowtrandingsystem.gui.model.Token
 import com.example.flowtrandingsystem.gui.model.User
+import com.example.flowtrandingsystem.gui.model.UserLogin
 import kotlinx.android.synthetic.main.main_activity.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -49,7 +50,7 @@ class MainActivity: AppCompatActivity(), View.OnClickListener {
 
     fun executarLogin() {
 
-        val usuario = User(
+        val usuario = UserLogin(
             cnpj_ou_cpf = editTextCpf.text.toString(), password = editTextSenha.text.toString()
         )
 

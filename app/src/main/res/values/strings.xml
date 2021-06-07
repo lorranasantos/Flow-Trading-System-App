@@ -21,7 +21,7 @@
     <string name="config">Configurações</string>
 
     <!-- Company Information-->
-    <string name="companyName">Nome da Empresa:</string>
+    <string name="companyName">Razão Social:</string>
     <string name="companyEmail">Email Comercial:</string>
     <string name="companyPlan">Plano Adiquirido:</string>
     <string name="companyBusines">Natureza de Negocios:</string>

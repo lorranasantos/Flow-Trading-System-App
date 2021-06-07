@@ -152,18 +152,20 @@
 
             </LinearLayout>
 
-    <TextView
-        android:id="@+id/footer_fts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/welcome_plans_ripple"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/arent_you_a_client"
-        android:orientation="horizontal"
-        android:textAlignment="center"
-        style="@style/footerAppearence"/>
+
+        <TextView
+            android:id="@+id/footer_fts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_marginTop="500dp"
+            android:background="@drawable/rounded_top"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/app_name"
+            android:orientation="horizontal"
+            android:textAlignment="center"
+            style="@style/footerAppearence"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

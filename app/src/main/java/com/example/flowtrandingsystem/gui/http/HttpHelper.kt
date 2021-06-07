@@ -6,6 +6,7 @@ import com.example.flowtrandingsystem.gui.api.UrlApi.Companion.CONTENT_TYPE
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 class HttpHelper {
 
@@ -21,7 +22,7 @@ class HttpHelper {
         val produto = OkHttpClient()
 
         // Criar o body da requisição
-        val body = RequestBody.create(headerhttp, json)
+        val body = json.toRequestBody(headerhttp)
 
         // Construir a requisição http para o servidor
         var request = Request.Builder().url(URL).post(body).build()
