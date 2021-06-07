@@ -9,14 +9,14 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
-import com.example.flowtrandingsystem.gui.model.Produto
+import com.example.flowtrandingsystem.gui.model.Product
 import com.example.flowtrandingsystem.gui.ui.DatasheetActivity
 
 class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapter.Holder>() {
 
-    var listItens =  emptyList<Produto>()
+    var listItens =  emptyList<Product>()
 
-    fun updateListaProdutos(lista: Produto){
+    fun updateListaProdutos(lista: Product){
         listItens = listOf(lista)
         notifyDataSetChanged()
     }

@@ -7,6 +7,6 @@ import com.example.flowtrandingsystem.R
 class DatasheetActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.datasheet_activity)
+        setContentView(R.layout.datasheet)
     }
 }
