@@ -2,6 +2,7 @@ package com.example.flowtrandingsystem.gui.http
 
 import com.example.flowtrandingsystem.gui.api.UrlApi.Companion.BASE_URL
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody
@@ -26,7 +27,7 @@ class HttpHelper {
         val response = usuario.newCall(request).execute()
 
         // Extrair o body da requisição
-        val responseBody = response.body()
+        val responseBody = response.body
 
         // Exibir o body da requisição
         if (responseBody != null) {
@@ -43,7 +44,7 @@ class HttpHelper {
         val URL = "http://10.0.2.2:3333/costumer"
 
         // Definir o cabeçalho
-        val headerhttp = MediaType.parse("application/json; charset=utf-8")
+        val headerhttp = "application/json; charset=utf-8".toMediaTypeOrNull()
 
         // Criar um produto que vai disparar a requisição
         val produto = OkHttpClient()
@@ -57,7 +58,7 @@ class HttpHelper {
         // Utilizar o client para fazer a requisição e receber a resposta
         val response = produto.newCall(request).execute()
 
-        return response.body().toString()
+        return response.body.toString()
     }
 
 
@@ -75,7 +76,7 @@ class HttpHelper {
         val response = produto.newCall(request).execute()
 
         // Extrair o body da requisição
-        val responseBody = response.body()
+        val responseBody = response.body
 
         // Exibir o body da requisição
         if (responseBody != null){
@@ -99,7 +100,7 @@ class HttpHelper {
         val response = produto.newCall(request).execute()
 
         // Extrair o body da requisição
-        val responseBody = response.body()
+        val responseBody = response.body
 
         // Exibir o body da requisição
         if (responseBody != null){
@@ -126,7 +127,7 @@ class HttpHelper {
         val response = produto.newCall(request).execute()
 
         // Extrair o body da requisição
-        val responseBody = response.body()
+        val responseBody = response.body
 
         // Exibir o body da requisição
         if (responseBody != null) {

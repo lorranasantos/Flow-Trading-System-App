@@ -20,60 +20,22 @@
         <activity android:name=".gui.ui.CompanyInfoActivity" />
         <activity android:name=".gui.ui.UserInfoActivity" />
         <activity android:name=".gui.ui.ScannerActivity" />
+        <activity android:name=".gui.ui.MenuActivity" />
         <activity android:name=".gui.ui.PdvActivity" android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".gui.ui.DatasheetActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".gui.ui.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".gui.ui.MainActivity"
             android:label="YourAppName"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <activity android:name=".gui.ui.PdvActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".gui.ui.MainActivity" android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".gui.ui.MenuActivity" android:label="FTS" android:theme="@style/AppTheme"/>
-        <activity android:name=".gui.ui.InventoryActivity"/>
-        <activity android:name=".gui.ui.AddNewProductActivity"/>
-        <activity android:name=".gui.ui.CompanyInfoActivity"/>
-        <activity android:name=".gui.ui.UserInfoActivity"/>
-        <activity android:name=".gui.ui.DatasheetActivity" android:theme="@style/AppTheme.NoActionBar"/>
-=======
-        <activity
-            android:name=".gui.ui.MainActivity"
-            android:label="YourAppName"
-            android:theme="@style/AppTheme.NoActionBar">
-=======
-        <activity android:name=".gui.ui.SplashActivity">
->>>>>>> 479e157f579f939b849849c0a3739930e678014a
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".gui.ui.MenuActivity"
-            android:label="FTS"
-            android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-<<<<<<< HEAD
-        <activity android:name=".gui.ui.InventoryActivity" />
-        <activity android:name=".gui.ui.AddNewProductActivity" />
-        <activity android:name=".gui.ui.CompanyInfoActivity" />
-        <activity android:name=".gui.ui.UserInfoActivity" />
-        <activity android:name=".gui.ui.DatasheetActivity" />
-        <activity android:name=".gui.ui.ScannerActivity" />
->>>>>>> 1f77bd17dbb26b5ecf98ad661f44f1ef9f038a06
-=======
->>>>>>> 479e157f579f939b849849c0a3739930e678014a
     </application>
 
 </manifest>
