@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <EditText
+    <com.santalu.maskara.widget.MaskEditText
         android:id="@+id/edit_client_register_cpf"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -25,7 +25,8 @@
         app:layout_constraintTop_toBottomOf="@+id/client_register_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:hint="@string/cpf"/>
+        android:hint="@string/cpf"
+        app:mask="###.###.###-##"/>
 
     <Button
         android:id="@+id/button_save_client_register"

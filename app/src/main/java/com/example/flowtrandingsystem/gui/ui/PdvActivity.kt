@@ -88,7 +88,7 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
             doAsync {
                 val http = HttpHelper()
-                http.post(clientJson)
+                http.postCostumer(clientJson)
             }
         }
 
