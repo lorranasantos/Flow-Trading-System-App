@@ -58,7 +58,7 @@ class HttpHelper {
 
     fun getUser () {
         // Definir URL do servidor
-        val URL = "${BASE_URL}user/"
+        val URL = "${BASE_URL}user"
 
         // Criar um produto que vai disparar a requisição
         val produto = OkHttpClient()

@@ -12,6 +12,7 @@ import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.UserCalls
 import com.example.flowtrandingsystem.gui.model.User
+import com.example.flowtrandingsystem.gui.model.UserToken
 import kotlinx.android.synthetic.main.user_info.*
 import retrofit2.Call
 import retrofit2.Response
@@ -74,28 +75,28 @@ class UserInfoActivity() : AppCompatActivity() {
 
     private  fun loadInfo() {
 
-        var userInfo: User = User()
+        var userInfo: UserToken = UserToken()
 
         val retrofit = RetrofitApi.getRetrofit()
         val userCall = retrofit.create(UserCalls::class.java)
 
-        val call = userCall.getInfoFromUser(User)
+        val call = userCall.getInfoFromUser(userInfo.id)
 
-        call.enqueue(object : retrofit2.Callback<User>{
+        call.enqueue(object : retrofit2.Callback<UserToken>{
 
-            override fun onFailure(call: Call<User>, t: Throwable) {
+            override fun onFailure(call: Call<UserToken>, t: Throwable) {
                 Toast.makeText(this@UserInfoActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                 Log.e("ERRO_CONEXÃO", t.message.toString())
             }
 
-            override fun onResponse(call: Call<User>, response: Response<User>) {
+            override fun onResponse(call: Call<UserToken>, response: Response<UserToken>) {
                 userInfo = response.body()!!
 
-                cpfUser.text = userInfo.cpf
+                cpfUser.text = userInfo.user_cpf
                 nameUser.text = userInfo.user_name
-                rgUser.text = userInfo.rg
-                roleUser.text = userInfo.Role.role_name
-                branchUser.text = userInfo.Branch.branch_name
+                rgUser.text = userInfo.user_rg
+//                roleUser.text = userInfo.Role.role_name
+                branchUser.text = userInfo.branch.branch_name
 
             }
 

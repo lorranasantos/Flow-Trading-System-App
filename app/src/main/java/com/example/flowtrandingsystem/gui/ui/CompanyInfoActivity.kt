@@ -19,7 +19,6 @@ import retrofit2.Response
 class CompanyInfoActivity() : AppCompatActivity() {
 
     lateinit var toggle: ActionBarDrawerToggle
-    private lateinit var branchName: TextView
     private lateinit var companyName : TextView
     private lateinit var companyEmail : TextView
     private lateinit var companyPlan : TextView
@@ -53,7 +52,6 @@ class CompanyInfoActivity() : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        branchName = findViewById(R.id.branch_of_company)
         companyName = findViewById(R.id.name_of_company)
         companyEmail = findViewById(R.id.email_of_company)
         companyPlan = findViewById(R.id.plan_of_company)
@@ -74,12 +72,12 @@ class CompanyInfoActivity() : AppCompatActivity() {
 
     private  fun loadInfo() {
 
-        var companyInfo: Company = Company()
+        var companyInfo: Company
 
         val retrofit = RetrofitApi.getRetrofit()
         val companyCall = retrofit.create(CompanyCalls::class.java)
 
-        val call = companyCall.getInfoFromCompany(companyInfo.id)
+        val call = companyCall.getInfoFromCompany()
 
         call.enqueue(object : retrofit2.Callback<Company>{
 
@@ -91,14 +89,11 @@ class CompanyInfoActivity() : AppCompatActivity() {
             override fun onResponse(call: Call<Company>, response: Response<Company>) {
                 companyInfo = response.body()!!
 
-
-                branchName = findViewById(R.id.branch_of_company)
                 companyName = findViewById(R.id.name_of_company)
                 companyEmail = findViewById(R.id.email_of_company)
                 companyPlan = findViewById(R.id.plan_of_company)
                 companyBusiness = findViewById(R.id.busines_of_company)
 
-                branchName.text = companyInfo.Branch.branch_name
                 companyName.text = companyInfo.fantasy_name
                 companyEmail.text = companyInfo.commercial_email
                 companyPlan.text = companyInfo.plan_id

@@ -77,16 +77,6 @@
             app:layout_constraintTop_toBottomOf="@+id/plan_company" />
 
         <TextView
-            android:id="@+id/company_branch"
-            style="@style/product_infotmation_titles"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="@string/comanyBranch"
-            android:textColor="@color/secondary"
-            app:layout_constraintStart_toStartOf="@+id/social_reason"
-            app:layout_constraintTop_toBottomOf="@+id/busines_company" />
-
-        <TextView
             android:id="@+id/name_of_company"
             style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
@@ -128,18 +118,6 @@
             android:layout_height="40dp"
             android:text="teste"
             app:layout_constraintTop_toBottomOf="@+id/plan_of_company"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="25dp"
-            android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
-
-        <TextView
-            android:id="@+id/branch_of_company"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/busines_of_company"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="25dp"
