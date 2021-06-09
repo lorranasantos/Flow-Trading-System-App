@@ -1,6 +1,8 @@
 package com.example.flowtrandingsystem.gui.ui
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -17,6 +19,9 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var inventoryOption: TextView
     private lateinit var pdvOption: TextView
 
+    private lateinit var sessionToken: String
+    private var sessionId: Int = 0
+
     lateinit var toggle: ActionBarDrawerToggle
 
     private fun goToInfoCompany(){
@@ -25,24 +30,17 @@ class MenuActivity : AppCompatActivity() {
         startActivity(companyScreen)
     }
 
-    private fun goToInfoUser(){
-
-        val userScreen = Intent(this, UserInfoActivity::class.java)
-    startActivity(userScreen)
-}
-
     private fun goToLogin(){
 
         val loginScreen = Intent(this, MainActivity::class.java)
         startActivity(loginScreen)
-    }
 
+    }
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)){
             drawerLayout.closeDrawer(drawerLayout)
         }
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -64,7 +62,6 @@ class MenuActivity : AppCompatActivity() {
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         main_navigation_view.setNavigationItemSelectedListener {
@@ -76,6 +73,19 @@ class MenuActivity : AppCompatActivity() {
             }
             true
         }
+
+        sessionToken = intent.getStringExtra("token").toString()
+        sessionId = intent.getIntExtra("tokenId", 0).toString().toInt()
+
+        Log.e("RESPONSE", "Id: ${sessionId} Token: ${sessionToken}")
+
+    }
+    private fun goToInfoUser(){
+        val userScreen = Intent(this, UserInfoActivity::class.java)
+        userScreen.putExtra("token", sessionToken)
+        userScreen.putExtra("tokenId", sessionId)
+        startActivity(userScreen)
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

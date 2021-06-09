@@ -7,7 +7,7 @@ import retrofit2.http.Path
 
 interface CompanyCalls {
 
-    @GET("company/find/1")
+    @GET("/company/find/1")
     fun getInfoFromCompany(): Call<Company>
 
 }
