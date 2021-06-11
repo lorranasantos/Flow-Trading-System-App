@@ -8,5 +8,5 @@ data class User(
         var rg: String = "",
         var Branch: Branch = Branch(),
         var Role: Role = Role(),
-        var Permissions: Permissions = Permissions()
+        var Permissions: ArrayList<Permissions>
 )

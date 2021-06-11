@@ -2,7 +2,7 @@ package com.example.flowtrandingsystem.gui.model
 
 data class Product(
 
-    var id: Long = 0,
+    var id: Int = 0,
     var product_name: String = "",
     var total_quantity: Long = 0,
     var cost_per_item: Double = 0.0,

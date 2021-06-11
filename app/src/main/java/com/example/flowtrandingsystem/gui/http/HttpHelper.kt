@@ -11,7 +11,6 @@ import okhttp3.RequestBody.Companion.toRequestBody
 class HttpHelper {
 
     fun postCostumer  (json: String) : String{
-
         // Definir URL do servidor
         val URL = "${BASE_URL}costumer"
 
@@ -25,7 +24,7 @@ class HttpHelper {
         val body = json.toRequestBody(headerhttp)
 
         // Construir a requisição http para o servidor
-        var request = Request.Builder().url(URL).post(body).build()
+        val request = Request.Builder().url(URL).post(body).build()
 
         // Utilizar o client para fazer a requisição e receber a resposta
         val response = produto.newCall(request).execute()
@@ -51,33 +50,6 @@ class HttpHelper {
 
         // Exibir o body da requisição
         if (responseBody != null){
-            val json = responseBody.string()
-            println("RESPOSTA ==========" + json)
-        }
-    }
-
-    fun getUser () {
-        // Definir URL do servidor
-        val URL = "${BASE_URL}user"
-
-        // Criar um produto que vai disparar a requisição
-        val produto = OkHttpClient()
-
-        // Criar uma requisição GET
-        val request = Request
-            .Builder()
-            .url(URL)
-            .get()
-            .build()
-
-        // Enviar a requisição para o servidor
-        val response = produto.newCall(request).execute()
-
-        // Extrair o body da requisição
-        val responseBody = response.body
-
-        // Exibir o body da requisição
-        if (responseBody != null) {
             val json = responseBody.string()
             println("RESPOSTA ==========" + json)
         }

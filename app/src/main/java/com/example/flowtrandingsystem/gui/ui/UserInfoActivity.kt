@@ -1,6 +1,8 @@
 package com.example.flowtrandingsystem.gui.ui
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -11,13 +13,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.UserCalls
-import com.example.flowtrandingsystem.gui.model.Token
 import com.example.flowtrandingsystem.gui.model.User
-import com.example.flowtrandingsystem.gui.model.UserLogin
-import com.example.flowtrandingsystem.gui.model.UserToken
 import kotlinx.android.synthetic.main.user_info.*
-import org.jetbrains.anko.toast
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 class UserInfoActivity() : AppCompatActivity() {
@@ -28,10 +27,6 @@ class UserInfoActivity() : AppCompatActivity() {
     private lateinit var rgUser : TextView
     private lateinit var roleUser : TextView
     private lateinit var branchUser : TextView
-    private lateinit var permissionUser : TextView
-
-    private var sessionToken: String = ""
-    private var sessionId: Int = 0
 
     private fun goToInfoCompany(){
 
@@ -83,27 +78,36 @@ class UserInfoActivity() : AppCompatActivity() {
 
     private  fun loadInfo() {
 
-        var userInfo: User = User()
+        //recuperar o token do sharedPreferences
+        val prefs: SharedPreferences =
+            this@UserInfoActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+
+        val retrivedToken =
+            prefs.getString("TOKEN", "Nada foi recebido")
+
+        val retrivedId =
+            prefs.getInt("ID", 0)
+
+        val retrivedCompanyId =
+            prefs.getInt("COMPANYID", 0)
+
+        Log.e("RETRIEVED", "Id: ${retrivedId} CompanyId: ${retrivedCompanyId} Token: ${retrivedToken}")
+
+        var userInfo: User
 
         val retrofit = RetrofitApi.getRetrofit()
         val userCall = retrofit.create(UserCalls::class.java)
 
-        //recuperar o token do sharedPreferences
-        sessionToken = intent.getStringExtra("token").toString()
-        sessionId = intent.getIntExtra("tokenId", sessionId).toString().toInt()
+        val call = userCall.getInfoFromUser(retrivedId, "Bearer ${retrivedToken}")
 
-        Log.e("RESPONSE", "Id: ${sessionId} Token: ${sessionToken}")
+        call.enqueue(object : Callback<User>{
 
-        val call = userCall.getInfoFromUser(sessionId, sessionToken)
-
-        call.enqueue(object : retrofit2.Callback<User?>{
-
-            override fun onFailure(call: Call<User?>, t: Throwable) {
+            override fun onFailure(call: Call<User>, t: Throwable) {
                 Toast.makeText(this@UserInfoActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                 Log.e("ERRO_CONEXÃO", t.message.toString())
             }
 
-            override fun onResponse(call: Call<User?>, response: Response<User?>) {
+            override fun onResponse(call: Call<User>, response: Response<User>) {
                 userInfo = response.body()!!
 
                 Log.i("TESTE", response.body().toString())
@@ -113,9 +117,9 @@ class UserInfoActivity() : AppCompatActivity() {
                 rgUser.text = userInfo.rg
                 roleUser.text = userInfo.Role.role_name
                 branchUser.text = userInfo.Branch.branch_name
-                permissionUser.text = userInfo.Permissions.permission_name
             }
         })
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

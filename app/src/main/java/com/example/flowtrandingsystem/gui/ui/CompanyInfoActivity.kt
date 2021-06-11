@@ -1,6 +1,8 @@
 package com.example.flowtrandingsystem.gui.ui
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -20,9 +22,11 @@ class CompanyInfoActivity() : AppCompatActivity() {
 
     lateinit var toggle: ActionBarDrawerToggle
     private lateinit var companyName : TextView
+    private lateinit var companyReason : TextView
     private lateinit var companyEmail : TextView
     private lateinit var companyPlan : TextView
     private lateinit var companyBusiness : TextView
+
 
     private fun goToMenu(){
 
@@ -52,7 +56,8 @@ class CompanyInfoActivity() : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        companyName = findViewById(R.id.name_of_company)
+        companyName = findViewById(R.id.company_name)
+        companyReason = findViewById(R.id.reason_of_company)
         companyEmail = findViewById(R.id.email_of_company)
         companyPlan = findViewById(R.id.plan_of_company)
         companyBusiness = findViewById(R.id.busines_of_company)
@@ -72,12 +77,27 @@ class CompanyInfoActivity() : AppCompatActivity() {
 
     private  fun loadInfo() {
 
+        //recuperar o token do sharedPreferences
+        val prefs: SharedPreferences =
+            this@CompanyInfoActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+
+        val retrivedToken =
+            prefs.getString("TOKEN", "Nada foi recebido")
+
+        val retrivedId =
+            prefs.getInt("ID", 0)
+
+        val retrivedCompanyId =
+            prefs.getInt("COMPANYID", 0)
+
+        Log.e("RETRIEVED", "Id: ${retrivedId} CompanyId: ${retrivedCompanyId} Token: ${retrivedToken}")
+
         var companyInfo: Company
 
         val retrofit = RetrofitApi.getRetrofit()
         val companyCall = retrofit.create(CompanyCalls::class.java)
 
-        val call = companyCall.getInfoFromCompany()
+        val call = companyCall.getInfoFromCompany(retrivedCompanyId, "Bearer ${retrivedToken}")
 
         call.enqueue(object : retrofit2.Callback<Company>{
 
@@ -89,20 +109,14 @@ class CompanyInfoActivity() : AppCompatActivity() {
             override fun onResponse(call: Call<Company>, response: Response<Company>) {
                 companyInfo = response.body()!!
 
-                companyName = findViewById(R.id.name_of_company)
-                companyEmail = findViewById(R.id.email_of_company)
-                companyPlan = findViewById(R.id.plan_of_company)
-                companyBusiness = findViewById(R.id.busines_of_company)
-
                 companyName.text = companyInfo.fantasy_name
+                companyReason.text = companyInfo.social_reason
                 companyEmail.text = companyInfo.commercial_email
-                companyPlan.text = companyInfo.plan_id
+                companyPlan.text = companyInfo.Plan.plan_name
                 companyBusiness.text = companyInfo.nature_of_the_business
 
             }
-
         })
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

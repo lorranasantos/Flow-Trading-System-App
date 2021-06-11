@@ -15,9 +15,10 @@
 
         <TextView
             android:id="@+id/user_name"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:text="Nome"
+            android:textAlignment="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +42,9 @@
             android:layout_height="40dp"
             android:layout_marginTop="50dp"
             android:text="@string/rgUser"
+            android:layout_marginStart="25dp"
             android:textColor="@color/secondary"
-            app:layout_constraintStart_toStartOf="@+id/frameLayout"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/user_name" />
 
         <TextView
@@ -79,9 +81,10 @@
         <TextView
             android:id="@+id/rg_from_user"
             style="@style/product_infotmation_titles"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="25dp"
+            android:textAlignment="textEnd"
             android:text="teste"
             android:textColor="@color/secondary"
             app:layout_constraintEnd_toEndOf="parent"
@@ -89,51 +92,43 @@
 
         <TextView
             android:id="@+id/cpf_from_user"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/rg_from_user"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="15dp"
+            style="@style/product_infotmation_titles"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="25dp"
+            android:textAlignment="textEnd"
+            android:text="teste"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_rg" />
 
         <TextView
             android:id="@+id/role_from_user"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/cpf_from_user"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="15dp"
+            style="@style/product_infotmation_titles"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="25dp"
+            android:textAlignment="textEnd"
+            android:text="teste"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/user_role" />
 
         <TextView
             android:id="@+id/branch_from_user"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/role_from_user"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="15dp"
+            style="@style/product_infotmation_titles"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="25dp"
+            android:textAlignment="textEnd"
+            android:text="teste"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/user_branch" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/user_navigation_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/nav_drawer_menu"/>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -155,6 +150,14 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/user_navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/nav_drawer_menu"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

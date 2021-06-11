@@ -15,12 +15,9 @@ import com.example.flowtrandingsystem.R
 import kotlinx.android.synthetic.main.fragment_initial_menu.*
 
 
-class MenuActivity : AppCompatActivity() {
+class MenuActivity : AppCompatActivity(){
     private lateinit var inventoryOption: TextView
     private lateinit var pdvOption: TextView
-
-    private lateinit var sessionToken: String
-    private var sessionId: Int = 0
 
     lateinit var toggle: ActionBarDrawerToggle
 
@@ -29,7 +26,6 @@ class MenuActivity : AppCompatActivity() {
         val companyScreen = Intent(this, CompanyInfoActivity::class.java)
         startActivity(companyScreen)
     }
-
     private fun goToLogin(){
 
         val loginScreen = Intent(this, MainActivity::class.java)
@@ -74,16 +70,29 @@ class MenuActivity : AppCompatActivity() {
             true
         }
 
-        sessionToken = intent.getStringExtra("token").toString()
-        sessionId = intent.getIntExtra("tokenId", 0).toString().toInt()
+        val prefs: SharedPreferences =
+            this@MenuActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
 
-        Log.e("RESPONSE", "Id: ${sessionId} Token: ${sessionToken}")
+        val retrivedToken =
+            prefs.getString("TOKEN", "Nada foi recebido")
+
+        val retrivedId =
+            prefs.getInt("ID", 0)
+
+        val retrivedCompanyId =
+            prefs.getInt("COMPANYID", 0)
+
+        Log.e("RESPONSE", "CENOURA: ${retrivedId}")
+        Log.e("RESPONSE", "ABOBORA: ${retrivedCompanyId}")
+        Log.e("RESPONSE", "BATATA: ${retrivedToken}")
+
+
+
+        Toast.makeText(this@MenuActivity, "CENOURA E BATATA: ${retrivedId} ${retrivedToken}", Toast.LENGTH_LONG).show()
 
     }
     private fun goToInfoUser(){
         val userScreen = Intent(this, UserInfoActivity::class.java)
-        userScreen.putExtra("token", sessionToken)
-        userScreen.putExtra("tokenId", sessionId)
         startActivity(userScreen)
 
     }
@@ -95,4 +104,6 @@ class MenuActivity : AppCompatActivity() {
 
         return super.onOptionsItemSelected(item)
     }
+
+
 }

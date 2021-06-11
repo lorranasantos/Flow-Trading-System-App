@@ -15,8 +15,9 @@
 
         <TextView
             android:id="@+id/company_name"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
             android:text="Casa Bahia"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -77,11 +78,12 @@
             app:layout_constraintTop_toBottomOf="@+id/plan_company" />
 
         <TextView
-            android:id="@+id/name_of_company"
+            android:id="@+id/reason_of_company"
             style="@style/product_infotmation_titles"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="25dp"
+            android:textAlignment="textEnd"
             android:text="teste"
             android:textColor="@color/secondary"
 
@@ -90,51 +92,41 @@
 
         <TextView
             android:id="@+id/email_of_company"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            style="@style/product_infotmation_titles"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="textEnd"
             android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/name_of_company"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="25dp"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
+            app:layout_constraintEnd_toEndOf="@+id/reason_of_company"
+            app:layout_constraintTop_toTopOf="@+id/comercial_email" />
 
         <TextView
             android:id="@+id/plan_of_company"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/email_of_company"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="15dp"
+            style="@style/product_infotmation_titles"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="25dp"
+            android:textAlignment="textEnd"
+            android:text="teste"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/comercial_email" />
 
         <TextView
             android:id="@+id/busines_of_company"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/plan_of_company"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="15dp"
+            style="@style/product_infotmation_titles"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="25dp"
+            android:textAlignment="textEnd"
+            android:text="teste"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/busines_company" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/company_navigation_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:headerLayout="@layout/nav_header"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/nav_drawer_menu"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -155,5 +147,15 @@
             style="@style/footerAppearence"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/company_navigation_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/nav_drawer_menu"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

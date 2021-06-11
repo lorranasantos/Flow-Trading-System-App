@@ -6,7 +6,7 @@ data class Company (
     var fantasy_name: String = "",
     var social_reason: String = "",
     var commercial_email: String = "",
-    var plan_id: String = "",
+    var Plan: Plan = Plan(),
     var nature_of_the_business: String = "",
     var Branch: Branch = Branch()
 
