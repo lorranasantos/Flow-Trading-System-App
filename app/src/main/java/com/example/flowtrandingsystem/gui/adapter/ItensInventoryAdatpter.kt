@@ -9,14 +9,14 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
-import com.example.flowtrandingsystem.gui.model.Produto
+import com.example.flowtrandingsystem.gui.model.Product
 import com.example.flowtrandingsystem.gui.ui.DatasheetActivity
 
-class ItensEstoqueAdatpter ( val context: Context) : RecyclerView.Adapter<ItensEstoqueAdatpter.Holder>() {
+class ItensInventoryAdatpter (val context: Context) : RecyclerView.Adapter<ItensInventoryAdatpter.Holder>() {
 
-    var listItens =  emptyList<Produto>()
+    var listItens =  emptyList<Product>()
 
-    fun updateListaProdutos(lista: List<Produto>){
+    fun updateListaProdutos(lista: List<Product>){
         listItens = lista
         notifyDataSetChanged()
     }
