@@ -84,7 +84,6 @@
         <item name="android:textStyle">bold</item>
         <item name="color">@color/secondary</item>
     </style>
-
     <style name="titles_pdv" parent="TextAppearance.AppCompat.Large">
         <item name="android:textSize">18sp</item>
         <item name="color">@android:color/black</item>

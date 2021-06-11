@@ -27,9 +27,14 @@
         <activity android:name=".gui.ui.CompanyInfoActivity" />
         <activity android:name=".gui.ui.UserInfoActivity" />
         <activity android:name=".gui.ui.ScannerActivity" />
+        <activity android:name=".gui.ui.MenuActivity" />
         <activity android:name=".gui.ui.PdvActivity" android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".gui.ui.DatasheetActivity" android:theme="@style/AppTheme.NoActionBar"/>
+<<<<<<< HEAD
+        <activity android:name=".gui.ui.SplashActivity"
+=======
         <activity android:name=".gui.ui.MainActivity"
+>>>>>>> 23b1629ba906d9f3cbb9c49fa4b3caecc8e36a85
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,15 +42,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
+        <activity android:name=".gui.ui.MainActivity"
+            android:label="YourAppName"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+=======
         <activity android:name=".gui.ui.MenuActivity"
             android:label="FTS"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+>>>>>>> 23b1629ba906d9f3cbb9c49fa4b3caecc8e36a85
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>
