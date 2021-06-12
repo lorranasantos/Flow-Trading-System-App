@@ -1,7 +1,6 @@
 package com.example.flowtrandingsystem.gui.model
 
 data class User(
-
         var id: Int = 0,
         var cpf: String = "",
         var user_name: String = "",

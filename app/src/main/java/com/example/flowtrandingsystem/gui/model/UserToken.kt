@@ -1,7 +1,6 @@
 package com.example.flowtrandingsystem.gui.model
 
 data class UserToken(
-
         var id: Int = 0,
         var branch: Branch = Branch(),
         var user_name: String = "",

@@ -16,7 +16,7 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
 
     var listItens =  emptyList<Product>()
 
-    fun updateListaProdutos(lista: Product){
+    fun updateListProducts(lista: Product){
         listItens = listOf(lista)
         notifyDataSetChanged()
     }
@@ -34,34 +34,35 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val itensRecentes = listItens[position]
+        val recentItems = listItens[position]
 
-        holder.tvNumberItem.text = itensRecentes.id.toString()
-        holder.tvCodeItem.text = itensRecentes.bar_code
-        holder.tvQuantidade.text = itensRecentes.total_quantity.toString()
-        holder.tvNomeItem.text = itensRecentes.product_name
-        holder.tvValorUnitario.text = itensRecentes.cost_per_item.toString()
+        holder.tvNumberItem.text = recentItems.id.toString()
+        holder.tvCodeItem.text = recentItems.bar_code
+        holder.tvQtd.text = recentItems.total_quantity.toString()
+        holder.tvNameItem.text = recentItems.product_name
+        holder.tvTotalValue.text = (recentItems.total_quantity * recentItems.cost_per_item.toString().toDouble()).toString()
+        holder.tvUnitValue.text = recentItems.cost_per_item.toString()
 
-
-        if(itensRecentes.cost_per_item <= 0){
-            holder.tvValorUnitario.text = "GRÁTIS"
+        if(recentItems.cost_per_item <= 0){
+            holder.tvUnitValue.text = "GRÁTIS"
         }else {
-            holder.tvValorUnitario.text = "R$ ${String.format("%.2f", itensRecentes.cost_per_item)}"
+            holder.tvUnitValue.text = "R$ ${String.format("%.2f", recentItems.cost_per_item)}"
         }
 
-        holder.cardInventoryItems.setOnClickListener{
-            val intent = Intent(context, DatasheetActivity::class.java)
-            context.startActivity(intent)
-        }
+//        holder.cardInventoryItems.setOnClickListener{
+//            val intent = Intent(context, DatasheetActivity::class.java)
+//            context.startActivity(intent)
+//        }
     }
 
     //inner class
     class Holder(view: View): RecyclerView.ViewHolder(view){
         val tvNumberItem = view.findViewById<TextView>(R.id.product_number)
         val tvCodeItem = view.findViewById<TextView>(R.id.product_code)
-        val tvQuantidade = view.findViewById<TextView>(R.id.product_quantity)
-        val tvNomeItem = view.findViewById<TextView>(R.id.product_name)
-        val tvValorUnitario = view.findViewById<TextView>(R.id.product_un_value)
-        val cardInventoryItems = view.findViewById<CardView>(R.id.product_total_price)
+        val tvQtd = view.findViewById<TextView>(R.id.product_quantity)
+        val tvNameItem = view.findViewById<TextView>(R.id.product_name)
+        val tvUnitValue = view.findViewById<TextView>(R.id.product_un_value)
+        val tvTotalValue = view.findViewById<TextView>(R.id.product_total_price)
+        val cardInventoryItems = view.findViewById<CardView>(R.id.card_produto_inventory)
     }
 }

@@ -10,9 +10,9 @@ import retrofit2.http.*
 interface UserCalls {
 
     @GET("/user/find/{id}")
-    fun getInfoFromUser(@Path("id") id: Int, @Header("Authorization") Token: String?): Call<User>
+    fun getInfoFromUser(@Path("id") id: Int, @Header("Authorization") token: String?): Call<User>
 
     @POST("/session")
-    fun postLogin(@Body usuario: UserLogin) : Call<Token>
+    fun postLogin(@Body user: UserLogin) : Call<Token>
 
 }
