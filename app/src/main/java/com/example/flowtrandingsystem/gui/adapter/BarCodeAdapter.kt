@@ -16,8 +16,8 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
 
     var listItens =  emptyList<Product>()
 
-    fun updateListProducts(lista: Product){
-        listItens = listOf(lista)
+    fun updateListProducts(lista: List<Product>){
+        listItens = lista
         notifyDataSetChanged()
     }
 
@@ -48,11 +48,6 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
         }else {
             holder.tvUnitValue.text = "R$ ${String.format("%.2f", recentItems.cost_per_item)}"
         }
-
-//        holder.cardInventoryItems.setOnClickListener{
-//            val intent = Intent(context, DatasheetActivity::class.java)
-//            context.startActivity(intent)
-//        }
     }
 
     //inner class
@@ -63,6 +58,5 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
         val tvNameItem = view.findViewById<TextView>(R.id.product_name)
         val tvUnitValue = view.findViewById<TextView>(R.id.product_un_value)
         val tvTotalValue = view.findViewById<TextView>(R.id.product_total_price)
-        val cardInventoryItems = view.findViewById<CardView>(R.id.card_produto_inventory)
     }
 }

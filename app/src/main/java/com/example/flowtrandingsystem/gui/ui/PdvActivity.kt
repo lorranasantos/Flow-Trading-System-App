@@ -20,6 +20,7 @@ import com.example.flowtrandingsystem.gui.http.HttpHelper
 import com.example.flowtrandingsystem.gui.model.Product
 import com.example.flowtrandingsystem.gui.model.RegisterClientPdv
 import com.google.gson.Gson
+import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.doAsync
 import retrofit2.Call
 import retrofit2.Response
@@ -28,7 +29,6 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var rvItens: RecyclerView
     lateinit var adapterItensList: BarCodeAdapter
-
     private lateinit var buttonAddClient: Button
     private lateinit var editCpf: EditText
     private lateinit var buttonSaveClient: Button
@@ -37,6 +37,8 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var editDiscount: EditText
     private lateinit var imgCameraCode: ImageView
     private lateinit var buttonAddCode: Button
+
+    var listProducts: ArrayList<Product> = ArrayList<Product>()
 
     private lateinit var dialog: AlertDialog
 
@@ -126,7 +128,11 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
                 val itemTotalValue = itemProduct.total_quantity * itemProduct.cost_per_item
 
-                adapterItensList.updateListProducts(itemProduct)
+                val listIndex = listProducts.size + 1
+
+                listProducts.add(itemProduct)
+
+                adapterItensList.updateListProducts(listProducts.toList())
 
                 Toast.makeText(this@PdvActivity, "Numero Item: ${itemProduct.id} " +
                         "Codigo: ${itemProduct.bar_code} " +
@@ -134,8 +140,6 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
                         "Produto: ${itemProduct.product_name} " +
                         "Valor Unitario: ${itemProduct.cost_per_item} " +
                         "Valor Total: ${itemTotalValue}", Toast.LENGTH_SHORT).show()
-
-
             }
         })
     }
