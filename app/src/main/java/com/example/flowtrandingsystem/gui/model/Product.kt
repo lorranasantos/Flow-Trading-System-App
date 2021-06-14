@@ -1,5 +1,7 @@
 package com.example.flowtrandingsystem.gui.model
 
+import java.io.Serializable
+
 data class Product(
     var id: Int = 0,
     var product_name: String = "",
@@ -10,5 +12,5 @@ data class Product(
     var product_type_id: Int = 0,
     var company_id: Int = 0,
     var bar_code: String = ""
-)
+)  : Serializable
 

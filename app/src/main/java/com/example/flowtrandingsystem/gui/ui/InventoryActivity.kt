@@ -21,11 +21,15 @@ class InventoryActivity() : AppCompatActivity() {
     lateinit var rvItens: RecyclerView
     lateinit var adapterItensEstoque: ItensInventoryAdatpter
 
+    private var productAdapter: Product = Product(id = 0, product_name= "", total_quantity = 0, cost_per_item = 0.0, unit_of_measurement_id = 0, product_type_id = 0, company_id = 0, bar_code = "")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.inventory)
 
         supportActionBar!!.hide()
+
+
 
         rvItens = findViewById(R.id.recycler_view_inventory_list)
 
@@ -74,6 +78,18 @@ class InventoryActivity() : AppCompatActivity() {
             override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
                 listaItens = response.body()!!
                 adapterItensEstoque.updateListaProdutos(listaItens)
+
+                val prefsProduct: SharedPreferences = this@InventoryActivity.getSharedPreferences(
+                    "preferenciasProduct",
+                    Context.MODE_PRIVATE
+                )
+
+
+                prefsProduct.edit().putInt("PRODUCTID", productAdapter.id).apply()
+
+                productAdapter =
+                    intent.getSerializableExtra("destino") as Product
+
             }
 
         })

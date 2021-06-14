@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flowtrandingsystem.R
+import com.example.flowtrandingsystem.gui.adapter.ItensInventoryAdatpter
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.UserCalls
 import com.example.flowtrandingsystem.gui.model.User
@@ -74,6 +75,7 @@ class UserInfoActivity() : AppCompatActivity() {
         }
 
         loadInfo()
+
     }
 
     private  fun loadInfo() {

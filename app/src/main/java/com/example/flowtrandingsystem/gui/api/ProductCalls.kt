@@ -12,6 +12,9 @@ interface ProductCalls {
     @GET("/company/{companyId}/product")
     fun getProduct(@Path("companyId") companyId: Int, @Header("Authorization") token: String?): Call<List<Product>>
 
+    @GET("/product/find/{id}")
+    fun getProductById(@Path("id") id: Int, @Header("Authorization") token: String?): Call<Product>
+
     @GET("/product/barCode/{barCode}")
     fun getBarProduct(@Path("barCode") barCode: String, @Header("Authorization") token: String?): Call<Product>
 
