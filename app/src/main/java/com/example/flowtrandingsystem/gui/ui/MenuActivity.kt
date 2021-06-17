@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.example.flowtrandingsystem.R
 import kotlinx.android.synthetic.main.fragment_initial_menu.*
-import kotlinx.android.synthetic.main.main_menu.*
 
 
 class MenuActivity : AppCompatActivity(){
@@ -42,7 +41,7 @@ class MenuActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_menu)
+        setContentView(R.layout.fragment_initial_menu)
 
         inventoryOption = findViewById(R.id.option_inventory)
         pdvOption = findViewById(R.id.option_sell)
@@ -57,10 +56,10 @@ class MenuActivity : AppCompatActivity(){
             startActivity(intentSell)
         }
 
-//        reportOption.setOnClickListener{
-//            val intentReportCompany = Intent(this, ReportActivity::class.java)
-//            startActivity(intentReportCompany)
-//        }
+        reportOption.setOnClickListener{
+            val intentReportCompany = Intent(this, ReportActivity::class.java)
+            startActivity(intentReportCompany)
+        }
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
