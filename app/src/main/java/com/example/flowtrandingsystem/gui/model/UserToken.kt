@@ -5,5 +5,7 @@ data class UserToken(
         var branch: Branch = Branch(),
         var user_name: String = "",
         var user_cpf: String = "",
-        var user_rg: String = ""
+        var user_rg: String = "",
+        var Role: Role = Role()
+//        var Permissions: Array<Permissions>
 )

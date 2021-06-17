@@ -30,7 +30,7 @@ class InventoryActivity() : AppCompatActivity() {
         rvItens = findViewById(R.id.recycler_view_inventory_list)
 
         rvItens.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         adapterItensEstoque = ItensInventoryAdatpter(this)
 
