@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.fragment_initial_menu.*
 class MenuActivity : AppCompatActivity(){
     private lateinit var inventoryOption: TextView
     private lateinit var pdvOption: TextView
+    private lateinit var reportOption: TextView
 
     lateinit var toggle: ActionBarDrawerToggle
 
@@ -44,6 +45,7 @@ class MenuActivity : AppCompatActivity(){
 
         inventoryOption = findViewById(R.id.option_inventory)
         pdvOption = findViewById(R.id.option_sell)
+        reportOption = findViewById(R.id.option_report)
 
         inventoryOption.setOnClickListener {
             val intentInventory = Intent(this, InventoryActivity::class.java)
@@ -52,6 +54,11 @@ class MenuActivity : AppCompatActivity(){
         pdvOption.setOnClickListener{
             val intentSell = Intent(this, PdvActivity::class.java)
             startActivity(intentSell)
+        }
+
+        reportOption.setOnClickListener{
+            val intentReportCompany = Intent(this, ReportActivity::class.java)
+            startActivity(intentReportCompany)
         }
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)

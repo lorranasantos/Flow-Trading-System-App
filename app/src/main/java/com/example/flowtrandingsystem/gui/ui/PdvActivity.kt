@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +21,7 @@ import com.example.flowtrandingsystem.gui.http.HttpHelper
 import com.example.flowtrandingsystem.gui.model.Product
 import com.example.flowtrandingsystem.gui.model.RegisterClientPdv
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.fragment_initial_menu.*
 import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.doAsync
 import retrofit2.Call
@@ -45,6 +47,7 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pdv)
+
 
         rvItens = findViewById(R.id.recycler_view_product_sale)
 
@@ -75,6 +78,8 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
             prefs.getString("TOKEN", "Nada foi recebido")
 
         Toast.makeText(this@PdvActivity, "RETRIEVED: ${retrivedToken}", Toast.LENGTH_LONG).show()
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     }
 
