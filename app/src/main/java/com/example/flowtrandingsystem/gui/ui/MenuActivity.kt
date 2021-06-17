@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -16,9 +17,9 @@ import kotlinx.android.synthetic.main.fragment_initial_menu.*
 
 
 class MenuActivity : AppCompatActivity(){
-    private lateinit var inventoryOption: TextView
-    private lateinit var pdvOption: TextView
-    private lateinit var reportOption: TextView
+    private lateinit var inventoryOption: LinearLayout
+    private lateinit var pdvOption: LinearLayout
+    private lateinit var reportOption: LinearLayout
 
     lateinit var toggle: ActionBarDrawerToggle
 

@@ -25,7 +25,7 @@ class InventoryActivity() : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.inventory)
 
-        supportActionBar!!.hide()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         rvItens = findViewById(R.id.recycler_view_inventory_list)
 
