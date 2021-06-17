@@ -17,6 +17,7 @@ import com.example.flowtrandingsystem.gui.adapter.ItensInventoryAdatpter
 import com.example.flowtrandingsystem.gui.api.ProductCalls
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.http.HttpHelper
+import com.example.flowtrandingsystem.gui.model.Logbook
 import com.example.flowtrandingsystem.gui.model.Product
 import com.example.flowtrandingsystem.gui.model.RegisterClientPdv
 import com.google.gson.Gson
@@ -103,10 +104,11 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
             prefs.getString("TOKEN", "Nada foi recebido")
 
         val editCode = findViewById<EditText>(R.id.pdv_activity_product_code)
-        val editUnitValue = findViewById<EditText>(R.id.pdv_prices)
         val editQtde = findViewById<EditText>(R.id.pdv_qtde_sale)
 
         var itemProduct: Product
+
+        val itemLog = Logbook()
 
         val retrofit = RetrofitApi.getRetrofit()
         val productBarCode = retrofit.create(ProductCalls::class.java)
@@ -123,12 +125,9 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
             override fun onResponse(call: Call<Product>, response: Response<Product>) {
                 itemProduct = response.body()!!
 
-                itemProduct.cost_per_item = editUnitValue.text.toString().toDouble()
-                itemProduct.total_quantity = editQtde.text.toString().toInt()
+                val quantity: Int = editQtde.text.toString().toInt()
 
-                val itemTotalValue = itemProduct.total_quantity * itemProduct.cost_per_item
-
-                val listIndex = listProducts.size + 1
+                val itemTotalValue = quantity * itemProduct.cost_per_item
 
                 listProducts.add(itemProduct)
 
@@ -136,9 +135,9 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
                 Toast.makeText(this@PdvActivity, "Numero Item: ${itemProduct.id} " +
                         "Codigo: ${itemProduct.bar_code} " +
-                        "Qtde: ${itemProduct.total_quantity} " +
+                        "Qtde: ${quantity} " +
                         "Produto: ${itemProduct.product_name} " +
-                        "Valor Unitario: ${itemProduct.cost_per_item} " +
+                        "Valor Unitario: ${itemLog.quantity_acquired} " +
                         "Valor Total: ${itemTotalValue}", Toast.LENGTH_SHORT).show()
             }
         })

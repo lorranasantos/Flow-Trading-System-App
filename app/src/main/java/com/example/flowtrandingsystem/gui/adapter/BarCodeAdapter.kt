@@ -38,9 +38,9 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
 
         holder.tvNumberItem.text = recentItems.id.toString()
         holder.tvCodeItem.text = recentItems.bar_code
-        holder.tvQtd.text = recentItems.total_quantity.toString()
+//        holder.tvQtd.text = recentItems.total_quantity.toString()
         holder.tvNameItem.text = recentItems.product_name
-        holder.tvTotalValue.text = (recentItems.total_quantity * recentItems.cost_per_item.toString().toDouble()).toString()
+        holder.tvTotalValue.text = (recentItems.cost_per_item.toString().toDouble()).toString()
         holder.tvUnitValue.text = recentItems.cost_per_item.toString()
 
         if(recentItems.cost_per_item <= 0){

@@ -74,6 +74,7 @@ class InventoryActivity() : AppCompatActivity() {
             override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
                 listaItens = response.body()!!
                 adapterItensEstoque.updateListaProdutos(listaItens)
+
             }
 
         })
