@@ -16,29 +16,28 @@ class DatasheetActivity: AppCompatActivity() {
         lateinit var tvNameProduct: TextView
         lateinit var tvType: TextView
         lateinit var tvCostPerItem: TextView
-//        lateinit var tvQtd: TextView
-//        lateinit var tvAcquisition: TextView
-//        lateinit var tvExpiraton: TextView
+        lateinit var tvQtd: TextView
+        lateinit var tvAcquisition: TextView
+        lateinit var tvExpiraton: TextView
         lateinit var product: Product
-//        lateinit var logbook: Logbook
+        var logbook: Logbook = Logbook()
 
         tvNameProduct = findViewById(R.id.product_name_datasheet)
         tvType = findViewById(R.id.type_of_product_datasheet)
         tvCostPerItem = findViewById(R.id.value_un_price_datasheet)
-//        tvQtd = findViewById(R.id.amount_of_inventory_datasheet)
-//        tvAcquisition = findViewById(R.id.price_datasheet)
-//        tvExpiraton = findViewById(R.id.expiration_date_datasheet)
+        tvQtd = findViewById(R.id.amount_of_inventory_datasheet)
+        tvAcquisition = findViewById(R.id.price_datasheet)
+        tvExpiraton = findViewById(R.id.expiration_date_datasheet)
 
         product = intent.getSerializableExtra("product") as Product
-
 //        logbook = intent.getSerializableExtra("log") as Logbook
 
         tvNameProduct.text = product.product_name
         tvType.text = product.product_type_id.toString()
         tvCostPerItem.text = product.cost_per_item.toString()
-//        tvQtd.text = logbook.quantity_acquired.toString()
-//        tvAcquisition.text = logbook.lot.manufacture_date
-//        tvExpiraton.text = logbook.lot.expiration_date
+        tvQtd.text = logbook.quantity_acquired.toString()
+        tvAcquisition.text = logbook.date_of_acquisition
+        tvExpiraton.text = logbook.lot.expiration_date
 
         if (product.cost_per_item == 0.0) {
             tvCostPerItem.text = "GRÁTIS"

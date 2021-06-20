@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.flowtrandingsystem.gui.adapter.ItensInventoryAdatpter
+import com.example.flowtrandingsystem.gui.adapter.ItensInventoryAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,13 +13,14 @@ import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.model.Product
 import com.example.flowtrandingsystem.gui.api.ProductCalls
+import com.example.flowtrandingsystem.gui.model.Logbook
 import retrofit2.Call
 import retrofit2.Response
 
-class InventoryActivity() : AppCompatActivity() {
+class InventoryActivity : AppCompatActivity() {
 
     lateinit var rvItens: RecyclerView
-    lateinit var adapterItensEstoque: ItensInventoryAdatpter
+    lateinit var adapterItensEstoque: ItensInventoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +33,7 @@ class InventoryActivity() : AppCompatActivity() {
         rvItens.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        adapterItensEstoque = ItensInventoryAdatpter(this)
+        adapterItensEstoque = ItensInventoryAdapter(this)
 
         rvItens.adapter = adapterItensEstoque
 
@@ -73,6 +74,9 @@ class InventoryActivity() : AppCompatActivity() {
 
             override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
                 listaItens = response.body()!!
+
+                var listLog =  Logbook()
+
                 adapterItensEstoque.updateListaProdutos(listaItens)
 
             }

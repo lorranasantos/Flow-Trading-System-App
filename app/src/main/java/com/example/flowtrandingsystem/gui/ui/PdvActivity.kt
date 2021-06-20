@@ -3,30 +3,32 @@ package com.example.flowtrandingsystem.gui.ui
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.*
-import androidx.appcompat.app.ActionBarDrawerToggle
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.adapter.BarCodeAdapter
-import com.example.flowtrandingsystem.gui.adapter.ItensInventoryAdatpter
 import com.example.flowtrandingsystem.gui.api.ProductCalls
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
+import com.example.flowtrandingsystem.gui.api.SaleCalls
 import com.example.flowtrandingsystem.gui.http.HttpHelper
-import com.example.flowtrandingsystem.gui.model.Logbook
 import com.example.flowtrandingsystem.gui.model.Product
 import com.example.flowtrandingsystem.gui.model.RegisterClientPdv
+import com.example.flowtrandingsystem.gui.model.Sale
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_initial_menu.*
-import org.jetbrains.anko.collections.forEachWithIndex
+import kotlinx.android.synthetic.main.pdv.*
 import org.jetbrains.anko.doAsync
 import retrofit2.Call
 import retrofit2.Response
+
 
 class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -40,6 +42,7 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var editDiscount: EditText
     private lateinit var imgCameraCode: ImageView
     private lateinit var buttonAddCode: Button
+    private lateinit var buttonFinishSale: Button
 
     var listProducts: ArrayList<Product> = ArrayList<Product>()
 
@@ -48,6 +51,10 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pdv)
+
+        val et = findViewById<EditText>(R.id.pdv_qtde_sale)
+        val theText = et.text.toString()
+
 
 
         rvItens = findViewById(R.id.recycler_view_product_sale)
@@ -70,6 +77,9 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
         buttonAddCode = findViewById(R.id.add_code)
         buttonAddCode.setOnClickListener(this)
+
+        buttonFinishSale = findViewById(R.id.finish_sale)
+        buttonFinishSale.setOnClickListener(this)
 
         //recuperar o token do sharedPreferences
         val prefs: SharedPreferences =
@@ -94,6 +104,8 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
             startActivity(scanScreen)
         }else if(v.id == R.id.add_code) {
             addProductByCode()
+        }else if(v.id == R.id.finish_sale) {
+            finishSale()
         }else{
             Toast.makeText(this, "Nada foi clicado", Toast.LENGTH_SHORT).show()
         }
@@ -112,8 +124,6 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         val editQtde = findViewById<EditText>(R.id.pdv_qtde_sale)
 
         var itemProduct: Product
-
-        val itemLog = Logbook()
 
         val retrofit = RetrofitApi.getRetrofit()
         val productBarCode = retrofit.create(ProductCalls::class.java)
@@ -134,16 +144,60 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
                 val itemTotalValue = quantity * itemProduct.cost_per_item
 
+                val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences(
+                    "total",
+                    Context.MODE_PRIVATE
+                )
+
+                prefs.edit().putFloat("total", itemTotalValue.toFloat()).apply()
+                prefs.edit().putString("iten", itemProduct.toString()).apply()
+
                 listProducts.add(itemProduct)
+
+                val codeIntent = Intent(this@PdvActivity, BarCodeAdapter::class.java)
+                codeIntent.putExtra("qtd", pdv_qtde_sale.text.toString().toInt())
 
                 adapterItensList.updateListProducts(listProducts.toList())
 
                 Toast.makeText(this@PdvActivity, "Numero Item: ${itemProduct.id} " +
-                        "Codigo: ${itemProduct.bar_code} " +
                         "Qtde: ${quantity} " +
                         "Produto: ${itemProduct.product_name} " +
-                        "Valor Unitario: ${itemLog.quantity_acquired} " +
+                        "Valor Unitario: ${itemProduct.cost_per_item} " +
                         "Valor Total: ${itemTotalValue}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun finishSale() {
+
+        //recuperar o token do sharedPreferences
+        val prefs: SharedPreferences =
+            this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+
+        val retrivedToken =
+            prefs.getString("TOKEN", "Nada foi recebido")
+
+        val retrivedIten =
+            prefs.getString("iten", "Nada foi recebido")
+
+        var sale: Sale = Sale(itens = retrivedIten)
+
+        val retrofit = RetrofitApi.getRetrofit()
+        val saleCall = retrofit.create(SaleCalls::class.java)
+
+        val call = saleCall.postSale(sale, "Bearer ${retrivedToken}")
+
+        call.enqueue(object : retrofit2.Callback<Sale>{
+
+            override fun onFailure(call: Call<Sale>, t: Throwable) {
+                Toast.makeText(this@PdvActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
+                Log.e("ERRO_CONEXÃO", t.message.toString())
+            }
+
+            override fun onResponse(call: Call<Sale>, response: Response<Sale>) {
+                sale = response.body()!!
+
+                Toast.makeText(this@PdvActivity, "Venda: ${sale}", Toast.LENGTH_SHORT).show()
             }
         })
     }

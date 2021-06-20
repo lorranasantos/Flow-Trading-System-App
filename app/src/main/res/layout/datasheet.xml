@@ -33,18 +33,27 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true">
 
-
         <TextView
             android:id="@+id/product_name_datasheet"
             style="@style/title_product_name"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginTop="64dp"
-            android:text="@string/app_name"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="110dp"
+            android:text="Nome"
+            android:textAlignment="center"
             android:textColor="@color/primaryDark"
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout"
+            app:layout_constraintStart_toStartOf="@+id/frameLayout"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="350dp"
+            android:layout_height="2dp"
+            android:background="@color/primaryDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/product_name_datasheet" />
 
         <TextView
             android:id="@+id/product_type_datasheet"
@@ -83,7 +92,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
             style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="Dara de Aquisição"
+            android:text="@string/acquisition_date"
             android:textColor="@color/secondary"
             app:layout_constraintStart_toStartOf="@+id/product_type_datasheet"
             app:layout_constraintTop_toBottomOf="@+id/amount_in_inventory_datasheet" />
