@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -16,8 +17,9 @@ import kotlinx.android.synthetic.main.fragment_initial_menu.*
 
 
 class MenuActivity : AppCompatActivity(){
-    private lateinit var inventoryOption: TextView
-    private lateinit var pdvOption: TextView
+    private lateinit var inventoryOption: LinearLayout
+    private lateinit var pdvOption: LinearLayout
+    private lateinit var reportOption: LinearLayout
 
     lateinit var toggle: ActionBarDrawerToggle
 
@@ -44,6 +46,7 @@ class MenuActivity : AppCompatActivity(){
 
         inventoryOption = findViewById(R.id.option_inventory)
         pdvOption = findViewById(R.id.option_sell)
+        reportOption = findViewById(R.id.option_report)
 
         inventoryOption.setOnClickListener {
             val intentInventory = Intent(this, InventoryActivity::class.java)
@@ -52,6 +55,11 @@ class MenuActivity : AppCompatActivity(){
         pdvOption.setOnClickListener{
             val intentSell = Intent(this, PdvActivity::class.java)
             startActivity(intentSell)
+        }
+
+        reportOption.setOnClickListener{
+            val intentReportCompany = Intent(this, ReportActivity::class.java)
+            startActivity(intentReportCompany)
         }
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)

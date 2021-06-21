@@ -1,5 +1,6 @@
 package com.example.flowtrandingsystem.gui.api
 
+import com.example.flowtrandingsystem.gui.model.Permissions
 import com.example.flowtrandingsystem.gui.model.Token
 import com.example.flowtrandingsystem.gui.model.User
 import com.example.flowtrandingsystem.gui.model.UserLogin
@@ -14,5 +15,11 @@ interface UserCalls {
 
     @POST("/session")
     fun postLogin(@Body user: UserLogin) : Call<Token>
+
+    @GET("/screens/find/{id}")
+    fun getScreens(@Path("id") id: Int, @Header("Authorization") token: String?): Call<User>
+
+    @GET("/permission/find/{id}")
+    fun getPermissions(@Path("id") id: Int, @Header("Authorization") token: String?): Call<Permissions>
 
 }

@@ -3,6 +3,7 @@ package com.example.flowtrandingsystem.gui.ui
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+<<<<<<< HEAD
 import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
@@ -25,11 +26,11 @@ class DatasheetActivity: AppCompatActivity() {
     lateinit var wholesalePrice: TextView
     lateinit var quantityInInventory: TextView
     lateinit var aquisitionDate: TextView
-    lateinit var expirationDate: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.datasheet)
+
 
         loadInfo()
     }
@@ -82,3 +83,6 @@ class DatasheetActivity: AppCompatActivity() {
     }
 
 }
+
+
+

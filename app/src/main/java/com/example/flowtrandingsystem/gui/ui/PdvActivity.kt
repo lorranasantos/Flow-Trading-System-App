@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,9 +18,12 @@ import com.example.flowtrandingsystem.gui.adapter.ItensInventoryAdatpter
 import com.example.flowtrandingsystem.gui.api.ProductCalls
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.http.HttpHelper
+import com.example.flowtrandingsystem.gui.model.Logbook
 import com.example.flowtrandingsystem.gui.model.Product
 import com.example.flowtrandingsystem.gui.model.RegisterClientPdv
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.fragment_initial_menu.*
+import org.jetbrains.anko.collections.forEachWithIndex
 import org.jetbrains.anko.doAsync
 import retrofit2.Call
 import retrofit2.Response
@@ -28,7 +32,6 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var rvItens: RecyclerView
     lateinit var adapterItensList: BarCodeAdapter
-
     private lateinit var buttonAddClient: Button
     private lateinit var editCpf: EditText
     private lateinit var buttonSaveClient: Button
@@ -38,11 +41,14 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var imgCameraCode: ImageView
     private lateinit var buttonAddCode: Button
 
+    var listProducts: ArrayList<Product> = ArrayList<Product>()
+
     private lateinit var dialog: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pdv)
+
 
         rvItens = findViewById(R.id.recycler_view_product_sale)
 
@@ -74,6 +80,8 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
         Toast.makeText(this@PdvActivity, "RETRIEVED: ${retrivedToken}", Toast.LENGTH_LONG).show()
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
     }
 
     override fun onClick(v: View) {
@@ -101,10 +109,11 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
             prefs.getString("TOKEN", "Nada foi recebido")
 
         val editCode = findViewById<EditText>(R.id.pdv_activity_product_code)
-        val editUnitValue = findViewById<EditText>(R.id.pdv_prices)
         val editQtde = findViewById<EditText>(R.id.pdv_qtde_sale)
 
         var itemProduct: Product
+
+        val itemLog = Logbook()
 
         val retrofit = RetrofitApi.getRetrofit()
         val productBarCode = retrofit.create(ProductCalls::class.java)
@@ -121,21 +130,20 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
             override fun onResponse(call: Call<Product>, response: Response<Product>) {
                 itemProduct = response.body()!!
 
-                itemProduct.cost_per_item = editUnitValue.text.toString().toDouble()
-                itemProduct.total_quantity = editQtde.text.toString().toInt()
+                val quantity: Int = editQtde.text.toString().toInt()
 
-                val itemTotalValue = itemProduct.total_quantity * itemProduct.cost_per_item
+                val itemTotalValue = quantity * itemProduct.cost_per_item
 
-                adapterItensList.updateListProducts(itemProduct)
+                listProducts.add(itemProduct)
+
+                adapterItensList.updateListProducts(listProducts.toList())
 
                 Toast.makeText(this@PdvActivity, "Numero Item: ${itemProduct.id} " +
                         "Codigo: ${itemProduct.bar_code} " +
-                        "Qtde: ${itemProduct.total_quantity} " +
+                        "Qtde: ${quantity} " +
                         "Produto: ${itemProduct.product_name} " +
-                        "Valor Unitario: ${itemProduct.cost_per_item} " +
+                        "Valor Unitario: ${itemLog.quantity_acquired} " +
                         "Valor Total: ${itemTotalValue}", Toast.LENGTH_SHORT).show()
-
-
             }
         })
     }

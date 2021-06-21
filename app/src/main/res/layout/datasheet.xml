@@ -1,201 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-xmlns:app="http://schemas.android.com/apk/res-auto">
-
-<LinearLayout
-    android:id="@+id/datasheet_list_title"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:padding="20dp"
-    android:layout_height="wrap_content"
-    android:background="@drawable/rounded_bottom"
-    android:orientation="vertical"
-    android:layout_alignParentTop="true"
-    android:layout_alignParentStart="true"
-    android:layout_alignParentEnd="true">
-
-    <TextView
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:id="@+id/datasheet_list_title"
         android:layout_width="match_parent"
+        android:padding="20dp"
         android:layout_height="wrap_content"
-        android:text="@string/inventory"
-        android:gravity="center_horizontal"
-        android:layout_gravity="center_vertical"
-        android:textAppearance="@style/register_title_appearence"/>
-
-</LinearLayout>
-
+        android:background="@drawable/rounded_bottom"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/inventory"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_vertical"
+            android:textAppearance="@style/register_title_appearence"/>
+    </LinearLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/datasheet_list_title"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true">
-
-
-
         <TextView
             android:id="@+id/product_name_datasheet"
+            style="@style/title_product_name"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="@string/product"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="110dp"
+            android:text="Nome"
+            android:textAlignment="center"
+            android:textColor="@color/primaryDark"
+            app:layout_constraintEnd_toEndOf="@+id/frameLayout"
+            app:layout_constraintStart_toStartOf="@+id/frameLayout"
+            app:layout_constraintTop_toTopOf="parent" />
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="350dp"
+            android:layout_height="2dp"
+            android:background="@color/primaryDark"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_margin="15dp"
-            android:textColor="@color/primaryDark"
-            style="@style/title_product_name"/>
-
+            app:layout_constraintTop_toBottomOf="@id/product_name_datasheet" />
         <TextView
-            android:id="@+id/product_type"
+            android:id="@+id/product_type_datasheet"
+            style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="20dp"
+            android:layout_marginStart="40dp"
             android:text="@string/type"
-            app:layout_constraintTop_toBottomOf="@+id/product_name_datasheet"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
-
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/product_name_datasheet" />
         <TextView
             android:id="@+id/un_price_datasheet"
+            style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="@string/price_un"
-            app:layout_constraintTop_toBottomOf="@+id/product_type"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
-
-
+            app:layout_constraintStart_toStartOf="@+id/product_type_datasheet"
+            app:layout_constraintTop_toBottomOf="@+id/product_type_datasheet" />
         <TextView
-            android:id="@+id/title_price_all_datasheet"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="@string/price_all"
-            app:layout_constraintTop_toBottomOf="@+id/un_price_datasheet"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
-
-        <TextView
-            android:id="@+id/title_amount_in_inventory_datasheet"
+            android:id="@+id/amount_in_inventory_datasheet"
+            style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="@string/amount_in_inventory"
-            app:layout_constraintTop_toBottomOf="@+id/title_price_all_datasheet"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
-
+            app:layout_constraintStart_toStartOf="@+id/product_type_datasheet"
+            app:layout_constraintTop_toBottomOf="@+id/un_price_datasheet" />
         <TextView
             android:id="@+id/acquisition_date_datasheet"
+            style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
-            android:text="Dara de Aquisição"
-            app:layout_constraintTop_toBottomOf="@+id/title_amount_in_inventory_datasheet"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
+            android:text="Data de aquisição"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
-
+            app:layout_constraintStart_toStartOf="@+id/product_type_datasheet"
+            app:layout_constraintTop_toBottomOf="@+id/amount_in_inventory_datasheet" />
         <TextView
             android:id="@+id/title_expiration_date_datasheet"
+            style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="@string/expiration_date"
-            app:layout_constraintTop_toBottomOf="@+id/acquisition_date_datasheet"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
-
+            app:layout_constraintStart_toStartOf="@+id/product_type_datasheet"
+            app:layout_constraintTop_toBottomOf="@+id/acquisition_date_datasheet" />
         <TextView
             android:id="@+id/type_of_product_datasheet"
+            style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:layout_marginEnd="40dp"
             android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/product_name_datasheet"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="25dp"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
-
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/product_type_datasheet" />
         <TextView
             android:id="@+id/value_un_price_datasheet"
+            style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/type_of_product_datasheet"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="25dp"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
-
+            app:layout_constraintEnd_toEndOf="@+id/type_of_product_datasheet"
+            app:layout_constraintTop_toTopOf="@+id/un_price_datasheet" />
         <TextView
-            android:id="@+id/price_all_datasheet"
+            android:id="@+id/amount_of_inventory_datasheet"
+            style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/value_un_price_datasheet"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="25dp"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
-
+            app:layout_constraintEnd_toEndOf="@+id/type_of_product_datasheet"
+            app:layout_constraintTop_toTopOf="@+id/amount_in_inventory_datasheet" />
         <TextView
-            android:id="@+id/amount_in_inventory_datasheet"
+            android:id="@+id/price_datasheet"
+            style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/price_all_datasheet"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="25dp"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
-
-        <TextView
-            android:id="@+id/acquisition_date"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/amount_in_inventory_datasheet"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="25dp"
-            android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
-
+            app:layout_constraintEnd_toEndOf="@+id/type_of_product_datasheet"
+            app:layout_constraintTop_toTopOf="@+id/acquisition_date_datasheet" />
         <TextView
             android:id="@+id/expiration_date_datasheet"
+            style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:text="teste"
-            app:layout_constraintTop_toBottomOf="@+id/acquisition_date"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="25dp"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
-
+            app:layout_constraintEnd_toEndOf="@+id/type_of_product_datasheet"
+            app:layout_constraintTop_toTopOf="@+id/title_expiration_date_datasheet" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 </RelativeLayout>

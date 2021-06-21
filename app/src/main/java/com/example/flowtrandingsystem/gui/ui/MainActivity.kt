@@ -11,9 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.UserCalls
+import com.example.flowtrandingsystem.gui.model.Permissions
+import com.example.flowtrandingsystem.gui.model.Screens
 import com.example.flowtrandingsystem.gui.model.Token
 import com.example.flowtrandingsystem.gui.model.UserLogin
 import kotlinx.android.synthetic.main.main_activity.*
+import org.json.JSONArray
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -73,14 +77,26 @@ class MainActivity: AppCompatActivity() {
 
                     //colocar o token no sharedPreferences
 
+//                    val permissionShare = token.user.Permissions[0].Screens[0].screen_name
+
+                    val array = JSONArray()
+                    var obj: JSONObject
+
+
+
                     val prefs: SharedPreferences = this@MainActivity.getSharedPreferences(
                         "preferencias",
                         Context.MODE_PRIVATE
                     )
 
+
+//                    val permissions = Permissions()
+//                    val screens = Screens()
+
                     prefs.edit().putString("TOKEN", token.token).apply()
                     prefs.edit().putInt("ID", token.user.id).apply()
                     prefs.edit().putInt("COMPANYID", token.user.branch.company_id).apply()
+//                    prefs.edit().putString("PERMISSION", token.user.Permissions[0].id.toString()).apply()
 
                     goToMainMenu()
 
