@@ -55,6 +55,7 @@ class CompanyInfoActivity() : AppCompatActivity() {
         toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (R.layout.company_info as AppCompatActivity).supportActionBar?.title = "Sobre a Empresa"
 
         companyName = findViewById(R.id.company_name)
         companyReason = findViewById(R.id.reason_of_company)

@@ -56,6 +56,7 @@ class UserInfoActivity() : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+
         nameUser = findViewById(R.id.user_name)
         cpfUser = findViewById(R.id.cpf_from_user)
         rgUser = findViewById(R.id.rg_from_user)
