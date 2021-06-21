@@ -19,4 +19,7 @@ interface ProductCalls {
     @GET("/product/barCode/{barCode}")
     fun getBarProduct(@Path("barCode") barCode: String, @Header("Authorization") token: String?): Call<ProductAdapter>
 
+   // @GET("productType")
+    //fun getProductType(@Path())
+
 }
