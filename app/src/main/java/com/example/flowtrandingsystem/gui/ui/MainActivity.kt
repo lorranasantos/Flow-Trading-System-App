@@ -77,26 +77,14 @@ class MainActivity: AppCompatActivity() {
 
                     //colocar o token no sharedPreferences
 
-//                    val permissionShare = token.user.Permissions[0].Screens[0].screen_name
-
-                    val array = JSONArray()
-                    var obj: JSONObject
-
-
-
                     val prefs: SharedPreferences = this@MainActivity.getSharedPreferences(
                         "preferencias",
                         Context.MODE_PRIVATE
                     )
 
-
-//                    val permissions = Permissions()
-//                    val screens = Screens()
-
                     prefs.edit().putString("TOKEN", token.token).apply()
                     prefs.edit().putInt("ID", token.user.id).apply()
                     prefs.edit().putInt("COMPANYID", token.user.branch.company_id).apply()
-//                    prefs.edit().putString("PERMISSION", token.user.Permissions[0].id.toString()).apply()
 
                     goToMainMenu()
 

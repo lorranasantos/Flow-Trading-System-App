@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="50dp"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
     android:layout_marginBottom="8dp"
@@ -15,7 +15,7 @@
         android:minEms="200"
         android:orientation="horizontal"
         android:gravity="center"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="10dp">
 
         <TextView
@@ -24,13 +24,13 @@
             android:layout_width="0dp"
             android:minEms="200"
             android:layout_height="wrap_content"
-            android:text="CANETINHA "
+            android:text="CANETINHA"
             android:layout_weight="6"/>
 
         <TextView
             android:id="@+id/inventory_product_quantity"
             style="@style/initialMenu_appearence"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
             android:layout_marginStart="10dp"
@@ -39,9 +39,9 @@
         <TextView
             android:id="@+id/inventory_product_price"
             style="@style/initialMenu_appearence"
-            android:layout_width="0dp"
+            android:layout_width="10dp"
             android:layout_height="wrap_content"
-            android:text="3,00"
+            android:text="0,00"
             android:layout_marginStart="10dp"
             android:layout_weight="2" />
 
