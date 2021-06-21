@@ -21,6 +21,7 @@ import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.SaleCalls
 import com.example.flowtrandingsystem.gui.http.HttpHelper
 import com.example.flowtrandingsystem.gui.model.Product
+import com.example.flowtrandingsystem.gui.model.ProductAdapter
 import com.example.flowtrandingsystem.gui.model.RegisterClientPdv
 import com.example.flowtrandingsystem.gui.model.Sale
 import com.google.gson.Gson
@@ -44,7 +45,7 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var buttonAddCode: Button
     private lateinit var buttonFinishSale: Button
 
-    var listProducts: ArrayList<Product> = ArrayList<Product>()
+    var listProducts: ArrayList<ProductAdapter> = ArrayList<ProductAdapter>()
 
     private lateinit var dialog: AlertDialog
 
@@ -123,21 +124,21 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         val editCode = findViewById<EditText>(R.id.pdv_activity_product_code)
         val editQtde = findViewById<EditText>(R.id.pdv_qtde_sale)
 
-        var itemProduct: Product
+        var itemProduct: ProductAdapter
 
         val retrofit = RetrofitApi.getRetrofit()
         val productBarCode = retrofit.create(ProductCalls::class.java)
 
         val call = productBarCode.getBarProduct(editCode.text.toString(), "Bearer ${retrivedToken}")
 
-        call.enqueue(object : retrofit2.Callback<Product>{
+        call.enqueue(object : retrofit2.Callback<ProductAdapter>{
 
-            override fun onFailure(call: Call<Product>, t: Throwable) {
+            override fun onFailure(call: Call<ProductAdapter>, t: Throwable) {
                 Toast.makeText(this@PdvActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                 Log.e("ERRO_CONEXÃO", t.message.toString())
             }
 
-            override fun onResponse(call: Call<Product>, response: Response<Product>) {
+            override fun onResponse(call: Call<ProductAdapter>, response: Response<ProductAdapter>) {
                 itemProduct = response.body()!!
 
                 val quantity: Int = editQtde.text.toString().toInt()
@@ -151,6 +152,8 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
                 prefs.edit().putFloat("total", itemTotalValue.toFloat()).apply()
                 prefs.edit().putString("iten", itemProduct.toString()).apply()
+
+                itemProduct.qtd = quantity
 
                 listProducts.add(itemProduct)
 
@@ -180,7 +183,7 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         val retrivedIten =
             prefs.getString("iten", "Nada foi recebido")
 
-        var sale: Sale = Sale(itens = retrivedIten)
+        var sale: Sale = Sale(itens = retrivedIten.toString())
 
         val retrofit = RetrofitApi.getRetrofit()
         val saleCall = retrofit.create(SaleCalls::class.java)

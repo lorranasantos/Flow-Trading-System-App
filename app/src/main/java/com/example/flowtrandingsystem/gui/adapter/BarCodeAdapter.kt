@@ -9,15 +9,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.model.Product
+import com.example.flowtrandingsystem.gui.model.ProductAdapter
 
 class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapter.Holder>() {
 
-    val pdvQtdf: Int = R.id.pdv_qtde_sale
+    var listItens =  emptyList<ProductAdapter>()
 
-
-    var listItens =  emptyList<Product>()
-
-    fun updateListProducts(lista: List<Product>){
+    fun updateListProducts(lista: List<ProductAdapter>){
         listItens = lista
         notifyDataSetChanged()
     }
@@ -37,13 +35,6 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val recentItems = listItens[position]
 
-        var intent = Intent()
-        var qtd: Int = intent.getIntExtra("qtd", 1)
-
-        val editQtde = R.id.pdv_qtde_sale
-
-        pdvQtdf
-
         holder.tvCodeItem.text = recentItems.bar_code
         holder.tvNameItem.text = recentItems.product_name
         holder.tvUnitValue.text = recentItems.cost_per_item.toString()
@@ -54,14 +45,14 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
             holder.tvUnitValue.text = "R$ ${String.format("%.2f", recentItems.cost_per_item)}"
         }
 
-        holder.pdvQtd.text = (recentItems.cost_per_item * qtd).toString()
+        holder.tvpdvTotalValue.text = (recentItems.cost_per_item * recentItems.qtd).toString()
     }
 
     //inner class
     class Holder(view: View): RecyclerView.ViewHolder(view){
         val tvCodeItem = view.findViewById<TextView>(R.id.product_code)
         val tvNameItem = view.findViewById<TextView>(R.id.product_name)
-        val pdvQtd = view.findViewById<TextView>(R.id.product_total_price)
         val tvUnitValue = view.findViewById<TextView>(R.id.product_un_value)
+        val tvpdvTotalValue = view.findViewById<TextView>(R.id.product_total_price)
     }
 }
