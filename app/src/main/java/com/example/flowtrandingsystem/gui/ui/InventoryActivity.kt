@@ -15,9 +15,12 @@ import com.example.flowtrandingsystem.gui.api.ProductCalls
 import com.example.flowtrandingsystem.gui.model.Logbook
 import retrofit2.Call
 import retrofit2.Response
+
 class InventoryActivity : AppCompatActivity() {
+
     lateinit var rvItens: RecyclerView
     lateinit var adapterItensEstoque: ItensInventoryAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.inventory)
@@ -25,7 +28,9 @@ class InventoryActivity : AppCompatActivity() {
         rvItens = findViewById(R.id.recycler_view_inventory_list)
         rvItens.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
         adapterItensEstoque = ItensInventoryAdapter(this)
+
         rvItens.adapter = adapterItensEstoque
         loadListaItens()
     }
@@ -51,7 +56,9 @@ class InventoryActivity : AppCompatActivity() {
             }
             override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
                 listaItens = response.body()!!
+
                 var listLog =  Logbook()
+
                 adapterItensEstoque.updateListaProdutos(listaItens)
             }
         })

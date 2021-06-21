@@ -95,7 +95,6 @@ class MenuActivity : AppCompatActivity(){
         Log.e("RESPONSE", "BATATA: ${retrivedToken}")
 
 
-
         Toast.makeText(this@MenuActivity, "CENOURA E BATATA: ${retrivedId} ${retrivedToken}", Toast.LENGTH_LONG).show()
 
     }

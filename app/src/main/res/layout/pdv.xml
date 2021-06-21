@@ -33,7 +33,9 @@
             android:id="@+id/add_code"
             android:layout_width="45dp"
             android:layout_height="0dp"
+            android:background="@drawable/pdv_title_radius"
             android:text="+"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/pdv_activity_product_code"
             app:layout_constraintStart_toEndOf="@id/img_camera_code"
             app:layout_constraintTop_toTopOf="@+id/pdv_activity_product_code" />
@@ -72,8 +74,18 @@
                     android:hint="0"
                     android:inputType="number"/>
 
+                <Button
+                    android:id="@+id/finish_sale"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:text="Finalizar"
+                    android:textColor="@color/white"
+                    android:background="@drawable/pdv_title_radius"/>
 
             </LinearLayout>
+
+
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -88,6 +100,7 @@
                     android:background="@drawable/buy"/>
 
             </LinearLayout>
+
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -122,34 +135,31 @@
                     android:textColor="@color/white" />
             </LinearLayout>
 
-            <ScrollView
-                android:layout_width="match_parent"
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/product_list_pdv">
 
+
+                <ScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+
+
                 <TableLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
                     <TableRow android:id="@+id/tableRow_titles_sale_screen">
 
                         <TextView
-                            android:id="@+id/item_number_pdv_title"
-                            style="@style/buy_description"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_column="0"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:padding="8dp"
-                            android:text="@string/item_number" />
-
-                        <TextView
                             android:id="@+id/code_product_title"
                             style="@style/buy_description"
-                            android:layout_width="match_parent"
+                            android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:layout_column="1"
                             android:layout_gravity="center"
@@ -157,22 +167,21 @@
                             android:padding="8dp"
                             android:text="@string/code" />
 
-                        <TextView
-                            android:id="@+id/tv_pdv_qtd_title"
-                            style="@style/buy_description"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_column="2"
-                            android:layout_gravity="center"
-                            android:layout_weight="1"
-                            android:padding="8dp"
-                            android:text="@string/qtd" />
+<!--                        <TextView-->
+<!--                            android:id="@+id/tv_pdv_qtd_title"-->
+<!--                            style="@style/buy_description"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_column="2"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:padding="8dp"-->
+<!--                            android:text="@string/qtd" />-->
 
                         <TextView
                             android:id="@+id/name_product_title"
                             style="@style/buy_description"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="100dp"                            android:layout_height="wrap_content"
                             android:layout_column="3"
                             android:layout_gravity="center"
                             android:layout_weight="1"
@@ -182,8 +191,7 @@
                         <TextView
                             android:id="@+id/tv_vlr_un_title"
                             style="@style/buy_description"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="100dp"                            android:layout_height="wrap_content"
                             android:layout_column="4"
                             android:layout_gravity="center"
                             android:layout_weight="1"
@@ -193,8 +201,7 @@
                         <TextView
                             android:id="@+id/tv_total_title"
                             style="@style/buy_description"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_width="100dp"                            android:layout_height="match_parent"
                             android:layout_column="5"
                             android:layout_gravity="center"
                             android:layout_weight="1"
@@ -202,6 +209,7 @@
                             android:text="@string/total" />
 
                     </TableRow>
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_view_product_sale"
                         android:layout_width="0dp"
@@ -214,7 +222,9 @@
 
                 </TableLayout>
 
-            </ScrollView>
+                </ScrollView>
+
+            </HorizontalScrollView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
