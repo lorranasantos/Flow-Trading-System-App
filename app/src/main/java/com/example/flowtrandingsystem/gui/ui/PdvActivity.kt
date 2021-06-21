@@ -141,7 +141,11 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
             override fun onResponse(call: Call<ProductAdapter>, response: Response<ProductAdapter>) {
                 itemProduct = response.body()!!
 
-                val quantity: Int = editQtde.text.toString().toInt()
+                var quantity = 1
+
+                if(editQtde.text.isNotEmpty()) {
+                    quantity = editQtde.text.toString().toInt()
+                }
 
                 val itemTotalValue = quantity * itemProduct.cost_per_item
 
@@ -158,7 +162,7 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
                 listProducts.add(itemProduct)
 
                 val codeIntent = Intent(this@PdvActivity, BarCodeAdapter::class.java)
-                codeIntent.putExtra("qtd", pdv_qtde_sale.text.toString().toInt())
+                codeIntent.putExtra("qtd", quantity)
 
                 adapterItensList.updateListProducts(listProducts.toList())
 

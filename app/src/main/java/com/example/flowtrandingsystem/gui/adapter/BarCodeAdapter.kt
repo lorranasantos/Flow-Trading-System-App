@@ -45,7 +45,7 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
             holder.tvUnitValue.text = "R$ ${String.format("%.2f", recentItems.cost_per_item)}"
         }
 
-        holder.tvpdvTotalValue.text = (recentItems.cost_per_item * recentItems.qtd).toString()
+        holder.tvpdvTotalValue.text = "R$: ${recentItems.cost_per_item * recentItems.qtd}"
     }
 
     //inner class

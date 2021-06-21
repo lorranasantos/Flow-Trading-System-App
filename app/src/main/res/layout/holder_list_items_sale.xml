@@ -11,7 +11,7 @@
        android:background="@color/light">
 
        <TableRow android:id="@+id/line_products"
-           android:background="@drawable/pdv_radius">
+           android:background="@drawable/pdv_item_radius">
 
            <TextView
                android:id="@+id/product_code"
@@ -24,18 +24,6 @@
                android:paddingTop="5dp"
                android:paddingBottom="5dp"
                android:text="123456" />
-
-<!--           <TextView-->
-<!--               android:id="@+id/product_quantity"-->
-<!--               android:layout_width="match_parent"-->
-<!--               android:layout_height="wrap_content"-->
-<!--               android:layout_column="2"-->
-<!--               android:layout_gravity="center"-->
-<!--               android:layout_weight="1"-->
-<!--               android:paddingTop="5dp"-->
-<!--               android:textAlignment="center"-->
-<!--               android:paddingBottom="5dp"-->
-<!--               android:text="5" />-->
 
            <TextView
                android:id="@+id/product_name"

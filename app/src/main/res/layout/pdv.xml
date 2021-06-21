@@ -137,22 +137,16 @@
 
 
             <HorizontalScrollView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/product_list_pdv">
 
-
-                <ScrollView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-
-
                 <TableLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="2dp">
 
                     <TableRow android:id="@+id/tableRow_titles_sale_screen">
 
@@ -181,7 +175,8 @@
                         <TextView
                             android:id="@+id/name_product_title"
                             style="@style/buy_description"
-                            android:layout_width="100dp"                            android:layout_height="wrap_content"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
                             android:layout_column="3"
                             android:layout_gravity="center"
                             android:layout_weight="1"
@@ -191,7 +186,8 @@
                         <TextView
                             android:id="@+id/tv_vlr_un_title"
                             style="@style/buy_description"
-                            android:layout_width="100dp"                            android:layout_height="wrap_content"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
                             android:layout_column="4"
                             android:layout_gravity="center"
                             android:layout_weight="1"
@@ -201,7 +197,8 @@
                         <TextView
                             android:id="@+id/tv_total_title"
                             style="@style/buy_description"
-                            android:layout_width="100dp"                            android:layout_height="match_parent"
+                            android:layout_width="100dp"
+                            android:layout_height="match_parent"
                             android:layout_column="5"
                             android:layout_gravity="center"
                             android:layout_weight="1"
@@ -212,7 +209,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_view_product_sale"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_marginTop="5dp"
                         android:layout_height="wrap_content"
                         app:layout_constraintStart_toStartOf="parent"
@@ -221,8 +218,6 @@
                         app:layout_constraintTop_toBottomOf="@+id/tableRow_titles_sale_screen"/>
 
                 </TableLayout>
-
-                </ScrollView>
 
             </HorizontalScrollView>
 
@@ -269,6 +264,7 @@
                     android:padding="10dp">
 
                     <TextView
+                        android:id="@+id/subTotal_pdv"
                         style="@style/titles_pdv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
