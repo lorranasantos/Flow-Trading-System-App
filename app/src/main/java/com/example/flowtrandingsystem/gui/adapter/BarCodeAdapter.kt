@@ -39,13 +39,9 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
         holder.tvNameItem.text = recentItems.product_name
         holder.tvUnitValue.text = recentItems.cost_per_item.toString()
 
-        if(recentItems.cost_per_item <= 0){
-            holder.tvUnitValue.text = "GRÁTIS"
-        }else {
-            holder.tvUnitValue.text = "R$ ${String.format("%.2f", recentItems.cost_per_item)}"
-        }
+        holder.tvUnitValue.text = "$${String.format("%.2f", recentItems.cost_per_item)}"
 
-        holder.tvpdvTotalValue.text = "R$: ${recentItems.cost_per_item * recentItems.qtd}"
+        holder.tvpdvTotalValue.text = "$${String.format("%.2f",recentItems.cost_per_item * recentItems.qtd)}"
     }
 
     //inner class

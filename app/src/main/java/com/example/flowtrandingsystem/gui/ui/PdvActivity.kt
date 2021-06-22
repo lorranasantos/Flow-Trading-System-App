@@ -61,7 +61,7 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         rvItens = findViewById(R.id.recycler_view_product_sale)
 
         rvItens.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
 
         adapterItensList = BarCodeAdapter(this)
 

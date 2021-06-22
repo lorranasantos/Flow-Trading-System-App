@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:id="@+id/holder_item_products"
-        android:layout_width="320dp"
+        android:layout_width="350dp"
         android:minEms="200"
         android:orientation="horizontal"
         android:gravity="center"
@@ -25,7 +25,7 @@
             android:minEms="200"
             android:layout_height="wrap_content"
             android:text="CANETINHA"
-            android:layout_weight="6"/>
+            android:layout_weight="7"/>
 
         <TextView
             android:id="@+id/inventory_product_quantity"
@@ -33,17 +33,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
-            android:layout_marginStart="10dp"
-            android:layout_weight="1" />
+            android:layout_marginStart="5dp" />
 
         <TextView
             android:id="@+id/inventory_product_price"
             style="@style/initialMenu_appearence"
             android:layout_width="10dp"
+            android:textAlignment="textEnd"
             android:layout_height="wrap_content"
             android:text="0,00"
-            android:layout_marginStart="10dp"
-            android:layout_weight="2" />
+            android:layout_marginStart="5dp"
+            android:layout_weight="3" />
 
 
     </LinearLayout>
