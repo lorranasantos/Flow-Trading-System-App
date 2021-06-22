@@ -4,10 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
-import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -25,7 +23,7 @@ import com.example.flowtrandingsystem.gui.model.Costumer
 import com.example.flowtrandingsystem.gui.model.ProductAdapter
 import com.example.flowtrandingsystem.gui.model.Sale
 import kotlinx.android.synthetic.main.add_discount_pdv.view.*
-import kotlinx.android.synthetic.main.client_register_pdv.*
+import kotlinx.android.synthetic.main.client_register_pdv.view.*
 import kotlinx.android.synthetic.main.pdv.*
 import retrofit2.Call
 import retrofit2.Response
@@ -35,6 +33,7 @@ open class PdvActivity : AppCompatActivity() {
 
     lateinit var rvItens: RecyclerView
     lateinit var adapterItensList: BarCodeAdapter
+    lateinit var editCpfClient: EditText
 
     var listProducts: ArrayList<ProductAdapter> = ArrayList<ProductAdapter>()
 
@@ -48,6 +47,9 @@ open class PdvActivity : AppCompatActivity() {
 
         rvItens = findViewById(R.id.recycler_view_product_sale)
 
+
+
+
         rvItens.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
 
@@ -56,10 +58,10 @@ open class PdvActivity : AppCompatActivity() {
         rvItens.adapter = adapterItensList
 
         pdv_client_register.setOnClickListener {
-            openClientRegister()
+            clientRegister()
         }
         pdv_add_discount.setOnClickListener {
-            openAddDiscount()
+            addDiscount()
         }
         img_camera_code.setOnClickListener {
             val scanScreen = Intent(this, ScannerActivity::class.java)
@@ -165,7 +167,7 @@ open class PdvActivity : AppCompatActivity() {
         })
     }
 
-    private fun openAddDiscount() {
+    private fun addDiscount() {
 
         val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_discount_pdv, null)
         val dialogBuilder = AlertDialog.Builder(this)
@@ -193,16 +195,20 @@ open class PdvActivity : AppCompatActivity() {
 
     }
 
-    private fun openClientRegister() {
-        val alertDialog = AlertDialog.Builder(this)
-        val view = layoutInflater.inflate(R.layout.client_register_pdv, null)
-        alertDialog.setView(view)
+    private fun clientRegister() {
 
-        val editCpfClient = view.findViewById<EditText>(R.id.edit_client_register_cpf)
+        val alerDialog = LayoutInflater.from(this).inflate(R.layout.client_register_pdv, null)
+        val dialogBuilder = AlertDialog.Builder(this)
+            .setView(alerDialog)
+        val alertShow = dialogBuilder.show()
 
-        button_save_client_register.setOnClickListener{
+        alerDialog.button_cancel_client_register.setOnClickListener {
+            alertShow.dismiss()
+        }
+        alerDialog.button_save_client_register.setOnClickListener {
 
-            //recuperar o token do sharedPreferences
+            editCpfClient = alerDialog.findViewById(R.id.edit_client_register_cpf)
+
             val prefs: SharedPreferences =
                 this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
 
@@ -213,7 +219,10 @@ open class PdvActivity : AppCompatActivity() {
 
             val retrofit = RetrofitApi.getRetrofit()
             val costumerCall = retrofit.create(CostumerCalls::class.java)
-            val call = costumerCall.postCostumer(editCpfClient.text.toString(), "Bearer ${retrivedToken}")
+
+            costumer.cpf = editCpfClient.text.toString()
+
+            val call = costumerCall.postCostumer(costumer, token = "Bearer ${retrivedToken}")
 
             call.enqueue(object : retrofit2.Callback<Costumer>{
                 override fun onFailure(call: Call<Costumer>, t: Throwable) {
@@ -225,15 +234,10 @@ open class PdvActivity : AppCompatActivity() {
                     costumer = response.body()!!
 
                     Toast.makeText(this@PdvActivity, "Cliente do CPF: ${costumer.cpf} Cadstrado!", Toast.LENGTH_SHORT).show()
+
+                    alertShow.dismiss()
                 }
             })
-
-        }
-
-        button_cancel_client_register.setOnClickListener {
-            dialog = alertDialog.create()
-            dialog.setCancelable(false)
-            dialog.show()
         }
     }
 }

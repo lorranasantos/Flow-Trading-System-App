@@ -29,7 +29,10 @@
                android:layout_height="wrap_content"
                android:layout_gravity="center"
                android:textAlignment="center"
+               android:maxLines="1"
+               android:singleLine="true"
                android:layout_weight="6"
+               android:ellipsize="end"
                android:textColor="@color/black"
                android:text="Dell Laptop S155 Dell" />
 
