@@ -16,29 +16,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.adapter.BarCodeAdapter
+import com.example.flowtrandingsystem.gui.api.CostumerCalls
 import com.example.flowtrandingsystem.gui.api.ProductCalls
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.SaleCalls
-import com.example.flowtrandingsystem.gui.http.HttpHelper
-import com.example.flowtrandingsystem.gui.model.Product
-import com.example.flowtrandingsystem.gui.model.ProductAdapter
-import com.example.flowtrandingsystem.gui.model.RegisterClientPdv
-import com.example.flowtrandingsystem.gui.model.Sale
-import com.google.gson.Gson
-import kotlinx.android.synthetic.main.pdv.*
-import org.jetbrains.anko.doAsync
+import com.example.flowtrandingsystem.gui.model.*
 import retrofit2.Call
 import retrofit2.Response
 
 
 class PdvActivity : AppCompatActivity(), View.OnClickListener {
-
     lateinit var rvItens: RecyclerView
     lateinit var adapterItensList: BarCodeAdapter
     private lateinit var buttonAddClient: Button
-    private lateinit var editCpf: EditText
     private lateinit var buttonSaveClient: Button
     private lateinit var buttonCancelClient: Button
+    private lateinit var editCpf: EditText
+    private lateinit var buttonSaveDiscount: Button
+    private lateinit var buttonCancelDiscount: Button
     private lateinit var buttonAddDiscount: Button
     private lateinit var editDiscount: EditText
     private lateinit var imgCameraCode: ImageView
@@ -52,11 +47,6 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pdv)
-
-        val et = findViewById<EditText>(R.id.pdv_qtde_sale)
-        val theText = et.text.toString()
-
-
 
         rvItens = findViewById(R.id.recycler_view_product_sale)
 
@@ -215,8 +205,8 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         alertDialog.setView(view)
 
         editDiscount = view.findViewById(R.id.edit_add_discount_pdv)
-        buttonSaveClient = view.findViewById(R.id.button_save_discount)
-        buttonCancelClient = view.findViewById(R.id.button_cancel_discount)
+        buttonSaveDiscount = view.findViewById(R.id.button_save_discount)
+        buttonCancelDiscount = view.findViewById(R.id.button_cancel_discount)
     }
 
     private fun openClientRegister() {
@@ -225,31 +215,50 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         alertDialog.setView(view)
 
         editCpf = view.findViewById(R.id.edit_client_register_cpf)
-        buttonSaveClient = view.findViewById(R.id.button_save_client_register)
-        buttonCancelClient = view.findViewById(R.id.button_cancel_client_register)
-
+        buttonSaveClient = findViewById(R.id.button_save_client_register)
         buttonSaveClient.setOnClickListener{
-            val newClient = RegisterClientPdv()
 
-            newClient.cpf = editCpf.text.toString()
+            //recuperar o token do sharedPreferences
+            val prefs: SharedPreferences =
+                this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
 
-            val gson = Gson()
-            val clientJson = gson.toJson(newClient)
+            val retrivedToken =
+                prefs.getString("TOKEN", "Nada foi recebido")
 
-            doAsync {
-                val http = HttpHelper()
-                http.postCostumer(clientJson)
-            }
+            var costumer = Costumer(cpf = editCpf.text.toString())
+
+            Log.e("Cliente", costumer.toString())
+
+            val retrofit = RetrofitApi.getRetrofit()
+            val costumerCall = retrofit.create(CostumerCalls::class.java)
+
+            val call = costumerCall.postCostumer(costumer.cpf, "Bearer ${retrivedToken}")
+
+            call.enqueue(object : retrofit2.Callback<Costumer>{
+
+                override fun onFailure(call: Call<Costumer>, t: Throwable) {
+                    Toast.makeText(this@PdvActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
+                    Log.e("ERRO_CONEXÃO", t.message.toString())
+                }
+
+                override fun onResponse(call: Call<Costumer>, response: Response<Costumer>) {
+                    costumer = response.body()!!
+
+                    Toast.makeText(this@PdvActivity, "Cliente do CPF: ${costumer.cpf} Cadstrado!", Toast.LENGTH_SHORT).show()
+                }
+            })
+
         }
 
-        buttonCancelClient.setOnClickListener(this)
-
-        dialog = alertDialog.create()
-        dialog.setCancelable(false)
-        dialog.show()
-
-
+        buttonCancelClient = findViewById(R.id.button_cancel_client_register)
+        buttonCancelClient.setOnClickListener {
+            dialog = alertDialog.create()
+            dialog.setCancelable(false)
+            dialog.show()
+        }
     }
+
+
 
 }
 
