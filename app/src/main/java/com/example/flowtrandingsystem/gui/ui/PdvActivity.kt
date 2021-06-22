@@ -4,11 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
-import android.view.View
+import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -20,25 +21,20 @@ import com.example.flowtrandingsystem.gui.api.CostumerCalls
 import com.example.flowtrandingsystem.gui.api.ProductCalls
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.SaleCalls
-import com.example.flowtrandingsystem.gui.model.*
+import com.example.flowtrandingsystem.gui.model.Costumer
+import com.example.flowtrandingsystem.gui.model.ProductAdapter
+import com.example.flowtrandingsystem.gui.model.Sale
+import kotlinx.android.synthetic.main.add_discount_pdv.view.*
+import kotlinx.android.synthetic.main.client_register_pdv.*
+import kotlinx.android.synthetic.main.pdv.*
 import retrofit2.Call
 import retrofit2.Response
 
 
-class PdvActivity : AppCompatActivity(), View.OnClickListener {
+open class PdvActivity : AppCompatActivity() {
+
     lateinit var rvItens: RecyclerView
     lateinit var adapterItensList: BarCodeAdapter
-    private lateinit var buttonAddClient: Button
-    private lateinit var buttonSaveClient: Button
-    private lateinit var buttonCancelClient: Button
-    private lateinit var editCpf: EditText
-    private lateinit var buttonSaveDiscount: Button
-    private lateinit var buttonCancelDiscount: Button
-    private lateinit var buttonAddDiscount: Button
-    private lateinit var editDiscount: EditText
-    private lateinit var imgCameraCode: ImageView
-    private lateinit var buttonAddCode: Button
-    private lateinit var buttonFinishSale: Button
 
     var listProducts: ArrayList<ProductAdapter> = ArrayList<ProductAdapter>()
 
@@ -47,6 +43,8 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pdv)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         rvItens = findViewById(R.id.recycler_view_product_sale)
 
@@ -57,48 +55,21 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
         rvItens.adapter = adapterItensList
 
-        buttonAddClient = findViewById(R.id.pdv_client_register)
-        buttonAddClient.setOnClickListener(this)
-
-        buttonAddDiscount = findViewById(R.id.pdv_add_discount)
-        buttonAddDiscount.setOnClickListener(this)
-
-        imgCameraCode = findViewById(R.id.img_camera_code)
-        imgCameraCode.setOnClickListener(this)
-
-        buttonAddCode = findViewById(R.id.add_code)
-        buttonAddCode.setOnClickListener(this)
-
-        buttonFinishSale = findViewById(R.id.finish_sale)
-        buttonFinishSale.setOnClickListener(this)
-
-        //recuperar o token do sharedPreferences
-        val prefs: SharedPreferences =
-            this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-
-        val retrivedToken =
-            prefs.getString("TOKEN", "Nada foi recebido")
-
-        Toast.makeText(this@PdvActivity, "RETRIEVED: ${retrivedToken}", Toast.LENGTH_LONG).show()
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-    }
-
-    override fun onClick(v: View) {
-        if (v.id == R.id.pdv_client_register){
+        pdv_client_register.setOnClickListener {
             openClientRegister()
-        }else if(v.id == R.id.pdv_add_discount) {
+        }
+        pdv_add_discount.setOnClickListener {
             openAddDiscount()
-        }else if(v.id == R.id.img_camera_code) {
+        }
+        img_camera_code.setOnClickListener {
             val scanScreen = Intent(this, ScannerActivity::class.java)
             startActivity(scanScreen)
-        }else if(v.id == R.id.add_code) {
-            addProductByCode()
-        }else if(v.id == R.id.finish_sale) {
+        }
+        finish_sale.setOnClickListener {
             finishSale()
-        }else{
-            Toast.makeText(this, "Nada foi clicado", Toast.LENGTH_SHORT).show()
+        }
+        add_code.setOnClickListener {
+            addProductByCode()
         }
     }
 
@@ -156,11 +127,6 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
                 adapterItensList.updateListProducts(listProducts.toList())
 
-                Toast.makeText(this@PdvActivity, "Numero Item: ${itemProduct.id} " +
-                        "Qtde: ${quantity} " +
-                        "Produto: ${itemProduct.product_name} " +
-                        "Valor Unitario: ${itemProduct.cost_per_item} " +
-                        "Valor Total: ${itemTotalValue}", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -200,13 +166,31 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun openAddDiscount() {
-        val alertDialog = AlertDialog.Builder(this)
-        val view = layoutInflater.inflate(R.layout.add_discount_pdv, null)
-        alertDialog.setView(view)
 
-        editDiscount = view.findViewById(R.id.edit_add_discount_pdv)
-        buttonSaveDiscount = view.findViewById(R.id.button_save_discount)
-        buttonCancelDiscount = view.findViewById(R.id.button_cancel_discount)
+        val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_discount_pdv, null)
+        val dialogBuilder = AlertDialog.Builder(this)
+            .setView(alerDialog)
+        val alertShow = dialogBuilder.show()
+
+        alerDialog.button_cancel_discount.setOnClickListener {
+            alertShow.dismiss()
+        }
+        alerDialog.button_save_discount.setOnClickListener {
+            var editDiscountPdv = alerDialog.edit_add_discount_pdv.text.toString()
+
+            val finalDiscount = findViewById<TextView>(R.id.final_discount)
+
+            Toast.makeText(this, "Desconto aplicado!", Toast.LENGTH_SHORT).show()
+
+            if (editDiscountPdv.isEmpty()){
+                editDiscountPdv = 0.toString()
+            }else{
+                finalDiscount.text = "$editDiscountPdv%"
+            }
+
+            alertShow.dismiss()
+        }
+
     }
 
     private fun openClientRegister() {
@@ -214,9 +198,9 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         val view = layoutInflater.inflate(R.layout.client_register_pdv, null)
         alertDialog.setView(view)
 
-        editCpf = view.findViewById(R.id.edit_client_register_cpf)
-        buttonSaveClient = findViewById(R.id.button_save_client_register)
-        buttonSaveClient.setOnClickListener{
+        val editCpfClient = view.findViewById<EditText>(R.id.edit_client_register_cpf)
+
+        button_save_client_register.setOnClickListener{
 
             //recuperar o token do sharedPreferences
             val prefs: SharedPreferences =
@@ -225,17 +209,13 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
             val retrivedToken =
                 prefs.getString("TOKEN", "Nada foi recebido")
 
-            var costumer = Costumer(cpf = editCpf.text.toString())
-
-            Log.e("Cliente", costumer.toString())
+            var costumer = Costumer()
 
             val retrofit = RetrofitApi.getRetrofit()
             val costumerCall = retrofit.create(CostumerCalls::class.java)
-
-            val call = costumerCall.postCostumer(costumer.cpf, "Bearer ${retrivedToken}")
+            val call = costumerCall.postCostumer(editCpfClient.text.toString(), "Bearer ${retrivedToken}")
 
             call.enqueue(object : retrofit2.Callback<Costumer>{
-
                 override fun onFailure(call: Call<Costumer>, t: Throwable) {
                     Toast.makeText(this@PdvActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                     Log.e("ERRO_CONEXÃO", t.message.toString())
@@ -250,15 +230,10 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
 
         }
 
-        buttonCancelClient = findViewById(R.id.button_cancel_client_register)
-        buttonCancelClient.setOnClickListener {
+        button_cancel_client_register.setOnClickListener {
             dialog = alertDialog.create()
             dialog.setCancelable(false)
             dialog.show()
         }
     }
-
-
-
 }
-
