@@ -46,7 +46,7 @@ class MainActivity: AppCompatActivity() {
 
         login_activity_button.setOnClickListener {
 
-            goToMainMenu()
+            executarLogin()
         }
 
     }

@@ -14,9 +14,11 @@ import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.model.Product
 import com.example.flowtrandingsystem.gui.model.ProductAdapter
 import com.example.flowtrandingsystem.gui.ui.PdvActivity
+import java.io.Externalizable
+import java.io.Serializable
 import kotlin.math.log
 
-class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapter.Holder>() {
+class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapter.Holder>(), Serializable {
 
     var listItens =  emptyList<ProductAdapter>()
 
@@ -58,10 +60,8 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
 
         Log.e("nada", cost_total.toString())
 
-
-        val intent = Intent(holder.itemView.context, PdvActivity::class.java)
-        //listener?.onClick(AlbumsData)
-        intent.putExtra("totalValue", cost_total)
+        val intent = Intent(context, PdvActivity::class.java)
+        intent.putExtra("totalValue", cost_total as Serializable)
 
     }
 

@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.EditText
@@ -20,17 +19,16 @@ import com.example.flowtrandingsystem.gui.api.CostumerCalls
 import com.example.flowtrandingsystem.gui.api.ProductCalls
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.SaleCalls
-import com.example.flowtrandingsystem.gui.model.Costumer
-import com.example.flowtrandingsystem.gui.model.ProductAdapter
-import com.example.flowtrandingsystem.gui.model.Sale
+import com.example.flowtrandingsystem.gui.model.*
 import kotlinx.android.synthetic.main.add_discount_pdv.view.*
 import kotlinx.android.synthetic.main.client_register_pdv.view.*
 import kotlinx.android.synthetic.main.pdv.*
 import retrofit2.Call
 import retrofit2.Response
+import java.io.Serializable
 
 
-open class PdvActivity : AppCompatActivity() {
+open class PdvActivity : AppCompatActivity(), Serializable {
 
     lateinit var rvItens: RecyclerView
     lateinit var adapterItensList: BarCodeAdapter
@@ -72,11 +70,6 @@ open class PdvActivity : AppCompatActivity() {
 
         addProductByCamera()
     }
-
-    fun passResultCallback(message: String) {
-        //message is "ff"
-    }
-
     private fun addProductByCamera() {
         val scannedCode: String = intent.getStringExtra("barCode").toString()
 
@@ -87,10 +80,6 @@ open class PdvActivity : AppCompatActivity() {
         }
     }
     private fun addProductByCode() {
-
-        val bundle : Bundle? = intent.extras
-        val total = bundle!!.getString("totalValue")
-        Log.e("totalValue", total.toString())
 
         //recuperar o token do sharedPreferences
         val prefs: SharedPreferences =
@@ -144,7 +133,9 @@ open class PdvActivity : AppCompatActivity() {
 
                 adapterItensList.updateListProducts(listProducts.toList())
 
-                passResultCallback("$itemTotalValue")
+                val valueAdapter: Double? = intent.getDoubleExtra("totalValue", 0.00)
+
+                Toast.makeText(this@PdvActivity, "Valor Recebido: ${valueAdapter}", Toast.LENGTH_SHORT).show()
 
             }
         })
@@ -161,15 +152,18 @@ open class PdvActivity : AppCompatActivity() {
         val retrivedIten =
             prefs.getString("iten", "Nada foi recebido")
 
-        var sale: Sale = Sale(itens = retrivedIten.toString())
+        var sale = Sale(items = arrayOf(Itens()))
 
         val retrofit = RetrofitApi.getRetrofit()
         val saleCall = retrofit.create(SaleCalls::class.java)
 
-        val call = saleCall.postSale(sale, "Bearer ${retrivedToken}")
+        sale.payment_method_id = 1
+        sale.branch_id = 1
+        sale.items = emptyArray<Itens>()
+
+        val call = saleCall.postSale(sale, token = "Bearer ${retrivedToken}")
 
         call.enqueue(object : retrofit2.Callback<Sale>{
-
             override fun onFailure(call: Call<Sale>, t: Throwable) {
                 Toast.makeText(this@PdvActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                 Log.e("ERRO_CONEXÃO", t.message.toString())
@@ -178,7 +172,8 @@ open class PdvActivity : AppCompatActivity() {
             override fun onResponse(call: Call<Sale>, response: Response<Sale>) {
                 sale = response.body()!!
 
-                Toast.makeText(this@PdvActivity, "Venda: ${sale}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@PdvActivity, "Cliente do CPF: ${sale} Cadstrado!", Toast.LENGTH_SHORT).show()
+
             }
         })
     }
