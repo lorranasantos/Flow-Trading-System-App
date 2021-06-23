@@ -24,6 +24,7 @@ class InventoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.inventory)
+
         supportActionBar!!.hide()
         rvItens = findViewById(R.id.recycler_view_inventory_list)
         rvItens.layoutManager =
@@ -45,6 +46,7 @@ class InventoryActivity : AppCompatActivity() {
         val retrivedCompanyId =
             prefs.getInt("COMPANYID", 0)
         Toast.makeText(this@InventoryActivity, "Id: ${retrivedId} IdComp: ${retrivedCompanyId} Token: ${retrivedToken}", Toast.LENGTH_LONG).show()
+
         var listaItens: List<Product>
         val retrofit = RetrofitApi.getRetrofit()
         val produtosCall = retrofit.create(ProductCalls::class.java)

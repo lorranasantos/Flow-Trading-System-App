@@ -20,6 +20,7 @@ class MenuActivity : AppCompatActivity(){
     private lateinit var pdvOption: LinearLayout
     private lateinit var reportOption: LinearLayout
 
+
     lateinit var toggle: ActionBarDrawerToggle
 
     private fun goToInfoCompany(){
@@ -48,7 +49,7 @@ class MenuActivity : AppCompatActivity(){
         reportOption = findViewById(R.id.option_report)
 
         inventoryOption.setOnClickListener {
-            val intentInventory = Intent(this, InventoryActivity::class.java)
+            val intentInventory = Intent(this, ProductTypeActivity::class.java)
             startActivity(intentInventory)
         }
         pdvOption.setOnClickListener{
