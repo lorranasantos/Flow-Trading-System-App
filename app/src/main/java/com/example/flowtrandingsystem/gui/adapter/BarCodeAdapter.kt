@@ -2,6 +2,7 @@ package com.example.flowtrandingsystem.gui.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.model.Product
 import com.example.flowtrandingsystem.gui.model.ProductAdapter
+import com.example.flowtrandingsystem.gui.ui.PdvActivity
 import kotlin.math.log
 
 class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapter.Holder>() {
@@ -46,12 +48,20 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
 
         holder.tvpdvTotalValue.text = "$${String.format("%.2f",recentItems.cost_per_item * recentItems.qtd)}"
 
-        val totalSub = holder.tvpdvTotalValue.text
+        val list = arrayListOf<Int>()
 
-        for (i in listItens){
-            Log.e("sei la: ", (totalSub.toString()) + 1)
+        for(i in listItens){
+            list.add((listItens[position].cost_per_item * listItens[position].qtd).toInt())
         }
 
+        val cost_total: Double = list.reduce{total, currentElement -> total + currentElement}.toDouble()
+
+        Log.e("nada", cost_total.toString())
+
+
+        val intent = Intent(holder.itemView.context, PdvActivity::class.java)
+        //listener?.onClick(AlbumsData)
+        intent.putExtra("totalValue", cost_total)
 
     }
 

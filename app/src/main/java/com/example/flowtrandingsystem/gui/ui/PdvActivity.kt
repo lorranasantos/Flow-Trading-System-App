@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.EditText
@@ -46,7 +47,7 @@ open class PdvActivity : AppCompatActivity() {
         rvItens = findViewById(R.id.recycler_view_product_sale)
 
         rvItens.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         adapterItensList = BarCodeAdapter(this)
 
@@ -72,6 +73,10 @@ open class PdvActivity : AppCompatActivity() {
         addProductByCamera()
     }
 
+    fun passResultCallback(message: String) {
+        //message is "ff"
+    }
+
     private fun addProductByCamera() {
         val scannedCode: String = intent.getStringExtra("barCode").toString()
 
@@ -82,6 +87,10 @@ open class PdvActivity : AppCompatActivity() {
         }
     }
     private fun addProductByCode() {
+
+        val bundle : Bundle? = intent.extras
+        val total = bundle!!.getString("totalValue")
+        Log.e("totalValue", total.toString())
 
         //recuperar o token do sharedPreferences
         val prefs: SharedPreferences =
@@ -135,10 +144,11 @@ open class PdvActivity : AppCompatActivity() {
 
                 adapterItensList.updateListProducts(listProducts.toList())
 
+                passResultCallback("$itemTotalValue")
+
             }
         })
     }
-
     private fun finishSale() {
 
         //recuperar o token do sharedPreferences
@@ -172,7 +182,6 @@ open class PdvActivity : AppCompatActivity() {
             }
         })
     }
-
     private fun addDiscount() {
 
         val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_discount_pdv, null)
@@ -200,7 +209,6 @@ open class PdvActivity : AppCompatActivity() {
         }
 
     }
-
     private fun clientRegister() {
 
         val alerDialog = LayoutInflater.from(this).inflate(R.layout.client_register_pdv, null)

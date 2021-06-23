@@ -13,9 +13,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.example.flowtrandingsystem.R
-import com.muddzdev.styleabletoast.StyleableToast
 import kotlinx.android.synthetic.main.fragment_initial_menu.*
-
 
 class MenuActivity : AppCompatActivity(){
     private lateinit var inventoryOption: LinearLayout
@@ -44,8 +42,6 @@ class MenuActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_initial_menu)
-
-        StyleableToast.makeText(this, "Logado com sucesso!", R.style.exampleToast).show()
 
         inventoryOption = findViewById(R.id.option_inventory)
         pdvOption = findViewById(R.id.option_sell)
