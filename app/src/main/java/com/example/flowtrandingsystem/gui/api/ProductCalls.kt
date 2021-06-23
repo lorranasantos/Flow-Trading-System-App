@@ -23,4 +23,7 @@ interface ProductCalls {
     @GET("/productType")
     fun getProductType(@Header("Authorization") token: String?): Call<List<ProductType>>
 
+    @GET("/product")
+    fun getProductByCategorieId(@Header("Authorization") token: String?): Call<Product>
+
 }

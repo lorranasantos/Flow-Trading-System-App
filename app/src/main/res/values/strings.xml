@@ -76,7 +76,7 @@
     <string name="un_price_abrv">Vlr. unit.</string>
     <string name="total">Total</string>
     <string name="subtotal">SubTotal</string>
-    <string name="discount">Desconto</string>
+    <string name="discount">Adicionar Desconto</string>
     <string name="client_register">Cadastrar Cliente</string>
     <string name="product">Produto</string>
 

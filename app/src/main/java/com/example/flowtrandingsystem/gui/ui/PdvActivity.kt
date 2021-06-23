@@ -5,10 +5,9 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Button
+import android.view.LayoutInflater
 import android.widget.EditText
-import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -16,102 +15,72 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.adapter.BarCodeAdapter
+import com.example.flowtrandingsystem.gui.api.CostumerCalls
 import com.example.flowtrandingsystem.gui.api.ProductCalls
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.SaleCalls
-import com.example.flowtrandingsystem.gui.http.HttpHelper
-import com.example.flowtrandingsystem.gui.model.Product
+import com.example.flowtrandingsystem.gui.model.Costumer
 import com.example.flowtrandingsystem.gui.model.ProductAdapter
-import com.example.flowtrandingsystem.gui.model.RegisterClientPdv
 import com.example.flowtrandingsystem.gui.model.Sale
-import com.google.gson.Gson
+import kotlinx.android.synthetic.main.add_discount_pdv.view.*
+import kotlinx.android.synthetic.main.client_register_pdv.view.*
 import kotlinx.android.synthetic.main.pdv.*
-import org.jetbrains.anko.doAsync
 import retrofit2.Call
 import retrofit2.Response
 
 
-class PdvActivity : AppCompatActivity(), View.OnClickListener {
+open class PdvActivity : AppCompatActivity() {
 
     lateinit var rvItens: RecyclerView
     lateinit var adapterItensList: BarCodeAdapter
-    private lateinit var buttonAddClient: Button
-    private lateinit var editCpf: EditText
-    private lateinit var buttonSaveClient: Button
-    private lateinit var buttonCancelClient: Button
-    private lateinit var buttonAddDiscount: Button
-    private lateinit var editDiscount: EditText
-    private lateinit var imgCameraCode: ImageView
-    private lateinit var buttonAddCode: Button
-    private lateinit var buttonFinishSale: Button
+    lateinit var editCpfClient: EditText
 
     var listProducts: ArrayList<ProductAdapter> = ArrayList<ProductAdapter>()
-
-    private lateinit var dialog: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pdv)
 
-        val et = findViewById<EditText>(R.id.pdv_qtde_sale)
-        val theText = et.text.toString()
-
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         rvItens = findViewById(R.id.recycler_view_product_sale)
 
         rvItens.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
 
         adapterItensList = BarCodeAdapter(this)
 
         rvItens.adapter = adapterItensList
 
-        buttonAddClient = findViewById(R.id.pdv_client_register)
-        buttonAddClient.setOnClickListener(this)
-
-        buttonAddDiscount = findViewById(R.id.pdv_add_discount)
-        buttonAddDiscount.setOnClickListener(this)
-
-        imgCameraCode = findViewById(R.id.img_camera_code)
-        imgCameraCode.setOnClickListener(this)
-
-        buttonAddCode = findViewById(R.id.add_code)
-        buttonAddCode.setOnClickListener(this)
-
-        buttonFinishSale = findViewById(R.id.finish_sale)
-        buttonFinishSale.setOnClickListener(this)
-
-        //recuperar o token do sharedPreferences
-        val prefs: SharedPreferences =
-            this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-
-        val retrivedToken =
-            prefs.getString("TOKEN", "Nada foi recebido")
-
-        Toast.makeText(this@PdvActivity, "RETRIEVED: ${retrivedToken}", Toast.LENGTH_LONG).show()
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-    }
-
-    override fun onClick(v: View) {
-        if (v.id == R.id.pdv_client_register){
-            openClientRegister()
-        }else if(v.id == R.id.pdv_add_discount) {
-            openAddDiscount()
-        }else if(v.id == R.id.img_camera_code) {
+        pdv_client_register.setOnClickListener {
+            clientRegister()
+        }
+        pdv_add_discount.setOnClickListener {
+            addDiscount()
+        }
+        img_camera_code.setOnClickListener {
             val scanScreen = Intent(this, ScannerActivity::class.java)
             startActivity(scanScreen)
-        }else if(v.id == R.id.add_code) {
-            addProductByCode()
-        }else if(v.id == R.id.finish_sale) {
-            finishSale()
-        }else{
-            Toast.makeText(this, "Nada foi clicado", Toast.LENGTH_SHORT).show()
         }
+        finish_sale.setOnClickListener {
+            finishSale()
+        }
+        add_code.setOnClickListener {
+            addProductByCode()
+        }
+
+        addProductByCamera()
     }
 
+    private fun addProductByCamera() {
+        val scannedCode: String = intent.getStringExtra("barCode").toString()
+
+        if(scannedCode.isEmpty()){
+            addProductByCode()
+        }else{
+            Toast.makeText(this, "Adicione seus produtos!", Toast.LENGTH_SHORT).show()
+        }
+    }
     private fun addProductByCode() {
 
         //recuperar o token do sharedPreferences
@@ -141,7 +110,11 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
             override fun onResponse(call: Call<ProductAdapter>, response: Response<ProductAdapter>) {
                 itemProduct = response.body()!!
 
-                val quantity: Int = editQtde.text.toString().toInt()
+                var quantity = 1
+
+                if(editQtde.text.isNotEmpty()) {
+                    quantity = editQtde.text.toString().toInt()
+                }
 
                 val itemTotalValue = quantity * itemProduct.cost_per_item
 
@@ -158,15 +131,10 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
                 listProducts.add(itemProduct)
 
                 val codeIntent = Intent(this@PdvActivity, BarCodeAdapter::class.java)
-                codeIntent.putExtra("qtd", pdv_qtde_sale.text.toString().toInt())
+                codeIntent.putExtra("qtd", quantity)
 
                 adapterItensList.updateListProducts(listProducts.toList())
 
-                Toast.makeText(this@PdvActivity, "Numero Item: ${itemProduct.id} " +
-                        "Qtde: ${quantity} " +
-                        "Produto: ${itemProduct.product_name} " +
-                        "Valor Unitario: ${itemProduct.cost_per_item} " +
-                        "Valor Total: ${itemTotalValue}", Toast.LENGTH_SHORT).show()
             }
         })
     }
@@ -205,47 +173,77 @@ class PdvActivity : AppCompatActivity(), View.OnClickListener {
         })
     }
 
-    private fun openAddDiscount() {
-        val alertDialog = AlertDialog.Builder(this)
-        val view = layoutInflater.inflate(R.layout.add_discount_pdv, null)
-        alertDialog.setView(view)
+    private fun addDiscount() {
 
-        editDiscount = view.findViewById(R.id.edit_add_discount_pdv)
-        buttonSaveClient = view.findViewById(R.id.button_save_discount)
-        buttonCancelClient = view.findViewById(R.id.button_cancel_discount)
-    }
+        val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_discount_pdv, null)
+        val dialogBuilder = AlertDialog.Builder(this)
+            .setView(alerDialog)
+        val alertShow = dialogBuilder.show()
 
-    private fun openClientRegister() {
-        val alertDialog = AlertDialog.Builder(this)
-        val view = layoutInflater.inflate(R.layout.client_register_pdv, null)
-        alertDialog.setView(view)
+        alerDialog.button_cancel_discount.setOnClickListener {
+            alertShow.dismiss()
+        }
+        alerDialog.button_save_discount.setOnClickListener {
+            var editDiscountPdv = alerDialog.edit_add_discount_pdv.text.toString()
 
-        editCpf = view.findViewById(R.id.edit_client_register_cpf)
-        buttonSaveClient = view.findViewById(R.id.button_save_client_register)
-        buttonCancelClient = view.findViewById(R.id.button_cancel_client_register)
+            val finalDiscount = findViewById<TextView>(R.id.final_discount)
 
-        buttonSaveClient.setOnClickListener{
-            val newClient = RegisterClientPdv()
+            Toast.makeText(this, "Desconto aplicado!", Toast.LENGTH_SHORT).show()
 
-            newClient.cpf = editCpf.text.toString()
-
-            val gson = Gson()
-            val clientJson = gson.toJson(newClient)
-
-            doAsync {
-                val http = HttpHelper()
-                http.postCostumer(clientJson)
+            if (editDiscountPdv.isEmpty()){
+                editDiscountPdv = 0.toString()
+            }else{
+                finalDiscount.text = "$editDiscountPdv%"
             }
+
+            alertShow.dismiss()
         }
 
-        buttonCancelClient.setOnClickListener(this)
-
-        dialog = alertDialog.create()
-        dialog.setCancelable(false)
-        dialog.show()
-
-
     }
 
-}
+    private fun clientRegister() {
 
+        val alerDialog = LayoutInflater.from(this).inflate(R.layout.client_register_pdv, null)
+        val dialogBuilder = AlertDialog.Builder(this)
+            .setView(alerDialog)
+        val alertShow = dialogBuilder.show()
+
+        alerDialog.button_cancel_client_register.setOnClickListener {
+            alertShow.dismiss()
+        }
+        alerDialog.button_save_client_register.setOnClickListener {
+
+            editCpfClient = alerDialog.findViewById(R.id.edit_client_register_cpf)
+
+            val prefs: SharedPreferences =
+                this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+
+            val retrivedToken =
+                prefs.getString("TOKEN", "Nada foi recebido")
+
+            var costumer = Costumer()
+
+            val retrofit = RetrofitApi.getRetrofit()
+            val costumerCall = retrofit.create(CostumerCalls::class.java)
+
+            costumer.cpf = editCpfClient.text.toString()
+
+            val call = costumerCall.postCostumer(costumer, token = "Bearer ${retrivedToken}")
+
+            call.enqueue(object : retrofit2.Callback<Costumer>{
+                override fun onFailure(call: Call<Costumer>, t: Throwable) {
+                    Toast.makeText(this@PdvActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
+                    Log.e("ERRO_CONEXÃO", t.message.toString())
+                }
+
+                override fun onResponse(call: Call<Costumer>, response: Response<Costumer>) {
+                    costumer = response.body()!!
+
+                    Toast.makeText(this@PdvActivity, "Cliente do CPF: ${costumer.cpf} Cadstrado!", Toast.LENGTH_SHORT).show()
+
+                    alertShow.dismiss()
+                }
+            })
+        }
+    }
+}

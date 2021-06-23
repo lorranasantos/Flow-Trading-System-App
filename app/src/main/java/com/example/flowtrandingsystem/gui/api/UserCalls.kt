@@ -16,10 +16,10 @@ interface UserCalls {
     @POST("/session")
     fun postLogin(@Body user: UserLogin) : Call<Token>
 
-    @GET("/screens/find/{id}")
-    fun getScreens(@Path("id") id: Int, @Header("Authorization") token: String?): Call<User>
-
-    @GET("/permission/find/{id}")
-    fun getPermissions(@Path("id") id: Int, @Header("Authorization") token: String?): Call<Permissions>
+//    @GET("/screens/find/{id}")
+//    fun getScreens(@Path("id") id: Int, @Header("Authorization") token: String?): Call<User>
+//
+//    @GET("/permission/find/{id}")
+//    fun getPermissions(@Path("id") id: Int, @Header("Authorization") token: String?): Call<Permissions>
 
 }

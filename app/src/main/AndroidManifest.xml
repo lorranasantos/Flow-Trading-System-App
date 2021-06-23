@@ -4,6 +4,7 @@
     package="com.example.flowtrandingsystem">
 
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application

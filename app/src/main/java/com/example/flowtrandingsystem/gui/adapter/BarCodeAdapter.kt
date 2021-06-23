@@ -2,14 +2,17 @@ package com.example.flowtrandingsystem.gui.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.model.Product
 import com.example.flowtrandingsystem.gui.model.ProductAdapter
+import kotlin.math.log
 
 class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapter.Holder>() {
 
@@ -39,13 +42,17 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
         holder.tvNameItem.text = recentItems.product_name
         holder.tvUnitValue.text = recentItems.cost_per_item.toString()
 
-        if(recentItems.cost_per_item <= 0){
-            holder.tvUnitValue.text = "GRÁTIS"
-        }else {
-            holder.tvUnitValue.text = "R$ ${String.format("%.2f", recentItems.cost_per_item)}"
+        holder.tvUnitValue.text = "$${String.format("%.2f", recentItems.cost_per_item)}"
+
+        holder.tvpdvTotalValue.text = "$${String.format("%.2f",recentItems.cost_per_item * recentItems.qtd)}"
+
+        val totalSub = holder.tvpdvTotalValue.text
+
+        for (i in listItens){
+            Log.e("sei la: ", (totalSub.toString()) + 1)
         }
 
-        holder.tvpdvTotalValue.text = (recentItems.cost_per_item * recentItems.qtd).toString()
+
     }
 
     //inner class
