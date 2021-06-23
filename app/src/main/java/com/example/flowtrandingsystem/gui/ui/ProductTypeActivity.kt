@@ -49,21 +49,21 @@ class ProductTypeActivity : AppCompatActivity() {
             prefs.getInt("ID", 0)
 
         val categoriesList =
-            prefs.getString("CATEGORIESID", "")
+            prefs.getString("nome", "")
         Toast.makeText(this@ProductTypeActivity, "Id: ${retrivedId} IdComp: ${categoriesList}  Token: ${retrivedToken}", Toast.LENGTH_LONG).show()
 
         var categoryList: List<ProductType>
         val retrofit = RetrofitApi.getRetrofit()
         val categoryCall = retrofit.create(ProductCalls::class.java)
 
-        val call = categoryCall.getProductType(categoriesList, "Bearer ${retrivedToken}")
+        val call = categoryCall.getProductType("Bearer ${retrivedToken}")
 
-        call.enqueue(object : retrofit2.Callback<ProductType>{
-
+        call.enqueue(object : retrofit2.Callback<List<ProductType>>{
             override fun onFailure(call: Call<List<ProductType>>, t: Throwable) {
                 Toast.makeText(this@ProductTypeActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                 Log.e("Erro_CONEXÃO", t.message.toString())
             }
+
             override fun onResponse(call: Call<List<ProductType>>, response: Response<List<ProductType>>) {
                 categoryList = response.body()!!
 
