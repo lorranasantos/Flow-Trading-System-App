@@ -37,8 +37,6 @@ open class PdvActivity : AppCompatActivity() {
 
     var listProducts: ArrayList<ProductAdapter> = ArrayList<ProductAdapter>()
 
-    private lateinit var dialog: AlertDialog
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pdv)
@@ -46,9 +44,6 @@ open class PdvActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         rvItens = findViewById(R.id.recycler_view_product_sale)
-
-
-
 
         rvItens.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true)
@@ -73,8 +68,19 @@ open class PdvActivity : AppCompatActivity() {
         add_code.setOnClickListener {
             addProductByCode()
         }
+
+        addProductByCamera()
     }
 
+    private fun addProductByCamera() {
+        val scannedCode: String = intent.getStringExtra("barCode").toString()
+
+        if(scannedCode.isEmpty()){
+            addProductByCode()
+        }else{
+            Toast.makeText(this, "Adicione seus produtos!", Toast.LENGTH_SHORT).show()
+        }
+    }
     private fun addProductByCode() {
 
         //recuperar o token do sharedPreferences

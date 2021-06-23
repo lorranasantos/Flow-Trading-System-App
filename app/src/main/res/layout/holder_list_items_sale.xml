@@ -20,6 +20,9 @@
                android:layout_height="wrap_content"
                android:layout_gravity="center"
                android:layout_weight="3"
+               android:maxLines="1"
+               android:singleLine="true"
+               android:ellipsize="end"
                android:textAlignment="center"
                android:text="123" />
 
@@ -29,11 +32,11 @@
                android:layout_height="wrap_content"
                android:layout_gravity="center"
                android:textAlignment="center"
+               android:layout_weight="6"
+               android:textColor="@color/black"
                android:maxLines="1"
                android:singleLine="true"
-               android:layout_weight="6"
                android:ellipsize="end"
-               android:textColor="@color/black"
                android:text="Dell Laptop S155 Dell" />
 
            <TextView
@@ -43,6 +46,9 @@
                android:textAlignment="center"
                android:layout_gravity="center"
                android:layout_weight="3"
+               android:maxLines="1"
+               android:singleLine="true"
+               android:ellipsize="end"
                android:textColor="@color/black"
                android:text="$1000,00" />
 
@@ -54,6 +60,9 @@
                android:layout_gravity="center"
                android:textColor="@color/black"
                android:layout_weight="3"
+               android:maxLines="1"
+               android:singleLine="true"
+               android:ellipsize="end"
                android:text="$1000,00" />
 
    </LinearLayout>

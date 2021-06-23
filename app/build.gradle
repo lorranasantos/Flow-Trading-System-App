@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.flowtrandingsystem"
-        minSdkVersion 27
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -58,6 +58,9 @@ dependencies {
 
     //Grafico
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
+
+    //Toast
+    implementation 'com.muddzdev:styleabletoast:2.3.0'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
