@@ -38,7 +38,6 @@ class MainActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
-
         supportActionBar?.hide()
 
         editTextCpf = findViewById(R.id.editTextUser)
@@ -85,6 +84,7 @@ class MainActivity: AppCompatActivity() {
                     prefs.edit().putString("TOKEN", token.token).apply()
                     prefs.edit().putInt("ID", token.user.id).apply()
                     prefs.edit().putInt("COMPANYID", token.user.branch.company_id).apply()
+                    prefs.edit().putInt("BRANCHID", token.user.branch.id).apply()
 
                     goToMainMenu()
 

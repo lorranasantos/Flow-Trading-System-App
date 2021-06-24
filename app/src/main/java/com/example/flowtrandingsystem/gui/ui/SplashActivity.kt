@@ -11,7 +11,6 @@ class SplashActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash)
-
         supportActionBar?.hide()
 
         Handler(Looper.getMainLooper()).postDelayed({

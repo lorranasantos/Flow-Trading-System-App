@@ -24,8 +24,9 @@ class InventoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.inventory)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle("Produtos Desta Categoria")
 
-        supportActionBar!!.hide()
         rvItens = findViewById(R.id.recycler_view_inventory_list)
         rvItens.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -45,7 +46,6 @@ class InventoryActivity : AppCompatActivity() {
             prefs.getInt("ID", 0)
         val retrivedCompanyId =
             prefs.getInt("COMPANYID", 0)
-        Toast.makeText(this@InventoryActivity, "Id: ${retrivedId} IdComp: ${retrivedCompanyId} Token: ${retrivedToken}", Toast.LENGTH_LONG).show()
 
         var listaItens: List<Product>
         val retrofit = RetrofitApi.getRetrofit()

@@ -49,12 +49,14 @@ class CompanyInfoActivity() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.company_info)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle("Informações da Sua Empresa")
 
         toggle = ActionBarDrawerToggle(this, drawerLayoutCompanyInfo, R.string.open, R.string.close)
         drawerLayoutCompanyInfo.addDrawerListener(toggle)
         toggle.syncState()
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         companyName = findViewById(R.id.company_name)
         companyReason = findViewById(R.id.reason_of_company)

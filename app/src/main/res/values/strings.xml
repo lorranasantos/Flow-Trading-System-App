@@ -64,6 +64,13 @@
         <item>Decoração</item>
     </string-array>
 
+    <string-array name="payment_methods">
+        <item>Credito</item>
+        <item>Debito</item>
+        <item>Boleto</item>
+        <item>Paypal</item>
+    </string-array>
+
     <!--PDV Section-->
     <string name="product_code">Código do Produto</string>
     <string name="un_value">Valor Unitário</string>
@@ -78,6 +85,7 @@
     <string name="subtotal">SubTotal</string>
     <string name="discount">Adicionar Desconto</string>
     <string name="client_register">Cadastrar Cliente</string>
+    <string name="payment">Metodo de Pagamento</string>
     <string name="product">Produto</string>
 
 </resources>

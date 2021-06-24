@@ -20,7 +20,6 @@ class ScannerActivity : AppCompatActivity() {
     private lateinit var scanner_view: CodeScannerView
     private lateinit var tvTextView: TextView
     private lateinit var tvResultado: TextView
-    private lateinit var pdvActivityProductCode: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

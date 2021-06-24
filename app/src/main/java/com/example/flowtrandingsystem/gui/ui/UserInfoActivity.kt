@@ -49,12 +49,12 @@ class UserInfoActivity() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.user_info)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle("Informações do Seu Perfil")
 
         toggle = ActionBarDrawerToggle(this, drawerLayoutUserInfo, R.string.open, R.string.close)
         drawerLayoutUserInfo.addDrawerListener(toggle)
         toggle.syncState()
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         nameUser = findViewById(R.id.user_name)
         cpfUser = findViewById(R.id.cpf_from_user)

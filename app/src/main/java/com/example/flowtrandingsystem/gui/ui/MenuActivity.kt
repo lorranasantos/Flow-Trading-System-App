@@ -43,6 +43,8 @@ class MenuActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_initial_menu)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle("Menu Principal")
 
         inventoryOption = findViewById(R.id.option_inventory)
         pdvOption = findViewById(R.id.option_sell)
@@ -65,8 +67,6 @@ class MenuActivity : AppCompatActivity(){
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         main_navigation_view.setNavigationItemSelectedListener {
             when(it.itemId) {

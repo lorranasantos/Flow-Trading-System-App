@@ -25,6 +25,8 @@ class ProductTypeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_type)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle("Categorias de Produtos")
 
         rvProductCategories = findViewById(R.id.recycler_view_category_list)
         rvProductCategories.layoutManager =
