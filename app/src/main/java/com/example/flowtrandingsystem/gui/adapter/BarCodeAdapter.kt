@@ -56,14 +56,14 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
             list.add((listItens[position].cost_per_item * listItens[position].qtd).toInt())
         }
 
-        val cost_total: Double = list.reduce{total, currentElement -> total + currentElement}.toDouble()
+        val cost_total = list.reduce{total, currentElement -> total + currentElement}.toDouble()
+
+        val intent = Intent(context.applicationContext, PdvActivity::class.java)
+        intent.putExtra("totalValue", cost_total)
 
         Log.e("nada", cost_total.toString())
-
-        val intent = Intent(context, PdvActivity::class.java)
-        intent.putExtra("totalValue", cost_total as Serializable)
-
     }
+
 
     //inner class
     class Holder(view: View): RecyclerView.ViewHolder(view){

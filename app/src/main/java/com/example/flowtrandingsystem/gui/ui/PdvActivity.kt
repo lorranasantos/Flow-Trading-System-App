@@ -133,7 +133,7 @@ open class PdvActivity : AppCompatActivity(), Serializable {
 
                 adapterItensList.updateListProducts(listProducts.toList())
 
-                val valueAdapter: Double? = intent.getDoubleExtra("totalValue", 0.00)
+                val valueAdapter = intent.getStringExtra("totalValue").toString()
 
                 Toast.makeText(this@PdvActivity, "Valor Recebido: ${valueAdapter}", Toast.LENGTH_SHORT).show()
 
