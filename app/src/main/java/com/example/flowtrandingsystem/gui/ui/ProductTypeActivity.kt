@@ -52,7 +52,7 @@ class ProductTypeActivity : AppCompatActivity() {
 
         val categoriesList =
             prefs.getString("nome", "")
-        Toast.makeText(this@ProductTypeActivity, "Id: ${retrivedId} IdComp: ${categoriesList}  Token: ${retrivedToken}", Toast.LENGTH_LONG).show()
+//        Toast.makeText(this@ProductTypeActivity, "Id: ${retrivedId} IdComp: ${categoriesList}  Token: ${retrivedToken}", Toast.LENGTH_LONG).show()
 
         var categoryList: List<ProductType>
         val retrofit = RetrofitApi.getRetrofit()

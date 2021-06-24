@@ -80,7 +80,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         if(scannedCode.isEmpty()){
             addProductByCode()
         }else{
-            Toast.makeText(this, "Adicione seus produtos!", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Adicione seus produtos!", Toast.LENGTH_SHORT).show()
         }
     }
     private fun addProductByCode() {
