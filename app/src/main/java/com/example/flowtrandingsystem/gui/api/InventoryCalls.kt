@@ -12,3 +12,4 @@ interface InventoryCalls {
     fun getReports(@Path("branch") branch: Int, @Header("Authorization") token: String?): Call<ArrayList<ProductAdapter>>
 
 }
+

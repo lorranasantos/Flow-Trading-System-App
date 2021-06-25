@@ -28,11 +28,14 @@
             android:paddingStart="15dp">
 
             <EditText
-                android:layout_width="match_parent"
+                android:id="@+id/edit_search_product"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:hint="@string/find"/>
             <ImageView
-                android:layout_width="15dp"
+                android:id="@+id/btn_search_product"
+                android:layout_width="25dp"
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_baseline_search_24"/>
         </LinearLayout>

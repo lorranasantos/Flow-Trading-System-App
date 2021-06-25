@@ -41,7 +41,7 @@ class ProductsCategoriesAdapter (val context: Context): RecyclerView.Adapter<Pro
 
         holder.cardInventoryItems.setOnClickListener {
             val intent = Intent(context, InventoryActivity::class.java)
-            intent.putExtra("productType", recentCategories)
+            intent.putExtra("productType", recentCategories.type)
             context.startActivity(intent)
         }
     }

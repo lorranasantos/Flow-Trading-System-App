@@ -2,7 +2,6 @@ package com.example.flowtrandingsystem.gui.adapter
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,15 +10,15 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.model.Logbook
-import com.example.flowtrandingsystem.gui.model.Product
+import com.example.flowtrandingsystem.gui.model.ProductAdapter
 import com.example.flowtrandingsystem.gui.ui.DatasheetActivity
 
 class ItensInventoryAdapter (val context: Context) : RecyclerView.Adapter<ItensInventoryAdapter.Holder>() {
 
-    var listItens =  emptyList<Product>()
+    var listItens =  emptyList<ProductAdapter>()
     var listLog =  Logbook()
 
-    fun updateListaProdutos(lista: List<Product>){
+    fun updateListaProdutos(lista: List<ProductAdapter>){
         listItens = lista
         notifyDataSetChanged()
     }
@@ -38,10 +37,10 @@ class ItensInventoryAdapter (val context: Context) : RecyclerView.Adapter<ItensI
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val itensRecentes = listItens[position]
-        val logsRecentes = listLog
+//        val logsRecentes = listLog
 
         holder.tvNomeItem.text = itensRecentes.product_name
-        holder.tvQuantidade.text = logsRecentes.quantity_acquired.toString()
+        holder.tvQuantidade.text = itensRecentes.LogBookInventory.quantity_acquired.toString()
         holder.tvValor.text = itensRecentes.cost_per_item.toString()
 
         if(itensRecentes.cost_per_item <= 0){
@@ -52,7 +51,7 @@ class ItensInventoryAdapter (val context: Context) : RecyclerView.Adapter<ItensI
 
         holder.cardInventoryItems.setOnClickListener{
             val intent = Intent(context, DatasheetActivity::class.java)
-            intent.putExtra("product", itensRecentes)
+            intent.putExtra("productId", itensRecentes.id)
             context.startActivity(intent)
 
 //            val prefs: SharedPreferences = this@ItensInventoryAdapter.getSharedPreferences(

@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
@@ -19,11 +18,13 @@ import com.example.flowtrandingsystem.gui.api.CostumerCalls
 import com.example.flowtrandingsystem.gui.api.ProductCalls
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.SaleCalls
-import com.example.flowtrandingsystem.gui.model.*
+import com.example.flowtrandingsystem.gui.model.Costumer
+import com.example.flowtrandingsystem.gui.model.Itens
+import com.example.flowtrandingsystem.gui.model.ProductAdapter
+import com.example.flowtrandingsystem.gui.model.Sale
 import kotlinx.android.synthetic.main.add_discount_pdv.view.*
 import kotlinx.android.synthetic.main.add_payment_method_pdv.view.*
 import kotlinx.android.synthetic.main.client_register_pdv.view.*
-import kotlinx.android.synthetic.main.fragment_initial_menu.*
 import kotlinx.android.synthetic.main.pdv.*
 import retrofit2.Call
 import retrofit2.Response
@@ -36,6 +37,8 @@ open class PdvActivity : AppCompatActivity(), Serializable{
     lateinit var adapterItensList: BarCodeAdapter
     lateinit var editCpfClient: EditText
 
+    lateinit var subTotal: TextView
+
     lateinit var optionMethods: Spinner
 
     var listProducts: ArrayList<ProductAdapter> = ArrayList<ProductAdapter>()
@@ -47,6 +50,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         supportActionBar?.setTitle("PDV")
 
         rvItens = findViewById(R.id.recycler_view_product_sale)
+        subTotal = findViewById(R.id.subTotal_pdv)
 
         rvItens.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -95,54 +99,67 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         val editCode = findViewById<EditText>(R.id.pdv_activity_product_code)
         val editQtde = findViewById<EditText>(R.id.pdv_qtde_sale)
 
-        var itemProduct: ProductAdapter
+        if (editCode.text.isEmpty()){
+            Toast.makeText(this, "Insira o codigo do produto", Toast.LENGTH_SHORT).show()
+            }else{
+            var itemProduct: ProductAdapter
 
-        val retrofit = RetrofitApi.getRetrofit()
-        val productBarCode = retrofit.create(ProductCalls::class.java)
+            val retrofit = RetrofitApi.getRetrofit()
+            val productBarCode = retrofit.create(ProductCalls::class.java)
 
-        val call = productBarCode.getBarProduct(editCode.text.toString(), "Bearer ${retrivedToken}")
+            val call = productBarCode.getBarProduct(editCode.text.toString(), "Bearer ${retrivedToken}")
 
-        call.enqueue(object : retrofit2.Callback<ProductAdapter>{
+            call.enqueue(object : retrofit2.Callback<ProductAdapter>{
 
-            override fun onFailure(call: Call<ProductAdapter>, t: Throwable) {
-                Toast.makeText(this@PdvActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
-                Log.e("ERRO_CONEXÃO", t.message.toString())
-            }
-
-            override fun onResponse(call: Call<ProductAdapter>, response: Response<ProductAdapter>) {
-                itemProduct = response.body()!!
-
-                var quantity = 1
-
-                if(editQtde.text.isNotEmpty()) {
-                    quantity = editQtde.text.toString().toInt()
+                override fun onFailure(call: Call<ProductAdapter>, t: Throwable) {
+                    Toast.makeText(this@PdvActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
+                    Log.e("ERRO_CONEXÃO", t.message.toString())
                 }
 
-                val itemTotalValue = quantity * itemProduct.cost_per_item
+                override fun onResponse(call: Call<ProductAdapter>, response: Response<ProductAdapter>) {
+                    itemProduct = response.body()!!
 
-                val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences(
-                    "total",
-                    Context.MODE_PRIVATE
-                )
+                    var quantity = 1
 
-                prefs.edit().putFloat("total", itemTotalValue.toFloat()).apply()
-                prefs.edit().putString("iten", itemProduct.toString()).apply()
+                    if(editQtde.text.isNotEmpty()) {
+                        quantity = editQtde.text.toString().toInt()
+                    }
 
-                itemProduct.qtd = quantity
+                    val itemTotalValue = quantity * itemProduct.cost_per_item
 
-                listProducts.add(itemProduct)
+                    val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences(
+                        "total",
+                        Context.MODE_PRIVATE
+                    )
 
-                val codeIntent = Intent(this@PdvActivity, BarCodeAdapter::class.java)
-                codeIntent.putExtra("qtd", quantity)
+                    prefs.edit().putFloat("total", itemTotalValue.toFloat()).apply()
+                    prefs.edit().putString("iten", itemProduct.toString()).apply()
 
-                adapterItensList.updateListProducts(listProducts.toList())
+                    itemProduct.qtd = quantity
 
-                val valueAdapter = intent.getStringExtra("totalValue").toString()
+                    listProducts.add(itemProduct)
 
-//                Toast.makeText(this@PdvActivity, "Valor Recebido: ${valueAdapter}", Toast.LENGTH_SHORT).show()
+                    val codeIntent = Intent(this@PdvActivity, BarCodeAdapter::class.java)
+                    codeIntent.putExtra("qtd", quantity)
 
-            }
-        })
+                    adapterItensList.updateListProducts(listProducts.toList())
+
+                    val list = arrayListOf<Double>()
+
+                    for(item in listProducts){
+                        list.add((item.cost_per_item * item.qtd))
+
+                    }
+
+                    val cost_total = list.reduce{totalValue, currentItem -> totalValue + currentItem}.toDouble()
+
+                    Toast.makeText(this@PdvActivity, "Valor Recebido: ${cost_total}", Toast.LENGTH_SHORT).show()
+
+                   subTotal.text = "$${String.format("%.2f",cost_total)}"
+
+                }
+            })
+        }
     }
     private fun finishSale() {
 
