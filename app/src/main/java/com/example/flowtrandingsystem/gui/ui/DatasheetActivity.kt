@@ -34,8 +34,6 @@ class DatasheetActivity: AppCompatActivity() {
     private lateinit var acquisitionDate: TextView
     private lateinit var expiratonDate: TextView
 
-    private lateinit var product: ProductAdapter
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.datasheet)
