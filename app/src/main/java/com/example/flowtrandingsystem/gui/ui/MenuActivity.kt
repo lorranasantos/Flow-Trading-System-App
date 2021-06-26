@@ -40,12 +40,10 @@ class MenuActivity : AppCompatActivity(){
             val intentSell = Intent(this, PdvActivity::class.java)
             startActivity(intentSell)
         }
-
         reportOption.setOnClickListener{
             val intentReportCompany = Intent(this, ReportActivity::class.java)
             startActivity(intentReportCompany)
         }
-
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -59,28 +57,11 @@ class MenuActivity : AppCompatActivity(){
             }
             true
         }
-
-        val prefs: SharedPreferences =
-            this@MenuActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-
-        val retrivedToken =
-            prefs.getString("TOKEN", "Nada foi recebido")
-
-        val retrivedId =
-            prefs.getInt("ID", 0)
-
-        val retrivedCompanyId =
-            prefs.getInt("COMPANYID", 0)
-
-        val retrivedPermissions =
-            prefs.getString("PERMISSIONS", "Nada foi recebido")
-
-        Log.e("RESPONSE", "CENOURA: ${retrivedId}")
-        Log.e("RESPONSE", "ABOBORA: ${retrivedCompanyId}")
-        Log.e("RESPONSE", "BATATA: ${retrivedToken}")
-        Log.e("RESPONSE", "ABOBORA: ${retrivedPermissions}")
-
     }
+
+    val prefs: SharedPreferences = this@MenuActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+    val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
+
     private fun goToInfoCompany(){
         val companyScreen = Intent(this, CompanyInfoActivity::class.java)
         startActivity(companyScreen)
@@ -89,14 +70,14 @@ class MenuActivity : AppCompatActivity(){
         val loginScreen = Intent(this, MainActivity::class.java)
         startActivity(loginScreen)
     }
+    private fun goToInfoUser(){
+        val userScreen = Intent(this, UserInfoActivity::class.java)
+        startActivity(userScreen)
+    }
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)){
             drawerLayout.closeDrawer(drawerLayout)
         }
-    }
-    private fun goToInfoUser(){
-        val userScreen = Intent(this, UserInfoActivity::class.java)
-        startActivity(userScreen)
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(toggle.onOptionsItemSelected(item)) {

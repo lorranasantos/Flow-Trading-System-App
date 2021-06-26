@@ -46,20 +46,15 @@ class ReportActivity : AppCompatActivity() {
         anyChartView.setChart(pieChart)
 
         loadReports()
-
     }
+
+    val prefs: SharedPreferences = this@ReportActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+    val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
+    val retrivedId = prefs.getInt("ID", 0)
+    val retrivedCompanyId = prefs.getInt("COMPANYID", 0)
+    val retrivedBranchId = prefs.getInt("BRANCHID", 0)
+
     private  fun loadReports() {
-        //recuperar o token do sharedPreferences
-        val prefs: SharedPreferences =
-            this@ReportActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-        val retrivedToken =
-            prefs.getString("TOKEN", "Nada foi recebido")
-        val retrivedId =
-            prefs.getInt("ID", 0)
-        val retrivedCompanyId =
-            prefs.getInt("COMPANYID", 0)
-        val retrivedBranchId =
-            prefs.getInt("BRANCHID", 0)
 
         var report: ArrayList<ProductAdapter>
         val retrofit = RetrofitApi.getRetrofit()
@@ -67,6 +62,7 @@ class ReportActivity : AppCompatActivity() {
         val call = reportCall.getReports(retrivedBranchId, "Bearer ${retrivedToken}")
 
         call.enqueue(object : retrofit2.Callback<ArrayList<ProductAdapter>>{
+
             override fun onFailure(call: Call<ArrayList<ProductAdapter>>, t: Throwable) {
                 Toast.makeText(this@ReportActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                 Log.e("Erro_CONEXÃO", t.message.toString())
@@ -74,11 +70,8 @@ class ReportActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ArrayList<ProductAdapter>>, response: Response<ArrayList<ProductAdapter>>) {
                 report = response.body()!!
 
-                Toast.makeText(this@ReportActivity, "Data: $report", Toast.LENGTH_SHORT).show()
-
-
+                Toast.makeText(this@ReportActivity, "Dados: $report", Toast.LENGTH_SHORT).show()
             }
         })
     }
-
 }

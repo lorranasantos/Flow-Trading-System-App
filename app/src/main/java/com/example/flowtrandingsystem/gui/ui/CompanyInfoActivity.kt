@@ -52,46 +52,30 @@ class CompanyInfoActivity() : AppCompatActivity() {
             }
             true
         }
-
         loadInfo()
     }
-    private fun goToMenu(){
 
+    val prefs: SharedPreferences = this@CompanyInfoActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+    val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
+    val retrivedCompanyId = prefs.getInt("COMPANYID", 0)
+
+    private fun goToMenu(){
         val menuScreen = Intent(this, MenuActivity::class.java)
         startActivity(menuScreen)
     }
     private fun goToInfoUser(){
-
         val userScreen = Intent(this, UserInfoActivity::class.java)
         startActivity(userScreen)
     }
     private fun goToLogin(){
-
         val loginScreen = Intent(this, MainActivity::class.java)
         startActivity(loginScreen)
     }
     private  fun loadInfo() {
 
-        //recuperar o token do sharedPreferences
-        val prefs: SharedPreferences =
-            this@CompanyInfoActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-
-        val retrivedToken =
-            prefs.getString("TOKEN", "Nada foi recebido")
-
-        val retrivedId =
-            prefs.getInt("ID", 0)
-
-        val retrivedCompanyId =
-            prefs.getInt("COMPANYID", 0)
-
-        Log.e("RETRIEVED", "Id: ${retrivedId} CompanyId: ${retrivedCompanyId} Token: ${retrivedToken}")
-
         var companyInfo: Company
-
         val retrofit = RetrofitApi.getRetrofit()
         val companyCall = retrofit.create(CompanyCalls::class.java)
-
         val call = companyCall.getInfoFromCompany(retrivedCompanyId, "Bearer ${retrivedToken}")
 
         call.enqueue(object : retrofit2.Callback<Company>{
@@ -100,7 +84,6 @@ class CompanyInfoActivity() : AppCompatActivity() {
                 Toast.makeText(this@CompanyInfoActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                 Log.e("ERRO_CONEXÃO", t.message.toString())
             }
-
             override fun onResponse(call: Call<Company>, response: Response<Company>) {
                 companyInfo = response.body()!!
 
@@ -109,7 +92,6 @@ class CompanyInfoActivity() : AppCompatActivity() {
                 companyEmail.text = companyInfo.commercial_email
                 companyPlan.text = companyInfo.Plan.plan_name
                 companyBusiness.text = companyInfo.nature_of_the_business
-
             }
         })
     }
@@ -117,7 +99,6 @@ class CompanyInfoActivity() : AppCompatActivity() {
         if(toggle.onOptionsItemSelected(item)) {
             return true
         }
-
         return super.onOptionsItemSelected(item)
     }
 }

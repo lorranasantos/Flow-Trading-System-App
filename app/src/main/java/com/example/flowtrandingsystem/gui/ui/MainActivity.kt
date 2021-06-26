@@ -25,12 +25,6 @@ class MainActivity: AppCompatActivity() {
     private lateinit var editTextSenha: EditText
     private lateinit var token: Token
 
-    private fun goToMainMenu(){
-        val menuScreen = Intent(this, MenuActivity::class.java)
-        startActivity(menuScreen)
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
@@ -39,30 +33,20 @@ class MainActivity: AppCompatActivity() {
         editTextCpf = findViewById(R.id.editTextUser)
         editTextSenha = findViewById(R.id.editTextPassword)
 
-
-
         login_activity_button.setOnClickListener {
-
-//            if (CPFUtil.myValidateCPF(editTextCpf.text.toString()))
-//                showSnackFeedback("CPF valid", true, view)
-//            else
-//                showSnackFeedback("CPF Invalid", false, view)
             executarLogin()
         }
-
     }
 
-    fun executarLogin() {
+    private fun goToMainMenu(){
+        val menuScreen = Intent(this, MenuActivity::class.java)
+        startActivity(menuScreen)
+    }
+    private fun executarLogin() {
 
-        val usuario = UserLogin(
-            cnpj_ou_cpf = editTextCpf.text.toString(), password = editTextSenha.text.toString().replace(".", "").replace("-", "")
-        )
-
-        Log.e("Usuario", usuario.toString())
-
+        val usuario = UserLogin(cnpj_ou_cpf = editTextCpf.text.toString().replace(".", "").replace("-", ""), password = editTextSenha.text.toString())
         val retrofit = RetrofitApi.getRetrofit()
         val loginCall = retrofit.create(UserCalls::class.java)
-
         val call = loginCall.postLogin(usuario)
 
         call.enqueue(object : Callback<Token> {
@@ -76,16 +60,14 @@ class MainActivity: AppCompatActivity() {
                     token = response.body()!!
                     Log.e("RESPONSE", token.toString())
 
-                    //colocar o token no sharedPreferences
-
                     val prefs: SharedPreferences = this@MainActivity.getSharedPreferences(
                         "preferencias",
                         Context.MODE_PRIVATE
                     )
-
-                    val listPerm = listOf<Int>(0,1,2,3,4,5)
-
-                    val lista2 = listPerm.toString().toInt()
+//
+//                    val listPerm = listOf<Int>(0,1,2,3,4,5)
+//
+//                    val lista2 = listPerm.toString().toInt()
 
                     prefs.edit().putString("TOKEN", token.token).apply()
                     prefs.edit().putInt("ID", token.user.id).apply()
@@ -94,7 +76,6 @@ class MainActivity: AppCompatActivity() {
 //                    prefs.edit().putString("PERMISSIONS", token.user.permissions[0].toString()).apply()
 
                     goToMainMenu()
-
                 }else {
                     Toast.makeText(this@MainActivity, "CPF ou senha invalidos", Toast.LENGTH_LONG).show()
                 }

@@ -1,6 +1,7 @@
 package com.example.flowtrandingsystem.gui.ui
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.format.DateFormat.format
@@ -50,33 +51,25 @@ class DatasheetActivity: AppCompatActivity() {
         loadInfo()
     }
 
+    val prefs: SharedPreferences = this@DatasheetActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+    val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
+    val retrivedProductId: Int = intent.getIntExtra("productId", 0)
+
     private fun loadInfo() {
 
-        //recuperar o token do sharedPreferences
-        val prefs: SharedPreferences =
-            this@DatasheetActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-
-        val retrivedToken =
-            prefs.getString("TOKEN", "Nada foi recebido")
-
-        val retrivedProductId: Int = intent.getIntExtra("productId", 0)
-
         var productInfo: Logbook
-
         val retrofit = RetrofitApi.getRetrofit()
         val productCall = retrofit.create(ProductCalls::class.java)
         val call = productCall.getLogProductById(retrivedProductId, "Bearer ${retrivedToken}")
+
         call.enqueue(object : Callback<Logbook> {
 
             override fun onFailure(call: Call<Logbook>, t: Throwable) {
                 Toast.makeText(this@DatasheetActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                 Log.e("ERRO_CONEXÃO", t.message.toString())
             }
-
             override fun onResponse(call: Call<Logbook>, response: Response<Logbook>) {
                 productInfo = response.body()!!
-
-                Log.i("TESTE", response.body().toString())
 
                 val formatedacquisitionDate = productInfo.date_of_acquisition.split("-")
                 val formatedexpiratonDate = productInfo.Lot.expiration_date.split("-")
@@ -94,14 +87,16 @@ class DatasheetActivity: AppCompatActivity() {
                 )
 
                 prefs.edit().putString("typeProduct", productInfo.Product.ProductType.type).apply()
-
             }
         })
     }
-
-    override fun onBackPressed() {
-
-    }
+//
+//    override fun onBackPressed() {
+//
+//        val categoryIntent = Intent(this@DatasheetActivity, InventoryActivity::class.java)
+//        categoryIntent.putExtra("productType", productType.toString())
+//        startActivity(categoryIntent)
+//    }
 }
 
 

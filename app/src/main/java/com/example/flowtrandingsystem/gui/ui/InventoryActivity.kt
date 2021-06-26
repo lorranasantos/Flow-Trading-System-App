@@ -12,6 +12,7 @@ import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.ProductCalls
 import com.example.flowtrandingsystem.gui.model.ProductAdapter
+import kotlinx.android.synthetic.main.inventory.*
 import retrofit2.Call
 import retrofit2.Response
 
@@ -33,31 +34,20 @@ class InventoryActivity : AppCompatActivity() {
         adapterItensEstoque = ItensInventoryAdapter(this)
 
         rvItens.adapter = adapterItensEstoque
-        loadListaItens()
+
+        edit_search_product.setOnClickListener {
+            searchItens()
+        }
+        loadListItens()
     }
-//    override fun onBackPressed() {
-//        if (parentActivityIntent == ){
-//
-//        }
-//    }
-    private  fun loadListaItens() {
-        //recuperar o token do sharedPreferences
-        val prefs: SharedPreferences =
-            this@InventoryActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-        val retrivedToken =
-            prefs.getString("TOKEN", "Nada foi recebido")
-        val retrivedCompanyId =
-            prefs.getInt("COMPANYID", 0)
 
-        val prefsType: SharedPreferences =
-            this@InventoryActivity.getSharedPreferences("type", Context.MODE_PRIVATE)
+    val prefs: SharedPreferences = this@InventoryActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+    val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
+    val retrivedCompanyId = prefs.getInt("COMPANYID", 0)
+    val prefsType: SharedPreferences = this@InventoryActivity.getSharedPreferences("type", Context.MODE_PRIVATE)
+    val retrivedCategoryName: String = intent.getStringExtra("productType").toString()
 
-        val retrivedCategoryOnBack =
-            prefsType.getString("typeProduct", "Nada foi recebido")
-
-        val retrivedCategoryName: String = intent.getStringExtra("productType").toString()
-
-        Toast.makeText(this, "Tipo: ${retrivedCategoryName}", Toast.LENGTH_SHORT).show()
+    private  fun loadListItens() {
 
         var listaItens: List<ProductAdapter>
         val retrofit = RetrofitApi.getRetrofit()
@@ -65,6 +55,28 @@ class InventoryActivity : AppCompatActivity() {
         val call = produtosCall.getProductByCategorie(retrivedCompanyId, retrivedCategoryName, "Bearer ${retrivedToken}"
         )
         call.enqueue(object : retrofit2.Callback<List<ProductAdapter>>{
+            override fun onFailure(call: Call<List<ProductAdapter>>, t: Throwable) {
+                Toast.makeText(this@InventoryActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
+                Log.e("Erro_CONEXÃO", t.message.toString())
+            }
+            override fun onResponse(call: Call<List<ProductAdapter>>, response: Response<List<ProductAdapter>>) {
+                listaItens = (response.body())!!
+
+                adapterItensEstoque.updateListaProdutos(listaItens)
+            }
+        })
+    }
+    private fun searchItens() {
+
+        Toast.makeText(this, "Tipo: ${retrivedCategoryName}", Toast.LENGTH_SHORT).show()
+
+        var listaItens: List<ProductAdapter>
+        val retrofit = RetrofitApi.getRetrofit()
+        val produtosCall = retrofit.create(ProductCalls::class.java)
+        val call = produtosCall.getProductByCategorie(retrivedCompanyId, retrivedCategoryName, "Bearer ${retrivedToken}")
+
+        call.enqueue(object : retrofit2.Callback<List<ProductAdapter>>{
+
             override fun onFailure(call: Call<List<ProductAdapter>>, t: Throwable) {
                 Toast.makeText(this@InventoryActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                 Log.e("Erro_CONEXÃO", t.message.toString())

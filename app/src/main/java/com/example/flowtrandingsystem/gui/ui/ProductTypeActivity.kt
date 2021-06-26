@@ -35,36 +35,26 @@ class ProductTypeActivity : AppCompatActivity() {
         adapterProductsCategories = ProductsCategoriesAdapter(this)
 
         rvProductCategories.adapter = adapterProductsCategories
+
         loadCategoriesList()
     }
 
+    val prefs: SharedPreferences = this@ProductTypeActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+    val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
+
     private fun loadCategoriesList() {
-
-        //recuperar o token do sharedPreferences
-        val prefs: SharedPreferences =
-            this@ProductTypeActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-
-        val retrivedToken =
-            prefs.getString("TOKEN", "Nada foi recebido")
-
-        val retrivedId =
-            prefs.getInt("ID", 0)
-
-        val categoriesList =
-            prefs.getString("nome", "")
 
         var categoryList: List<ProductType>
         val retrofit = RetrofitApi.getRetrofit()
         val categoryCall = retrofit.create(ProductCalls::class.java)
-
         val call = categoryCall.getProductType("Bearer ${retrivedToken}")
 
         call.enqueue(object : retrofit2.Callback<List<ProductType>>{
+
             override fun onFailure(call: Call<List<ProductType>>, t: Throwable) {
                 Toast.makeText(this@ProductTypeActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                 Log.e("Erro_CONEXÃO", t.message.toString())
             }
-
             override fun onResponse(call: Call<List<ProductType>>, response: Response<List<ProductType>>) {
                 categoryList = response.body()!!
 

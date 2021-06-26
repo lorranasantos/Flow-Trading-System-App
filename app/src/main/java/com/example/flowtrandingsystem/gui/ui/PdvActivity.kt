@@ -75,9 +75,12 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         add_code.setOnClickListener {
             addProductByCode()
         }
-
         addProductByCamera()
     }
+
+    val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+    val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
+
     private fun addProductByCamera() {
         val scannedCode: String = intent.getStringExtra("barCode").toString()
 
@@ -89,24 +92,16 @@ open class PdvActivity : AppCompatActivity(), Serializable{
     }
     private fun addProductByCode() {
 
-        //recuperar o token do sharedPreferences
-        val prefs: SharedPreferences =
-            this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-
-        val retrivedToken =
-            prefs.getString("TOKEN", "Nada foi recebido")
-
         val editCode = findViewById<EditText>(R.id.pdv_activity_product_code)
         val editQtde = findViewById<EditText>(R.id.pdv_qtde_sale)
 
         if (editCode.text.isEmpty()){
-            Toast.makeText(this, "Insira o codigo do produto", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Insira ou escaneie  o codigo do produto", Toast.LENGTH_SHORT).show()
             }else{
-            var itemProduct: ProductAdapter
 
+            var itemProduct: ProductAdapter
             val retrofit = RetrofitApi.getRetrofit()
             val productBarCode = retrofit.create(ProductCalls::class.java)
-
             val call = productBarCode.getBarProduct(editCode.text.toString(), "Bearer ${retrivedToken}")
 
             call.enqueue(object : retrofit2.Callback<ProductAdapter>{
@@ -115,7 +110,6 @@ open class PdvActivity : AppCompatActivity(), Serializable{
                     Toast.makeText(this@PdvActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                     Log.e("ERRO_CONEXÃO", t.message.toString())
                 }
-
                 override fun onResponse(call: Call<ProductAdapter>, response: Response<ProductAdapter>) {
                     itemProduct = response.body()!!
 
@@ -190,18 +184,8 @@ open class PdvActivity : AppCompatActivity(), Serializable{
             alertShow.dismiss()
         }
         alerDialog.button_finish.setOnClickListener {
-            //recuperar o token do sharedPreferences
-            val prefs: SharedPreferences =
-                this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-
-            val retrivedToken =
-                prefs.getString("TOKEN", "Nada foi recebido")
-
-            val retrivedIten =
-                prefs.getString("iten", "Nada foi recebido")
 
             var sale = Sale(items = arrayOf(Itens()))
-
             val retrofit = RetrofitApi.getRetrofit()
             val saleCall = retrofit.create(SaleCalls::class.java)
 
@@ -225,7 +209,6 @@ open class PdvActivity : AppCompatActivity(), Serializable{
                     sale = response.body()!!
 
                     Toast.makeText(this@PdvActivity, "Venda finalizada!", Toast.LENGTH_SHORT).show()
-
                 }
             })
 
@@ -261,7 +244,6 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
             alertShow.dismiss()
         }
-
     }
     private fun clientRegister() {
 
@@ -279,27 +261,18 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
             editCpfClient = alerDialog.findViewById(R.id.edit_client_register_cpf)
 
-            val prefs: SharedPreferences =
-                this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-
-            val retrivedToken =
-                prefs.getString("TOKEN", "Nada foi recebido")
-
             var costumer = Costumer()
-
+            costumer.cpf = editCpfClient.text.toString()
             val retrofit = RetrofitApi.getRetrofit()
             val costumerCall = retrofit.create(CostumerCalls::class.java)
-
-            costumer.cpf = editCpfClient.text.toString()
-
             val call = costumerCall.postCostumer(costumer, token = "Bearer ${retrivedToken}")
 
             call.enqueue(object : retrofit2.Callback<Costumer>{
+
                 override fun onFailure(call: Call<Costumer>, t: Throwable) {
                     Toast.makeText(this@PdvActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                     Log.e("ERRO_CONEXÃO", t.message.toString())
                 }
-
                 override fun onResponse(call: Call<Costumer>, response: Response<Costumer>) {
                     costumer = response.body()!!
 
