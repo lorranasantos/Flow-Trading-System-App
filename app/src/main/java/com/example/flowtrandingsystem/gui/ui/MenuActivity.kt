@@ -20,25 +20,7 @@ class MenuActivity : AppCompatActivity(){
     private lateinit var pdvOption: LinearLayout
     private lateinit var reportOption: LinearLayout
 
-
     lateinit var toggle: ActionBarDrawerToggle
-
-    private fun goToInfoCompany(){
-
-        val companyScreen = Intent(this, CompanyInfoActivity::class.java)
-        startActivity(companyScreen)
-    }
-    private fun goToLogin(){
-
-        val loginScreen = Intent(this, MainActivity::class.java)
-        startActivity(loginScreen)
-
-    }
-    override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
-            drawerLayout.closeDrawer(drawerLayout)
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -90,25 +72,36 @@ class MenuActivity : AppCompatActivity(){
         val retrivedCompanyId =
             prefs.getInt("COMPANYID", 0)
 
+        val retrivedPermissions =
+            prefs.getString("PERMISSIONS", "Nada foi recebido")
+
         Log.e("RESPONSE", "CENOURA: ${retrivedId}")
         Log.e("RESPONSE", "ABOBORA: ${retrivedCompanyId}")
         Log.e("RESPONSE", "BATATA: ${retrivedToken}")
+        Log.e("RESPONSE", "ABOBORA: ${retrivedPermissions}")
 
     }
-
+    private fun goToInfoCompany(){
+        val companyScreen = Intent(this, CompanyInfoActivity::class.java)
+        startActivity(companyScreen)
+    }
+    private fun goToLogin(){
+        val loginScreen = Intent(this, MainActivity::class.java)
+        startActivity(loginScreen)
+    }
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(drawerLayout)
+        }
+    }
     private fun goToInfoUser(){
         val userScreen = Intent(this, UserInfoActivity::class.java)
         startActivity(userScreen)
-
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(toggle.onOptionsItemSelected(item)) {
             return true
         }
-
         return super.onOptionsItemSelected(item)
     }
-
-
 }

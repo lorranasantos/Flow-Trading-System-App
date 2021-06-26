@@ -27,25 +27,6 @@ class CompanyInfoActivity() : AppCompatActivity() {
     private lateinit var companyPlan : TextView
     private lateinit var companyBusiness : TextView
 
-
-    private fun goToMenu(){
-
-        val menuScreen = Intent(this, MenuActivity::class.java)
-        startActivity(menuScreen)
-    }
-
-    private fun goToInfoUser(){
-
-        val userScreen = Intent(this, UserInfoActivity::class.java)
-        startActivity(userScreen)
-    }
-
-    private fun goToLogin(){
-
-        val loginScreen = Intent(this, MainActivity::class.java)
-        startActivity(loginScreen)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.company_info)
@@ -55,8 +36,6 @@ class CompanyInfoActivity() : AppCompatActivity() {
         toggle = ActionBarDrawerToggle(this, drawerLayoutCompanyInfo, R.string.open, R.string.close)
         drawerLayoutCompanyInfo.addDrawerListener(toggle)
         toggle.syncState()
-
-
 
         companyName = findViewById(R.id.company_name)
         companyReason = findViewById(R.id.reason_of_company)
@@ -76,7 +55,21 @@ class CompanyInfoActivity() : AppCompatActivity() {
 
         loadInfo()
     }
+    private fun goToMenu(){
 
+        val menuScreen = Intent(this, MenuActivity::class.java)
+        startActivity(menuScreen)
+    }
+    private fun goToInfoUser(){
+
+        val userScreen = Intent(this, UserInfoActivity::class.java)
+        startActivity(userScreen)
+    }
+    private fun goToLogin(){
+
+        val loginScreen = Intent(this, MainActivity::class.java)
+        startActivity(loginScreen)
+    }
     private  fun loadInfo() {
 
         //recuperar o token do sharedPreferences
@@ -120,7 +113,6 @@ class CompanyInfoActivity() : AppCompatActivity() {
             }
         })
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(toggle.onOptionsItemSelected(item)) {
             return true

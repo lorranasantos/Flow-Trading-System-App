@@ -11,13 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.UserCalls
-import com.example.flowtrandingsystem.gui.model.Permissions
-import com.example.flowtrandingsystem.gui.model.Screens
 import com.example.flowtrandingsystem.gui.model.Token
 import com.example.flowtrandingsystem.gui.model.UserLogin
 import kotlinx.android.synthetic.main.main_activity.*
-import org.json.JSONArray
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,8 +39,14 @@ class MainActivity: AppCompatActivity() {
         editTextCpf = findViewById(R.id.editTextUser)
         editTextSenha = findViewById(R.id.editTextPassword)
 
+
+
         login_activity_button.setOnClickListener {
 
+//            if (CPFUtil.myValidateCPF(editTextCpf.text.toString()))
+//                showSnackFeedback("CPF valid", true, view)
+//            else
+//                showSnackFeedback("CPF Invalid", false, view)
             executarLogin()
         }
 
@@ -81,10 +83,15 @@ class MainActivity: AppCompatActivity() {
                         Context.MODE_PRIVATE
                     )
 
+                    val listPerm = listOf<Int>(0,1,2,3,4,5)
+
+                    val lista2 = listPerm.toString().toInt()
+
                     prefs.edit().putString("TOKEN", token.token).apply()
                     prefs.edit().putInt("ID", token.user.id).apply()
                     prefs.edit().putInt("COMPANYID", token.user.branch.company_id).apply()
                     prefs.edit().putInt("BRANCHID", token.user.branch.id).apply()
+//                    prefs.edit().putString("PERMISSIONS", token.user.permissions[0].toString()).apply()
 
                     goToMainMenu()
 
