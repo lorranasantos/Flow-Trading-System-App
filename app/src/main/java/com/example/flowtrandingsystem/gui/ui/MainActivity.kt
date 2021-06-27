@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.UserCalls
+import com.example.flowtrandingsystem.gui.model.Permissions
 import com.example.flowtrandingsystem.gui.model.Token
 import com.example.flowtrandingsystem.gui.model.UserLogin
 import kotlinx.android.synthetic.main.main_activity.*
@@ -40,6 +41,7 @@ class MainActivity: AppCompatActivity() {
 
     private fun goToMainMenu(){
         val menuScreen = Intent(this, MenuActivity::class.java)
+        intent.putExtra("permissionsUser", token.user.permissions.toString())
         startActivity(menuScreen)
     }
     private fun executarLogin() {
@@ -64,16 +66,14 @@ class MainActivity: AppCompatActivity() {
                         "preferencias",
                         Context.MODE_PRIVATE
                     )
-//
-//                    val listPerm = listOf<Int>(0,1,2,3,4,5)
-//
-//                    val lista2 = listPerm.toString().toInt()
 
                     prefs.edit().putString("TOKEN", token.token).apply()
                     prefs.edit().putInt("ID", token.user.id).apply()
                     prefs.edit().putInt("COMPANYID", token.user.branch.company_id).apply()
                     prefs.edit().putInt("BRANCHID", token.user.branch.id).apply()
-//                    prefs.edit().putString("PERMISSIONS", token.user.permissions[0].toString()).apply()
+
+                    //Tentar passar o usuario inteiro
+                    prefs.edit().putString("USER", token.user.toString()).apply()
 
                     goToMainMenu()
                 }else {

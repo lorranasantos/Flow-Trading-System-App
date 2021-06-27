@@ -51,11 +51,10 @@ class DatasheetActivity: AppCompatActivity() {
         loadInfo()
     }
 
-    val prefs: SharedPreferences = this@DatasheetActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-    val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
-    val retrivedProductId: Int = intent.getIntExtra("productId", 0)
-
     private fun loadInfo() {
+        val prefs: SharedPreferences = this@DatasheetActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+        val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
+        val retrivedProductId: Int = intent.getIntExtra("productId", 0)
 
         var productInfo: Logbook
         val retrofit = RetrofitApi.getRetrofit()

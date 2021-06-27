@@ -54,11 +54,6 @@ class CompanyInfoActivity() : AppCompatActivity() {
         }
         loadInfo()
     }
-
-    val prefs: SharedPreferences = this@CompanyInfoActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-    val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
-    val retrivedCompanyId = prefs.getInt("COMPANYID", 0)
-
     private fun goToMenu(){
         val menuScreen = Intent(this, MenuActivity::class.java)
         startActivity(menuScreen)
@@ -72,6 +67,9 @@ class CompanyInfoActivity() : AppCompatActivity() {
         startActivity(loginScreen)
     }
     private  fun loadInfo() {
+        val prefs: SharedPreferences = this@CompanyInfoActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+        val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
+        val retrivedCompanyId = prefs.getInt("COMPANYID", 0)
 
         var companyInfo: Company
         val retrofit = RetrofitApi.getRetrofit()

@@ -30,13 +30,13 @@ class ReportActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_report)
+        setContentView(R.layout.report)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setTitle("Relatorios")
 
         pieChart = AnyChart.pie()
 
-        var statement =  ArrayList<DataEntry>()
+        val statement =  ArrayList<DataEntry>()
         statement.add( ValueDataEntry("Lucro", 70))
         statement.add( ValueDataEntry("Prejuizo", 30))
 
@@ -48,13 +48,10 @@ class ReportActivity : AppCompatActivity() {
         loadReports()
     }
 
-    val prefs: SharedPreferences = this@ReportActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-    val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
-    val retrivedId = prefs.getInt("ID", 0)
-    val retrivedCompanyId = prefs.getInt("COMPANYID", 0)
-    val retrivedBranchId = prefs.getInt("BRANCHID", 0)
-
     private  fun loadReports() {
+        val prefs: SharedPreferences = this@ReportActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+        val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
+        val retrivedBranchId = prefs.getInt("BRANCHID", 0)
 
         var report: ArrayList<ProductAdapter>
         val retrofit = RetrofitApi.getRetrofit()

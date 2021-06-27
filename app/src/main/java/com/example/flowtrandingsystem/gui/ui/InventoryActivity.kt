@@ -3,6 +3,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.widget.EditText
 import android.widget.Toast
 import com.example.flowtrandingsystem.gui.adapter.ItensInventoryAdapter
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,7 @@ class InventoryActivity : AppCompatActivity() {
 
     lateinit var rvItens: RecyclerView
     lateinit var adapterItensEstoque: ItensInventoryAdapter
+    lateinit var editSrc: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,21 +35,25 @@ class InventoryActivity : AppCompatActivity() {
 
         adapterItensEstoque = ItensInventoryAdapter(this)
 
+        editSrc = findViewById(R.id.edit_search_product)
+
         rvItens.adapter = adapterItensEstoque
 
-        edit_search_product.setOnClickListener {
-            searchItens()
-        }
         loadListItens()
+
+        btn_search_product.setOnClickListener {
+            if (editSrc.text.isNotEmpty()){
+                searchItens()
+            }else{
+                loadListItens()
+            }
+        }
     }
-
-    val prefs: SharedPreferences = this@InventoryActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-    val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
-    val retrivedCompanyId = prefs.getInt("COMPANYID", 0)
-    val prefsType: SharedPreferences = this@InventoryActivity.getSharedPreferences("type", Context.MODE_PRIVATE)
-    val retrivedCategoryName: String = intent.getStringExtra("productType").toString()
-
     private  fun loadListItens() {
+        val prefs: SharedPreferences = this@InventoryActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+        val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
+        val retrivedCompanyId = prefs.getInt("COMPANYID", 0)
+        val retrivedCategoryName: String = intent.getStringExtra("productType").toString()
 
         var listaItens: List<ProductAdapter>
         val retrofit = RetrofitApi.getRetrofit()
@@ -67,13 +73,15 @@ class InventoryActivity : AppCompatActivity() {
         })
     }
     private fun searchItens() {
-
-        Toast.makeText(this, "Tipo: ${retrivedCategoryName}", Toast.LENGTH_SHORT).show()
+        val prefs: SharedPreferences = this@InventoryActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+        val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
+        val retrivedCompanyId = prefs.getInt("COMPANYID", 0)
+        val retrivedCategoryName: String = intent.getStringExtra("productType").toString()
 
         var listaItens: List<ProductAdapter>
         val retrofit = RetrofitApi.getRetrofit()
         val produtosCall = retrofit.create(ProductCalls::class.java)
-        val call = produtosCall.getProductByCategorie(retrivedCompanyId, retrivedCategoryName, "Bearer ${retrivedToken}")
+        val call = produtosCall.getProductBySearch(retrivedCompanyId, editSrc.text.toString(), retrivedCategoryName,"Bearer ${retrivedToken}")
 
         call.enqueue(object : retrofit2.Callback<List<ProductAdapter>>{
 

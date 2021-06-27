@@ -24,7 +24,7 @@ class ProductTypeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_product_type)
+        setContentView(R.layout.product_type)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setTitle("Categorias de Produtos")
 
@@ -39,10 +39,9 @@ class ProductTypeActivity : AppCompatActivity() {
         loadCategoriesList()
     }
 
-    val prefs: SharedPreferences = this@ProductTypeActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-    val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
-
     private fun loadCategoriesList() {
+        val prefs: SharedPreferences = this@ProductTypeActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+        val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
 
         var categoryList: List<ProductType>
         val retrofit = RetrofitApi.getRetrofit()

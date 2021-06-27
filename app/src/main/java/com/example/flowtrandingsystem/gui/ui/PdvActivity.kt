@@ -78,9 +78,6 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         addProductByCamera()
     }
 
-    val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-    val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
-
     private fun addProductByCamera() {
         val scannedCode: String = intent.getStringExtra("barCode").toString()
 
@@ -91,6 +88,8 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         }
     }
     private fun addProductByCode() {
+        val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+        val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
 
         val editCode = findViewById<EditText>(R.id.pdv_activity_product_code)
         val editQtde = findViewById<EditText>(R.id.pdv_qtde_sale)
@@ -156,6 +155,8 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         }
     }
     private fun finishSale() {
+        val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+        val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
 
         val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_payment_method_pdv, null)
         val dialogBuilder = AlertDialog.Builder(this)
@@ -174,9 +175,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 Toast.makeText(this@PdvActivity, "Selecione uma opção", Toast.LENGTH_SHORT).show()
             }
-
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
             }
         }
 
@@ -246,6 +245,8 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         }
     }
     private fun clientRegister() {
+        val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+        val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
 
         val alerDialog = LayoutInflater.from(this).inflate(R.layout.client_register_pdv, null)
         val dialogBuilder = AlertDialog.Builder(this)
@@ -262,7 +263,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
             editCpfClient = alerDialog.findViewById(R.id.edit_client_register_cpf)
 
             var costumer = Costumer()
-            costumer.cpf = editCpfClient.text.toString()
+            costumer.cpf = editCpfClient.text.toString().replace(".", "").replace("-", "")
             val retrofit = RetrofitApi.getRetrofit()
             val costumerCall = retrofit.create(CostumerCalls::class.java)
             val call = costumerCall.postCostumer(costumer, token = "Bearer ${retrivedToken}")

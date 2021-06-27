@@ -59,9 +59,6 @@ class MenuActivity : AppCompatActivity(){
         }
     }
 
-    val prefs: SharedPreferences = this@MenuActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-    val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
-
     private fun goToInfoCompany(){
         val companyScreen = Intent(this, CompanyInfoActivity::class.java)
         startActivity(companyScreen)

@@ -24,6 +24,10 @@ interface ProductCalls {
     @GET("/company/{companyId}/product?")
     fun getProductByCategorie(@Path("companyId") companyId: Int, @Query("product_type") product_type: String, @Header("Authorization") token: String?): Call<List<ProductAdapter>>
 
+    @GET("/company/{companyId}/product?")
+    fun getProductBySearch(
+        @Path("companyId") companyId: Int, @Query("product_name") product_name: String, @Query("product_type") product_type: String, @Header("Authorization") token: String?): Call<List<ProductAdapter>>
+
 }
 
 
