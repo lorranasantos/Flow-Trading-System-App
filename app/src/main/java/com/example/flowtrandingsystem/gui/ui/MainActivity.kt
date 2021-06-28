@@ -41,7 +41,7 @@ class MainActivity: AppCompatActivity() {
 
     private fun goToMainMenu(){
         val menuScreen = Intent(this, MenuActivity::class.java)
-        intent.putExtra("permissionsUser", token.user.permissions.toString())
+        intent.putExtra("permissionsUser", token.user.toString())
         startActivity(menuScreen)
     }
     private fun executarLogin() {
@@ -67,13 +67,12 @@ class MainActivity: AppCompatActivity() {
                         Context.MODE_PRIVATE
                     )
 
+                    //Tentar passar a permissao usuario inteiro
+                    prefs.edit().putString("USER", token.user.toString()).apply()
                     prefs.edit().putString("TOKEN", token.token).apply()
                     prefs.edit().putInt("ID", token.user.id).apply()
                     prefs.edit().putInt("COMPANYID", token.user.branch.company_id).apply()
                     prefs.edit().putInt("BRANCHID", token.user.branch.id).apply()
-
-                    //Tentar passar o usuario inteiro
-                    prefs.edit().putString("USER", token.user.toString()).apply()
 
                     goToMainMenu()
                 }else {

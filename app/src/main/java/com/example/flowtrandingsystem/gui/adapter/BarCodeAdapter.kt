@@ -50,15 +50,6 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
 
         holder.tvpdvTotalValue.text = "$${String.format("%.2f",recentItems.cost_per_item * recentItems.qtd)}"
 
-//        val list = arrayListOf<Int>()
-//
-//        for(i in listItens){
-//            list.add((listItens[position].cost_per_item * listItens[position].qtd).toInt())
-//        }
-//
-//        val cost_total = list.reduce{total, currentElement -> total + currentElement}.toDouble()
-//
-//        Log.e("Pedro:", cost_total.toString())
     }
 
 

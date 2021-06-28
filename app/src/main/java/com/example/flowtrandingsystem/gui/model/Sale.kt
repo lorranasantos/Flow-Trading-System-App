@@ -5,5 +5,6 @@ import java.io.Serializable
 data class Sale(
     var payment_method_id: Int = 0,
     var branch_id: Int = 0,
-    var items: Array<Itens>
+    var discount: Int = 0,
+    var items: Array<ProductAdapter>
 ) : Serializable

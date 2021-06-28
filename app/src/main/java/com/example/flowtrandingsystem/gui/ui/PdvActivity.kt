@@ -18,10 +18,7 @@ import com.example.flowtrandingsystem.gui.api.CostumerCalls
 import com.example.flowtrandingsystem.gui.api.ProductCalls
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.SaleCalls
-import com.example.flowtrandingsystem.gui.model.Costumer
-import com.example.flowtrandingsystem.gui.model.Itens
-import com.example.flowtrandingsystem.gui.model.ProductAdapter
-import com.example.flowtrandingsystem.gui.model.Sale
+import com.example.flowtrandingsystem.gui.model.*
 import kotlinx.android.synthetic.main.add_discount_pdv.view.*
 import kotlinx.android.synthetic.main.add_payment_method_pdv.view.*
 import kotlinx.android.synthetic.main.client_register_pdv.view.*
@@ -36,6 +33,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
     lateinit var rvItens: RecyclerView
     lateinit var adapterItensList: BarCodeAdapter
     lateinit var editCpfClient: EditText
+//    lateinit var tvDiscount: TextView
 
     lateinit var subTotal: TextView
 
@@ -78,7 +76,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         addProductByCamera()
     }
 
-    private fun addProductByCamera() {
+    fun addProductByCamera() {
         val scannedCode: String = intent.getStringExtra("barCode").toString()
 
         if(scannedCode.isEmpty()){
@@ -87,7 +85,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 //            Toast.makeText(this, "Adicione seus produtos!", Toast.LENGTH_SHORT).show()
         }
     }
-    private fun addProductByCode() {
+    fun addProductByCode() {
         val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
         val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
 
@@ -146,7 +144,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
                     val cost_total = list.reduce{totalValue, currentItem -> totalValue + currentItem}.toDouble()
 
-                    Toast.makeText(this@PdvActivity, "Valor Recebido: ${cost_total}", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this@PdvActivity, "Valor Recebido: ${cost_total}", Toast.LENGTH_SHORT).show()
 
                    subTotal.text = "$${String.format("%.2f",cost_total)}"
 
@@ -154,69 +152,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
             })
         }
     }
-    private fun finishSale() {
-        val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-        val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
-
-        val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_payment_method_pdv, null)
-        val dialogBuilder = AlertDialog.Builder(this)
-            .setView(alerDialog)
-        val alertShow = dialogBuilder.show()
-
-        alertShow.setCanceledOnTouchOutside(false)
-
-        optionMethods = alerDialog.findViewById(R.id.spinner_methods) as Spinner
-
-        val options = arrayOf("Debito", "Credito", "Boleto", "Paypal")
-
-        optionMethods.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options)
-
-        optionMethods.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                Toast.makeText(this@PdvActivity, "Selecione uma opção", Toast.LENGTH_SHORT).show()
-            }
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            }
-        }
-
-        alerDialog.button_cancel_sale.setOnClickListener {
-            alertShow.dismiss()
-        }
-        alerDialog.button_finish.setOnClickListener {
-
-            var sale = Sale(items = arrayOf(Itens()))
-            val retrofit = RetrofitApi.getRetrofit()
-            val saleCall = retrofit.create(SaleCalls::class.java)
-
-            sale.payment_method_id = 1
-            sale.branch_id = 1
-            sale.items = emptyArray<Itens>()
-
-            val call = saleCall.postSale(sale, token = "Bearer ${retrivedToken}")
-
-            call.enqueue(object : retrofit2.Callback<Sale> {
-                override fun onFailure(call: Call<Sale>, t: Throwable) {
-                    Toast.makeText(
-                        this@PdvActivity,
-                        "Ops! Acho que ocorreu um problema.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    Log.e("ERRO_CONEXÃO", t.message.toString())
-                }
-
-                override fun onResponse(call: Call<Sale>, response: Response<Sale>) {
-                    sale = response.body()!!
-
-                    Toast.makeText(this@PdvActivity, "Venda finalizada!", Toast.LENGTH_SHORT).show()
-                }
-            })
-
-            alertShow.dismiss()
-            finish()
-            startActivity(getIntent())
-        }
-    }
-    private fun addDiscount() {
+    fun addDiscount() {
 
         val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_discount_pdv, null)
         val dialogBuilder = AlertDialog.Builder(this)
@@ -240,48 +176,135 @@ open class PdvActivity : AppCompatActivity(), Serializable{
             }else{
                 finalDiscount.text = "$editDiscountPdv%"
             }
+            val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences(
+                "preferencias",
+                Context.MODE_PRIVATE
+            )
 
+            prefs.edit().putInt("DISCOUNT", finalDiscount.toString().replace("%", "").toInt()).apply()
             alertShow.dismiss()
         }
     }
-    private fun clientRegister() {
+    fun finishSale(){
         val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
         val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
+        val retrivedBranchId = prefs.getInt("BRANCHID", 0)
+        val retrivedIten = prefs.getString("iten", "Nada foi recebido")
+        val retrivedDiscount = prefs.getInt("DISCOUNT", 0)
 
-        val alerDialog = LayoutInflater.from(this).inflate(R.layout.client_register_pdv, null)
+        val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_payment_method_pdv, null)
         val dialogBuilder = AlertDialog.Builder(this)
             .setView(alerDialog)
         val alertShow = dialogBuilder.show()
 
         alertShow.setCanceledOnTouchOutside(false)
 
-        alerDialog.button_cancel_client_register.setOnClickListener {
+        optionMethods = alerDialog.findViewById(R.id.spinner_methods) as Spinner
+
+//        var options: PaymentMethod
+//        val retrofit = RetrofitApi.getRetrofit()
+//        val paymentCall = retrofit.create(SaleCalls::class.java)
+//        val call = paymentCall.getLogPaymentMethod("Bearer ${retrivedToken}")
+//
+//        call.enqueue(object : retrofit2.Callback<PaymentMethod>{
+//
+//            override fun onFailure(call: Call<PaymentMethod>, t: Throwable) {
+//                Toast.makeText(this@PdvActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
+//                Log.e("ERRO_CONEXÃO", t.message.toString())
+//            }
+//            override fun onResponse(call: Call<PaymentMethod>, response: Response<PaymentMethod>) {
+//                options = response.body()!!
+
+            val options = arrayOf("Debito", "Credito")
+
+        optionMethods.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options)
+
+        optionMethods.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                Toast.makeText(this@PdvActivity, "Selecione uma opção", Toast.LENGTH_SHORT).show()
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            }
+        }
+        alerDialog.button_cancel_sale.setOnClickListener {
             alertShow.dismiss()
         }
-        alerDialog.button_save_client_register.setOnClickListener {
+        alerDialog.button_finish.setOnClickListener {
 
-            editCpfClient = alerDialog.findViewById(R.id.edit_client_register_cpf)
+            var sale = Sale(payment_method_id = 1, branch_id = retrivedBranchId, items = emptyArray<ProductAdapter>())
 
-            var costumer = Costumer()
-            costumer.cpf = editCpfClient.text.toString().replace(".", "").replace("-", "")
+            if (retrivedDiscount.toString() == "0" || retrivedDiscount.toString() == ""){
+                sale.discount = 0
+            }else{
+                sale.discount = retrivedDiscount
+            }
+
+            sale.items = arrayOf<ProductAdapter>()
+
             val retrofit = RetrofitApi.getRetrofit()
-            val costumerCall = retrofit.create(CostumerCalls::class.java)
-            val call = costumerCall.postCostumer(costumer, token = "Bearer ${retrivedToken}")
+            val saleCall = retrofit.create(SaleCalls::class.java)
+            val call = saleCall.postSale(sale, "Bearer ${retrivedToken}")
 
-            call.enqueue(object : retrofit2.Callback<Costumer>{
-
-                override fun onFailure(call: Call<Costumer>, t: Throwable) {
-                    Toast.makeText(this@PdvActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
+            call.enqueue(object : retrofit2.Callback<Sale> {
+                override fun onFailure(call: Call<Sale>, t: Throwable) {
+                    Toast.makeText(
+                        this@PdvActivity,
+                        "Ops! Acho que ocorreu um problema.",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     Log.e("ERRO_CONEXÃO", t.message.toString())
                 }
-                override fun onResponse(call: Call<Costumer>, response: Response<Costumer>) {
-                    costumer = response.body()!!
 
-                    Toast.makeText(this@PdvActivity, "Cliente do CPF: ${costumer.cpf} Cadstrado!", Toast.LENGTH_SHORT).show()
+                override fun onResponse(call: Call<Sale>, response: Response<Sale>) {
+                    sale = response.body()!!
 
-                    alertShow.dismiss()
+                    Toast.makeText(this@PdvActivity, "${retrivedDiscount}  +  $sale", Toast.LENGTH_SHORT).show()
                 }
             })
+
+            alertShow.dismiss()
+            finish()
+            startActivity(getIntent())
         }
     }
+    private fun clientRegister() {
+            val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+            val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
+
+            val alerDialog = LayoutInflater.from(this).inflate(R.layout.client_register_pdv, null)
+            val dialogBuilder = AlertDialog.Builder(this)
+                .setView(alerDialog)
+            val alertShow = dialogBuilder.show()
+
+            alertShow.setCanceledOnTouchOutside(false)
+
+            alerDialog.button_cancel_client_register.setOnClickListener {
+                alertShow.dismiss()
+            }
+            alerDialog.button_save_client_register.setOnClickListener {
+
+                editCpfClient = alerDialog.findViewById(R.id.edit_client_register_cpf)
+
+                var costumer = Costumer()
+                costumer.cpf = editCpfClient.text.toString().replace(".", "").replace("-", "")
+                val retrofit = RetrofitApi.getRetrofit()
+                val costumerCall = retrofit.create(CostumerCalls::class.java)
+                val call = costumerCall.postCostumer(costumer, token = "Bearer ${retrivedToken}")
+
+                call.enqueue(object : retrofit2.Callback<Costumer>{
+
+                    override fun onFailure(call: Call<Costumer>, t: Throwable) {
+                        Toast.makeText(this@PdvActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
+                        Log.e("ERRO_CONEXÃO", t.message.toString())
+                    }
+                    override fun onResponse(call: Call<Costumer>, response: Response<Costumer>) {
+                        costumer = response.body()!!
+
+                        Toast.makeText(this@PdvActivity, "Cliente do CPF: ${costumer.cpf} Cadstrado!", Toast.LENGTH_SHORT).show()
+
+                        alertShow.dismiss()
+                    }
+                })
+            }
+        }
 }

@@ -37,8 +37,14 @@ class MenuActivity : AppCompatActivity(){
             startActivity(intentInventory)
         }
         pdvOption.setOnClickListener{
+
+            val prefs: SharedPreferences = this@MenuActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+            val retrivedUser = prefs.getString("USER", "Nada foi recebido")
+
+            Toast.makeText(this, "permissao:${retrivedUser}", Toast.LENGTH_SHORT).show()
+
             val intentSell = Intent(this, PdvActivity::class.java)
-            startActivity(intentSell)
+                startActivity(intentSell)
         }
         reportOption.setOnClickListener{
             val intentReportCompany = Intent(this, ReportActivity::class.java)
