@@ -33,7 +33,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
     lateinit var rvItens: RecyclerView
     lateinit var adapterItensList: BarCodeAdapter
     lateinit var editCpfClient: EditText
-//    lateinit var tvDiscount: TextView
+    lateinit var tvDiscount: TextView
 
     lateinit var subTotal: TextView
 
@@ -165,27 +165,27 @@ open class PdvActivity : AppCompatActivity(), Serializable{
             alertShow.dismiss()
         }
         alerDialog.button_save_discount.setOnClickListener {
-            var editDiscountPdv = alerDialog.edit_add_discount_pdv.text.toString()
+            var editDiscountPdv = alerDialog.edit_add_discount_pdv.text.toString().toInt()
 
-            val finalDiscount = findViewById<TextView>(R.id.final_discount)
+            tvDiscount.text = final_discount.toString()
 
             Toast.makeText(this, "Desconto aplicado!", Toast.LENGTH_SHORT).show()
 
-            if (editDiscountPdv.isEmpty()){
-                editDiscountPdv = 0.toString()
+            if (editDiscountPdv.toString().isEmpty()){
+                tvDiscount.text = 0.toString()
             }else{
-                finalDiscount.text = "$editDiscountPdv%"
+                tvDiscount.text = editDiscountPdv.toString()
             }
             val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences(
                 "preferencias",
                 Context.MODE_PRIVATE
             )
-
-            prefs.edit().putInt("DISCOUNT", finalDiscount.toString().replace("%", "").toInt()).apply()
+            prefs.edit().putInt("DISCOUNT", tvDiscount.text.toString().replace("%","").toInt()).apply()
             alertShow.dismiss()
         }
     }
     fun finishSale(){
+
         val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
         val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
         val retrivedBranchId = prefs.getInt("BRANCHID", 0)
@@ -233,11 +233,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
             var sale = Sale(payment_method_id = 1, branch_id = retrivedBranchId, items = emptyArray<ProductAdapter>())
 
-            if (retrivedDiscount.toString() == "0" || retrivedDiscount.toString() == ""){
-                sale.discount = 0
-            }else{
-                sale.discount = retrivedDiscount
-            }
+            sale.discount = tvDiscount.text.toString().toInt()
 
             sale.items = arrayOf<ProductAdapter>()
 
@@ -258,13 +254,14 @@ open class PdvActivity : AppCompatActivity(), Serializable{
                 override fun onResponse(call: Call<Sale>, response: Response<Sale>) {
                     sale = response.body()!!
 
-                    Toast.makeText(this@PdvActivity, "${retrivedDiscount}  +  $sale", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@PdvActivity, sale.discount, Toast.LENGTH_SHORT).show()
                 }
             })
 
             alertShow.dismiss()
             finish()
             startActivity(getIntent())
+            Toast.makeText(this, retrivedIten, Toast.LENGTH_SHORT).show()
         }
     }
     private fun clientRegister() {

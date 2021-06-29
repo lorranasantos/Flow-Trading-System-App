@@ -315,7 +315,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/pdv_title_radius"
-            android:text="@string/discount"
+            android:text="@string/add_discount"
             android:textColor="@color/white"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="@+id/linear_add_discount"
