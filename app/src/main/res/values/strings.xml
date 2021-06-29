@@ -85,6 +85,7 @@
     <string name="subtotal">SubTotal</string>
     <string name="add_discount">Adicionar Desconto</string>
     <string name="discount">Desconto</string>
+    <string name="finish">Finalizar</string>
     <string name="client_register">Cadastrar Cliente</string>
     <string name="payment">Metodo de Pagamento</string>
     <string name="product">Produto</string>

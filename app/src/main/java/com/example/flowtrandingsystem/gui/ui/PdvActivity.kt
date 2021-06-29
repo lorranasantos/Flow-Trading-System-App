@@ -19,7 +19,6 @@ import com.example.flowtrandingsystem.gui.api.ProductCalls
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.SaleCalls
 import com.example.flowtrandingsystem.gui.model.*
-import kotlinx.android.synthetic.main.add_discount_pdv.view.*
 import kotlinx.android.synthetic.main.add_payment_method_pdv.view.*
 import kotlinx.android.synthetic.main.client_register_pdv.view.*
 import kotlinx.android.synthetic.main.pdv.*
@@ -33,7 +32,6 @@ open class PdvActivity : AppCompatActivity(), Serializable{
     lateinit var rvItens: RecyclerView
     lateinit var adapterItensList: BarCodeAdapter
     lateinit var editCpfClient: EditText
-    lateinit var tvDiscount: TextView
 
     lateinit var subTotal: TextView
 
@@ -45,7 +43,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pdv)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setTitle("PDV")
+        supportActionBar?.title = "PDV"
 
         rvItens = findViewById(R.id.recycler_view_product_sale)
         subTotal = findViewById(R.id.subTotal_pdv)
@@ -60,9 +58,6 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         pdv_client_register.setOnClickListener {
             clientRegister()
         }
-        pdv_add_discount.setOnClickListener {
-            addDiscount()
-        }
         img_camera_code.setOnClickListener {
             val scanScreen = Intent(this, ScannerActivity::class.java)
             startActivity(scanScreen)
@@ -75,26 +70,23 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         }
         addProductByCamera()
     }
-
     fun addProductByCamera() {
+        val editCode = findViewById<EditText>(R.id.pdv_activity_product_code)
         val scannedCode: String = intent.getStringExtra("barCode").toString()
 
-        if(scannedCode.isEmpty()){
-            addProductByCode()
+        if(scannedCode == "null"){
+            Toast.makeText(this, "Insira ou escaneie o código", Toast.LENGTH_SHORT).show()
         }else{
-//            Toast.makeText(this, "Adicione seus produtos!", Toast.LENGTH_SHORT).show()
+            editCode.setText(scannedCode)
+            addProductByCode()
         }
     }
     fun addProductByCode() {
         val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
         val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
 
-        val editCode = findViewById<EditText>(R.id.pdv_activity_product_code)
         val editQtde = findViewById<EditText>(R.id.pdv_qtde_sale)
-
-        if (editCode.text.isEmpty()){
-            Toast.makeText(this, "Insira ou escaneie  o codigo do produto", Toast.LENGTH_SHORT).show()
-            }else{
+        val editCode = findViewById<EditText>(R.id.pdv_activity_product_code)
 
             var itemProduct: ProductAdapter
             val retrofit = RetrofitApi.getRetrofit()
@@ -139,58 +131,20 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
                     for(item in listProducts){
                         list.add((item.cost_per_item * item.qtd))
-
                     }
 
                     val cost_total = list.reduce{totalValue, currentItem -> totalValue + currentItem}.toDouble()
-
-//                    Toast.makeText(this@PdvActivity, "Valor Recebido: ${cost_total}", Toast.LENGTH_SHORT).show()
 
                    subTotal.text = "$${String.format("%.2f",cost_total)}"
 
                 }
             })
-        }
-    }
-    fun addDiscount() {
-
-        val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_discount_pdv, null)
-        val dialogBuilder = AlertDialog.Builder(this)
-            .setView(alerDialog)
-        val alertShow = dialogBuilder.show()
-
-        alertShow.setCanceledOnTouchOutside(false)
-
-        alerDialog.button_cancel_discount.setOnClickListener {
-            alertShow.dismiss()
-        }
-        alerDialog.button_save_discount.setOnClickListener {
-            var editDiscountPdv = alerDialog.edit_add_discount_pdv.text.toString().toInt()
-
-            tvDiscount.text = final_discount.toString()
-
-            Toast.makeText(this, "Desconto aplicado!", Toast.LENGTH_SHORT).show()
-
-            if (editDiscountPdv.toString().isEmpty()){
-                tvDiscount.text = 0.toString()
-            }else{
-                tvDiscount.text = editDiscountPdv.toString()
-            }
-            val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences(
-                "preferencias",
-                Context.MODE_PRIVATE
-            )
-            prefs.edit().putInt("DISCOUNT", tvDiscount.text.toString().replace("%","").toInt()).apply()
-            alertShow.dismiss()
-        }
     }
     fun finishSale(){
-
         val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
         val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
         val retrivedBranchId = prefs.getInt("BRANCHID", 0)
         val retrivedIten = prefs.getString("iten", "Nada foi recebido")
-        val retrivedDiscount = prefs.getInt("DISCOUNT", 0)
 
         val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_payment_method_pdv, null)
         val dialogBuilder = AlertDialog.Builder(this)
@@ -201,21 +155,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
         optionMethods = alerDialog.findViewById(R.id.spinner_methods) as Spinner
 
-//        var options: PaymentMethod
-//        val retrofit = RetrofitApi.getRetrofit()
-//        val paymentCall = retrofit.create(SaleCalls::class.java)
-//        val call = paymentCall.getLogPaymentMethod("Bearer ${retrivedToken}")
-//
-//        call.enqueue(object : retrofit2.Callback<PaymentMethod>{
-//
-//            override fun onFailure(call: Call<PaymentMethod>, t: Throwable) {
-//                Toast.makeText(this@PdvActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
-//                Log.e("ERRO_CONEXÃO", t.message.toString())
-//            }
-//            override fun onResponse(call: Call<PaymentMethod>, response: Response<PaymentMethod>) {
-//                options = response.body()!!
-
-            val options = arrayOf("Debito", "Credito")
+        val options = arrayOf("Debito", "Credito", "Boleto", "PicPay")
 
         optionMethods.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options)
 
@@ -226,14 +166,21 @@ open class PdvActivity : AppCompatActivity(), Serializable{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
             }
         }
+
+        val editDiscountPdv = findViewById<EditText>(R.id.edit_add_discount_pdv)
+
+        var finalDiscount: Int
+
         alerDialog.button_cancel_sale.setOnClickListener {
             alertShow.dismiss()
         }
         alerDialog.button_finish.setOnClickListener {
 
+            finalDiscount = editDiscountPdv.text.toString().toInt()
+
             var sale = Sale(payment_method_id = 1, branch_id = retrivedBranchId, items = emptyArray<ProductAdapter>())
 
-            sale.discount = tvDiscount.text.toString().toInt()
+            sale.discount = finalDiscount
 
             sale.items = arrayOf<ProductAdapter>()
 
@@ -254,7 +201,9 @@ open class PdvActivity : AppCompatActivity(), Serializable{
                 override fun onResponse(call: Call<Sale>, response: Response<Sale>) {
                     sale = response.body()!!
 
-                    Toast.makeText(this@PdvActivity, sale.discount, Toast.LENGTH_SHORT).show()
+                    Log.e("ERRO_DISCONUT", sale.discount.toString())
+
+//                    Toast.makeText(this@PdvActivity, sale.discount, Toast.LENGTH_SHORT).show()
                 }
             })
 

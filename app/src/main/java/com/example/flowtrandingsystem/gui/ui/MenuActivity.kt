@@ -41,7 +41,7 @@ class MenuActivity : AppCompatActivity(){
             val prefs: SharedPreferences = this@MenuActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
             val retrivedUser = prefs.getString("USER", "Nada foi recebido")
 
-            Toast.makeText(this, "permissao:${retrivedUser}", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "permissao:${retrivedUser}", Toast.LENGTH_SHORT).show()
 
             val intentSell = Intent(this, PdvActivity::class.java)
                 startActivity(intentSell)
