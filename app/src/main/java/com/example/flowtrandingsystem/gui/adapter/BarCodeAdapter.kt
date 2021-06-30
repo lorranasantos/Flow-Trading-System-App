@@ -33,11 +33,6 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
     override fun getItemCount(): Int {
         return listItens.size
     }
-//    fun removeItem(position: Int){
-//        val index = Random.nextInt(8)
-//        listItens.removeAt(index)
-//        notifyItemRemoved(index)
-//    }
     override fun onBindViewHolder(holder: Holder, index: Int) {
         val recentItems = listItens[index]
 
@@ -48,21 +43,12 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
         holder.tvUnitValue.text = "$${String.format("%.2f", recentItems.cost_per_item)}"
 
         holder.tvpdvTotalValue.text = "$${String.format("%.2f",recentItems.cost_per_item * recentItems.qtd)}"
-
-        holder.tvDeletIten.setOnClickListener{
-
-            val selectedItem = listItens[index]
-
-            Toast.makeText(context, "${selectedItem.product_name}", Toast.LENGTH_SHORT).show()
-        }
     }
-    //inner class
     class Holder(view: View): RecyclerView.ViewHolder(view){
         val tvCodeItem = view.findViewById<TextView>(R.id.product_code)
         val tvNameItem = view.findViewById<TextView>(R.id.product_name)
         val tvUnitValue = view.findViewById<TextView>(R.id.product_un_value)
         val tvpdvTotalValue = view.findViewById<TextView>(R.id.product_total_price)
-        val tvDeletIten = view.findViewById<Button>(R.id.delete_product)
     }
 }
 

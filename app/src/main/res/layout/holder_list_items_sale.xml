@@ -13,13 +13,6 @@
        android:paddingTop="2dp"
        android:paddingBottom="2dp">
 
-       <Button
-           android:id="@+id/delete_product"
-           android:layout_width="30dp"
-           android:layout_height="match_parent"
-           android:background="@drawable/ic_baseline_delete_forever_24"
-           android:onClick="removeItem"/>
-
        <TextView
            android:id="@+id/product_code"
            android:layout_width="0dp"

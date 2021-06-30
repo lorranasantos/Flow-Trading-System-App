@@ -21,12 +21,10 @@ import com.example.flowtrandingsystem.gui.api.SaleCalls
 import com.example.flowtrandingsystem.gui.model.*
 import kotlinx.android.synthetic.main.add_payment_method_pdv.view.*
 import kotlinx.android.synthetic.main.client_register_pdv.view.*
-import kotlinx.android.synthetic.main.holder_list_items_sale.*
 import kotlinx.android.synthetic.main.pdv.*
 import retrofit2.Call
 import retrofit2.Response
 import java.io.Serializable
-import kotlin.random.Random
 
 
 open class PdvActivity : AppCompatActivity(), Serializable{
@@ -52,10 +50,6 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         rvItens = findViewById(R.id.recycler_view_product_sale)
         subTotal = findViewById(R.id.subTotal_pdv)
 
-
-
-
-
         rvItens.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
@@ -78,6 +72,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         }
 
         addProductByCamera()
+
     }
 
     fun addProductByCamera() {
@@ -126,7 +121,8 @@ open class PdvActivity : AppCompatActivity(), Serializable{
                     )
 
                     prefs.edit().putFloat("total", itemTotalValue.toFloat()).apply()
-                    prefs.edit().putString("iten", itemProduct.toString()).apply()
+                    prefs.edit().putString("itenQtd", itemProduct.qtd.toString()).apply()
+                    prefs.edit().putString("itenId", itemProduct.id.toString()).apply()
 
                     itemProduct.qtd = quantity
 
@@ -147,6 +143,20 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
                     subTotal.text = "$${String.format("%.2f",cost_total)}"
 
+                    remove_code.setOnClickListener {
+
+                        if (listProducts.size > 0) {
+                            val index = listProducts.size - 1
+
+                            listProducts.removeAt(index)
+
+                            adapterItensList.notifyItemRemoved(index)
+
+                            adapterItensList.updateListProducts(listProducts)
+                        }
+
+                    }
+
                 }
             })
     }
@@ -154,7 +164,8 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
         val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
         val retrivedBranchId = prefs.getInt("BRANCHID", 0)
-        val retrivedIten = prefs.getString("iten", "Nada foi recebido")
+        val retrivedItenId = prefs.getInt("itenId", 0)
+        val retrivedItenQtd = prefs.getInt("itenQtd", 1)
 
         val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_payment_method_pdv, null)
         val dialogBuilder = AlertDialog.Builder(this)
@@ -186,13 +197,34 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         }
         alerDialog.button_finish.setOnClickListener {
 
-            finalDiscount = editDiscountPdv.text.toString().toInt()
+//            finalDiscount = editDiscountPdv.text.toString().toInt()
 
-            var sale = Sale(payment_method_id = 1, branch_id = retrivedBranchId, items = emptyArray<ProductAdapter>())
+            val idTaken = listOf<Int>(retrivedItenId)
+            val qtdTaken = listOf<Int>(retrivedItenQtd)
 
-            sale.discount = finalDiscount
+            var sale = Sale()
 
-            sale.items = arrayOf<ProductAdapter>()
+            sale.payment_method_id = 1
+            sale.branch_id = retrivedBranchId
+            sale.discount = 0
+
+            var listOfItens = ArrayList<Itens>()
+
+            listProducts.forEach {
+
+                var index = 0
+
+                val iten: Itens = Itens(product_id = it.id, quantity = it.qtd)
+
+                if (listOfItens.size > 0 ) {
+                    index = listOfItens.size - 1
+                }
+
+               listOfItens.add(iten)
+            }
+
+            sale.items = listOfItens
+
 
             val retrofit = RetrofitApi.getRetrofit()
             val saleCall = retrofit.create(SaleCalls::class.java)
@@ -220,7 +252,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
             alertShow.dismiss()
             finish()
             startActivity(getIntent())
-            Toast.makeText(this, retrivedIten, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, sale.toString(), Toast.LENGTH_SHORT).show()
         }
     }
     fun clientRegister() {

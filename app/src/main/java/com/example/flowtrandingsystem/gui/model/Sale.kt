@@ -6,5 +6,5 @@ data class Sale(
     var payment_method_id: Int = 0,
     var branch_id: Int = 0,
     var discount: Int = 0,
-    var items: Array<ProductAdapter>
+    var items: ArrayList<Itens>? = null
 ) : Serializable
