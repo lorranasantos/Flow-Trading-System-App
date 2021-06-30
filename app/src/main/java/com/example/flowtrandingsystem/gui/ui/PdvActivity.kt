@@ -21,10 +21,12 @@ import com.example.flowtrandingsystem.gui.api.SaleCalls
 import com.example.flowtrandingsystem.gui.model.*
 import kotlinx.android.synthetic.main.add_payment_method_pdv.view.*
 import kotlinx.android.synthetic.main.client_register_pdv.view.*
+import kotlinx.android.synthetic.main.holder_list_items_sale.*
 import kotlinx.android.synthetic.main.pdv.*
 import retrofit2.Call
 import retrofit2.Response
 import java.io.Serializable
+import kotlin.random.Random
 
 
 open class PdvActivity : AppCompatActivity(), Serializable{
@@ -32,6 +34,8 @@ open class PdvActivity : AppCompatActivity(), Serializable{
     lateinit var rvItens: RecyclerView
     lateinit var adapterItensList: BarCodeAdapter
     lateinit var editCpfClient: EditText
+//
+//    private val tvDeletIten = findViewById<Button>(R.id.delete_product)
 
     lateinit var subTotal: TextView
 
@@ -47,6 +51,10 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
         rvItens = findViewById(R.id.recycler_view_product_sale)
         subTotal = findViewById(R.id.subTotal_pdv)
+
+
+
+
 
         rvItens.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
@@ -68,8 +76,10 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         add_code.setOnClickListener {
             addProductByCode()
         }
+
         addProductByCamera()
     }
+
     fun addProductByCamera() {
         val editCode = findViewById<EditText>(R.id.pdv_activity_product_code)
         val scannedCode: String = intent.getStringExtra("barCode").toString()
@@ -135,7 +145,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
                     val cost_total = list.reduce{totalValue, currentItem -> totalValue + currentItem}.toDouble()
 
-                   subTotal.text = "$${String.format("%.2f",cost_total)}"
+                    subTotal.text = "$${String.format("%.2f",cost_total)}"
 
                 }
             })
@@ -213,7 +223,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
             Toast.makeText(this, retrivedIten, Toast.LENGTH_SHORT).show()
         }
     }
-    private fun clientRegister() {
+    fun clientRegister() {
             val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
             val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
 
@@ -253,4 +263,5 @@ open class PdvActivity : AppCompatActivity(), Serializable{
                 })
             }
         }
+
 }

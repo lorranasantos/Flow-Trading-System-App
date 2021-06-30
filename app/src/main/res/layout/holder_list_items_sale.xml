@@ -13,10 +13,12 @@
        android:paddingTop="2dp"
        android:paddingBottom="2dp">
 
-       <ImageView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:src="@drawable/ic_baseline_delete_forever_24"/>
+       <Button
+           android:id="@+id/delete_product"
+           android:layout_width="30dp"
+           android:layout_height="match_parent"
+           android:background="@drawable/ic_baseline_delete_forever_24"
+           android:onClick="removeItem"/>
 
        <TextView
            android:id="@+id/product_code"

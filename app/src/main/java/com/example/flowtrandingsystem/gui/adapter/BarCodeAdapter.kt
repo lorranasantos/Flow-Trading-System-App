@@ -1,24 +1,19 @@
 package com.example.flowtrandingsystem.gui.adapter
 
 import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
-import com.example.flowtrandingsystem.gui.model.Product
 import com.example.flowtrandingsystem.gui.model.ProductAdapter
-import com.example.flowtrandingsystem.gui.ui.PdvActivity
-import java.io.Externalizable
 import java.io.Serializable
-import kotlin.math.log
+import kotlin.random.Random
 
-class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapter.Holder>(), Serializable {
+class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapter.Holder>() {
 
     var listItens =  emptyList<ProductAdapter>()
 
@@ -38,9 +33,13 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
     override fun getItemCount(): Int {
         return listItens.size
     }
-
-    override fun onBindViewHolder(holder: Holder, position: Int) {
-        val recentItems = listItens[position]
+//    fun removeItem(position: Int){
+//        val index = Random.nextInt(8)
+//        listItens.removeAt(index)
+//        notifyItemRemoved(index)
+//    }
+    override fun onBindViewHolder(holder: Holder, index: Int) {
+        val recentItems = listItens[index]
 
         holder.tvCodeItem.text = recentItems.bar_code
         holder.tvNameItem.text = recentItems.product_name
@@ -50,14 +49,21 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
 
         holder.tvpdvTotalValue.text = "$${String.format("%.2f",recentItems.cost_per_item * recentItems.qtd)}"
 
+        holder.tvDeletIten.setOnClickListener{
+
+            val selectedItem = listItens[index]
+
+            Toast.makeText(context, "${selectedItem.product_name}", Toast.LENGTH_SHORT).show()
+        }
     }
-
-
     //inner class
     class Holder(view: View): RecyclerView.ViewHolder(view){
         val tvCodeItem = view.findViewById<TextView>(R.id.product_code)
         val tvNameItem = view.findViewById<TextView>(R.id.product_name)
         val tvUnitValue = view.findViewById<TextView>(R.id.product_un_value)
         val tvpdvTotalValue = view.findViewById<TextView>(R.id.product_total_price)
+        val tvDeletIten = view.findViewById<Button>(R.id.delete_product)
     }
 }
+
+
