@@ -252,7 +252,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
             alertShow.dismiss()
             finish()
             startActivity(getIntent())
-            Toast.makeText(this, sale.toString(), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "${sale.items}", Toast.LENGTH_LONG).show()
         }
     }
     fun clientRegister() {

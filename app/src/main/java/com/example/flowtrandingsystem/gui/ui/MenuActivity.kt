@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.flowtrandingsystem.R
 import kotlinx.android.synthetic.main.fragment_initial_menu.*
 
@@ -19,6 +20,7 @@ class MenuActivity : AppCompatActivity(){
     private lateinit var inventoryOption: LinearLayout
     private lateinit var pdvOption: LinearLayout
     private lateinit var reportOption: LinearLayout
+    private lateinit var drawerLayout: DrawerLayout
 
     lateinit var toggle: ActionBarDrawerToggle
 
@@ -31,6 +33,7 @@ class MenuActivity : AppCompatActivity(){
         inventoryOption = findViewById(R.id.option_inventory)
         pdvOption = findViewById(R.id.option_sell)
         reportOption = findViewById(R.id.option_report)
+        drawerLayout = findViewById(R.id.drawerLayout)
 
         inventoryOption.setOnClickListener {
             val intentInventory = Intent(this, ProductTypeActivity::class.java)
