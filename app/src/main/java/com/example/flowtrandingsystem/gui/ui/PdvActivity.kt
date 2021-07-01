@@ -93,6 +93,10 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         val editQtde = findViewById<EditText>(R.id.pdv_qtde_sale)
         val editCode = findViewById<EditText>(R.id.pdv_activity_product_code)
 
+        if (editCode.text.isEmpty()){
+            Toast.makeText(this, "Insira um código valido", Toast.LENGTH_SHORT).show()
+        }else{
+
             var itemProduct: ProductAdapter
             val retrofit = RetrofitApi.getRetrofit()
             val productBarCode = retrofit.create(ProductCalls::class.java)
@@ -101,7 +105,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
             call.enqueue(object : retrofit2.Callback<ProductAdapter>{
 
                 override fun onFailure(call: Call<ProductAdapter>, t: Throwable) {
-                    Toast.makeText(this@PdvActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@PdvActivity, "Verifique o códido novamente", Toast.LENGTH_SHORT).show()
                     Log.e("ERRO_CONEXÃO", t.message.toString())
                 }
                 override fun onResponse(call: Call<ProductAdapter>, response: Response<ProductAdapter>) {
@@ -109,9 +113,13 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
                     var quantity = 1
 
-                    if(editQtde.text.isNotEmpty()) {
-                        quantity = editQtde.text.toString().toInt()
-                    }
+                    if(editQtde.text.toString().toInt() == 0) {
+                        Toast.makeText(this@PdvActivity, "Quantidade Invalida", Toast.LENGTH_SHORT).show()
+
+                        if(editQtde.text.isNotEmpty()) {
+                            quantity = editQtde.text.toString().toInt()
+                        }
+                    }else{
 
                     val itemTotalValue = quantity * itemProduct.cost_per_item
 
@@ -141,7 +149,11 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
                     val cost_total = list.reduce{totalValue, currentItem -> totalValue + currentItem}.toDouble()
 
-                    subTotal.text = "$${String.format("%.2f",cost_total)}"
+                    if (listProducts.isEmpty()){
+                        subTotal.text = 0.0.toString()
+                    }else{
+                        subTotal.text = "$${String.format("%.2f",cost_total)}"
+                    }
 
                     remove_code.setOnClickListener {
 
@@ -153,12 +165,15 @@ open class PdvActivity : AppCompatActivity(), Serializable{
                             adapterItensList.notifyItemRemoved(index)
 
                             adapterItensList.updateListProducts(listProducts)
+
                         }
 
                     }
 
                 }
+                }
             })
+        }
     }
     fun finishSale(){
         val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
