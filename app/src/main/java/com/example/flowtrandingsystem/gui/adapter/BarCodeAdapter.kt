@@ -39,10 +39,9 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
         holder.tvCodeItem.text = recentItems.bar_code
         holder.tvNameItem.text = recentItems.product_name
         holder.tvUnitValue.text = recentItems.cost_per_item.toString()
-
         holder.tvUnitValue.text = "$${String.format("%.2f", recentItems.cost_per_item)}"
-
         holder.tvpdvTotalValue.text = "$${String.format("%.2f",recentItems.cost_per_item * recentItems.qtd)}"
+
     }
     class Holder(view: View): RecyclerView.ViewHolder(view){
         val tvCodeItem = view.findViewById<TextView>(R.id.product_code)

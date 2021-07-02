@@ -53,7 +53,7 @@ class InventoryActivity : AppCompatActivity() {
         val prefs: SharedPreferences = this@InventoryActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
         val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
         val retrivedCompanyId = prefs.getInt("COMPANYID", 0)
-        val retrivedCategoryName: String = intent.getStringExtra("productType").toString()
+        val retrivedCategoryName: String = prefs.getString("TYPE", "Nada foi recebido").toString()
 
         var listaItens: List<ProductAdapter>
         val retrofit = RetrofitApi.getRetrofit()

@@ -32,8 +32,6 @@ open class PdvActivity : AppCompatActivity(), Serializable{
     lateinit var rvItens: RecyclerView
     lateinit var adapterItensList: BarCodeAdapter
     lateinit var editCpfClient: EditText
-//
-//    private val tvDeletIten = findViewById<Button>(R.id.delete_product)
 
     lateinit var subTotal: TextView
 
@@ -74,13 +72,12 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         addProductByCamera()
 
     }
-
     fun addProductByCamera() {
         val editCode = findViewById<EditText>(R.id.pdv_activity_product_code)
         val scannedCode: String = intent.getStringExtra("barCode").toString()
 
         if(scannedCode == "null"){
-            Toast.makeText(this, "Insira ou escaneie o código", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Insira ou escaneie o código", Toast.LENGTH_LONG).show()
         }else{
             editCode.setText(scannedCode)
             addProductByCode()
@@ -89,23 +86,24 @@ open class PdvActivity : AppCompatActivity(), Serializable{
     fun addProductByCode() {
         val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
         val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
+        val retrivedCompany = prefs.getInt("COMPANYID", 0)
 
         val editQtde = findViewById<EditText>(R.id.pdv_qtde_sale)
         val editCode = findViewById<EditText>(R.id.pdv_activity_product_code)
 
         if (editCode.text.isEmpty()){
-            Toast.makeText(this, "Insira um código valido", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Insira um código valido", Toast.LENGTH_LONG).show()
         }else{
 
             var itemProduct: ProductAdapter
             val retrofit = RetrofitApi.getRetrofit()
             val productBarCode = retrofit.create(ProductCalls::class.java)
-            val call = productBarCode.getBarProduct(editCode.text.toString(), "Bearer ${retrivedToken}")
+            val call = productBarCode.getBarProduct(editCode.text.toString(), retrivedCompany,"Bearer ${retrivedToken}")
 
             call.enqueue(object : retrofit2.Callback<ProductAdapter>{
 
                 override fun onFailure(call: Call<ProductAdapter>, t: Throwable) {
-                    Toast.makeText(this@PdvActivity, "Verifique o códido novamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@PdvActivity, "Verifique o Codigo Novamente", Toast.LENGTH_LONG).show()
                     Log.e("ERRO_CONEXÃO", t.message.toString())
                 }
                 override fun onResponse(call: Call<ProductAdapter>, response: Response<ProductAdapter>) {
@@ -114,7 +112,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
                     var quantity = 1
 
                     if(editQtde.text.toString().toInt() == 0) {
-                        Toast.makeText(this@PdvActivity, "Quantidade Invalida", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@PdvActivity, "Quantidade Invalida", Toast.LENGTH_LONG).show()
 
                         if(editQtde.text.isNotEmpty()) {
                             quantity = editQtde.text.toString().toInt()
@@ -181,6 +179,10 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         val retrivedBranchId = prefs.getInt("BRANCHID", 0)
         val retrivedItenId = prefs.getInt("itenId", 0)
         val retrivedItenQtd = prefs.getInt("itenQtd", 1)
+
+        if (listProducts.isEmpty()){
+            Toast.makeText(this, "Lista de Compras Vazia", Toast.LENGTH_SHORT).show()
+        }else{
 
         val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_payment_method_pdv, null)
         val dialogBuilder = AlertDialog.Builder(this)
@@ -268,25 +270,31 @@ open class PdvActivity : AppCompatActivity(), Serializable{
             finish()
             startActivity(getIntent())
             Toast.makeText(this, "${sale.items}", Toast.LENGTH_LONG).show()
+
+        }
         }
     }
     fun clientRegister() {
-            val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-            val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
+        val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+        val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
 
-            val alerDialog = LayoutInflater.from(this).inflate(R.layout.client_register_pdv, null)
-            val dialogBuilder = AlertDialog.Builder(this)
-                .setView(alerDialog)
-            val alertShow = dialogBuilder.show()
+        val alerDialog = LayoutInflater.from(this).inflate(R.layout.client_register_pdv, null)
+        val dialogBuilder = AlertDialog.Builder(this)
+            .setView(alerDialog)
+        val alertShow = dialogBuilder.show()
 
-            alertShow.setCanceledOnTouchOutside(false)
+        alertShow.setCanceledOnTouchOutside(false)
 
-            alerDialog.button_cancel_client_register.setOnClickListener {
-                alertShow.dismiss()
-            }
-            alerDialog.button_save_client_register.setOnClickListener {
+        alerDialog.button_cancel_client_register.setOnClickListener {
+            alertShow.dismiss()
+        }
+        alerDialog.button_save_client_register.setOnClickListener {
 
-                editCpfClient = alerDialog.findViewById(R.id.edit_client_register_cpf)
+            editCpfClient = alerDialog.findViewById(R.id.edit_client_register_cpf)
+
+            if (editCpfClient.text.isEmpty()){
+                Toast.makeText(this, "Insira Um CPF Valido", Toast.LENGTH_SHORT).show()
+            }else{
 
                 var costumer = Costumer()
                 costumer.cpf = editCpfClient.text.toString().replace(".", "").replace("-", "")
@@ -307,8 +315,9 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
                         alertShow.dismiss()
                     }
+
                 })
             }
         }
-
+    }
 }

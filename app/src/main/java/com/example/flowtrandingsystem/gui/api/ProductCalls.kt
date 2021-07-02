@@ -2,7 +2,6 @@ package com.example.flowtrandingsystem.gui.api
 
 
 import com.example.flowtrandingsystem.gui.model.Logbook
-import com.example.flowtrandingsystem.gui.model.Product
 import com.example.flowtrandingsystem.gui.model.ProductAdapter
 import com.example.flowtrandingsystem.gui.model.ProductType
 import retrofit2.Call
@@ -15,8 +14,8 @@ interface ProductCalls {
     @GET("/logbook/find/{id}")
     fun getLogProductById(@Path("id") id: Int, @Header("Authorization") token: String?): Call<Logbook>
 
-    @GET("/product/barCode/{barCode}")
-    fun getBarProduct(@Path("barCode") barCode: String, @Header("Authorization") token: String?): Call<ProductAdapter>
+    @GET("/company/{companyId}/product/barCode/{barCode}")
+    fun getBarProduct(@Path("barCode") barCode: String, @Path("companyId") companyId: Int, @Header("Authorization") token: String?): Call<ProductAdapter>
 
     @GET("/productType")
     fun getProductType(@Header("Authorization") token: String?): Call<List<ProductType>>

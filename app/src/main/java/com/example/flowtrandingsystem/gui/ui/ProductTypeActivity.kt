@@ -58,6 +58,8 @@ class ProductTypeActivity : AppCompatActivity() {
                 categoryList = response.body()!!
 
                 adapterProductsCategories.updateCategoryList(categoryList)
+
+
             }
         })
     }
