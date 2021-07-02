@@ -8,5 +8,5 @@ import retrofit2.http.POST
 
 interface CostumerCalls {
     @POST("/costumer")
-    fun postCostumer(@Body cpf: String, @Header("Authorization") token: String?) : Call<Costumer>
+    fun postCostumer(@Body costumer: Costumer, @Header("Authorization") token: String?) : Call<Costumer>
 }

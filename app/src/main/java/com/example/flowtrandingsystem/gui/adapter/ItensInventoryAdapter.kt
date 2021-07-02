@@ -10,15 +10,15 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.model.Logbook
-import com.example.flowtrandingsystem.gui.model.Product
+import com.example.flowtrandingsystem.gui.model.ProductAdapter
 import com.example.flowtrandingsystem.gui.ui.DatasheetActivity
 
-class ItensInventoryAdatpter (val context: Context) : RecyclerView.Adapter<ItensInventoryAdatpter.Holder>() {
+class ItensInventoryAdapter (val context: Context) : RecyclerView.Adapter<ItensInventoryAdapter.Holder>() {
 
-    var listItens =  emptyList<Product>()
-//    var listLog =  Logbook()
+    var listItens =  emptyList<ProductAdapter>()
+    var listLog =  Logbook()
 
-    fun updateListaProdutos(lista: List<Product>){
+    fun updateListaProdutos(lista: List<ProductAdapter>){
         listItens = lista
         notifyDataSetChanged()
     }
@@ -37,9 +37,10 @@ class ItensInventoryAdatpter (val context: Context) : RecyclerView.Adapter<Itens
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val itensRecentes = listItens[position]
+//        val logsRecentes = listLog
 
         holder.tvNomeItem.text = itensRecentes.product_name
-//        holder.tvQuantidade.text = listLog.quantity_acquired.toString()
+        holder.tvQuantidade.text = itensRecentes.LogBookInventory.quantity_acquired.toString()
         holder.tvValor.text = itensRecentes.cost_per_item.toString()
 
         if(itensRecentes.cost_per_item <= 0){
@@ -50,9 +51,14 @@ class ItensInventoryAdatpter (val context: Context) : RecyclerView.Adapter<Itens
 
         holder.cardInventoryItems.setOnClickListener{
             val intent = Intent(context, DatasheetActivity::class.java)
-            intent.putExtra("product", itensRecentes)
-//            intent.putExtra("log", listLog)
+            intent.putExtra("productId", itensRecentes.id)
             context.startActivity(intent)
+
+//            val prefs: SharedPreferences = this@ItensInventoryAdapter.getSharedPreferences(
+//                "preferenciasLog",
+//                Context.MODE_PRIVATE
+//            )
+//            prefs.edit().putString("logbook", logsRecentes.toString()).apply()
 
         }
     }
@@ -63,6 +69,5 @@ class ItensInventoryAdatpter (val context: Context) : RecyclerView.Adapter<Itens
         val tvQuantidade = view.findViewById<TextView>(R.id.inventory_product_quantity)
         val tvValor = view.findViewById<TextView>(R.id.inventory_product_price)
         val cardInventoryItems = view.findViewById<CardView>(R.id.card_produto_inventory)
-
     }
 }

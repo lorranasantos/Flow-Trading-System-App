@@ -4,54 +4,59 @@
     package="com.example.flowtrandingsystem">
 
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:targetSandboxVersion="1"
-        android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".gui.ui.ReportActivity"></activity>
+        android:theme="@style/AppTheme">
         <activity
             android:name=".gui.ui.SplashActivity"
             android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
+            android:name=".gui.ui.ProductTypeActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".gui.ui.MenuActivity"/>
+        <activity
+            android:name=".gui.ui.ReportActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".gui.ui.MenuActivity"/>
+        <activity
             android:name=".gui.ui.InventoryActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName=".gui.ui.ProductTypeActivity"/>
         <activity
             android:name=".gui.ui.CompanyInfoActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".gui.ui.UserInfoActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".gui.ui.ScannerActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".gui.ui.MenuActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".gui.ui.PdvActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:parentActivityName=".gui.ui.MenuActivity"/>
         <activity
             android:name=".gui.ui.DatasheetActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:parentActivityName=".gui.ui.InventoryActivity"/>
         <activity
             android:name=".gui.ui.MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

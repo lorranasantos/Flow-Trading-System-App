@@ -28,34 +28,15 @@ class UserInfoActivity() : AppCompatActivity() {
     private lateinit var roleUser : TextView
     private lateinit var branchUser : TextView
 
-    private fun goToInfoCompany(){
-
-        val companyScreen = Intent(this, CompanyInfoActivity::class.java)
-        startActivity(companyScreen)
-    }
-
-    private fun goToMenu(){
-
-        val menuScreen = Intent(this, MenuActivity::class.java)
-        startActivity(menuScreen)
-    }
-
-    private fun goToLogin(){
-
-        val loginScreen = Intent(this, MainActivity::class.java)
-        startActivity(loginScreen)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.user_info)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle("Informações do Seu Perfil")
 
         toggle = ActionBarDrawerToggle(this, drawerLayoutUserInfo, R.string.open, R.string.close)
         drawerLayoutUserInfo.addDrawerListener(toggle)
         toggle.syncState()
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
 
         nameUser = findViewById(R.id.user_name)
         cpfUser = findViewById(R.id.cpf_from_user)
@@ -73,32 +54,29 @@ class UserInfoActivity() : AppCompatActivity() {
             }
             true
         }
-
         loadInfo()
     }
 
+    private fun goToInfoCompany(){
+        val companyScreen = Intent(this, CompanyInfoActivity::class.java)
+        startActivity(companyScreen)
+    }
+    private fun goToMenu(){
+        val menuScreen = Intent(this, MenuActivity::class.java)
+        startActivity(menuScreen)
+    }
+    private fun goToLogin(){
+        val loginScreen = Intent(this, MainActivity::class.java)
+        startActivity(loginScreen)
+    }
     private  fun loadInfo() {
-
-        //recuperar o token do sharedPreferences
-        val prefs: SharedPreferences =
-            this@UserInfoActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-
-        val retrivedToken =
-            prefs.getString("TOKEN", "Nada foi recebido")
-
-        val retrivedId =
-            prefs.getInt("ID", 0)
-
-        val retrivedCompanyId =
-            prefs.getInt("COMPANYID", 0)
-
-        Log.e("RETRIEVED", "Id: ${retrivedId} CompanyId: ${retrivedCompanyId} Token: ${retrivedToken}")
+        val prefs: SharedPreferences = this@UserInfoActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+        val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
+        val retrivedId = prefs.getInt("ID", 0)
 
         var userInfo: User
-
         val retrofit = RetrofitApi.getRetrofit()
         val userCall = retrofit.create(UserCalls::class.java)
-
         val call = userCall.getInfoFromUser(retrivedId, "Bearer ${retrivedToken}")
 
         call.enqueue(object : Callback<User>{
@@ -107,11 +85,8 @@ class UserInfoActivity() : AppCompatActivity() {
                 Toast.makeText(this@UserInfoActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                 Log.e("ERRO_CONEXÃO", t.message.toString())
             }
-
             override fun onResponse(call: Call<User>, response: Response<User>) {
                 userInfo = response.body()!!
-
-                Log.i("TESTE", response.body().toString())
 
                 cpfUser.text = userInfo.cpf
                 nameUser.text = userInfo.user_name
@@ -120,14 +95,11 @@ class UserInfoActivity() : AppCompatActivity() {
                 branchUser.text = userInfo.Branch.branch_name
             }
         })
-
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(toggle.onOptionsItemSelected(item)) {
             return true
         }
-
         return super.onOptionsItemSelected(item)
     }
 }

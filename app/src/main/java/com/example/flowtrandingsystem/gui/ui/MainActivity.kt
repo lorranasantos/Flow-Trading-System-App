@@ -12,12 +12,9 @@ import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.UserCalls
 import com.example.flowtrandingsystem.gui.model.Permissions
-import com.example.flowtrandingsystem.gui.model.Screens
 import com.example.flowtrandingsystem.gui.model.Token
 import com.example.flowtrandingsystem.gui.model.UserLogin
 import kotlinx.android.synthetic.main.main_activity.*
-import org.json.JSONArray
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,39 +26,29 @@ class MainActivity: AppCompatActivity() {
     private lateinit var editTextSenha: EditText
     private lateinit var token: Token
 
-    private fun goToMainMenu(){
-        val menuScreen = Intent(this, MenuActivity::class.java)
-        startActivity(menuScreen)
-
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
-
         supportActionBar?.hide()
 
         editTextCpf = findViewById(R.id.editTextUser)
         editTextSenha = findViewById(R.id.editTextPassword)
 
         login_activity_button.setOnClickListener {
-
             executarLogin()
         }
-
     }
 
-    fun executarLogin() {
+    private fun goToMainMenu(){
+        val menuScreen = Intent(this, MenuActivity::class.java)
+        intent.putExtra("permissionsUser", token.user.toString())
+        startActivity(menuScreen)
+    }
+    private fun executarLogin() {
 
-        val usuario = UserLogin(
-            cnpj_ou_cpf = editTextCpf.text.toString(), password = editTextSenha.text.toString().replace(".", "").replace("-", "")
-        )
-
-        Log.e("Usuario", usuario.toString())
-
+        val usuario = UserLogin(cnpj_ou_cpf = editTextCpf.text.toString().replace(".", "").replace("-", ""), password = editTextSenha.text.toString())
         val retrofit = RetrofitApi.getRetrofit()
         val loginCall = retrofit.create(UserCalls::class.java)
-
         val call = loginCall.postLogin(usuario)
 
         call.enqueue(object : Callback<Token> {
@@ -75,31 +62,19 @@ class MainActivity: AppCompatActivity() {
                     token = response.body()!!
                     Log.e("RESPONSE", token.toString())
 
-                    //colocar o token no sharedPreferences
-
-//                    val permissionShare = token.user.Permissions[0].Screens[0].screen_name
-
-                    val array = JSONArray()
-                    var obj: JSONObject
-
-
-
                     val prefs: SharedPreferences = this@MainActivity.getSharedPreferences(
                         "preferencias",
                         Context.MODE_PRIVATE
                     )
 
-
-//                    val permissions = Permissions()
-//                    val screens = Screens()
-
+                    //Tentar passar a permissao usuario inteiro
+                    prefs.edit().putString("USER", token.user.toString()).apply()
                     prefs.edit().putString("TOKEN", token.token).apply()
                     prefs.edit().putInt("ID", token.user.id).apply()
                     prefs.edit().putInt("COMPANYID", token.user.branch.company_id).apply()
-//                    prefs.edit().putString("PERMISSION", token.user.Permissions[0].id.toString()).apply()
+                    prefs.edit().putInt("BRANCHID", token.user.branch.id).apply()
 
                     goToMainMenu()
-
                 }else {
                     Toast.makeText(this@MainActivity, "CPF ou senha invalidos", Toast.LENGTH_LONG).show()
                 }

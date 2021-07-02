@@ -6,6 +6,6 @@ data class UserToken(
         var user_name: String = "",
         var user_cpf: String = "",
         var user_rg: String = "",
-        var Role: Role = Role()
-//        var Permissions: Array<Permissions>
+        var Role: Role = Role(),
+        var permissions: Array<Permissions>
 )

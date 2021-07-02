@@ -108,4 +108,13 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="exampleToast">
+        <item name="android:colorBackground">#94ffab</item>
+        <item name="android:textColor">#000</item>
+<!--        <item name="icon">@drawable/ic_key_24</item>-->
+        <item name="strokeColor">#000</item>
+        <item name="strokeWidth">3dp</item>
+        <item name="cornerRadius">3dp</item>
+    </style>
+
 </resources>

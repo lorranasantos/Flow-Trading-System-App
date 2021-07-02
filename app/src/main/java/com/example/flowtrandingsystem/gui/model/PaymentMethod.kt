@@ -1,6 +1,6 @@
 package com.example.flowtrandingsystem.gui.model
 
-data class UnitOfMeasurement (
+data class PaymentMethod (
     val id: Int = 0,
-    val unit_name: String = ""
+    val method: String = ""
 )

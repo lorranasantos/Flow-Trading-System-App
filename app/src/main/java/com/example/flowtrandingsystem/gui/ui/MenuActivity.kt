@@ -12,61 +12,50 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.flowtrandingsystem.R
 import kotlinx.android.synthetic.main.fragment_initial_menu.*
-
 
 class MenuActivity : AppCompatActivity(){
     private lateinit var inventoryOption: LinearLayout
     private lateinit var pdvOption: LinearLayout
     private lateinit var reportOption: LinearLayout
+    private lateinit var drawerLayout: DrawerLayout
 
     lateinit var toggle: ActionBarDrawerToggle
-
-    private fun goToInfoCompany(){
-
-        val companyScreen = Intent(this, CompanyInfoActivity::class.java)
-        startActivity(companyScreen)
-    }
-    private fun goToLogin(){
-
-        val loginScreen = Intent(this, MainActivity::class.java)
-        startActivity(loginScreen)
-
-    }
-    override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
-            drawerLayout.closeDrawer(drawerLayout)
-        }
-    }
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_initial_menu)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle("Menu Principal")
 
         inventoryOption = findViewById(R.id.option_inventory)
         pdvOption = findViewById(R.id.option_sell)
         reportOption = findViewById(R.id.option_report)
+        drawerLayout = findViewById(R.id.drawerLayout)
 
         inventoryOption.setOnClickListener {
-            val intentInventory = Intent(this, InventoryActivity::class.java)
+            val intentInventory = Intent(this, ProductTypeActivity::class.java)
             startActivity(intentInventory)
         }
         pdvOption.setOnClickListener{
-            val intentSell = Intent(this, PdvActivity::class.java)
-            startActivity(intentSell)
-        }
 
+            val prefs: SharedPreferences = this@MenuActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+            val retrivedUser = prefs.getString("USER", "Nada foi recebido")
+
+//            Toast.makeText(this, "permissao:${retrivedUser}", Toast.LENGTH_SHORT).show()
+
+            val intentSell = Intent(this, PdvActivity::class.java)
+                startActivity(intentSell)
+        }
         reportOption.setOnClickListener{
             val intentReportCompany = Intent(this, ReportActivity::class.java)
             startActivity(intentReportCompany)
         }
-
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         main_navigation_view.setNavigationItemSelectedListener {
             when(it.itemId) {
@@ -77,41 +66,29 @@ class MenuActivity : AppCompatActivity(){
             }
             true
         }
+    }
 
-        val prefs: SharedPreferences =
-            this@MenuActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-
-        val retrivedToken =
-            prefs.getString("TOKEN", "Nada foi recebido")
-
-        val retrivedId =
-            prefs.getInt("ID", 0)
-
-        val retrivedCompanyId =
-            prefs.getInt("COMPANYID", 0)
-
-        Log.e("RESPONSE", "CENOURA: ${retrivedId}")
-        Log.e("RESPONSE", "ABOBORA: ${retrivedCompanyId}")
-        Log.e("RESPONSE", "BATATA: ${retrivedToken}")
-
-
-
-        Toast.makeText(this@MenuActivity, "CENOURA E BATATA: ${retrivedId} ${retrivedToken}", Toast.LENGTH_LONG).show()
-
+    private fun goToInfoCompany(){
+        val companyScreen = Intent(this, CompanyInfoActivity::class.java)
+        startActivity(companyScreen)
+    }
+    private fun goToLogin(){
+        val loginScreen = Intent(this, MainActivity::class.java)
+        startActivity(loginScreen)
     }
     private fun goToInfoUser(){
         val userScreen = Intent(this, UserInfoActivity::class.java)
         startActivity(userScreen)
-
     }
-
+    override fun onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(drawerLayout)
+        }
+    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(toggle.onOptionsItemSelected(item)) {
             return true
         }
-
         return super.onOptionsItemSelected(item)
     }
-
-
 }
