@@ -76,6 +76,7 @@ class DatasheetActivity: AppCompatActivity() {
 
                     val formatedacquisitionDate = productInfo.date_of_acquisition.split("-")
                     acquisitionDate.text = "${formatedacquisitionDate[2]}-${formatedacquisitionDate[1]}-${formatedacquisitionDate[0]}"
+                    expiratonDate.text = "N/A"
 
                     productName.text = productInfo.Product.product_name
                     productType.text = productInfo.Product.ProductType.type

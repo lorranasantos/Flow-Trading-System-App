@@ -72,6 +72,17 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         addProductByCamera()
 
     }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.e("ERRO_SAVE","In Saved")
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle, outState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        Log.e("ERRO_SAVE","In Restored")
+
+    }
+
     fun addProductByCamera() {
         val editCode = findViewById<EditText>(R.id.pdv_activity_product_code)
         val scannedCode: String = intent.getStringExtra("barCode").toString()
@@ -80,7 +91,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
             Toast.makeText(this, "Insira ou escaneie o código", Toast.LENGTH_LONG).show()
         }else{
             editCode.setText(scannedCode)
-            addProductByCode()
+//            addProductByCode()
         }
     }
     fun addProductByCode() {
@@ -92,85 +103,87 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         val editCode = findViewById<EditText>(R.id.pdv_activity_product_code)
 
         if (editCode.text.isEmpty()){
-            Toast.makeText(this, "Insira um código valido", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Insira Um Código Valido", Toast.LENGTH_LONG).show()
         }else{
 
-            var itemProduct: ProductAdapter
-            val retrofit = RetrofitApi.getRetrofit()
-            val productBarCode = retrofit.create(ProductCalls::class.java)
-            val call = productBarCode.getBarProduct(editCode.text.toString(), retrivedCompany,"Bearer ${retrivedToken}")
+            if(editQtde.text.toString().isNullOrBlank() || editQtde.text.toString().toInt() === 0) {
+                Toast.makeText(this@PdvActivity, "Quantidade Invalida", Toast.LENGTH_LONG).show()
 
-            call.enqueue(object : retrofit2.Callback<ProductAdapter>{
+            }else{
 
-                override fun onFailure(call: Call<ProductAdapter>, t: Throwable) {
-                    Toast.makeText(this@PdvActivity, "Verifique o Codigo Novamente", Toast.LENGTH_LONG).show()
-                    Log.e("ERRO_CONEXÃO", t.message.toString())
-                }
-                override fun onResponse(call: Call<ProductAdapter>, response: Response<ProductAdapter>) {
-                    itemProduct = response.body()!!
+                var itemProduct: ProductAdapter
+                val retrofit = RetrofitApi.getRetrofit()
+                val productBarCode = retrofit.create(ProductCalls::class.java)
+                val call = productBarCode.getBarProduct(editCode.text.toString(), retrivedCompany,"Bearer ${retrivedToken}")
 
-                    var quantity = 1
+                call.enqueue(object : retrofit2.Callback<ProductAdapter>{
 
-                    if(editQtde.text.toString().toInt() == 0) {
-                        Toast.makeText(this@PdvActivity, "Quantidade Invalida", Toast.LENGTH_LONG).show()
-
-                        if(editQtde.text.isNotEmpty()) {
-                            quantity = editQtde.text.toString().toInt()
-                        }
-                    }else{
-
-                    val itemTotalValue = quantity * itemProduct.cost_per_item
-
-                    val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences(
-                        "total",
-                        Context.MODE_PRIVATE
-                    )
-
-                    prefs.edit().putFloat("total", itemTotalValue.toFloat()).apply()
-                    prefs.edit().putString("itenQtd", itemProduct.qtd.toString()).apply()
-                    prefs.edit().putString("itenId", itemProduct.id.toString()).apply()
-
-                    itemProduct.qtd = quantity
-
-                    listProducts.add(itemProduct)
-
-                    val codeIntent = Intent(this@PdvActivity, BarCodeAdapter::class.java)
-                    codeIntent.putExtra("qtd", quantity)
-
-                    adapterItensList.updateListProducts(listProducts.toList())
-
-                    val list = arrayListOf<Double>()
-
-                    for(item in listProducts){
-                        list.add((item.cost_per_item * item.qtd))
+                    override fun onFailure(call: Call<ProductAdapter>, t: Throwable) {
+                        Toast.makeText(this@PdvActivity, "Verifique o Codigo Novamente", Toast.LENGTH_LONG).show()
+                        Log.e("ERRO_CONEXÃO", t.message.toString())
                     }
+                    override fun onResponse(call: Call<ProductAdapter>, response: Response<ProductAdapter>) {
+                        itemProduct = response.body()!!
 
-                    val cost_total = list.reduce{totalValue, currentItem -> totalValue + currentItem}.toDouble()
+                        var quantity = 1
 
-                    if (listProducts.isEmpty()){
-                        subTotal.text = 0.0.toString()
-                    }else{
-                        subTotal.text = "$${String.format("%.2f",cost_total)}"
-                    }
+                        quantity = editQtde.text.toString().toInt()
 
-                    remove_code.setOnClickListener {
+                        val itemTotalValue = quantity * itemProduct.cost_per_item
 
-                        if (listProducts.size > 0) {
-                            val index = listProducts.size - 1
+                        val prefs: SharedPreferences = this@PdvActivity.getSharedPreferences(
+                            "total",
+                            Context.MODE_PRIVATE
+                        )
 
-                            listProducts.removeAt(index)
+                        prefs.edit().putFloat("total", itemTotalValue.toFloat()).apply()
+                        prefs.edit().putString("itenQtd", itemProduct.qtd.toString()).apply()
+                        prefs.edit().putString("itenId", itemProduct.id.toString()).apply()
 
-                            adapterItensList.notifyItemRemoved(index)
+                        itemProduct.qtd = quantity
 
-                            adapterItensList.updateListProducts(listProducts)
+                        listProducts.add(itemProduct)
 
+                        val codeIntent = Intent(this@PdvActivity, BarCodeAdapter::class.java)
+                        codeIntent.putExtra("qtd", quantity)
+
+                        adapterItensList.updateListProducts(listProducts.toList())
+
+                        val list = arrayListOf<Double>()
+
+                        for (item in listProducts) {
+                            list.add((item.cost_per_item * item.qtd))
                         }
 
-                    }
+                        val cost_total =
+                            list.reduce { totalValue, currentItem -> totalValue + currentItem }
+                                .toDouble()
 
-                }
-                }
-            })
+                        if (listProducts.isEmpty()) {
+                            subTotal.text = 0.0.toString()
+                        } else {
+                            subTotal.text = "$${String.format("%.2f", cost_total)}"
+                        }
+
+                        remove_code.setOnClickListener {
+
+                            if (listProducts.size > 0) {
+                                val index = listProducts.size - 1
+
+                                listProducts.removeAt(index)
+
+                                adapterItensList.notifyItemRemoved(index)
+
+                                adapterItensList.updateListProducts(listProducts)
+
+                                subTotal.text = "$${String.format("%.2f", cost_total - listProducts[index].cost_per_item)}"
+
+                            }
+
+                        }
+                    }
+                })
+            }
         }
     }
     fun finishSale(){
@@ -184,94 +197,95 @@ open class PdvActivity : AppCompatActivity(), Serializable{
             Toast.makeText(this, "Lista de Compras Vazia", Toast.LENGTH_SHORT).show()
         }else{
 
-        val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_payment_method_pdv, null)
-        val dialogBuilder = AlertDialog.Builder(this)
-            .setView(alerDialog)
-        val alertShow = dialogBuilder.show()
+            val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_payment_method_pdv, null)
+            val dialogBuilder = AlertDialog.Builder(this)
+                .setView(alerDialog)
+            val alertShow = dialogBuilder.show()
 
-        alertShow.setCanceledOnTouchOutside(false)
+            alertShow.setCanceledOnTouchOutside(false)
 
-        optionMethods = alerDialog.findViewById(R.id.spinner_methods) as Spinner
+            optionMethods = alerDialog.findViewById(R.id.spinner_methods) as Spinner
 
-        val options = arrayOf("Debito", "Credito", "Boleto", "PicPay")
+            val options = arrayOf("Debito", "Credito", "Boleto", "PicPay")
 
-        optionMethods.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options)
+            optionMethods.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options)
 
-        optionMethods.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                Toast.makeText(this@PdvActivity, "Selecione uma opção", Toast.LENGTH_SHORT).show()
-            }
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            }
-        }
-
-        val editDiscountPdv = findViewById<EditText>(R.id.edit_add_discount_pdv)
-
-        var finalDiscount: Int
-
-        alerDialog.button_cancel_sale.setOnClickListener {
-            alertShow.dismiss()
-        }
-        alerDialog.button_finish.setOnClickListener {
-
-//            finalDiscount = editDiscountPdv.text.toString().toInt()
-
-            val idTaken = listOf<Int>(retrivedItenId)
-            val qtdTaken = listOf<Int>(retrivedItenQtd)
-
-            var sale = Sale()
-
-            sale.payment_method_id = 1
-            sale.branch_id = retrivedBranchId
-            sale.discount = 0
-
-            var listOfItens = ArrayList<Itens>()
-
-            listProducts.forEach {
-
-                var index = 0
-
-                val iten: Itens = Itens(product_id = it.id, quantity = it.qtd)
-
-                if (listOfItens.size > 0 ) {
-                    index = listOfItens.size - 1
+            optionMethods.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    Toast.makeText(this@PdvActivity, "Selecione uma opção", Toast.LENGTH_SHORT).show()
                 }
-
-               listOfItens.add(iten)
+                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                }
             }
 
-            sale.items = listOfItens
 
+            alerDialog.button_cancel_sale.setOnClickListener {
+                alertShow.dismiss()
+            }
+            alerDialog.button_finish.setOnClickListener {
 
-            val retrofit = RetrofitApi.getRetrofit()
-            val saleCall = retrofit.create(SaleCalls::class.java)
-            val call = saleCall.postSale(sale, "Bearer ${retrivedToken}")
+                val editDiscountPdv = findViewById<EditText>(R.id.edit_add_discount_pdv)
 
-            call.enqueue(object : retrofit2.Callback<Sale> {
-                override fun onFailure(call: Call<Sale>, t: Throwable) {
-                    Toast.makeText(
-                        this@PdvActivity,
-                        "Ops! Acho que ocorreu um problema.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    Log.e("ERRO_CONEXÃO", t.message.toString())
+                val idTaken = listOf<Int>(retrivedItenId)
+                val qtdTaken = listOf<Int>(retrivedItenQtd)
+
+                var sale = Sale()
+
+                sale.payment_method_id = 1
+                sale.branch_id = retrivedBranchId
+
+//                if(editDiscountPdv.text.toString().isNullOrBlank()) {
+//                    Toast.makeText(this@PdvActivity, "Desconto Invalido", Toast.LENGTH_LONG).show()
+//
+//                }else{
+
+                    sale.discount = 0
+
+                    val listOfItens = ArrayList<Itens>()
+
+                    listProducts.forEach {
+
+                        var index = 0
+
+                        val iten: Itens = Itens(product_id = it.id, quantity = it.qtd)
+
+                        if (listOfItens.size > 0 ) {
+                            index = listOfItens.size - 1
+                        }
+
+                       listOfItens.add(iten)
+                    }
+
+                    sale.items = listOfItens
+
+                    val retrofit = RetrofitApi.getRetrofit()
+                    val saleCall = retrofit.create(SaleCalls::class.java)
+                    val call = saleCall.postSale(sale, "Bearer ${retrivedToken}")
+
+                    call.enqueue(object : retrofit2.Callback<Sale> {
+                        override fun onFailure(call: Call<Sale>, t: Throwable) {
+                            Toast.makeText(
+                                this@PdvActivity,
+                                "Ops! Acho que ocorreu um problema.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            Log.e("ERRO_CONEXÃO", t.message.toString())
+                        }
+
+                        override fun onResponse(call: Call<Sale>, response: Response<Sale>) {
+                            sale = response.body()!!
+
+                            Log.e("ERRO_DISCONUT", sale.discount.toString())
+
+                        }
+                    })
+
+                    alertShow.dismiss()
+                    finish()
+                    startActivity(getIntent())
+                    Toast.makeText(this, "Venda Concluida", Toast.LENGTH_LONG).show()
                 }
-
-                override fun onResponse(call: Call<Sale>, response: Response<Sale>) {
-                    sale = response.body()!!
-
-                    Log.e("ERRO_DISCONUT", sale.discount.toString())
-
-//                    Toast.makeText(this@PdvActivity, sale.discount, Toast.LENGTH_SHORT).show()
-                }
-            })
-
-            alertShow.dismiss()
-            finish()
-            startActivity(getIntent())
-            Toast.makeText(this, "${sale.items}", Toast.LENGTH_LONG).show()
-
-        }
+//            }
         }
     }
     fun clientRegister() {

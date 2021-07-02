@@ -41,7 +41,7 @@ class ScannerActivity : AppCompatActivity() {
             camera = CodeScanner.CAMERA_BACK
             formats = CodeScanner.ALL_FORMATS
             autoFocusMode = AutoFocusMode.SAFE
-            scanMode = ScanMode.SINGLE
+            scanMode = ScanMode.CONTINUOUS
             isAutoFocusEnabled = true
             isFlashEnabled = false
 
