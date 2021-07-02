@@ -5,7 +5,8 @@
         <item
             android:id="@+id/nav_option_home"
             android:icon="@drawable/home_24"
-            android:title="@string/home" />
+            android:title="@string/home"
+            android:itemBackground="@android:color/transparent"/>
         <item
             android:id="@+id/nav_option_profile"
             android:icon="@drawable/ic_profile_24"

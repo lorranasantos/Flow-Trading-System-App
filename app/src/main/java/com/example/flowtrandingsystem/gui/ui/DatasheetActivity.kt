@@ -32,6 +32,7 @@ class DatasheetActivity: AppCompatActivity() {
     private lateinit var productType: TextView
     private lateinit var unitPrice: TextView
     private lateinit var productQtd: TextView
+    private lateinit var barCode: TextView
     private lateinit var acquisitionDate: TextView
     private lateinit var expiratonDate: TextView
 
@@ -45,6 +46,7 @@ class DatasheetActivity: AppCompatActivity() {
         productType = findViewById(R.id.type_of_product_datasheet)
         unitPrice = findViewById(R.id.value_un_price_datasheet)
         productQtd = findViewById(R.id.amount_of_inventory_datasheet)
+        barCode = findViewById(R.id.product_barcode_datasheet)
         acquisitionDate = findViewById(R.id.acq_date_datsheet)
         expiratonDate = findViewById(R.id.expiration_date_datasheet)
 
@@ -70,22 +72,37 @@ class DatasheetActivity: AppCompatActivity() {
             override fun onResponse(call: Call<Logbook>, response: Response<Logbook>) {
                 productInfo = response.body()!!
 
-                val formatedacquisitionDate = productInfo.date_of_acquisition.split("-")
-                val formatedexpiratonDate = productInfo.Lot.expiration_date.split("-")
+                if (productInfo.Lot.expiration_date.isNullOrBlank()){
 
-                productName.text = productInfo.Product.product_name
-                productType.text = productInfo.Product.ProductType.type
-                unitPrice.text = "R$ ${String.format("%.2f", productInfo.Product.cost_per_item)}"
-                productQtd.text = productInfo.quantity_acquired.toString()
-                acquisitionDate.text = "${formatedacquisitionDate[2]}-${formatedacquisitionDate[1]}-${formatedacquisitionDate[0]}"
-                expiratonDate.text = "${formatedexpiratonDate[2]}-${formatedexpiratonDate[1]}-${formatedexpiratonDate[0]}"
+                    val formatedacquisitionDate = productInfo.date_of_acquisition.split("-")
+                    acquisitionDate.text = "${formatedacquisitionDate[2]}-${formatedacquisitionDate[1]}-${formatedacquisitionDate[0]}"
 
-                val prefs: SharedPreferences = this@DatasheetActivity.getSharedPreferences(
-                    "type",
-                    Context.MODE_PRIVATE
-                )
+                    productName.text = productInfo.Product.product_name
+                    productType.text = productInfo.Product.ProductType.type
+                    unitPrice.text = "R$ ${String.format("%.2f", productInfo.Product.cost_per_item)}"
+                    productQtd.text = productInfo.quantity_acquired.toString()
+                    barCode.text = productInfo.Product.bar_code
 
-                prefs.edit().putString("typeProduct", productInfo.Product.ProductType.type).apply()
+                }else{
+
+                    val formatedacquisitionDate = productInfo.date_of_acquisition.split("-")
+                    val formatedexpiratonDate = productInfo.Lot.expiration_date.split("-")
+                    expiratonDate.text = "${formatedexpiratonDate[2]}-${formatedexpiratonDate[1]}-${formatedexpiratonDate[0]}"
+                    acquisitionDate.text = "${formatedacquisitionDate[2]}-${formatedacquisitionDate[1]}-${formatedacquisitionDate[0]}"
+
+                    productName.text = productInfo.Product.product_name
+                    productType.text = productInfo.Product.ProductType.type
+                    unitPrice.text = "R$ ${String.format("%.2f", productInfo.Product.cost_per_item)}"
+                    productQtd.text = productInfo.quantity_acquired.toString()
+                    barCode.text = productInfo.Product.bar_code
+
+                    val prefs: SharedPreferences = this@DatasheetActivity.getSharedPreferences(
+                        "type",
+                        Context.MODE_PRIVATE
+                    )
+
+                    prefs.edit().putString("typeProduct", productInfo.Product.ProductType.type).apply()
+                }
             }
         })
     }

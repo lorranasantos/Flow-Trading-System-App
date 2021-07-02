@@ -1,6 +1,5 @@
 package com.example.flowtrandingsystem.gui.api
 
-import com.example.flowtrandingsystem.gui.model.Product
 import com.example.flowtrandingsystem.gui.model.ProductAdapter
 import retrofit2.Call
 import retrofit2.http.GET

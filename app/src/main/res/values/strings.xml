@@ -43,6 +43,7 @@
     <string name="price_un">Preço unitário:</string>
     <string name="price_all">Preço Atacado</string>
     <string name="amount_in_inventory">Quantidade em estoque:</string>
+    <string name="barcode">Código:</string>
     <string name="acquisition_date">Data de Aquisição:</string>
     <string name="quantidade">Quantidade:</string>
     <string name="expiration_date">Data de Expiração:</string>
