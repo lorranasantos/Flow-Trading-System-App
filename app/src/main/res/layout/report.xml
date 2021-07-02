@@ -35,7 +35,7 @@
                 style="@style/pdv_white_titles"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Relatório de Vendas"
+                android:text="Relatório de Estoque"
                 android:textAlignment="center"
                 android:textColor="@color/white" />
         </LinearLayout>
@@ -93,19 +93,19 @@
                             android:padding="5dp"
                             android:textAppearance="@style/pdv_prices"
                             android:textAlignment="center"
-                            android:text="11111"/>
+                            android:text="1111"/>
                         <TextView
                             android:id="@+id/report_product"
                             android:padding="5dp"
                             android:textAlignment="center"
                             android:textAppearance="@style/pdv_prices"
-                            android:text="umdoistres"/>
+                            android:text="geléia"/>
                         <TextView
                             android:id="@+id/report_description"
                             android:padding="5dp"
                             android:textAlignment="center"
                             android:textAppearance="@style/pdv_prices"
-                            android:text="aaaaaaaaaaaaaaaaa"/>
+                            android:text="geléia de morango"/>
                         <TextView
                             android:id="@+id/report_quantity"
                             android:padding="5dp"
@@ -123,7 +123,7 @@
                             android:padding="5dp"
                             android:textAlignment="center"
                             android:textAppearance="@style/pdv_prices"
-                            android:text="kg"/>
+                            android:text="g"/>
                     </TableRow>
 
                 </TableLayout>
