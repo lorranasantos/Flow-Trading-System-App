@@ -72,16 +72,16 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         addProductByCamera()
 
     }
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.e("ERRO_SAVE","In Saved")
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle, outState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        Log.e("ERRO_SAVE","In Restored")
-
-    }
+//    override fun onSaveInstanceState(outState: Bundle) {
+//        super.onSaveInstanceState(outState)
+//        Log.e("ERRO_SAVE","In Saved")
+//    }
+//
+//    override fun onRestoreInstanceState(savedInstanceState: Bundle, outState: Bundle) {
+//        super.onRestoreInstanceState(savedInstanceState)
+//        Log.e("ERRO_SAVE","In Restored")
+//
+//    }
 
     fun addProductByCamera() {
         val editCode = findViewById<EditText>(R.id.pdv_activity_product_code)
