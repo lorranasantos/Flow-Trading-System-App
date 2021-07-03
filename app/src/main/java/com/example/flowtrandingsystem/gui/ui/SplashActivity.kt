@@ -7,19 +7,16 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flowtrandingsystem.R
 
-class SplashActivity: AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash)
-
         supportActionBar?.hide()
 
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this@SplashActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
-        }, 1500)
-
+        }, 1000)
     }
-
 }

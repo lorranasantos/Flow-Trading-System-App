@@ -1,118 +1,119 @@
 package com.example.flowtrandingsystem.gui.ui
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import com.example.flowtrandingsystem.gui.model.Logbook
+import android.text.format.DateFormat.format
 import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.api.ProductCalls
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
-import com.example.flowtrandingsystem.gui.api.UserCalls
-import com.example.flowtrandingsystem.gui.model.Product
-import com.example.flowtrandingsystem.gui.model.User
+import com.example.flowtrandingsystem.gui.model.Logbook
+import com.example.flowtrandingsystem.gui.model.ProductAdapter
+import com.google.android.material.timepicker.TimeFormat
+import kotlinx.android.synthetic.main.fragment_initial_menu.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.String.format
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
-class DatasheetActivity: AppCompatActivity() {
+class DatasheetActivity : AppCompatActivity() {
 
-    lateinit var productName: TextView
-    lateinit var productType: TextView
-    lateinit var unitPrice: TextView
-    lateinit var wholesalePrice: TextView
-    lateinit var quantityInInventory: TextView
-    lateinit var aquisitionDate: TextView
+    private lateinit var productName: TextView
+    private lateinit var productType: TextView
+    private lateinit var unitPrice: TextView
+    private lateinit var productQtd: TextView
+    private lateinit var barCode: TextView
+    private lateinit var acquisitionDate: TextView
+    private lateinit var expiratonDate: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.datasheet)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle("Informações do Produto")
+
+        productName = findViewById(R.id.product_name_datasheet)
+        productType = findViewById(R.id.type_of_product_datasheet)
+        unitPrice = findViewById(R.id.value_un_price_datasheet)
+        productQtd = findViewById(R.id.amount_of_inventory_datasheet)
+        barCode = findViewById(R.id.product_barcode_datasheet)
+        acquisitionDate = findViewById(R.id.acq_date_datsheet)
+        expiratonDate = findViewById(R.id.expiration_date_datasheet)
 
         loadInfo()
-
-        lateinit var tvNameProduct: TextView
-        lateinit var tvType: TextView
-        lateinit var tvCostPerItem: TextView
-        lateinit var tvQtd: TextView
-        lateinit var tvAcquisition: TextView
-        lateinit var tvExpiraton: TextView
-        lateinit var product: Product
-        var logbook: Logbook = Logbook()
-
-        tvNameProduct = findViewById(R.id.product_name_datasheet)
-        tvType = findViewById(R.id.type_of_product_datasheet)
-        tvCostPerItem = findViewById(R.id.value_un_price_datasheet)
-        tvQtd = findViewById(R.id.amount_of_inventory_datasheet)
-        tvAcquisition = findViewById(R.id.price_datasheet)
-        tvExpiraton = findViewById(R.id.expiration_date_datasheet)
-
-        product = intent.getSerializableExtra("product") as Product
-//        logbook = intent.getSerializableExtra("log") as Logbook
-
-        tvNameProduct.text = product.product_name
-        tvType.text = product.product_type_id.toString()
-        tvCostPerItem.text = product.cost_per_item.toString()
-        tvQtd.text = logbook.quantity_acquired.toString()
-        tvAcquisition.text = logbook.date_of_acquisition
-        tvExpiraton.text = logbook.lot.expiration_date
-
-        if (product.cost_per_item == 0.0) {
-            tvCostPerItem.text = "GRÁTIS"
-        } else {
-            tvCostPerItem.text = "R$ ${String.format("%.2f", product.cost_per_item)}"
-        }
     }
 
-    private  fun loadInfo() {
+    private fun loadInfo() {
+        val prefs: SharedPreferences = this@DatasheetActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+        val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
+        val retrivedProductId: Int = intent.getIntExtra("productId", 0)
 
-        //recuperar o token do sharedPreferences
-        val prefs: SharedPreferences =
-            this@DatasheetActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-
-        val retrivedToken =
-            prefs.getString("TOKEN", "Nada foi recebido")
-
-        val retrivedProductId =
-            prefs.getInt("PRODUCTID", 0)
-
-        var productInfo: Product
-
+        var productInfo: Logbook
         val retrofit = RetrofitApi.getRetrofit()
         val productCall = retrofit.create(ProductCalls::class.java)
+        val call = productCall.getLogProductById(retrivedProductId, "Bearer ${retrivedToken}")
 
-        val call = productCall.getProductById(retrivedProductId, "Bearer ${retrivedToken}")
+        call.enqueue(object : Callback<Logbook> {
 
-        call.enqueue(object : Callback<Product> {
-
-            override fun onFailure(call: Call<Product>, t: Throwable) {
+            override fun onFailure(call: Call<Logbook>, t: Throwable) {
                 Toast.makeText(this@DatasheetActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                 Log.e("ERRO_CONEXÃO", t.message.toString())
             }
-
-            override fun onResponse(call: Call<Product>, response: Response<Product>) {
+            override fun onResponse(call: Call<Logbook>, response: Response<Logbook>) {
                 productInfo = response.body()!!
 
-                Log.i("TESTE", response.body().toString())
+                if (productInfo.Lot.expiration_date.isNullOrBlank()){
 
-                productName.text = productInfo.product_name
-                productType.text = productInfo.product_type_id.toString()
-                unitPrice.text = productInfo.cost_per_item.toString()
+                    val formatedacquisitionDate = productInfo.date_of_acquisition.split("-")
+                    acquisitionDate.text = "${formatedacquisitionDate[2]}-${formatedacquisitionDate[1]}-${formatedacquisitionDate[0]}"
+                    expiratonDate.text = "N/A"
 
+                    productName.text = productInfo.Product.product_name
+                    productType.text = productInfo.Product.ProductType.type
+                    unitPrice.text = "R$ ${String.format("%.2f", productInfo.Product.cost_per_item)}"
+                    productQtd.text = productInfo.quantity_acquired.toString()
+                    barCode.text = productInfo.Product.bar_code
 
-//                lateinit var quantityInInventory: TextView
-//                lateinit var aquisitionDate: TextView
-//                lateinit var expirationDate: TextView
-//
+                }else{
+
+                    val formatedacquisitionDate = productInfo.date_of_acquisition.split("-")
+                    val formatedexpiratonDate = productInfo.Lot.expiration_date.split("-")
+                    expiratonDate.text = "${formatedexpiratonDate[2]}-${formatedexpiratonDate[1]}-${formatedexpiratonDate[0]}"
+                    acquisitionDate.text = "${formatedacquisitionDate[2]}-${formatedacquisitionDate[1]}-${formatedacquisitionDate[0]}"
+
+                    productName.text = productInfo.Product.product_name
+                    productType.text = productInfo.Product.ProductType.type
+                    unitPrice.text = "R$ ${String.format("%.2f", productInfo.Product.cost_per_item)}"
+                    productQtd.text = productInfo.quantity_acquired.toString()
+                    barCode.text = productInfo.Product.bar_code
+
+                    val prefs: SharedPreferences = this@DatasheetActivity.getSharedPreferences(
+                        "type",
+                        Context.MODE_PRIVATE
+                    )
+
+                    prefs.edit().putString("typeProduct", productInfo.Product.ProductType.type).apply()
+                }
             }
-
-
         })
-
     }
-
+//
+//    override fun onBackPressed() {
+//
+//        val categoryIntent = Intent(this@DatasheetActivity, InventoryActivity::class.java)
+//        categoryIntent.putExtra("productType", productType.toString())
+//        startActivity(categoryIntent)
+//    }
 }
 
 

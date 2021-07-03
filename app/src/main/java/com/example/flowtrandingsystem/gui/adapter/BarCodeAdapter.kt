@@ -1,18 +1,17 @@
 package com.example.flowtrandingsystem.gui.adapter
 
 import android.content.Context
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
-import com.example.flowtrandingsystem.gui.model.Product
 import com.example.flowtrandingsystem.gui.model.ProductAdapter
-import kotlin.math.log
+import java.io.Serializable
+import kotlin.random.Random
 
 class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapter.Holder>() {
 
@@ -34,28 +33,16 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
     override fun getItemCount(): Int {
         return listItens.size
     }
-
-    override fun onBindViewHolder(holder: Holder, position: Int) {
-        val recentItems = listItens[position]
+    override fun onBindViewHolder(holder: Holder, index: Int) {
+        val recentItems = listItens[index]
 
         holder.tvCodeItem.text = recentItems.bar_code
         holder.tvNameItem.text = recentItems.product_name
         holder.tvUnitValue.text = recentItems.cost_per_item.toString()
-
         holder.tvUnitValue.text = "$${String.format("%.2f", recentItems.cost_per_item)}"
-
         holder.tvpdvTotalValue.text = "$${String.format("%.2f",recentItems.cost_per_item * recentItems.qtd)}"
 
-        val totalSub = holder.tvpdvTotalValue.text
-
-        for (i in listItens){
-            Log.e("sei la: ", (totalSub.toString()) + 1)
-        }
-
-
     }
-
-    //inner class
     class Holder(view: View): RecyclerView.ViewHolder(view){
         val tvCodeItem = view.findViewById<TextView>(R.id.product_code)
         val tvNameItem = view.findViewById<TextView>(R.id.product_name)
@@ -63,3 +50,5 @@ class BarCodeAdapter (val context: Context) : RecyclerView.Adapter<BarCodeAdapte
         val tvpdvTotalValue = view.findViewById<TextView>(R.id.product_total_price)
     }
 }
+
+

@@ -39,13 +39,14 @@
     <string name="pdv">PDV</string>
     <string name="sell">Venda</string>
     <string name="inventory">Estoque</string>
-    <string name="type">Tipo</string>
-    <string name="price_un">Preço unitário</string>
+    <string name="type">Tipo:</string>
+    <string name="price_un">Preço unitário:</string>
     <string name="price_all">Preço Atacado</string>
-    <string name="amount_in_inventory">Quantidade em estoque</string>
-    <string name="acquisition_date">Data de Aquisição</string>
-    <string name="quantidade">Quantidade</string>
-    <string name="expiration_date">Expiração</string>
+    <string name="amount_in_inventory">Quantidade em estoque:</string>
+    <string name="barcode">Código:</string>
+    <string name="acquisition_date">Data de Aquisição:</string>
+    <string name="quantidade">Quantidade:</string>
+    <string name="expiration_date">Data de Expiração:</string>
     <string name="companie">Empresa</string>
     <string name="unit_of_measurement">Unidade de medida</string>
     <string name="paleparia"><b>Papelaria</b></string>
@@ -64,6 +65,13 @@
         <item>Decoração</item>
     </string-array>
 
+    <string-array name="payment_methods">
+        <item>Credito</item>
+        <item>Debito</item>
+        <item>Boleto</item>
+        <item>Paypal</item>
+    </string-array>
+
     <!--PDV Section-->
     <string name="product_code">Código do Produto</string>
     <string name="un_value">Valor Unitário</string>
@@ -76,8 +84,11 @@
     <string name="un_price_abrv">Vlr. unit.</string>
     <string name="total">Total</string>
     <string name="subtotal">SubTotal</string>
-    <string name="discount">Adicionar Desconto</string>
+    <string name="add_discount">Adicionar Desconto</string>
+    <string name="discount">Desconto</string>
+    <string name="finish">Finalizar</string>
     <string name="client_register">Cadastrar Cliente</string>
+    <string name="payment">Metodo de Pagamento</string>
     <string name="product">Produto</string>
 
 </resources>

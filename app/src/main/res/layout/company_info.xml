@@ -9,6 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="25dp"
         android:layout_below="@+id/datasheet_list_title"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true">
@@ -19,7 +20,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="110dp"
-            android:text="Casa Bahia"
             android:textAlignment="center"
             android:textColor="@color/primaryDark"
             app:layout_constraintEnd_toEndOf="@+id/frameLayout2"
@@ -36,58 +36,57 @@
             app:layout_constraintTop_toBottomOf="@id/company_name" />
 
         <TextView
-            app:layout_goneMarginStart="20dp"
             android:id="@+id/social_reason"
+            style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:layout_marginTop="50dp"
             android:text="@string/companyName"
-            app:layout_constraintTop_toBottomOf="@+id/company_name"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="25dp"
             android:textColor="@color/secondary"
-            style="@style/product_infotmation_titles"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/company_name"
+            app:layout_goneMarginStart="20dp" />
 
         <TextView
             android:id="@+id/comercial_email"
             style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:layout_marginTop="20dp"
             android:text="@string/companyEmail"
             android:textColor="@color/secondary"
             app:layout_constraintStart_toStartOf="@+id/social_reason"
-            app:layout_constraintTop_toBottomOf="@+id/social_reason" />
+            app:layout_constraintTop_toBottomOf="@+id/reason_of_company" />
 
         <TextView
             android:id="@+id/plan_company"
             style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:layout_marginTop="20dp"
             android:text="@string/companyPlan"
             android:textColor="@color/secondary"
             app:layout_constraintStart_toStartOf="@+id/social_reason"
-            app:layout_constraintTop_toBottomOf="@+id/comercial_email" />
+            app:layout_constraintTop_toBottomOf="@+id/email_of_company" />
 
         <TextView
             android:id="@+id/busines_company"
             style="@style/product_infotmation_titles"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
+            android:layout_marginTop="20dp"
             android:text="@string/companyBusines"
             android:textColor="@color/secondary"
             app:layout_constraintStart_toStartOf="@+id/social_reason"
-            app:layout_constraintTop_toBottomOf="@+id/plan_company" />
+            app:layout_constraintTop_toBottomOf="@+id/plan_of_company" />
 
         <TextView
             android:id="@+id/reason_of_company"
             style="@style/product_infotmation_titles"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="25dp"
             android:textAlignment="textEnd"
-            android:text="teste"
             android:textColor="@color/secondary"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/social_reason" />
 
@@ -97,7 +96,6 @@
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:textAlignment="textEnd"
-            android:text="teste"
             android:textColor="@color/secondary"
             app:layout_constraintEnd_toEndOf="@+id/reason_of_company"
             app:layout_constraintTop_toTopOf="@+id/comercial_email" />
@@ -107,23 +105,19 @@
             style="@style/product_infotmation_titles"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="25dp"
             android:textAlignment="textEnd"
-            android:text="teste"
             android:textColor="@color/secondary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/comercial_email" />
+            app:layout_constraintEnd_toEndOf="@+id/reason_of_company"
+            app:layout_constraintTop_toTopOf="@+id/plan_company" />
 
         <TextView
             android:id="@+id/busines_of_company"
             style="@style/product_infotmation_titles"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="25dp"
             android:textAlignment="textEnd"
-            android:text="teste"
             android:textColor="@color/secondary"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/reason_of_company"
             app:layout_constraintTop_toTopOf="@+id/busines_company" />
 
 

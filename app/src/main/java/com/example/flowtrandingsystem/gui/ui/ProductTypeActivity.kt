@@ -24,7 +24,9 @@ class ProductTypeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_product_type)
+        setContentView(R.layout.product_type)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle("Categorias de Produtos")
 
         rvProductCategories = findViewById(R.id.recycler_view_category_list)
         rvProductCategories.layoutManager =
@@ -33,43 +35,31 @@ class ProductTypeActivity : AppCompatActivity() {
         adapterProductsCategories = ProductsCategoriesAdapter(this)
 
         rvProductCategories.adapter = adapterProductsCategories
+
         loadCategoriesList()
     }
 
     private fun loadCategoriesList() {
-
-        //recuperar o token do sharedPreferences
-        val prefs: SharedPreferences =
-            this@ProductTypeActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
-
-        val retrivedToken =
-            prefs.getString("TOKEN", "Nada foi recebido")
-
-        val retrivedId =
-            prefs.getInt("ID", 0)
-
-        val categoriesList =
-            prefs.getString("nome", "")
-        Toast.makeText(this@ProductTypeActivity, "Id: ${retrivedId} IdComp: ${categoriesList}  Token: ${retrivedToken}", Toast.LENGTH_LONG).show()
+        val prefs: SharedPreferences = this@ProductTypeActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+        val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
 
         var categoryList: List<ProductType>
         val retrofit = RetrofitApi.getRetrofit()
         val categoryCall = retrofit.create(ProductCalls::class.java)
-
         val call = categoryCall.getProductType("Bearer ${retrivedToken}")
 
         call.enqueue(object : retrofit2.Callback<List<ProductType>>{
+
             override fun onFailure(call: Call<List<ProductType>>, t: Throwable) {
                 Toast.makeText(this@ProductTypeActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                 Log.e("Erro_CONEXÃO", t.message.toString())
             }
-
             override fun onResponse(call: Call<List<ProductType>>, response: Response<List<ProductType>>) {
                 categoryList = response.body()!!
 
-                var listLog =  Logbook()
-
                 adapterProductsCategories.updateCategoryList(categoryList)
+
+
             }
         })
     }
