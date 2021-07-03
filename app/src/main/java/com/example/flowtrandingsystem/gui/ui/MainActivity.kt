@@ -11,9 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.UserCalls
+import com.example.flowtrandingsystem.gui.model.Permissions
+import com.example.flowtrandingsystem.gui.model.Screens
 import com.example.flowtrandingsystem.gui.model.Token
 import com.example.flowtrandingsystem.gui.model.UserLogin
 import kotlinx.android.synthetic.main.main_activity.*
+import org.json.JSONArray
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,7 +46,7 @@ class MainActivity: AppCompatActivity() {
 
         login_activity_button.setOnClickListener {
 
-            executarLogin()
+            goToMainMenu()
         }
 
     }

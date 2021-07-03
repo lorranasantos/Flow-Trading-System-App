@@ -31,28 +31,5 @@ class HttpHelper {
 
         return response.body.toString()
     }
-
-    fun getProduct () {
-        // Definir URL do servidor
-        val URL = "${BASE_URL}product/"
-
-        // Criar um produto que vai disparar a requisição
-        val produto = OkHttpClient()
-
-        // Criar uma requisição GET
-        val request = Request.Builder().url(URL).get().build()
-
-        // Enviar a requisição para o servidor
-        val response = produto.newCall(request).execute()
-
-        // Extrair o body da requisição
-        val responseBody = response.body
-
-        // Exibir o body da requisição
-        if (responseBody != null){
-            val json = responseBody.string()
-            println("RESPOSTA ==========" + json)
-        }
-    }
 }
 

@@ -74,6 +74,7 @@ class UserInfoActivity() : AppCompatActivity() {
         }
 
         loadInfo()
+
     }
 
     private  fun loadInfo() {

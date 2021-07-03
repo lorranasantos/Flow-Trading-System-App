@@ -6,18 +6,22 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.example.flowtrandingsystem.R
+import com.muddzdev.styleabletoast.StyleableToast
 import kotlinx.android.synthetic.main.fragment_initial_menu.*
 
 
 class MenuActivity : AppCompatActivity(){
-    private lateinit var inventoryOption: TextView
-    private lateinit var pdvOption: TextView
+    private lateinit var inventoryOption: LinearLayout
+    private lateinit var pdvOption: LinearLayout
+    private lateinit var reportOption: LinearLayout
+
 
     lateinit var toggle: ActionBarDrawerToggle
 
@@ -42,16 +46,24 @@ class MenuActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_initial_menu)
 
+        StyleableToast.makeText(this, "Logado com sucesso!", R.style.exampleToast).show()
+
         inventoryOption = findViewById(R.id.option_inventory)
         pdvOption = findViewById(R.id.option_sell)
+        reportOption = findViewById(R.id.option_report)
 
         inventoryOption.setOnClickListener {
-            val intentInventory = Intent(this, InventoryActivity::class.java)
+            val intentInventory = Intent(this, ProductTypeActivity::class.java)
             startActivity(intentInventory)
         }
         pdvOption.setOnClickListener{
             val intentSell = Intent(this, PdvActivity::class.java)
             startActivity(intentSell)
+        }
+
+        reportOption.setOnClickListener{
+            val intentReportCompany = Intent(this, ReportActivity::class.java)
+            startActivity(intentReportCompany)
         }
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
@@ -86,11 +98,8 @@ class MenuActivity : AppCompatActivity(){
         Log.e("RESPONSE", "ABOBORA: ${retrivedCompanyId}")
         Log.e("RESPONSE", "BATATA: ${retrivedToken}")
 
-
-
-        Toast.makeText(this@MenuActivity, "CENOURA E BATATA: ${retrivedId} ${retrivedToken}", Toast.LENGTH_LONG).show()
-
     }
+
     private fun goToInfoUser(){
         val userScreen = Intent(this, UserInfoActivity::class.java)
         startActivity(userScreen)
