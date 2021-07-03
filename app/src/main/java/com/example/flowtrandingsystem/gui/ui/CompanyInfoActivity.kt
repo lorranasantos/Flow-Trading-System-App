@@ -21,7 +21,7 @@ import kotlinx.android.synthetic.main.company_info.*
 import retrofit2.Call
 import retrofit2.Response
 
-class CompanyInfoActivity() : AppCompatActivity() {
+class CompanyInfoActivity : AppCompatActivity() {
 
     lateinit var toggle: ActionBarDrawerToggle
     private lateinit var companyName : TextView

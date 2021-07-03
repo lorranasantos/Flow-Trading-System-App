@@ -57,6 +57,10 @@
         <activity
             android:name=".gui.ui.MainActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".gui.ui.LoadingActivity"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".gui.ui.MenuActivity"/>
     </application>
 
 </manifest>

@@ -134,6 +134,27 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/loading"
+        android:layout_width="260dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="508dp"
+        android:background="@drawable/circle_add_product_inventory"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Load"
+                android:textAppearance="@style/title_product_name" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:background="@drawable/rounded_top"

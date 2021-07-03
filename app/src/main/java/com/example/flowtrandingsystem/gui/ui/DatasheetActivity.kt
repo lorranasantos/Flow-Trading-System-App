@@ -26,7 +26,7 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-class DatasheetActivity: AppCompatActivity() {
+class DatasheetActivity : AppCompatActivity() {
 
     private lateinit var productName: TextView
     private lateinit var productType: TextView
