@@ -56,7 +56,7 @@ open class PdvActivity : AppCompatActivity() {
             clientRegister()
         }
         pdv_add_discount.setOnClickListener {
-            addDiscount()
+//            addDiscount()
         }
         img_camera_code.setOnClickListener {
             val scanScreen = Intent(this, ScannerActivity::class.java)
@@ -173,33 +173,33 @@ open class PdvActivity : AppCompatActivity() {
         })
     }
 
-    private fun addDiscount() {
-
-        val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_discount_pdv, null)
-        val dialogBuilder = AlertDialog.Builder(this)
-            .setView(alerDialog)
-        val alertShow = dialogBuilder.show()
-
-        alerDialog.button_cancel_discount.setOnClickListener {
-            alertShow.dismiss()
-        }
-        alerDialog.button_save_discount.setOnClickListener {
-            var editDiscountPdv = alerDialog.edit_add_discount_pdv.text.toString()
-
-            val finalDiscount = findViewById<TextView>(R.id.final_discount)
-
-            Toast.makeText(this, "Desconto aplicado!", Toast.LENGTH_SHORT).show()
-
-            if (editDiscountPdv.isEmpty()){
-                editDiscountPdv = 0.toString()
-            }else{
-                finalDiscount.text = "$editDiscountPdv%"
-            }
-
-            alertShow.dismiss()
-        }
-
-    }
+//    private fun addDiscount() {
+//
+//        val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_discount_pdv, null)
+//        val dialogBuilder = AlertDialog.Builder(this)
+//            .setView(alerDialog)
+//        val alertShow = dialogBuilder.show()
+//
+//        alerDialog.button_cancel_discount.setOnClickListener {
+//            alertShow.dismiss()
+//        }
+//        alerDialog.button_save_discount.setOnClickListener {
+//            var editDiscountPdv = alerDialog.edit_add_discount_pdv.text.toString()
+//
+//            val finalDiscount = findViewById<TextView>(R.id.final_discount)
+//
+//            Toast.makeText(this, "Desconto aplicado!", Toast.LENGTH_SHORT).show()
+//
+//            if (editDiscountPdv.isEmpty()){
+//                editDiscountPdv = 0.toString()
+//            }else{
+//                finalDiscount.text = "$editDiscountPdv%"
+//            }
+//
+//            alertShow.dismiss()
+//        }
+//
+//    }
 
     private fun clientRegister() {
 
