@@ -4,10 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +14,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.flowtrandingsystem.R
 import kotlinx.android.synthetic.main.fragment_initial_menu.*
+
 
 class MenuActivity : AppCompatActivity(){
     private lateinit var inventoryOption: LinearLayout
@@ -81,8 +81,11 @@ class MenuActivity : AppCompatActivity(){
         startActivity(userScreen)
     }
     override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)){
-            drawerLayout.closeDrawer(drawerLayout)
+        val layout = findViewById<View>(R.id.drawerLayout) as DrawerLayout
+        if (layout.isDrawerOpen(GravityCompat.START)) {
+            layout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
         }
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

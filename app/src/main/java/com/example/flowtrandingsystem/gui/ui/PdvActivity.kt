@@ -10,6 +10,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
@@ -176,10 +177,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
                                 adapterItensList.updateListProducts(listProducts)
 
-                                subTotal.text = "$${String.format("%.2f", cost_total - listProducts[index].cost_per_item)}"
-
                             }
-
                         }
                     }
                 })
@@ -332,6 +330,12 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
                 })
             }
+        }
+    }
+
+    override fun setActionBar(toolbar: Toolbar?) {
+        addOnContextAvailableListener {
+            Toast.makeText(this, "cu", Toast.LENGTH_SHORT).show()
         }
     }
 }

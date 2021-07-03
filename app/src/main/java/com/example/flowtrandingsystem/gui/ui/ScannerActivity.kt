@@ -52,6 +52,7 @@ class ScannerActivity : AppCompatActivity() {
                     val codeIntent = Intent(this@ScannerActivity, PdvActivity::class.java)
                     codeIntent.putExtra("barCode", it.text)
                     startActivity(codeIntent)
+                    finish()
                 }
             }
             errorCallback = ErrorCallback {
