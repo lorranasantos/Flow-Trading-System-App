@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -20,6 +21,7 @@ import com.example.flowtrandingsystem.gui.api.ProductCalls
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.SaleCalls
 import com.example.flowtrandingsystem.gui.model.*
+import kotlinx.android.synthetic.main.add_payment_method_pdv.*
 import kotlinx.android.synthetic.main.add_payment_method_pdv.view.*
 import kotlinx.android.synthetic.main.client_register_pdv.view.*
 import kotlinx.android.synthetic.main.pdv.*
@@ -59,12 +61,6 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         pdv_client_register.setOnClickListener {
             clientRegister()
         }
-<<<<<<< HEAD
-        pdv_add_discount.setOnClickListener {
-//            addDiscount()
-        }
-=======
->>>>>>> feature/realizacao_venda
         img_camera_code.setOnClickListener {
             val scanScreen = Intent(this, ScannerActivity::class.java)
             startActivity(scanScreen)
@@ -199,11 +195,10 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
         if (listProducts.isEmpty()){
             Toast.makeText(this, "Lista de Compras Vazia", Toast.LENGTH_SHORT).show()
-        }else{
+        }else {
 
             val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_payment_method_pdv, null)
-            val dialogBuilder = AlertDialog.Builder(this)
-                .setView(alerDialog)
+            val dialogBuilder = AlertDialog.Builder(this).setView(alerDialog)
             val alertShow = dialogBuilder.show()
 
             alertShow.setCanceledOnTouchOutside(false)
@@ -212,67 +207,44 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
             val options = arrayOf("Debito", "Credito", "Boleto", "PicPay")
 
-            optionMethods.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options)
+            optionMethods.adapter =
+                ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, options)
 
-            optionMethods.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            optionMethods.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(p0: AdapterView<*>?) {
-                    Toast.makeText(this@PdvActivity, "Selecione uma opção", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@PdvActivity, "Selecione uma opção", Toast.LENGTH_SHORT)
+                        .show()
                 }
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
                 }
             }
-
-
             alerDialog.button_cancel_sale.setOnClickListener {
                 alertShow.dismiss()
             }
             alerDialog.button_finish.setOnClickListener {
 
-<<<<<<< HEAD
-//    private fun addDiscount() {
-//
-//        val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_discount_pdv, null)
-//        val dialogBuilder = AlertDialog.Builder(this)
-//            .setView(alerDialog)
-//        val alertShow = dialogBuilder.show()
-//
-//        alerDialog.button_cancel_discount.setOnClickListener {
-//            alertShow.dismiss()
-//        }
-//        alerDialog.button_save_discount.setOnClickListener {
-//            var editDiscountPdv = alerDialog.edit_add_discount_pdv.text.toString()
-//
-//            val finalDiscount = findViewById<TextView>(R.id.final_discount)
-//
-//            Toast.makeText(this, "Desconto aplicado!", Toast.LENGTH_SHORT).show()
-//
-//            if (editDiscountPdv.isEmpty()){
-//                editDiscountPdv = 0.toString()
-//            }else{
-//                finalDiscount.text = "$editDiscountPdv%"
-//            }
-//
-//            alertShow.dismiss()
-//        }
-//
-//    }
-=======
-                val editDiscountPdv = findViewById<EditText>(R.id.edit_add_discount_pdv)
+                var editDiscountPdv: EditText
 
-                val idTaken = listOf<Int>(retrivedItenId)
-                val qtdTaken = listOf<Int>(retrivedItenQtd)
+                editDiscountPdv = findViewById(R.id.edit_add_discount_pdv)
 
-                var sale = Sale()
+                val takenDiscount = editDiscountPdv.text.toString().toInt()
 
-                sale.payment_method_id = 1
-                sale.branch_id = retrivedBranchId
+                if (takenDiscount.toString().isNullOrBlank()) {
+                    Toast.makeText(this, "Insira Um Desconto Valido", Toast.LENGTH_SHORT).show()
+                } else {
 
-//                if(editDiscountPdv.text.toString().isNullOrBlank()) {
-//                    Toast.makeText(this@PdvActivity, "Desconto Invalido", Toast.LENGTH_LONG).show()
-//
-//                }else{
+                    var sale = Sale()
 
-                    sale.discount = 0
+                    sale.payment_method_id = 1
+                    sale.branch_id = retrivedBranchId
+
+                    sale.discount = takenDiscount
 
                     val listOfItens = ArrayList<Itens>()
 
@@ -282,11 +254,11 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
                         val iten: Itens = Itens(product_id = it.id, quantity = it.qtd)
 
-                        if (listOfItens.size > 0 ) {
+                        if (listOfItens.size > 0) {
                             index = listOfItens.size - 1
                         }
 
-                       listOfItens.add(iten)
+                        listOfItens.add(iten)
                     }
 
                     sale.items = listOfItens
@@ -309,17 +281,16 @@ open class PdvActivity : AppCompatActivity(), Serializable{
                             sale = response.body()!!
 
                             Log.e("ERRO_DISCONUT", sale.discount.toString())
->>>>>>> feature/realizacao_venda
+
 
                         }
                     })
-
                     alertShow.dismiss()
                     finish()
                     startActivity(getIntent())
                     Toast.makeText(this, "Venda Concluida", Toast.LENGTH_LONG).show()
                 }
-//            }
+            }
         }
     }
     fun clientRegister() {
@@ -366,12 +337,6 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
                 })
             }
-        }
-    }
-
-    override fun setActionBar(toolbar: Toolbar?) {
-        addOnContextAvailableListener {
-            Toast.makeText(this, "cu", Toast.LENGTH_SHORT).show()
         }
     }
 }
