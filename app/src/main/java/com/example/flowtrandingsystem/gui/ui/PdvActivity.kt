@@ -159,26 +159,26 @@ open class PdvActivity : AppCompatActivity(), Serializable{
                         }
 
                         val cost_total =
-                            list.reduce { totalValue, currentItem -> totalValue + currentItem }
-                                .toDouble()
+                            list.reduce { totalValue, currentItem -> totalValue + currentItem }.toDouble()
 
                         if (listProducts.isEmpty()) {
                             subTotal.text = 0.0.toString()
                         } else {
                             subTotal.text = "$${String.format("%.2f", cost_total)}"
-                        }
 
-                        remove_code.setOnClickListener {
+                            remove_code.setOnClickListener {
 
-                            if (listProducts.size > 0) {
-                                val index = listProducts.size - 1
+                                if (listProducts.size > 0) {
+                                    val index = listProducts.size - 1
 
-                                listProducts.removeAt(index)
+                                    listProducts.removeAt(index)
 
-                                adapterItensList.notifyItemRemoved(index)
+                                    adapterItensList.notifyItemRemoved(index)
 
-                                adapterItensList.updateListProducts(listProducts)
+                                    adapterItensList.updateListProducts(listProducts)
 
+                                    subTotal.text = "$${String.format("%.2f", cost_total.minus(itemTotalValue))}"
+                                }
                             }
                         }
                     }
@@ -192,6 +192,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         val retrivedBranchId = prefs.getInt("BRANCHID", 0)
         val retrivedItenId = prefs.getInt("itenId", 0)
         val retrivedItenQtd = prefs.getInt("itenQtd", 1)
+
 
         if (listProducts.isEmpty()){
             Toast.makeText(this, "Lista de Compras Vazia", Toast.LENGTH_SHORT).show()
@@ -229,67 +230,56 @@ open class PdvActivity : AppCompatActivity(), Serializable{
             }
             alerDialog.button_finish.setOnClickListener {
 
-                var editDiscountPdv: EditText
+                var sale = Sale()
 
-                editDiscountPdv = findViewById(R.id.edit_add_discount_pdv)
+                sale.payment_method_id = 1
+                sale.branch_id = retrivedBranchId
 
-                val takenDiscount = editDiscountPdv.text.toString().toInt()
+                sale.discount = 0
 
-                if (takenDiscount.toString().isNullOrBlank()) {
-                    Toast.makeText(this, "Insira Um Desconto Valido", Toast.LENGTH_SHORT).show()
-                } else {
+                val listOfItens = ArrayList<Itens>()
 
-                    var sale = Sale()
+                listProducts.forEach {
 
-                    sale.payment_method_id = 1
-                    sale.branch_id = retrivedBranchId
+                    var index = 0
 
-                    sale.discount = takenDiscount
+                    val iten: Itens = Itens(product_id = it.id, quantity = it.qtd)
 
-                    val listOfItens = ArrayList<Itens>()
-
-                    listProducts.forEach {
-
-                        var index = 0
-
-                        val iten: Itens = Itens(product_id = it.id, quantity = it.qtd)
-
-                        if (listOfItens.size > 0) {
-                            index = listOfItens.size - 1
-                        }
-
-                        listOfItens.add(iten)
+                    if (listOfItens.size > 0) {
+                        index = listOfItens.size - 1
                     }
 
-                    sale.items = listOfItens
-
-                    val retrofit = RetrofitApi.getRetrofit()
-                    val saleCall = retrofit.create(SaleCalls::class.java)
-                    val call = saleCall.postSale(sale, "Bearer ${retrivedToken}")
-
-                    call.enqueue(object : retrofit2.Callback<Sale> {
-                        override fun onFailure(call: Call<Sale>, t: Throwable) {
-                            Toast.makeText(
-                                this@PdvActivity,
-                                "Ops! Acho que ocorreu um problema.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            Log.e("ERRO_CONEXÃO", t.message.toString())
-                        }
-
-                        override fun onResponse(call: Call<Sale>, response: Response<Sale>) {
-                            sale = response.body()!!
-
-                            Log.e("ERRO_DISCONUT", sale.discount.toString())
-
-
-                        }
-                    })
-                    alertShow.dismiss()
-                    finish()
-                    startActivity(getIntent())
-                    Toast.makeText(this, "Venda Concluida", Toast.LENGTH_LONG).show()
+                    listOfItens.add(iten)
                 }
+
+                sale.items = listOfItens
+
+                val retrofit = RetrofitApi.getRetrofit()
+                val saleCall = retrofit.create(SaleCalls::class.java)
+                val call = saleCall.postSale(sale, "Bearer ${retrivedToken}")
+
+                call.enqueue(object : retrofit2.Callback<Sale> {
+                    override fun onFailure(call: Call<Sale>, t: Throwable) {
+                        Toast.makeText(
+                            this@PdvActivity,
+                            "Ops! Acho que ocorreu um problema.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        Log.e("ERRO_CONEXÃO", t.message.toString())
+                    }
+
+                    override fun onResponse(call: Call<Sale>, response: Response<Sale>) {
+                        sale = response.body()!!
+
+                        Log.e("ERRO_DISCONUT", sale.discount.toString())
+
+
+                    }
+                })
+                alertShow.dismiss()
+                finish()
+                startActivity(getIntent())
+                Toast.makeText(this, "Venda Concluida", Toast.LENGTH_LONG).show()
             }
         }
     }
