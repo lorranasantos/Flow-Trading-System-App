@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
@@ -99,5 +100,17 @@ class MenuActivity : AppCompatActivity(){
             return true
         }
         return super.onOptionsItemSelected(item)
+    }
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+
+        // Back?
+        return if (keyCode == KeyEvent.KEYCODE_BACK) {
+            // Back
+            moveTaskToBack(true)
+            true
+        } else {
+            // Return
+            super.onKeyDown(keyCode, event)
+        }
     }
 }
