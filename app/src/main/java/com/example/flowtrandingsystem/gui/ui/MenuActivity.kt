@@ -21,7 +21,7 @@ class MenuActivity : AppCompatActivity(){
     private lateinit var inventoryOption: LinearLayout
     private lateinit var pdvOption: LinearLayout
     private lateinit var reportOption: LinearLayout
-    private lateinit var loadOption: LinearLayout
+//    private lateinit var loadOption: LinearLayout
     private lateinit var drawerLayout: DrawerLayout
 
     lateinit var toggle: ActionBarDrawerToggle
@@ -35,7 +35,7 @@ class MenuActivity : AppCompatActivity(){
         inventoryOption = findViewById(R.id.option_inventory)
         pdvOption = findViewById(R.id.option_sell)
         reportOption = findViewById(R.id.option_report)
-        loadOption = findViewById(R.id.loading)
+//        loadOption = findViewById(R.id.loading)
         drawerLayout = findViewById(R.id.drawerLayout)
 
         inventoryOption.setOnClickListener {
@@ -56,10 +56,10 @@ class MenuActivity : AppCompatActivity(){
             val intentReportCompany = Intent(this, ReportActivity::class.java)
             startActivity(intentReportCompany)
         }
-        loadOption.setOnClickListener{
-            val intentReportCompany = Intent(this, LoadingActivity::class.java)
-            startActivity(intentReportCompany)
-        }
+//        loadOption.setOnClickListener{
+//            val intentReportCompany = Intent(this, LoadingActivity::class.java)
+//            startActivity(intentReportCompany)
+//        }
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -82,6 +82,7 @@ class MenuActivity : AppCompatActivity(){
     private fun goToLogin(){
         val loginScreen = Intent(this, MainActivity::class.java)
         startActivity(loginScreen)
+        finish()
     }
     private fun goToInfoUser(){
         val userScreen = Intent(this, UserInfoActivity::class.java)
