@@ -13,15 +13,19 @@ import com.anychart.chart.common.dataentry.DataEntry
 import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.anychart.charts.Pie
 import com.example.flowtrandingsystem.R
+import com.example.flowtrandingsystem.gui.adapter.ReportSaleAdapter
 import com.example.flowtrandingsystem.gui.api.InventoryCalls
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
+import com.example.flowtrandingsystem.gui.api.SaleCalls
 import com.example.flowtrandingsystem.gui.model.ProductAdapter
+import com.example.flowtrandingsystem.gui.model.Sale
 import retrofit2.Call
 import retrofit2.Response
 
 class ReportActivity : AppCompatActivity() {
 
-    lateinit var reportSaleToday: TextView
+    lateinit var reportSales: TextView
+    lateinit var adapterSales: ReportSaleAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +33,9 @@ class ReportActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setTitle("Relatorios")
 
+        reportSales = findViewById(R.id.report_sale)
+
+        adapterSales = ReportSaleAdapter(this)
 
         loadReports()
     }
@@ -38,21 +45,22 @@ class ReportActivity : AppCompatActivity() {
         val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
         val retrivedBranchId = prefs.getInt("BRANCHID", 0)
 
-        var report: ArrayList<ProductAdapter>
+        var report: List<Sale>
         val retrofit = RetrofitApi.getRetrofit()
-        val reportCall = retrofit.create(InventoryCalls::class.java)
-        val call = reportCall.getReports(retrivedBranchId, "Bearer ${retrivedToken}")
+        val reportCall = retrofit.create(SaleCalls::class.java)
+        val call = reportCall.getSales("Bearer ${retrivedToken}")
 
-        call.enqueue(object : retrofit2.Callback<ArrayList<ProductAdapter>>{
+        call.enqueue(object : retrofit2.Callback<List<Sale>>{
 
-            override fun onFailure(call: Call<ArrayList<ProductAdapter>>, t: Throwable) {
+            override fun onFailure(call: Call<List<Sale>>, t: Throwable) {
                 Toast.makeText(this@ReportActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                 Log.e("Erro_CONEXÃO", t.message.toString())
             }
-            override fun onResponse(call: Call<ArrayList<ProductAdapter>>, response: Response<ArrayList<ProductAdapter>>) {
+
+            override fun onResponse(call: Call<List<Sale>>, response: Response<List<Sale>>) {
                 report = response.body()!!
 
-//                Toast.makeText(this@ReportActivity, "Dados: $report", Toast.LENGTH_SHORT).show()
+                adapterSales.updateSaleList(report)
             }
         })
     }

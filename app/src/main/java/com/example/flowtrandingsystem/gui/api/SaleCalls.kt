@@ -14,5 +14,6 @@ interface SaleCalls {
     @GET("/paymentMethod")
     fun getLogPaymentMethod(@Header("Authorization") token: String?): Call<PaymentMethod>
 
-
+    @GET("sale")
+    fun getSales(@Header("Authorization")token: String?): Call<List<Sale>>
 }

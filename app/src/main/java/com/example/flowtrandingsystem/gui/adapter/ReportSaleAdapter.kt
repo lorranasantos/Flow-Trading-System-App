@@ -1,0 +1,43 @@
+package com.example.flowtrandingsystem.gui.adapter
+
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.example.flowtrandingsystem.R
+import com.example.flowtrandingsystem.gui.model.Sale
+
+class ReportSaleAdapter(val context: Context): RecyclerView.Adapter<ReportSaleAdapter.Holder>() {
+
+    var listSale = emptyList<Sale>()
+
+    fun updateSaleList(list: List<Sale>){
+        listSale = list
+        notifyDataSetChanged()
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReportSaleAdapter.Holder {
+        val view = LayoutInflater
+            .from(context)
+            .inflate(R.layout.holder_product_types, parent, false)
+
+        return Holder(view)
+    }
+
+    override fun getItemCount(): Int {
+        return listSale.size
+    }
+
+    override fun onBindViewHolder(holder: Holder, position: Int) {
+        val recentSale = listSale[position]
+
+        holder.itemsSale.text = recentSale.items.toString()
+
+    }
+
+    class Holder(view: View): RecyclerView.ViewHolder(view){
+        val itemsSale = view.findViewById<TextView>(R.id.report_sale)
+    }
+}
