@@ -34,21 +34,15 @@ class ReportSaleAdapter(val context: Context): RecyclerView.Adapter<ReportSaleAd
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val recentSale = listSale[position]
 
-        holder.itemCode.text = recentSale.bar_code.toString()
+
         holder.itemName.text = recentSale.product_name
-        holder.itemDescription.text = recentSale.description
         holder.itemQuantity.text = recentSale.quantity.toString()
-        holder.itemCost.text = recentSale.cost_per_item.toString()
-        holder.itemUn.text = recentSale.unit_name
+
 
     }
 
     class Holder(view: View): RecyclerView.ViewHolder(view){
-        val itemCode = view.findViewById<TextView>(R.id.report_product_code)
         val itemName = view.findViewById<TextView>(R.id.report_product_name)
-        val itemDescription = view.findViewById<TextView>(R.id.report_product_descripton)
         val itemQuantity = view.findViewById<TextView>(R.id.report_product_quantity)
-        val itemCost = view.findViewById<TextView>(R.id.report_costs)
-        val itemUn = view.findViewById<TextView>(R.id.report_un)
     }
 }

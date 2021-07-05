@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="@color/light"
+    android:layout_margin="4dp">
 
 
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/report_product_code"
-            android:padding="8dp"
-            android:textAppearance="@style/pdv_prices"
-            android:textAlignment="center"
-            android:text="xxxxxx"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/light">
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
@@ -21,15 +20,10 @@
             android:padding="8dp"
             android:textAppearance="@style/pdv_prices"
             android:textAlignment="center"
-            android:text="Produto"/>
-        <TextView
-            android:layout_height="wrap_content"
-            android:id="@+id/report_product_descripton"
-            android:layout_width="wrap_content"
-            android:padding="8dp"
-            android:textAppearance="@style/pdv_prices"
-            android:textAlignment="center"
-            android:text="Descrição"/>
+            android:text="Produto"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
         <TextView
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
@@ -37,22 +31,13 @@
             android:padding="8dp"
             android:textAppearance="@style/pdv_prices"
             android:textAlignment="center"
-            android:text="Quantidade"/>
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/report_costs"
-            android:padding="8dp"
-            android:textAppearance="@style/pdv_prices"
-            android:textAlignment="center"
-            android:text="Custo por item"/>
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:id="@+id/report_un"
-            android:padding="8dp"
-            android:textAppearance="@style/pdv_prices"
-            android:textAlignment="center"
-            android:text="Un. de medida"/>
+            android:text="Quantidade"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-</LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</androidx.cardview.widget.CardView>
