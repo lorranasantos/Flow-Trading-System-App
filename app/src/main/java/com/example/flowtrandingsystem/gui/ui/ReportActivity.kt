@@ -13,6 +13,7 @@ import com.example.flowtrandingsystem.gui.adapter.ReportSaleAdapter
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.SaleCalls
 import com.example.flowtrandingsystem.gui.model.ReportSale
+import com.example.flowtrandingsystem.gui.model.Sale
 import retrofit2.Call
 import retrofit2.Response
 
@@ -44,19 +45,19 @@ class ReportActivity : AppCompatActivity() {
         val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
         val retrivedBranchId = prefs.getInt("BRANCHID", 0)
 
-        var report: List<ReportSale>
+        var report: List<Sale>
         val retrofit = RetrofitApi.getRetrofit()
         val reportCall = retrofit.create(SaleCalls::class.java)
-        val call = reportCall.getReportSales("Bearer ${retrivedToken}")
+        val call = reportCall.getSalesInfo(retrivedBranchId,"Bearer ${retrivedToken}")
 
-        call.enqueue(object : retrofit2.Callback<List<ReportSale>>{
+        call.enqueue(object : retrofit2.Callback<List<Sale>>{
 
-            override fun onFailure(call: Call<List<ReportSale>>, t: Throwable) {
+            override fun onFailure(call: Call<List<Sale>>, t: Throwable) {
                 Toast.makeText(this@ReportActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                 Log.e("Erro_CONEXÃO", t.message.toString())
             }
 
-            override fun onResponse(call: Call<List<ReportSale>>, response: Response<List<ReportSale>>) {
+            override fun onResponse(call: Call<List<Sale>>, response: Response<List<Sale>>) {
                 if (response.code() == 200 || response.code() == 201){
                     report = response.body()!!
 

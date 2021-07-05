@@ -28,15 +28,7 @@
             android:maxLines="1"
             android:singleLine="true"
             android:ellipsize="end"
-            android:layout_weight="7"/>
-
-        <TextView
-            android:id="@+id/inventory_product_quantity"
-            style="@style/initialMenu_appearence"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="0"
-            android:layout_marginStart="5dp" />
+            android:layout_weight="3"/>
 
         <TextView
             android:id="@+id/inventory_product_price"
@@ -49,7 +41,7 @@
             android:singleLine="true"
             android:ellipsize="end"
             android:layout_marginStart="5dp"
-            android:layout_weight="3" />
+            android:layout_weight="1" />
 
 
     </LinearLayout>

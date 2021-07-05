@@ -16,7 +16,6 @@ import com.example.flowtrandingsystem.gui.ui.DatasheetActivity
 class ItensInventoryAdapter (val context: Context) : RecyclerView.Adapter<ItensInventoryAdapter.Holder>() {
 
     var listItens =  emptyList<ProductAdapter>()
-    var listLog =  Logbook()
 
     fun updateListaProdutos(lista: List<ProductAdapter>){
         listItens = lista
@@ -37,10 +36,8 @@ class ItensInventoryAdapter (val context: Context) : RecyclerView.Adapter<ItensI
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         val itensRecentes = listItens[position]
-//        val logsRecentes = listLog
 
         holder.tvNomeItem.text = itensRecentes.product_name
-        holder.tvQuantidade.text = itensRecentes.LogBookInventory.quantity_acquired.toString()
         holder.tvValor.text = itensRecentes.cost_per_item.toString()
 
         if(itensRecentes.cost_per_item <= 0){
@@ -54,19 +51,12 @@ class ItensInventoryAdapter (val context: Context) : RecyclerView.Adapter<ItensI
             intent.putExtra("productId", itensRecentes.id)
             context.startActivity(intent)
 
-//            val prefs: SharedPreferences = this@ItensInventoryAdapter.getSharedPreferences(
-//                "preferenciasLog",
-//                Context.MODE_PRIVATE
-//            )
-//            prefs.edit().putString("logbook", logsRecentes.toString()).apply()
-
         }
     }
 
     //inner class
     class Holder(view: View): RecyclerView.ViewHolder(view){
         val tvNomeItem = view.findViewById<TextView>(R.id.inventory_product_name)
-        val tvQuantidade = view.findViewById<TextView>(R.id.inventory_product_quantity)
         val tvValor = view.findViewById<TextView>(R.id.inventory_product_price)
         val cardInventoryItems = view.findViewById<CardView>(R.id.card_produto_inventory)
     }
