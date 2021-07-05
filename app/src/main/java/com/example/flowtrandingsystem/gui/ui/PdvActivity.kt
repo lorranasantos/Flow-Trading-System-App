@@ -59,12 +59,6 @@ open class PdvActivity : AppCompatActivity(), Serializable{
         pdv_client_register.setOnClickListener {
             clientRegister()
         }
-<<<<<<< HEAD
-        pdv_add_discount.setOnClickListener {
-//            addDiscount()
-        }
-=======
->>>>>>> feature/realizacao_venda
         img_camera_code.setOnClickListener {
             val scanScreen = Intent(this, ScannerActivity::class.java)
             startActivity(scanScreen)
@@ -228,7 +222,6 @@ open class PdvActivity : AppCompatActivity(), Serializable{
             }
             alerDialog.button_finish.setOnClickListener {
 
-<<<<<<< HEAD
 //    private fun addDiscount() {
 //
 //        val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_discount_pdv, null)
@@ -256,7 +249,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 //        }
 //
 //    }
-=======
+
                 val editDiscountPdv = findViewById<EditText>(R.id.edit_add_discount_pdv)
 
                 val idTaken = listOf<Int>(retrivedItenId)
@@ -309,7 +302,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
                             sale = response.body()!!
 
                             Log.e("ERRO_DISCONUT", sale.discount.toString())
->>>>>>> feature/realizacao_venda
+
 
                         }
                     })

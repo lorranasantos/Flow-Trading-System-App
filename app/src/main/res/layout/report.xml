@@ -48,17 +48,52 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:stretchColumns="1">
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/title_report_bar_code"
+                        android:padding="8dp"
+                        android:textAppearance="@style/pdv_prices"
+                        android:textAlignment="center"
+                        android:text="Código de Barras"/>
+                    <TextView
+                        android:padding="8dp"
+                        android:textAppearance="@style/pdv_prices"
+                        android:textAlignment="center"
+                        android:text="Produto"/>
+                    <TextView
+                        android:padding="8dp"
+                        android:textAppearance="@style/pdv_prices"
+                        android:textAlignment="center"
+                        android:text="Descrição"/>
+                    <TextView
+                        android:padding="8dp"
+                        android:textAppearance="@style/pdv_prices"
+                        android:textAlignment="center"
+                        android:text="Quantidade"/>
+                    <TextView
+                        android:padding="8dp"
+                        android:textAppearance="@style/pdv_prices"
+                        android:textAlignment="center"
+                        android:text="Custo por item"/>
+                    <TextView
+                        android:padding="8dp"
+                        android:textAppearance="@style/pdv_prices"
+                        android:textAlignment="center"
+                        android:text="Un. de medida"/>
+                </TableRow>
                     <TableRow
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <TextView
-                            android:id="@+id/report_sale"
-                            android:padding="8dp"
-                            android:textAppearance="@style/pdv_prices"
-                            android:textAlignment="center"
-                            android:text="xxxxxx"/>
-                    </TableRow>
 
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_view_report_sale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            tools:listitem="@layout/holder_report_items" />
+                    </TableRow>
                 </TableLayout>
             </HorizontalScrollView>
         </LinearLayout>

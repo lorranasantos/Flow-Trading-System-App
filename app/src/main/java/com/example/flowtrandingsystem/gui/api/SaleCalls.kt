@@ -1,9 +1,6 @@
 package com.example.flowtrandingsystem.gui.api
 
-import com.example.flowtrandingsystem.gui.model.Logbook
-import com.example.flowtrandingsystem.gui.model.PaymentMethod
-import com.example.flowtrandingsystem.gui.model.Sale
-import com.example.flowtrandingsystem.gui.model.Token
+import com.example.flowtrandingsystem.gui.model.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -14,6 +11,6 @@ interface SaleCalls {
     @GET("/paymentMethod")
     fun getLogPaymentMethod(@Header("Authorization") token: String?): Call<PaymentMethod>
 
-    @GET("sale")
-    fun getSales(@Header("Authorization")token: String?): Call<List<Sale>>
+    @GET("/branch/1/inventory/report")
+    fun getReportSales(@Header("Authorization") token: String?): Call<List<ReportSale>>
 }

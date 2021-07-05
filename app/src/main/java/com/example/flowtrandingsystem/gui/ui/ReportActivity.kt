@@ -5,27 +5,22 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
 import android.widget.Toast
-import com.anychart.AnyChart
-import com.anychart.AnyChartView
-import com.anychart.chart.common.dataentry.DataEntry
-import com.anychart.chart.common.dataentry.ValueDataEntry
-import com.anychart.charts.Pie
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.adapter.ReportSaleAdapter
-import com.example.flowtrandingsystem.gui.api.InventoryCalls
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.SaleCalls
-import com.example.flowtrandingsystem.gui.model.ProductAdapter
-import com.example.flowtrandingsystem.gui.model.Sale
+import com.example.flowtrandingsystem.gui.model.ReportSale
 import retrofit2.Call
 import retrofit2.Response
 
 class ReportActivity : AppCompatActivity() {
 
-    lateinit var reportSales: TextView
+    lateinit var rvReportSales: RecyclerView
     lateinit var adapterSales: ReportSaleAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +28,13 @@ class ReportActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setTitle("Relatorios")
 
-        reportSales = findViewById(R.id.report_sale)
+        rvReportSales = findViewById(R.id.recycler_view_report_sale)
+        rvReportSales.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         adapterSales = ReportSaleAdapter(this)
+        rvReportSales.adapter = adapterSales
+
 
         loadReports()
     }
@@ -45,22 +44,27 @@ class ReportActivity : AppCompatActivity() {
         val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
         val retrivedBranchId = prefs.getInt("BRANCHID", 0)
 
-        var report: List<Sale>
+        var report: List<ReportSale>
         val retrofit = RetrofitApi.getRetrofit()
         val reportCall = retrofit.create(SaleCalls::class.java)
-        val call = reportCall.getSales("Bearer ${retrivedToken}")
+        val call = reportCall.getReportSales("Bearer ${retrivedToken}")
 
-        call.enqueue(object : retrofit2.Callback<List<Sale>>{
+        call.enqueue(object : retrofit2.Callback<List<ReportSale>>{
 
-            override fun onFailure(call: Call<List<Sale>>, t: Throwable) {
+            override fun onFailure(call: Call<List<ReportSale>>, t: Throwable) {
                 Toast.makeText(this@ReportActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
                 Log.e("Erro_CONEXÃO", t.message.toString())
             }
 
-            override fun onResponse(call: Call<List<Sale>>, response: Response<List<Sale>>) {
-                report = response.body()!!
+            override fun onResponse(call: Call<List<ReportSale>>, response: Response<List<ReportSale>>) {
+                if (response.code() == 200 || response.code() == 201){
+                    report = response.body()!!
 
-                adapterSales.updateSaleList(report)
+                    Log.i("XPTO", response.body().toString())
+                    adapterSales.updateSaleList(report)
+                }else{
+                    Toast.makeText(this@ReportActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
+                }
             }
         })
     }
