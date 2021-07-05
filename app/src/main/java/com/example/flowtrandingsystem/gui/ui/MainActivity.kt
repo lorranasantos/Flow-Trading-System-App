@@ -43,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         val menuScreen = Intent(this, MenuActivity::class.java)
         intent.putExtra("permissionsUser", token.user.toString())
         startActivity(menuScreen)
+        finish()
     }
     private fun executarLogin() {
 

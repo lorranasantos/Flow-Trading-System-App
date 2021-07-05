@@ -66,7 +66,7 @@ class DatasheetActivity : AppCompatActivity() {
         call.enqueue(object : Callback<Logbook> {
 
             override fun onFailure(call: Call<Logbook>, t: Throwable) {
-                Toast.makeText(this@DatasheetActivity, "Ops! Acho que ocorreu um problema.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@DatasheetActivity, "Estoque Não Cadastrado Ainda.", Toast.LENGTH_LONG).show()
                 Log.e("ERRO_CONEXÃO", t.message.toString())
             }
             override fun onResponse(call: Call<Logbook>, response: Response<Logbook>) {
