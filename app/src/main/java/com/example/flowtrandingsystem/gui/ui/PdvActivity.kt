@@ -277,8 +277,8 @@ open class PdvActivity : AppCompatActivity(), Serializable{
                     }
                 })
                 alertShow.dismiss()
-                finish()
                 startActivity(getIntent())
+                finish()
                 Toast.makeText(this, "Venda Concluida", Toast.LENGTH_LONG).show()
             }
         }
