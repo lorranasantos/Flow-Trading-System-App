@@ -41,11 +41,13 @@
                 android:textColor="@color/black" />
         </LinearLayout>
         <TextView
+            android:id="@+id/total_sales"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="10"
             android:padding="8dp"
-            android:textSize="20dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:textAppearance="@style/title_product_name"/>
 
     </LinearLayout>
@@ -82,11 +84,13 @@
                 android:textColor="@color/black" />
         </LinearLayout>
         <TextView
+            android:id="@+id/total_purchases"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="10"
             android:padding="8dp"
-            android:textSize="20dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:textAppearance="@style/title_product_name"/>
 
     </LinearLayout>
