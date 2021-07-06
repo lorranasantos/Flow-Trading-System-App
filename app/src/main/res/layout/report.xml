@@ -74,7 +74,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Clientes atendidos hoje"
+                    android:text="Vendas realizadas"
                     android:padding="10dp"
                     android:textSize="20sp"
                     style="@style/white_text"/>
@@ -138,35 +138,6 @@
                     android:paddingBottom="10dp"
                     style="@style/title_product_name"/>
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/report_most_sell"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/pdv_title_radius"
-                android:layout_margin="30dp"
-                android:orientation="vertical"
-                app:layout_constraintTop_toBottomOf="@+id/report_bills"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="@drawable/pdv_radius"
-                    android:text="MAIS VENDIDOS"
-                    android:gravity="center"
-                    android:textSize="20dp"
-                    style="@style/titles_pdv"/>
-                <TextView
-                    android:id="@+id/report_product_most_sell"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Coca-Cola"
-                    android:padding="10dp"
-                    android:textSize="20sp"
-                    style="@style/title_product_name"/>
-            </LinearLayout>
-
-
 
             <LinearLayout
                 android:id="@+id/sale_report"
