@@ -11,6 +11,9 @@ interface SaleCalls {
     @GET("/paymentMethod")
     fun getLogPaymentMethod(@Header("Authorization") token: String?): Call<PaymentMethod>
 
-    @GET("/branch/1/inventory/report")
-    fun getReportSales(@Header("Authorization") token: String?): Call<List<ReportSale>>
+    @GET("/branch/{branch}/inventory/report")
+    fun getReportSales(@Path("branch") branch: Int, @Header("Authorization") token: String?): Call<List<ReportSale>>
+
+    @GET("/branch/{branch}/sale")
+    fun getSalesInfo(@Path("branch") branch: Int, @Header("Authorization") token: String?): Call<List<Sale>>
 }

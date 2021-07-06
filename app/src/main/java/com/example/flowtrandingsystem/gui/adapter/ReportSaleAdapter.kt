@@ -12,13 +12,12 @@ import com.example.flowtrandingsystem.gui.model.Sale
 
 class ReportSaleAdapter(val context: Context): RecyclerView.Adapter<ReportSaleAdapter.Holder>() {
 
-    var listSale = emptyList<ReportSale>()
+    var listSale = emptyList<Sale>()
 
-    fun updateSaleList(list: List<ReportSale>){
+    fun updateSaleList(list: List<Sale>){
         listSale = list
         notifyDataSetChanged()
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater
             .from(context)
@@ -35,9 +34,8 @@ class ReportSaleAdapter(val context: Context): RecyclerView.Adapter<ReportSaleAd
         val recentSale = listSale[position]
 
 
-        holder.itemName.text = recentSale.product_name
-        holder.itemQuantity.text = recentSale.quantity.toString()
-
+        holder.itemName.text = recentSale.items?.get(position)?.product_id.toString()
+        holder.itemQuantity.text = recentSale.items?.get(position)?.product_id.toString()
 
     }
 

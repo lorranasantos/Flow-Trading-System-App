@@ -230,40 +230,6 @@ open class PdvActivity : AppCompatActivity(), Serializable{
             }
             alerDialog.button_finish.setOnClickListener {
 
-
-//    private fun addDiscount() {
-//
-//        val alerDialog = LayoutInflater.from(this).inflate(R.layout.add_discount_pdv, null)
-//        val dialogBuilder = AlertDialog.Builder(this)
-//            .setView(alerDialog)
-//        val alertShow = dialogBuilder.show()
-//
-//        alerDialog.button_cancel_discount.setOnClickListener {
-//            alertShow.dismiss()
-//        }
-//        alerDialog.button_save_discount.setOnClickListener {
-//            var editDiscountPdv = alerDialog.edit_add_discount_pdv.text.toString()
-//
-//            val finalDiscount = findViewById<TextView>(R.id.final_discount)
-//
-//            Toast.makeText(this, "Desconto aplicado!", Toast.LENGTH_SHORT).show()
-//
-//            if (editDiscountPdv.isEmpty()){
-//                editDiscountPdv = 0.toString()
-//            }else{
-//                finalDiscount.text = "$editDiscountPdv%"
-//            }
-//
-//            alertShow.dismiss()
-//        }
-//
-//    }
-
-                val editDiscountPdv = findViewById<EditText>(R.id.edit_add_discount_pdv)
-
-                val idTaken = listOf<Int>(retrivedItenId)
-                val qtdTaken = listOf<Int>(retrivedItenQtd)
-
                 var sale = Sale()
 
                 sale.payment_method_id = 1
@@ -304,12 +270,12 @@ open class PdvActivity : AppCompatActivity(), Serializable{
 
                     override fun onResponse(call: Call<Sale>, response: Response<Sale>) {
                         sale = response.body()!!
-                            Log.e("ERRO_DISCONUT", sale.discount.toString())
+
                     }
                 })
                 alertShow.dismiss()
-                finish()
                 startActivity(getIntent())
+                finish()
                 Toast.makeText(this, "Venda Concluida", Toast.LENGTH_LONG).show()
             }
         }
