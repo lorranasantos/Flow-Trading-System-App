@@ -230,7 +230,6 @@ open class PdvActivity : AppCompatActivity(), Serializable{
             }
             alerDialog.button_finish.setOnClickListener {
 
-
                 var sale = Sale()
 
                 sale.payment_method_id = 1
