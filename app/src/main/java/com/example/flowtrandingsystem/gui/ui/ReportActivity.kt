@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.example.flowtrandingsystem.R
@@ -39,58 +40,16 @@ class ReportActivity : AppCompatActivity() {
 
         adapterSales = ReportSaleAdapter(this)
 
-        //loadReports()
-
-
-        adapterSales = ReportSaleAdapter(this)
+        btn_refresh.setOnClickListener {
+            startActivity(getIntent())
+            finish()
+        }
 
         loadTotalSale()
         loadTotalPurchase()
         setPieChartData()
     }
 
-    private fun setPieChartData(){
-        val xvalues = ArrayList<String>()
-        xvalues.add("Compras")
-        xvalues.add("Vendas")
-
-        val yvalues = ArrayList<Float>()
-        yvalues.add(23f)
-        yvalues.add(77f)
-
-        val pieChartEntry = ArrayList<Entry>()
-        for ((i, item) in yvalues.withIndex())
-        {
-            pieChartEntry.add(Entry(item, i))
-        }
-       // pieChartEntry.add(Entry(30f, 0))
-       // pieChartEntry.add(Entry(70f, 0))
-
-        //colors
-        val colorsChart = ArrayList<Int>()
-        colorsChart.add(resources.getColor(R.color.primaryDark))
-        colorsChart.add(resources.getColor(R.color.primary))
-
-        //fill the chart
-        val piedataSet = PieDataSet(pieChartEntry, "Compras e Vendas")
-
-        piedataSet.colors = colorsChart
-
-        piedataSet.sliceSpace = 2f
-
-        val data = PieData(xvalues, piedataSet)
-        pieChart.data = data
-
-        pieChart.holeRadius = 5f
-
-        pieChart.setDescription("Balaço de compras e vendas")
-        pieChart.animateY(2000)
-
-        val legend: Legend = pieChart.legend
-        legend.position = Legend.LegendPosition.LEFT_OF_CHART
-
-
-    }
     private fun loadTotalSale() {
         val prefs: SharedPreferences = this@ReportActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
         val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
@@ -114,7 +73,17 @@ class ReportActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<Sale>>, response: Response<List<Sale>>) {
                 totalSale = response.body()!!
 
-                tvTotalSale.text = totalSale.size.toString()
+                tvTotalSale.text = totalSale.size.toDouble().toString()
+
+                val value = totalSale.size
+
+                val prefs: SharedPreferences = this@ReportActivity.getSharedPreferences(
+                    "preferencias",
+                    Context.MODE_PRIVATE
+                )
+
+                //Tentar passar a permissao usuario inteiro
+                prefs.edit().putFloat("SALEVALUE", value.toFloat()).apply()
 
             }
         })
@@ -141,9 +110,66 @@ class ReportActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<Purchase>>, response: Response<List<Purchase>>) {
                 totalPurchase = response.body()!!
 
-                tvTotalPurchase.text = totalPurchase.size.toString()
+                tvTotalPurchase.text = totalPurchase.size.toDouble().toString()
+
+                val value = totalPurchase.size
+
+                val prefs: SharedPreferences = this@ReportActivity.getSharedPreferences(
+                    "preferencias",
+                    Context.MODE_PRIVATE
+                )
+
+                //Tentar passar a permissao usuario inteiro
+                prefs.edit().putFloat("PURCHASEVALUE", value.toFloat()).apply()
 
             }
         })
+    }
+    private fun setPieChartData(){
+        val prefs: SharedPreferences = this@ReportActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
+        val retrivedSale = prefs.getFloat("SALEVALUE", 0.0F)
+        val retrivedPurchase = prefs.getFloat("PURCHASEVALUE", 0.0F)
+
+        Toast.makeText(this, "$retrivedSale, $retrivedPurchase", Toast.LENGTH_SHORT).show()
+
+        val xvalues = ArrayList<String>()
+        xvalues.add("Compras")
+        xvalues.add("Vendas")
+
+        val yvalues = ArrayList<Int>()
+        yvalues.add(retrivedPurchase.toInt())
+        yvalues.add(retrivedSale.toInt())
+
+        val pieChartEntry = ArrayList<Entry>()
+        for ((i, item) in yvalues.withIndex())
+        {
+            pieChartEntry.add(Entry(item.toFloat(), i))
+        }
+       // pieChartEntry.add(Entry(30f, 0))
+       // pieChartEntry.add(Entry(70f, 0))
+
+        //colors
+        val colorsChart = ArrayList<Int>()
+        colorsChart.add(resources.getColor(R.color.primaryDark))
+        colorsChart.add(resources.getColor(R.color.primary))
+
+        //fill the chart
+        val piedataSet = PieDataSet(pieChartEntry, "Compras e Vendas")
+
+        piedataSet.colors = colorsChart
+
+        piedataSet.sliceSpace = 2f
+
+        val data = PieData(xvalues, piedataSet)
+        pieChart.data = data
+
+        pieChart.holeRadius = 5f
+
+        pieChart.setDescription("Balanço de compras e vendas")
+        pieChart.animateY(2000)
+
+        val legend: Legend = pieChart.legend
+        legend.position = Legend.LegendPosition.LEFT_OF_CHART
+
     }
 }
