@@ -12,7 +12,6 @@ import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.adapter.ReportSaleAdapter
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.SaleCalls
-import com.example.flowtrandingsystem.gui.model.ReportSale
 import com.example.flowtrandingsystem.gui.model.Sale
 import retrofit2.Call
 import retrofit2.Response
@@ -22,7 +21,6 @@ class ReportActivity : AppCompatActivity() {
     lateinit var rvReportSales: RecyclerView
     lateinit var adapterSales: ReportSaleAdapter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.report)
@@ -30,17 +28,17 @@ class ReportActivity : AppCompatActivity() {
         supportActionBar?.setTitle("Relatorios")
 
         rvReportSales = findViewById(R.id.recycler_view_report_sale)
+
         rvReportSales.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         adapterSales = ReportSaleAdapter(this)
         rvReportSales.adapter = adapterSales
 
-
         loadReports()
     }
 
-    private  fun loadReports() {
+    private fun loadReports() {
         val prefs: SharedPreferences = this@ReportActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
         val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
         val retrivedBranchId = prefs.getInt("BRANCHID", 0)
