@@ -6,6 +6,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,7 @@ import com.example.flowtrandingsystem.gui.adapter.ReportSaleAdapter
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
 import com.example.flowtrandingsystem.gui.api.SaleCalls
 import com.example.flowtrandingsystem.gui.model.ReportSale
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -23,8 +25,9 @@ import retrofit2.Response
 
 class ReportActivity : AppCompatActivity() {
 
-    lateinit var rvReportSales: RecyclerView
     lateinit var adapterSales: ReportSaleAdapter
+    lateinit var tvTotalSale: TextView
+    lateinit var tvTotalPurchase: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +36,9 @@ class ReportActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setTitle("Relatorios")
 
+        tvTotalSale = findViewById(R.id.total_sales)
+        tvTotalPurchase = findViewById(R.id.total_purchases)
         adapterSales = ReportSaleAdapter(this)
-
 
         //loadReports()
         setPieChartData()
@@ -45,9 +49,17 @@ class ReportActivity : AppCompatActivity() {
         xvalues.add("Compras")
         xvalues.add("Vendas")
 
+        val yvalues = ArrayList<Float>()
+        yvalues.add(23f)
+        yvalues.add(77f)
+
         val pieChartEntry = ArrayList<Entry>()
-        pieChartEntry.add(Entry(30f, 0))
-        pieChartEntry.add(Entry(70f, 0))
+        for ((i, item) in yvalues.withIndex())
+        {
+            pieChartEntry.add(Entry(item, i))
+        }
+       // pieChartEntry.add(Entry(30f, 0))
+       // pieChartEntry.add(Entry(70f, 0))
 
         //colors
         val colorsChart = ArrayList<Int>()
@@ -66,6 +78,12 @@ class ReportActivity : AppCompatActivity() {
         pieChart.data = data
 
         pieChart.holeRadius = 5f
+
+        pieChart.setDescription("Balaço de compras e vendas")
+        pieChart.animateY(2000)
+
+        val legend: Legend = pieChart.legend
+        legend.position = Legend.LegendPosition.LEFT_OF_CHART
 
 
     }

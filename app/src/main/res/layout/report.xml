@@ -41,6 +41,7 @@
                     android:textColor="@color/black" />
             </LinearLayout>
             <TextView
+                android:id="@+id/total_sales"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="10"
@@ -82,6 +83,7 @@
                     android:textColor="@color/black" />
             </LinearLayout>
             <TextView
+                android:id="@+id/total_purchases"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="10"
