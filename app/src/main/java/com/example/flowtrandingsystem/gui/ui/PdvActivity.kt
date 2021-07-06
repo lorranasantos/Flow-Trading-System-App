@@ -4,14 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
@@ -19,9 +17,8 @@ import com.example.flowtrandingsystem.gui.adapter.BarCodeAdapter
 import com.example.flowtrandingsystem.gui.api.CostumerCalls
 import com.example.flowtrandingsystem.gui.api.ProductCalls
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
-import com.example.flowtrandingsystem.gui.api.SaleCalls
+import com.example.flowtrandingsystem.gui.api.SaleAndPurchaseCalls
 import com.example.flowtrandingsystem.gui.model.*
-import kotlinx.android.synthetic.main.add_payment_method_pdv.*
 import kotlinx.android.synthetic.main.add_payment_method_pdv.view.*
 import kotlinx.android.synthetic.main.client_register_pdv.view.*
 import kotlinx.android.synthetic.main.pdv.*
@@ -255,7 +252,7 @@ open class PdvActivity : AppCompatActivity(), Serializable{
                 sale.items = listOfItens
 
                 val retrofit = RetrofitApi.getRetrofit()
-                val saleCall = retrofit.create(SaleCalls::class.java)
+                val saleCall = retrofit.create(SaleAndPurchaseCalls::class.java)
                 val call = saleCall.postSale(sale, "Bearer ${retrivedToken}")
 
                 call.enqueue(object : retrofit2.Callback<Sale> {
