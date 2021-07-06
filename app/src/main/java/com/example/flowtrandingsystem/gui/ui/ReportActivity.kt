@@ -54,14 +54,15 @@ class ReportActivity : AppCompatActivity() {
         xvalues.add("Compras")
         xvalues.add("Vendas")
 
-        val yvalues = ArrayList<Float>()
-        yvalues.add(23f)
-        yvalues.add(77f)
+
+        var yvalues = ArrayList<Int>()
+        yvalues.add()
+        yvalues.add()
 
         val pieChartEntry = ArrayList<Entry>()
         for ((i, item) in yvalues.withIndex())
         {
-            pieChartEntry.add(Entry(item, i))
+            pieChartEntry.add(Entry(i, item))
         }
        // pieChartEntry.add(Entry(30f, 0))
        // pieChartEntry.add(Entry(70f, 0))
