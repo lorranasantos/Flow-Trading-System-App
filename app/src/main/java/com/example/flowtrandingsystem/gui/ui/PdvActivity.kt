@@ -10,6 +10,8 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flowtrandingsystem.R
@@ -322,5 +324,8 @@ open class PdvActivity : AppCompatActivity(), Serializable{
                 })
             }
         }
+    }
+    override fun onBackPressed() {
+        Toast.makeText(this, "Utilize o Botão do Menu Para Voltar", Toast.LENGTH_SHORT).show()
     }
 }
