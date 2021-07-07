@@ -56,12 +56,12 @@ class DatasheetActivity : AppCompatActivity() {
     private fun loadInfo() {
         val prefs: SharedPreferences = this@DatasheetActivity.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
         val retrivedToken = prefs.getString("TOKEN", "Nada foi recebido")
-        val retrivedProductId: Int = intent.getIntExtra("productId", 0)
+        val retrivedLogId: Int = intent.getIntExtra("logId", 0)
 
         var productInfo: Logbook
         val retrofit = RetrofitApi.getRetrofit()
         val productCall = retrofit.create(ProductCalls::class.java)
-        val call = productCall.getLogProductById(retrivedProductId, "Bearer ${retrivedToken}")
+        val call = productCall.getLogProductById(retrivedLogId, "Bearer ${retrivedToken}")
 
         call.enqueue(object : Callback<Logbook> {
 

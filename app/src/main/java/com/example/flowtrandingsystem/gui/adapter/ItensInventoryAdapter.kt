@@ -48,7 +48,7 @@ class ItensInventoryAdapter (val context: Context) : RecyclerView.Adapter<ItensI
 
         holder.cardInventoryItems.setOnClickListener{
             val intent = Intent(context, DatasheetActivity::class.java)
-            intent.putExtra("productId", itensRecentes.id)
+            intent.putExtra("logId", itensRecentes.LogBookInventory.id)
             context.startActivity(intent)
 
         }

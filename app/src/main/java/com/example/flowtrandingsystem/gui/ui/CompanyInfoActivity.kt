@@ -40,6 +40,7 @@ class CompanyInfoActivity : AppCompatActivity() {
         drawerLayoutCompanyInfo.addDrawerListener(toggle)
         toggle.syncState()
 
+
         companyName = findViewById(R.id.company_name)
         companyReason = findViewById(R.id.reason_of_company)
         companyEmail = findViewById(R.id.email_of_company)
