@@ -129,11 +129,9 @@ class ReportActivity : AppCompatActivity() {
         val retrivedSale = prefs.getFloat("SALEVALUE", 0.0F)
         val retrivedPurchase = prefs.getFloat("PURCHASEVALUE", 0.0F)
 
-        Toast.makeText(this, "$retrivedSale, $retrivedPurchase", Toast.LENGTH_SHORT).show()
-
         val xvalues = ArrayList<String>()
-        xvalues.add("Compras")
-        xvalues.add("Vendas")
+        xvalues.add("DESPESAS")
+        xvalues.add("LUCROS")
 
         val yvalues = ArrayList<Int>()
         yvalues.add(retrivedPurchase.toInt())
