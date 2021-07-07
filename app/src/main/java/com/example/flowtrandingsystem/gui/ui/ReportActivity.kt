@@ -142,8 +142,6 @@ class ReportActivity : AppCompatActivity() {
         {
             pieChartEntry.add(Entry(item.toFloat(), i))
         }
-       // pieChartEntry.add(Entry(30f, 0))
-       // pieChartEntry.add(Entry(70f, 0))
 
         //colors
         val colorsChart = ArrayList<Int>()
