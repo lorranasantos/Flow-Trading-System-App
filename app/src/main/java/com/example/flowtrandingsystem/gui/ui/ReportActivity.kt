@@ -153,7 +153,7 @@ class ReportActivity : AppCompatActivity() {
         colorsChart.add(resources.getColor(R.color.primary))
 
         //fill the chart
-        val piedataSet = PieDataSet(pieChartEntry, "Compras e Vendas")
+        val piedataSet = PieDataSet(pieChartEntry, "")
 
         piedataSet.colors = colorsChart
 
@@ -166,11 +166,12 @@ class ReportActivity : AppCompatActivity() {
         pieChart.data = data
 
         pieChart.setDescription("Balanço de compras e vendas")
+        pieChart.setDescriptionPosition(0f, 500f)
         pieChart.setDescriptionTextSize(12f)
         pieChart.animateY(2000)
 
-        val legend: Legend = pieChart.legend
-        legend.position = Legend.LegendPosition.LEFT_OF_CHART
+        /*val legend: Legend = pieChart.legend
+        legend.position = Legend.LegendPosition.LEFT_OF_CHART*/
 
     }
 }
