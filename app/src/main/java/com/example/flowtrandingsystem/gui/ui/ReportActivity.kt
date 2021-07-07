@@ -2,20 +2,18 @@ package com.example.flowtrandingsystem.gui.ui
 
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.flowtrandingsystem.R
 import com.example.flowtrandingsystem.gui.adapter.ReportSaleAdapter
 import com.example.flowtrandingsystem.gui.api.RetrofitApi
-import com.example.flowtrandingsystem.gui.model.ReportSale
-import com.github.mikephil.charting.components.Legend
 import com.example.flowtrandingsystem.gui.api.SaleAndPurchaseCalls
 import com.example.flowtrandingsystem.gui.model.Purchase
 import com.example.flowtrandingsystem.gui.model.Sale
+import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -74,7 +72,7 @@ class ReportActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<Sale>>, response: Response<List<Sale>>) {
                 totalSale = response.body()!!
 
-                tvTotalSale.text = totalSale.size.toDouble().toString()
+                tvTotalSale.text = totalSale.size.toString()
 
                 val value = totalSale.size
 
@@ -111,7 +109,7 @@ class ReportActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<Purchase>>, response: Response<List<Purchase>>) {
                 totalPurchase = response.body()!!
 
-                tvTotalPurchase.text = totalPurchase.size.toDouble().toString()
+                tvTotalPurchase.text = totalPurchase.size.toString()
 
                 val value = totalPurchase.size
 
@@ -161,12 +159,14 @@ class ReportActivity : AppCompatActivity() {
 
         piedataSet.sliceSpace = 2f
 
+        val chartText = PieData(xvalues, piedataSet)
+        chartText.setValueTextSize(20f)
+
         val data = PieData(xvalues, piedataSet)
         pieChart.data = data
 
-        pieChart.holeRadius = 5f
-
         pieChart.setDescription("Balanço de compras e vendas")
+        pieChart.setDescriptionTextSize(12f)
         pieChart.animateY(2000)
 
         val legend: Legend = pieChart.legend
